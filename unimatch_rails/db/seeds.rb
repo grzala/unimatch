@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-@user = User.create(name: 'user1', password: 'user1', email: 'rjrjrjr@absd.ac.uk' , surname: 'surname')
+@user = User.create(name: 'user1', password: 'user1', email: 'user1@absd.ac.uk' , surname: 'surname')
 @user2 = User.create(name: 'user2', password: 'user2', email: 'rjrjrjr2@awdasd.ac.uk' , surname: 'surname')
 
 @soc = Society.create(name: 'soc1', description: 'soc1', paid: false, recurring: false, cost: 2.0)

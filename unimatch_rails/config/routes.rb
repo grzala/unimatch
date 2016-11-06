@@ -2,8 +2,16 @@ Rails.application.routes.draw do
   
   
   get '/user/list' => 'user#list'
-  post 'user/:id' => 'user#update'
+  post '/user/:id' => 'user#update'
   resources :user
+  
+  controller :session do
+    get  'login' => :new
+    post 'login' => :create
+    get 'logout' => :destroy
+  end
+  
+  root "user#list"
   
   #match ':controller'(/:action(/:id))', :via => get
 

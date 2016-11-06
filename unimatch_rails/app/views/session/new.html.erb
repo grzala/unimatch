@@ -1,0 +1,27 @@
+
+<% if flash[:alert] %>
+  <div class="panel-heading" id="notice">
+    <legend><%= flash[:alert] %></legend>
+  </div>
+<% else %>
+  <div class="panel-heading">  
+  <legend>Please Log In</legend>
+  </div>
+<% end %>
+<%= form_tag do %>
+  <div class="panel-body">
+    <fieldset>
+      <div class="login-labels">
+        <%= label_tag :email, 'Email:' %>
+        <%= text_field_tag :email, params[:email] %>
+      </div>
+      <div class="login-labels">
+        <%= label_tag :password, 'Password:' %>
+        <%= password_field_tag :password, params[:password] %>
+      </div>
+      <div>
+        <%= submit_tag "Login" %>
+      </div>
+    </fieldset>
+  </div>
+<% end %>

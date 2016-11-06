@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20161101155405) do
   end
 
   create_table "interests", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -91,9 +92,10 @@ ActiveRecord::Schema.define(version: 20161101155405) do
     t.string   "email"
     t.string   "name"
     t.string   "surname"
-    t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "hashed_password"
+    t.string   "salt"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

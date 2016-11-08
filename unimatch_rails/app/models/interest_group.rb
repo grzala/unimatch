@@ -1,3 +1,3 @@
 class InterestGroup < ApplicationRecord
-    belongs_to :interests
+    has_many :interests
 end

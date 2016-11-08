@@ -37,17 +37,17 @@ ActiveRecord::Schema.define(version: 20161101155405) do
   end
 
   create_table "interest_groups", force: :cascade do |t|
-    t.integer  "interests_id"
-    t.string   "name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["interests_id"], name: "index_interest_groups_on_interests_id"
-  end
-
-  create_table "interests", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "interests", force: :cascade do |t|
+    t.integer  "interest_group_id"
+    t.string   "name"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["interest_group_id"], name: "index_interests_on_interest_group_id"
   end
 
   create_table "members", force: :cascade do |t|

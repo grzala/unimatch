@@ -1,0 +1,50 @@
+sports:
+    - raquetball
+    - bowling 
+    - badmington
+    - baseball
+    - football
+    - basketball
+    - cricket
+    - horseback riding
+    - golf
+    - rugby
+
+science:
+    - programming
+    - chemistry
+    - aviation
+    - space science
+    - genetics
+    - geology
+   
+cooking:
+    - mexican
+    - french
+    - italian
+    - indian
+    - spanish
+    - thai
+    - chinese
+
+music:
+    - rock
+    - alternative
+    - classical
+    - electronic
+    - hip-hop
+    - jazz
+    - radio
+    - dance
+
+culture:
+    - languages
+    - travel
+    - religion
+    - history
+    - ancient history
+
+health:
+    - fitness
+    - bodybuilding
+    - healthy eating

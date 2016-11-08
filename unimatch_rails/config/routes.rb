@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'logout' => :destroy
   end
   
-  root "user#list"
+  root "session#new"
   
   #match ':controller'(/:action(/:id))', :via => get
 

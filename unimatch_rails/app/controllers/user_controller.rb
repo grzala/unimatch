@@ -17,15 +17,8 @@ class UserController < ApplicationController
   
   def create
     @user = User.new(user_param)
-    if @user.save
-      flash[:notice] = "success"
-      flash[:color] = "valid"
-    else
-      flash[:notice] = "error"
-      flash[:color] = "invalid"
-    end
     
-    render "new"
+    redirect_to root_path
   end
   
   def edit

@@ -10,10 +10,12 @@
 
   <body>
     
+    <h1 id="header_text">UniMatch</h1>
+    
     <% if session[:user_id] %>
+      <div class="nav_left">
       <p>You are logged in as <%= session[:user_name] %> <%= link_to "logout", '/logout' %></p>
-    <% else %>
-      <p>You are not logged in <%= link_to "login", '/login' %></p>
+      </div>
     <% end %>
     <%= yield %>
   </body>

@@ -1,3 +1,9 @@
+<div class="account_details">
 <%= @user.name %>
+<br>
 <%= @user.surname %>
+<br>
 <%= @user.email %>
+<br>
+<%= link_to "Edit these details", '/user/'+ session[:user_id].to_s + '/edit' %></p>
+</div>

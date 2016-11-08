@@ -9,18 +9,18 @@
   </div>
 <% end %>
 <%= form_tag do %>
-  <div class="panel-body">
+  <div class="login_form">
     <fieldset>
-      <div class="login-labels">
-        <%= label_tag :email, 'Email:' %>
-        <%= text_field_tag :email, params[:email] %>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= text_field_tag :email, params[:email] %>
       </div>
-      <div class="login-labels">
-        <%= label_tag :password, 'Password:' %>
-        <%= password_field_tag :password, params[:password] %>
+      <br>
+      <div class="input-group">
+        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= password_field_tag :password, params[:password] %>
       </div>
       <div>
         <%= submit_tag "Login" %>
+        <%= link_to "register", '/user/new' %>
       </div>
     </fieldset>
   </div>

@@ -3,6 +3,15 @@ class UserController < ApplicationController
     @users = User.all
   end
   
+  def match
+    @matches = Connector.get_user_matches
+    @matched_users = {}
+    User.all.each do |user|
+      @matched_users[user] = @matches[user.id]
+    end
+    @matched_users = @matched_users.sort_by {|k,v| v}.reverse
+  end
+  
   def show
     @user = User.find(params[:id])
   end

@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   
-  
-  get '/user/list' => 'user#list'
-  post '/user/:id' => 'user#update'
+  controller :user do
+    get '/user/list' => :list
+    post '/user/:id' => :update
+    get '/user/match/:id' => :match
+  end
   resources :user
   
   controller :session do

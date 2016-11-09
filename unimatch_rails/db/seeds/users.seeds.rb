@@ -44,7 +44,7 @@ after :interests do
         
         #randomly generate interests
         @interests_no = 5 + rand(20) #between 5 and 20 interests
-        @interest_id_array = rand_set(@interests_no, 1, @interest_amount+1)
+        @interest_id_array = rand_set(@interests_no, 1, @interest_amount)
         @interest_id_array.each do |id|
             @user.add_interest(id)
         end

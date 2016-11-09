@@ -56,25 +56,15 @@ public class Database {
                 interest_groups.put(id, name);
             }
             
-            //interests
+            //interests /////////////////change this, dont need so much sql here
             pst = con.prepareStatement("SELECT * FROM unimatch.interests");
-            PreparedStatement get_group_query = con.prepareStatement("SELECT name FROM unimatch.interest_groups WHERE id = ?");
-            ResultSet group_result = null;
             rs = pst.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int group_id = rs.getInt("interest_group_id");
                 String name = rs.getString("name");
-                get_group_query.setInt(1, group_id);
-                group_result = get_group_query.executeQuery(); group_result.first();
-                interests.put(id, new Interest(id, name, group_result.getString("name")));
-            }
-            
-            //close statements
-            if(group_result != null) {
-                group_result.close();
-                get_group_query.close();
+                interests.put(id, new Interest(id, name, interest_groups.get(group_id)));
             }
             
             

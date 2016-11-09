@@ -29,8 +29,9 @@ public class ReccomenderAlgorithm {
 
         //System.out.println(matches.size());
 
+        Server s = new Server();
         try {
-            Server.run();
+            s.run();
         } catch(Exception e) {
             
         }

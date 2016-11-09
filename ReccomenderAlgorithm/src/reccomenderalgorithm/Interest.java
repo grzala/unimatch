@@ -11,11 +11,11 @@ package reccomenderalgorithm;
  */
 public class Interest {
     
-    public int ID;
+    public int id;
     String name, group;
     
-    public Interest(int ID, String name, String group) {
-        this.ID = ID;
+    public Interest(int id, String name, String group) {
+        this.id = id;
         this.name = name;
         this.group = group;
     }
@@ -25,7 +25,7 @@ public class Interest {
             return false;
         } else {
             Interest i = (Interest)o;
-            return i.ID == this.ID;
+            return i.id == this.id;
         }
     }
     

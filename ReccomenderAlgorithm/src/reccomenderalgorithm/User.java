@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class User {
     
-    public int ID;
+    public int id;
     public String name, surname;
     public ArrayList<Interest> interests = new ArrayList<Interest>();
     
-    public User(int ID, String name, String surname) {
-        this.ID = ID;
+    public User(int id, String name, String surname) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
     }

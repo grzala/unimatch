@@ -4,7 +4,7 @@ class UserController < ApplicationController
   end
   
   def match
-    @matches = Connector.get_user_matches
+    @matches = Connector.get_user_matches(params[:id])
     @matched_users = {}
     User.all.each do |user|
       @matched_users[user] = @matches[user.id]

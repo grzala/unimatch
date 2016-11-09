@@ -4,9 +4,9 @@ module Connect
         @hostname = 'unimatch.ddns.net'
         @port = 6789
         
-        def Connector.get_user_matches
+        def Connector.get_user_matches(id)
             s = TCPSocket.open(@hostname, @port)
-            a = 2.to_s
+            a = id.to_s
             s.puts(a)
             json = s.gets.chomp
             json = JSON.parse(json)

@@ -28,8 +28,10 @@ public class Database {
     public HashMap<Integer, User> users = new HashMap<>();
     
     Connection con = null;
+    
+    private final String HOSTNAME = "unimatch.ddns.net";
 
-    String url = "jdbc:mysql://unimatch.ddns.net";
+    String url = "jdbc:mysql://"+HOSTNAME;
     String user = "alg";
     String password = "alg";
     

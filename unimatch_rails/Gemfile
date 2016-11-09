@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 # For seeding
 gem 'seedbank'
 
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -50,9 +52,11 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :test do
+group :production do
   # Mysql
   gem 'mysql2'
+  # Deployment
+  gem 'passenger'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

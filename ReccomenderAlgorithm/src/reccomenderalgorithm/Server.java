@@ -7,6 +7,7 @@ package reccomenderalgorithm;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -23,13 +24,17 @@ import org.json.JSONObject;
  */
 public class Server {
     
-    private Database db;
+    public static Database db;
     
     public Server() {
          //init db
-         System.out.println("initializing database");
-         db = new Database();
-         System.out.println("database initialized");
+         updateDatabase();
+    }
+    
+    public static void updateDatabase() {
+        System.out.println("initializing database");
+        Server.db = new Database();
+        System.out.println("database initialized");
     }
     
     public void run() throws Exception {
@@ -65,20 +70,31 @@ public class Server {
                 BufferedReader inFromClient =
                    new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 
-                //get matches, convert to json
-                final HashMap<Integer, Float> matches;
-                int id = Integer.parseInt(inFromClient.readLine());
-                System.out.println("Matching for: " + db.users.get(id).name);
-                matches = Reccomender.get_matches(id, db);
-                JSONObject jsonMatches = hashMapToJson(matches);
-                System.out.println("done matching");
+                String message = inFromClient.readLine();
+                String toSend = null;
+                if (message.equals("restartdb")) {
+                    Server.updateDatabase();
+                    toSend = "\n";
+                } else {
+                    int id = Integer.parseInt(message);
+                    toSend = getMatches(id);
+                }
                 
-                //publish
                 final DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream()); // OutputStream where to send the map in case of network you get it from the Socket instance.
-                outputStream.writeBytes(jsonMatches.toString()+"\n");
+                outputStream.writeBytes(toSend+"\n");
             } catch(Exception e) {
                 
             }
+        }
+        
+        private String getMatches(int id) throws JSONException, IOException {
+            //get matches, convert to json
+            final HashMap<Integer, Float> matches;
+            System.out.println("Matching for: " + db.users.get(id).name);
+            matches = Reccomender.get_matches(id, db);
+            JSONObject jsonMatches = hashMapToJson(matches);
+            System.out.println("done matching");
+            return jsonMatches.toString();
         }
         
         private JSONObject hashMapToJson(HashMap<Integer, Float> map) {

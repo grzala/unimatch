@@ -26,6 +26,7 @@ class UserController < ApplicationController
   
   def create
     @user = User.new(user_param)
+    @user.save
     
     redirect_to root_path
   end

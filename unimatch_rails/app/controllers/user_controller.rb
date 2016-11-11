@@ -27,7 +27,7 @@ class UserController < ApplicationController
   def create
     @user = User.new(user_param)
     @user.save
-    
+    Connector.reinitialize_algorith
     redirect_to root_path
   end
   

@@ -39,6 +39,7 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.update_attributes(user_param)
+      Connector.reinitialize_algorith
       redirect_to :action => 'list'
     end
   end

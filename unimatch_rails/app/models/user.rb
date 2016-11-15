@@ -41,6 +41,18 @@ class User < ApplicationRecord
 		return @interests
 	end
 	
+	def update_interests_by_ids(interest_ids)
+		@ui = UserInterest.where(user_id: self.id)
+		@ui.each do |u|
+			u.destroy
+		end
+		
+		interest_ids.each do |interest_id|
+			self.add_interest(interest_id)
+		end
+		
+	end
+	
 	def get_interest_names
 		@interests = self.get_interests
 		@new = []

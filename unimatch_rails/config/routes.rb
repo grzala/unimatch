@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     get '/user/list' => :list
     post '/user/:id' => :update
     get '/user/match/:id' => :match
+    get '/user/choose/:id' => :choose_interests
+    post '/user/choose/:id' => :update_interests, :as => :update_interests
   end
   resources :user
   

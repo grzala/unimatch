@@ -1,0 +1,12 @@
+<div style="text-align: left; padding-left: 20px; margin-bottom:100px">
+    <%= form_tag update_interests_url, :id => @user.id do %>
+        <% @interests.each do |interest_group, interests| %>
+            <p><%= interest_group.name %>:</p>
+            <% interests.each do |interest| %>
+                <% checked = @user_interests.include? interest %>
+                <p style="margin-left: 20px"><%= interest.name %><%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %></p>
+            <% end %>
+        <% end %>
+        <%= submit_tag :Update %>
+    <% end %>
+</div>

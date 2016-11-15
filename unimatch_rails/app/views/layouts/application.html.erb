@@ -14,7 +14,7 @@
     
     <% if session[:user_id] %>
       <div class="nav_left">
-      <p>You are logged in as <%= session[:user_name] %> <%= link_to "logout", '/logout' %></p>
+      <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %> <%= link_to "logout", logout_url %></p>
       </div>
     <% end %>
     <%= yield %>

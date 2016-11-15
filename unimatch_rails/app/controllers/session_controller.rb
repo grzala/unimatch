@@ -12,7 +12,6 @@ class SessionController < ApplicationController
             redirect_to root_url
         else
             print params[:email]
-            print "aboooooove"
             redirect_to login_url, :alert => "Username or password is invalid"
         end
     end

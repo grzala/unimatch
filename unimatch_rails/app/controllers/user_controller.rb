@@ -21,14 +21,28 @@ class UserController < ApplicationController
   end
   
   def user_param
-   params.require(:user).permit(:email, :name, :surname, :password)
+    params.require(:user).permit(:email, :name, :surname, :password)
   end
   
   def create
     @user = User.new(user_param)
     @user.save
-    Connector.reinitialize_algorith
+    Connector.reinitialize_algorithm_db
+    
     redirect_to root_path
+  end
+  
+  def choose_interests
+    @interests = Interest.retrieve_as_dictionary
+    @user = User.find_by_id(params[:id])
+    @user_interests = @user.get_interests
+  end
+  
+  def update_interests
+    User.find_by_id(params[:id]).update_interests_by_ids(params[:interests])
+    params[:interests]
+    
+    redirect_to user_url, :id => params[:id]
   end
   
   def edit
@@ -39,7 +53,7 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.update_attributes(user_param)
-      Connector.reinitialize_algorith
+      Connector.reinitialize_algorithm_db
       redirect_to :action => 'list'
     end
   end

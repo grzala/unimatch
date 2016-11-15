@@ -40,7 +40,7 @@ class UserController < ApplicationController
   
   def update_interests
     User.find_by_id(params[:id]).update_interests_by_ids(params[:interests])
-    params[:interests]
+    Connector.reinitialize_algorithm_db
     
     redirect_to user_url, :id => params[:id]
   end

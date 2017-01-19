@@ -9,8 +9,8 @@ class User < ApplicationRecord
   
   validates :name, :presence => true, :uniqueness => false, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+ac.uk)\z/i
-  validates :email, :presence => true, :uniqueness => {case_sensitive: false}, format: { with: VALID_EMAIL_REGEX }, length: {maximum: 255}
-  
+  validates :email, :presence => true, :uniqueness => {:case_sensitive => false}, format: { with: VALID_EMAIL_REGEX }, length: {maximum: 255}
+ 
   def User.encrypt_password(password, salt)
     Digest::SHA2.hexdigest(password + "wibble" + salt)
   end
@@ -41,6 +41,16 @@ class User < ApplicationRecord
 		return @interests
 	end
 	
+	def get_interests_by_id
+		@interests = get_interests
+		@interest_ids = []
+		@interests.each do |interest|
+			@interest_ids << interest.id
+		end
+		
+		return @interest_ids
+	end
+	
 	def update_interests_by_ids(interest_ids)
 		@ui = UserInterest.where(user_id: self.id)
 		@ui.each do |u|
@@ -63,7 +73,10 @@ class User < ApplicationRecord
 	end
 	
 	def add_interest(id)
-		UserInterest.create(user_id: self.id, interest_id: id)
+		@interests = get_interests_by_id
+		if !@interests.include? id
+			UserInterest.create(user_id: self.id, interest_id: id)
+		end
 	end
 	
 	def delete_interest(id)

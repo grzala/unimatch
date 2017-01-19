@@ -1,4 +1,11 @@
 class UserController < ApplicationController
+  
+  before_filter :authorize, :only => [:edit, :match, :choose_interests, :delete]
+  
+  def authorize
+    if session[:user_id] != params[:id].to_i then redirect_to :root end
+  end
+  
   def list
     @users = User.all
   end

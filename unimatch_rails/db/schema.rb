@@ -62,12 +62,11 @@ ActiveRecord::Schema.define(version: 20161101155405) do
 
   create_table "societies", force: :cascade do |t|
     t.string   "name"
-    t.text     "description"
-    t.float    "cost"
-    t.boolean  "paid"
-    t.boolean  "recurring"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description", default: ""
+    t.boolean  "paid",        default: false
+    t.boolean  "recurring",   default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "universities", force: :cascade do |t|

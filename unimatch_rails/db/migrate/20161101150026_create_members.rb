@@ -4,8 +4,8 @@ class CreateMembers < ActiveRecord::Migration[5.0]
 
       t.timestamps
       
-      t.belongs_to :user
-      t.belongs_to :society
+      t.belongs_to :user, :null => false
+      t.belongs_to :society, :null => false
       t.boolean :admin, :default => false
     end
   end

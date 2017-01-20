@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 20161101155405) do
   create_table "members", force: :cascade do |t|
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "user_id"
-    t.integer  "society_id"
+    t.integer  "user_id",                    null: false
+    t.integer  "society_id",                 null: false
     t.boolean  "admin",      default: false
     t.index ["society_id"], name: "index_members_on_society_id"
     t.index ["user_id"], name: "index_members_on_user_id"

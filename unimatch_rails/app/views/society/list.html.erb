@@ -1,0 +1,9 @@
+<% @societies.each do |society| %>
+    <%= society.name %>
+    <%= society.description %>
+      <p>
+          <% str = !society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
+          <%= link_to str, controller: 'society', action: 'join_leave', id: society.id %>
+      </p>
+    </br>
+<% end %>

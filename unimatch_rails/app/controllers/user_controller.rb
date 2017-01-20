@@ -27,10 +27,6 @@ class UserController < ApplicationController
     @user = User.new
   end
   
-  def user_param
-    params.require(:user).permit(:email, :name, :surname, :password)
-  end
-  
   def create
     @user = User.new(user_param)
     @user.save
@@ -68,6 +64,11 @@ class UserController < ApplicationController
   def delete
     User.find(params[:id]).destroy
     redirect_to :action => 'list'
+  end
+  
+  private
+  def user_param
+    params.require(:user).permit(:email, :name, :surname, :password)
   end
 end
 

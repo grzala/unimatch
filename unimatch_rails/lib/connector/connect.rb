@@ -5,6 +5,7 @@ module Connect
         @port = 6789
         
         def Connector.get_user_matches(id)
+            begin
             s = TCPSocket.open(@hostname, @port)
             a = id.to_s
             s.puts(a)
@@ -16,14 +17,19 @@ module Connect
             end
             s.close
             return matches
+            rescue SocketError
+            end
         end
         
         def Connector.reinitialize_algorithm_db
-            s = TCPSocket.open(@hostname, @port)
-            a = "restartdb"
-            s.puts(a)
-            
-            a = s.gets.chomp
+            begin
+                s = TCPSocket.open(@hostname, @port)
+                a = "restartdb"
+                s.puts(a)
+                
+                a = s.gets.chomp
+            rescue SocketError
+            end
         end
     end
 end

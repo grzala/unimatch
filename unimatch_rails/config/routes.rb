@@ -4,10 +4,8 @@ Rails.application.routes.draw do
   controller :society do
      get '/society/list' => :list
      get '/society/join/:id' => :join_leave
-     
-     
-  
   end
+  resources :society
   
   controller :user do
     get '/user/list' => :list

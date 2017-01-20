@@ -21,6 +21,7 @@ class Society < ApplicationRecord
   end
   
   def add_member(id)
+    
 		@members = get_members_by_id
 		if !@members.include? id
 			Member.create(user_id: id, society_id: self.id)
@@ -62,6 +63,14 @@ class Society < ApplicationRecord
       @m.admin = false
       @m.save
     end
+  end
+  
+  def has_member(id)
+    return get_members_by_id.include? id
+  end
+  
+  def has_admin(id)
+    return get_admins_by_id.include? id
   end
   
   private

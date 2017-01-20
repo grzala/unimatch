@@ -69,8 +69,20 @@ describe Society, 'methods' do
         expect(society2.save).not_to be
         expect(society3.save).not_to be
         expect(society4.save).to be
-        
-        
     end
     
+    it "can recognize members and admins" do
+        society = Society.find(3)
+        user = User.new({:name => "Adam2", :password => "adam123", :email => "adam2.adam@adam.ac.uk"})
+        user.save
+        
+        expect(society.has_member(user.id)).not_to be
+        society.add_member(user.id)
+        expect(society.has_member(user.id)).to be
+        
+        expect(society.has_admin(user.id)).not_to be
+        society.add_admin(user.id)
+        expect(society.has_admin(user.id)).to be
+    end
+        
 end

@@ -57,13 +57,13 @@ class UserController < ApplicationController
     
     if @user.update_attributes(user_param)
       Connector.reinitialize_algorithm_db
-      redirect_to :action => 'list'
+      redirect_to :action => :list
     end
   end
   
   def delete
     User.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => :list
   end
   
   private

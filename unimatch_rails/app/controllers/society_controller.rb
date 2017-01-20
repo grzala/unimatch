@@ -23,15 +23,23 @@ class SocietyController < ApplicationController
     
     def new
         @society = Society.new
+        @interests = Interest.all
     end
     
     def create
         @society = Society.new(society_param)
-        @society.save
         
         #creating a society, you become an admin and member instantly
         @society.add_member(session[:user_id])
         @society.add_admin(session[:user_id])
+        
+        #interests THIS IS TEMPORARY IT SHOULD HAPPEN THIS WAY
+        (0..params[:interest_count].to_i).each do |i|
+            param = ("id_" + i.to_s).to_sym
+            @society.add_interest(params[:selected_interests][param].to_i)
+        end
+        
+        @society.save
         
         Connector.reinitialize_algorithm_db
         redirect_to :action => :list

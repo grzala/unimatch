@@ -7,6 +7,8 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :hashed_password
       t.string :salt
       
+      #t.belongs_to :university, index: true #after we add some universities. add same in societies
+      
       t.timestamps
     end
   end

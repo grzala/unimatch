@@ -5,6 +5,9 @@ class Society < ApplicationRecord
   has_many :events
   has_many :billing_history
   
+  has_many :interests
+  has_many :interests, :through => :society_interests
+  
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false}, length: {maximum: 50}
   
   def get_members
@@ -21,7 +24,6 @@ class Society < ApplicationRecord
   end
   
   def add_member(id)
-    
 		@members = get_members_by_id
 		if !@members.include? id
 			Member.create(user_id: id, society_id: self.id)
@@ -73,11 +75,40 @@ class Society < ApplicationRecord
     return get_admins_by_id.include? id
   end
   
+  def add_interest(id)
+    SocietyInterest.create(society_id: self.id, interest_id: id)
+  end
+  
+  def get_interests
+		@si = SocietyInterest.where(society_id: self.id)
+		@interests = []
+		@si.each do |s|
+			@interests << Interest.find_by_id(s.interest_id)
+		end
+		return @interests
+  end
+  
+  def get_interests_by_id
+    return filter_by_id(get_interests)
+  end
+  
+  def get_interests_by_name
+    return filter_by_name(get_interests)
+  end
+  
   private
   def filter_by_id(array)
     @ids = []
     array.each do |item|
       @ids << item.id
+    end
+    return @ids    
+  end
+  
+  def filter_by_name(array)
+    @ids = []
+    array.each do |item|
+      @ids << item.name
     end
     return @ids    
   end

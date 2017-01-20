@@ -4,6 +4,18 @@
         <p> Name: </br> <%= f.text_field :name %></p>
         <p> Description: </br> <%= f.text_area :description, cols: 20, rows: 10 %> </p>
         
+        
+        <!-- this is temporary somebody fix this abomination as quick as possible -->
+        <p>Interests:</p>
+        
+        <% count = 0; 5.times do %>
+            <!-- cannot be called interests -->
+            <p><%= select("selected_interests", "id_" + count.to_s ,  @interests.all.collect {|i| [ i.name, i.id ] }, { include_blank: true }) %></p>
+            <% count += 1 %>
+        <% end %>
+        
+        
+        <input type="hidden" name="interest_count" value=<%= count.to_s %> />
         <%= f.submit :Signup %>
     <% end %>
 </div>

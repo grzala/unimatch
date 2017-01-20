@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101155405) do
+ActiveRecord::Schema.define(version: 20170120192206) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -69,13 +69,20 @@ ActiveRecord::Schema.define(version: 20161101155405) do
     t.datetime "updated_at",                  null: false
   end
 
+  create_table "society_interests", force: :cascade do |t|
+    t.integer  "society_id"
+    t.integer  "interest_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["interest_id"], name: "index_society_interests_on_interest_id"
+    t.index ["society_id"], name: "index_society_interests_on_society_id"
+  end
+
   create_table "universities", force: :cascade do |t|
     t.string   "name"
     t.string   "city"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_universities_on_user_id"
   end
 
   create_table "user_interests", force: :cascade do |t|

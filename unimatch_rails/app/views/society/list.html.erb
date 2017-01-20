@@ -8,6 +8,7 @@
     </br>
     Is Member: <%= society.has_member(session[:user_id]) %>
     Is Admin: <%= society.has_admin(session[:user_id]) %>
+    Interests: <%= society.get_interests_by_name %>
     <p>
         <% str = !society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
         <%= link_to str, controller: 'society', action: 'join_leave', id: society.id %>

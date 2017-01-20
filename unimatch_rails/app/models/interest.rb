@@ -4,6 +4,9 @@ class Interest < ApplicationRecord
     has_many :users
     has_many :users, :through => :user_interests
     
+    has_many :societies
+    has_many :societies, :through => :society_interests
+    
     
     def self.retrieve_as_dictionary
        toreturn = {}

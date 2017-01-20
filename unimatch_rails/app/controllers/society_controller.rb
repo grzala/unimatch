@@ -28,6 +28,7 @@ class SocietyController < ApplicationController
     
     def create
         @society = Society.new(society_param)
+        @society.save
         
         #creating a society, you become an admin and member instantly
         @society.add_member(session[:user_id])
@@ -39,7 +40,6 @@ class SocietyController < ApplicationController
             @society.add_interest(params[:selected_interests][param].to_i)
         end
         
-        @society.save
         
         Connector.reinitialize_algorithm_db
         redirect_to :action => :list

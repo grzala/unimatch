@@ -2,7 +2,7 @@
 
 <div class="whatevs">
     <h2>Create Event</h2>
-    <%= form_tag(:url => {:controller => 'event', :action => 'create'}) do %>
+    <%= form_tag(:event_index) do %>
         <p> Name: </br> <%= text_field_tag :name %></p>
         <p> Description: </br> <%= text_field_tag :description %></p>
         <p> Location: </br> <%= text_field_tag :location %></p>

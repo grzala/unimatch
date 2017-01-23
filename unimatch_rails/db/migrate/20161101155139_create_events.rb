@@ -10,7 +10,8 @@ class CreateEvents < ActiveRecord::Migration[5.0]
       t.boolean :frequency
       t.float :cost
       
-      t.belongs_to :society
+      t.belongs_to :society, :default = nil, :null: true
+      t.belongs_to :user
       
       t.timestamps
     end

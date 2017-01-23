@@ -3,7 +3,7 @@
 <p>When you create a society you automatically become an admin. you cannot leave society before you resign as admin. there is currently no way to stop being an admin, sodon't be surprised if you cannot leave the group</p>
 
 <% @societies.each do |society| %>
-    <%= society.name %>
+    <%= link_to society.name, controller: 'society', action: 'show', id: society.id %>
     <%= society.description %>
     </br>
     Is Member: <%= society.has_member(session[:user_id]) %>

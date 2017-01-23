@@ -1,0 +1,32 @@
+<% @page_title = "create event" %>
+
+<div class="whatevs">
+    <h2>Create Event</h2>
+    <%= form_tag(:url => {:controller => 'event', :action => 'create'}) do %>
+        <p> Name: </br> <%= text_field_tag :name %></p>
+        <p> Description: </br> <%= text_field_tag :description %></p>
+        <p> Location: </br> <%= text_field_tag :location %></p>
+        <p> Cost: </br> <%= text_field_tag :location, "0" %>£</p>
+        <p> Date Event(JQUERY DATEPICKER): </br> <%= text_field_tag :startdate %></p>
+        <p> TIME(JQUERY TIMEPICKER): </br> <%= text_field_tag :hour %> : <%= text_field_tag :minute %></p>
+        <p> Recurring: <%= check_box_tag :recurring %></p>
+        <p> Frequency(ENSURE ENTERING INTEGERS): </br> <%= text_field_tag :frequency %></p>
+        <p> Date of the last event: </br> <%= text_field_tag :enddate %></p>
+        
+        <!-- drop down list of societies administered by logged in user -->
+        
+        <%= submit_tag :Signup %>
+    <% end %>
+</div>
+
+<!--
+<p> Name: </br> <input type="text" name="name" /></p>
+<p> Description: </br> <input type="text" name="description" />/p>
+<p> Location: </br> <input type="text" name="location" /></p>
+<p> Cost: </br> <input type="text" name="cost" value="0" />£</p>
+<p> Date Event(JQUERY DATEPICKER): </br><input type="text" name="startdate" /></p>
+<p> TIME(JQUERY TIMEPICKER): </br> <input type="text" name="hour" /> : <input type="text" name="minute" /></p>
+<p> Recurring: <input type="checkbox" name="recurring" value="recurring"></p>
+<p> Frequency(ENSURE ENTERING INTEGERS): </br> <input type="text" name="frequency" /></p>
+<p> Date of the last event: </br> <input type="text" name="enddate" /></p>
+-->

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170120192206) do
+ActiveRecord::Schema.define(version: 20170123162541) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -21,19 +21,29 @@ ActiveRecord::Schema.define(version: 20170120192206) do
     t.index ["society_id"], name: "index_billing_histories_on_society_id"
   end
 
+  create_table "event_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.date     "date"
-    t.time     "time"
+    t.date     "startdate"
+    t.date     "enddate"
+    t.integer  "time"
     t.string   "description"
     t.string   "location"
-    t.boolean  "fixed"
-    t.boolean  "frequency"
-    t.float    "cost"
+    t.integer  "frequency",      default: 0
+    t.float    "cost",           default: 0.0
+    t.boolean  "canceled",       default: false
     t.integer  "society_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "event_group_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["event_group_id"], name: "index_events_on_event_group_id"
     t.index ["society_id"], name: "index_events_on_society_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
 
   create_table "interest_groups", force: :cascade do |t|

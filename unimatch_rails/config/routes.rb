@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
   resources :society
   
+  resources :event
+  
   controller :user do
     get '/user/list' => :list
     post '/user/:id' => :update

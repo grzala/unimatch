@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   end
   resources :society
   
+  controller :event do
+    get '/event/list' => :list
+    
+  end
   resources :event
+  
+
   
   controller :user do
     get '/user/list' => :list

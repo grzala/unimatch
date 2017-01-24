@@ -28,8 +28,7 @@ ActiveRecord::Schema.define(version: 20170123162541) do
 
   create_table "events", force: :cascade do |t|
     t.string   "name"
-    t.date     "startdate"
-    t.date     "enddate"
+    t.date     "date"
     t.integer  "time"
     t.string   "description"
     t.string   "location"
@@ -37,12 +36,10 @@ ActiveRecord::Schema.define(version: 20170123162541) do
     t.float    "cost",           default: 0.0
     t.boolean  "canceled",       default: false
     t.integer  "society_id"
-    t.integer  "user_id"
     t.integer  "event_group_id"
+    t.integer  "user_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
-    t.index ["event_group_id"], name: "index_events_on_event_group_id"
-    t.index ["society_id"], name: "index_events_on_society_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

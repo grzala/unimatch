@@ -3,3 +3,8 @@
 <% @society.get_interests_by_name.each do |interest| %>
     <p><%= interest %></p>
 <% end %>
+
+<p>Events:</p>
+<% @society.get_events.each do |event| %>
+    <p><%= event.name %></p>
+<% end %>

@@ -96,6 +96,11 @@ class Society < ApplicationRecord
     return filter_by_name(get_interests)
   end
   
+  def get_events
+    return Event.where(society_id: self.id)
+    
+  end
+  
   private
   def filter_by_id(array)
     @ids = []

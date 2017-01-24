@@ -1,5 +1,7 @@
 class EventController < ApplicationController
     
+    #if no society - choose interests
+    
     def new
         @choices = []
         temp = {}

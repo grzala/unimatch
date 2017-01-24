@@ -14,6 +14,7 @@
         <p> Date of the last event: </br> <%= text_field_tag :enddate %></p>
         
         <!-- drop down list of societies administered by logged in user -->
+        <p> <%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %></p>
         
         <%= submit_tag :Signup %>
     <% end %>

@@ -37,7 +37,7 @@ class SocietyController < ApplicationController
         #interests THIS IS TEMPORARY IT SHOULD HAPPEN THIS WAY
         (0..params[:interest_count].to_i).each do |i|
             param = ("id_" + i.to_s).to_sym
-            @society.add_interest(params[:selected_interests][param].to_i)
+            @society.add_interest(params[:selected_interests][param].to_i) #THIS CANNOT STAY LIKE THIS
         end
         
         

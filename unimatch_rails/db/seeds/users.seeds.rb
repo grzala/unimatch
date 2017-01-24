@@ -39,7 +39,7 @@ after :interests do
     @interest_amount = Interest.maximum('id')
     
     50.times do |i|
-        number = i.to_s
+        number = (i+1).to_s
         @user = User.create(name: scottish_names.sample, password: 'user'+number, email: 'user'+number+'@abdn.ac.uk' , surname: scottish_surnames.sample)
         
         #randomly generate interests

@@ -1,11 +1,22 @@
 class EventController < ApplicationController
     
     def new
+        @choices = []
+        temp = {}
+        temp["name"] = ""
+        temp["value"] = nil
+        @choices << temp
+        
+        User.find(session[:user_id]).get_administered_societies.each do |society|
+            temp = {}
+            temp["name"] = society.name
+            temp["value"] = society.id
+            @choices << temp
+        end
     end
     
     def list
         @events = Event.all
-    
     end
     
     def create
@@ -18,20 +29,17 @@ class EventController < ApplicationController
             
             while cur_date <= enddate
                 puts cur_date
-                save_event(params[:name], params[:description], params[:location], params[:cost], cur_date, params[:hour], params[:minute], session[:user_id], nil, @group.id)
+                save_event(params[:name], params[:description], params[:location], params[:cost], cur_date, params[:hour], params[:minute], session[:user_id], params[:society_id], @group.id)
                 cur_date += 7 * params[:frequency].to_i
             end
             
         else 
             date = Date.parse(params[:startdate])
-            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], session[:user_id])
+            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], session[:user_id], params[:society_id])
         end
         
         
-        
-        
-        
-        #redirect_to root_path
+        redirect_to :action => :list
     end
     
     def save_event(name, description, location, cost, date, hour, minute, user_id, society_id = nil, event_group_id = nil)

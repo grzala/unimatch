@@ -2,6 +2,11 @@ class EventController < ApplicationController
     
     #if no society - choose interests
     
+    def show
+        @event = Event.find(params[:id])
+    end
+    
+    
     def new
         @choices = []
         temp = {}

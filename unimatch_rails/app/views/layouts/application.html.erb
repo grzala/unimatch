@@ -15,10 +15,11 @@
       <div class="nav_left">
       <div id="desktop_nav">
       <ul>
-        <li><%= link_to 'Home', '/' %></li>
-        <li><%= link_to 'Societies', '/society/list' %></li>
-        <li><%= link_to 'Matches', '/user/match' %></li>
-        <li><%= link_to 'Feedback', 'googleform' %></li>
+        <p><%= session[:user_id] %></p>
+        <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
+        <li><%= link_to 'Societies', :controller => :society, :action=> :list %></li>
+        <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Feedback', '#' %></li>
       </ul>
       </div>
       <div id = "details">

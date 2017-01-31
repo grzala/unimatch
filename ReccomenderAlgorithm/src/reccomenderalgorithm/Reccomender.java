@@ -16,19 +16,18 @@ import java.util.Set;
  */
 public class Reccomender {
     
-    public static HashMap<Integer, Float> get_matches(int id, Database db) {
+    public static HashMap<Integer, Float> get_matches(int id, Database2 db) {
         return get_matches(id, db, false);
     }
     
-    public static HashMap<Integer, Float> get_matches(int id, Database db, boolean verbose) {
+    public static HashMap<Integer, Float> get_matches(int id, Database2 db, boolean verbose) {
         HashMap<Integer, Float> result = new HashMap<>();
         
-        User usr = db.users.get(id);
+        User usr = db.getUserByID(id);
         if (verbose)
             System.out.println("comparing for " + usr.name);
 
-        for (int key : db.users.keySet()) {
-            User usr2 = db.users.get(key);
+        for (User usr2 : db.getUsers()) {
             
             //intersections
             ArrayList<Interest> likes1 = new ArrayList<Interest>(usr.interests);

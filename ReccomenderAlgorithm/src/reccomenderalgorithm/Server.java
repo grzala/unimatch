@@ -24,7 +24,7 @@ import org.json.JSONObject;
  */
 public class Server {
     
-    public static Database db;
+    public static Database2 db;
     
     public Server() {
          //init db
@@ -33,7 +33,7 @@ public class Server {
     
     public static void updateDatabase() {
         System.out.println("initializing database");
-        Server.db = new Database();
+        Server.db = new Database2();
         System.out.println("database initialized");
     }
     
@@ -90,8 +90,8 @@ public class Server {
         private String getMatches(int id) throws JSONException, IOException {
             //get matches, convert to json
             final HashMap<Integer, Float> matches;
-            System.out.println("Matching for: " + db.users.get(id).name);
-            matches = Reccomender.get_matches(id, db);
+            System.out.println("Matching for: " + db.getUserByID(id).name);
+            matches = Reccomender.get_matches(id, db, true);
             JSONObject jsonMatches = hashMapToJson(matches);
             System.out.println("done matching");
             return jsonMatches.toString();

@@ -29,39 +29,37 @@ ActiveRecord::Schema.define(version: 20170123162541) do
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.date     "date"
-    t.integer  "time"
+    t.time     "time"
     t.string   "description"
     t.string   "location"
-    t.integer  "frequency",      default: 0
-    t.float    "cost",           default: 0.0
-    t.boolean  "canceled",       default: false
+    t.boolean  "fixed"
+    t.boolean  "frequency"
+    t.float    "cost"
     t.integer  "society_id"
-    t.integer  "event_group_id"
-    t.integer  "user_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["user_id"], name: "index_events_on_user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["society_id"], name: "index_events_on_society_id"
   end
 
   create_table "interest_groups", force: :cascade do |t|
+    t.integer  "interests_id"
+    t.string   "name"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["interests_id"], name: "index_interest_groups_on_interests_id"
+  end
+
+  create_table "interests", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "interests", force: :cascade do |t|
-    t.integer  "interest_group_id"
-    t.string   "name"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.index ["interest_group_id"], name: "index_interests_on_interest_group_id"
-  end
-
   create_table "members", force: :cascade do |t|
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "user_id",                    null: false
-    t.integer  "society_id",                 null: false
+    t.integer  "user_id"
+    t.integer  "society_id"
     t.boolean  "admin",      default: false
     t.index ["society_id"], name: "index_members_on_society_id"
     t.index ["user_id"], name: "index_members_on_user_id"
@@ -69,11 +67,12 @@ ActiveRecord::Schema.define(version: 20170123162541) do
 
   create_table "societies", force: :cascade do |t|
     t.string   "name"
-    t.text     "description", default: ""
-    t.boolean  "paid",        default: false
-    t.boolean  "recurring",   default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.text     "description"
+    t.float    "cost"
+    t.boolean  "paid"
+    t.boolean  "recurring"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "society_interests", force: :cascade do |t|
@@ -88,8 +87,10 @@ ActiveRecord::Schema.define(version: 20170123162541) do
   create_table "universities", force: :cascade do |t|
     t.string   "name"
     t.string   "city"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_universities_on_user_id"
   end
 
   create_table "user_interests", force: :cascade do |t|

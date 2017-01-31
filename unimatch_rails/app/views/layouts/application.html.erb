@@ -10,11 +10,20 @@
 
   <body>
     
-    <h1 id="header_text">UniMatch</h1>
-    
+    <img class="inline_block" src="/assets/unimatch_logo.png" alt="UniMatch Logo" height="100" >
     <% if session[:user_id] %>
       <div class="nav_left">
+      <div id="desktop_nav">
+      <ul>
+        <li><%= link_to 'Home', '/' %></li>
+        <li><%= link_to 'Societies', '/society/list' %></li>
+        <li><%= link_to 'Matches', '/user/match' %></li>
+        <li><%= link_to 'Feedback', 'googleform' %></li>
+      </ul>
+      </div>
+      <div id = "details">
       <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %> <%= link_to "logout", logout_url %></p>
+      </div>
       </div>
     <% end %>
     <%= yield %>

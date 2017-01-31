@@ -24,7 +24,7 @@ import org.json.JSONObject;
  */
 public class Server {
     
-    public static Database2 db;
+    public static Database db;
     
     public Server() {
          //init db
@@ -33,7 +33,7 @@ public class Server {
     
     public static void updateDatabase() {
         System.out.println("initializing database");
-        Server.db = new Database2();
+        Server.db = new DevelopmentDB();
         System.out.println("database initialized");
     }
     
@@ -71,14 +71,8 @@ public class Server {
                    new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 
                 String message = inFromClient.readLine();
-                String toSend = null;
-                if (message.equals("restartdb")) {
-                    Server.updateDatabase();
-                    toSend = "\n";
-                } else {
-                    int id = Integer.parseInt(message);
-                    toSend = getMatches(id);
-                }
+                int id = Integer.parseInt(message);
+                String toSend = getMatches(id);
                 
                 final DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream()); // OutputStream where to send the map in case of network you get it from the Socket instance.
                 outputStream.writeBytes(toSend+"\n");
@@ -91,7 +85,7 @@ public class Server {
             //get matches, convert to json
             final HashMap<Integer, Float> matches;
             System.out.println("Matching for: " + db.getUserByID(id).name);
-            matches = Reccomender.get_matches(id, db, true);
+            matches = Reccomender.get_matches(db.getUserByID(id), db.getUsers(), db.getInterests(), true);
             JSONObject jsonMatches = hashMapToJson(matches);
             System.out.println("done matching");
             return jsonMatches.toString();

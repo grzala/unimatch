@@ -18,7 +18,7 @@ import java.util.HashMap;
  *
  * @author grzala
  */
-public class Database2 {
+public class DevelopmentDB implements Database{
     
     //interests and groups are fixed, restart algorithm server if changes are made
     public HashMap<Integer, String> interest_groups = new HashMap<>();
@@ -32,7 +32,7 @@ public class Database2 {
     String user = "alg";
     String password = "alg";
     
-    public Database2() {
+    public DevelopmentDB() {
         connect();
         
         populateTables();
@@ -92,6 +92,10 @@ public class Database2 {
             e.printStackTrace();
         }
         return result;
+    }
+    
+    public ArrayList<Interest> getInterests() {
+        return new ArrayList<Interest>(interests.values());
     }
     
     public Interest findInterestByID(int id) {

@@ -16,24 +16,23 @@ import java.util.Set;
  */
 public class Reccomender {
     
-    public static HashMap<Integer, Float> get_matches(int id, Database2 db) {
-        return get_matches(id, db, false);
+    public static HashMap<Integer, Float> get_matches(User usr, ArrayList<User> users, ArrayList<Interest> interests) {
+        return get_matches(usr, users, interests, false);
     }
     
-    public static HashMap<Integer, Float> get_matches(int id, Database2 db, boolean verbose) {
+    public static HashMap<Integer, Float> get_matches(User usr, ArrayList<User> users, ArrayList<Interest> interests, boolean verbose) {
         HashMap<Integer, Float> result = new HashMap<>();
         
-        User usr = db.getUserByID(id);
         if (verbose)
             System.out.println("comparing for " + usr.name);
 
-        for (User usr2 : db.getUsers()) {
+        for (User usr2 : users) {
             
             //intersections
             ArrayList<Interest> likes1 = new ArrayList<Interest>(usr.interests);
             ArrayList<Interest> likes2 = new ArrayList<Interest>(usr2.interests);
-            ArrayList<Interest> dislikes1 = new ArrayList<Interest>(db.interests.values()); dislikes1.removeAll(likes1);
-            ArrayList<Interest> dislikes2 = new ArrayList<Interest>(db.interests.values()); dislikes2.removeAll(likes2);
+            ArrayList<Interest> dislikes1 = new ArrayList<Interest>(interests); dislikes1.removeAll(likes1);
+            ArrayList<Interest> dislikes2 = new ArrayList<Interest>(interests); dislikes2.removeAll(likes2);
 
             ArrayList<Interest> likes1likes2intersection = new ArrayList<Interest>(likes1); likes1likes2intersection.retainAll(likes2);
             ArrayList<Interest> dislikes1dislikes2intersection = new ArrayList<Interest>(dislikes1); dislikes1dislikes2intersection.retainAll(dislikes2);

@@ -28,16 +28,16 @@ public class Server {
     
     public Server() {
          //init db
-         updateDatabase();
+         db = null;
     }
     
-    public static void updateDatabase() {
-        System.out.println("initializing database");
-        Server.db = new DevelopmentDB();
-        System.out.println("database initialized");
+    public void setDatabase(Database db) {
+        this.db = db;
     }
     
     public void run() throws Exception {
+        if (db == null) throw new Exception();
+        
         ServerSocket serverSocket = null;
         boolean listening = true;
 
@@ -47,11 +47,11 @@ public class Server {
             System.err.println("Could not listen on port: 6789.");
             System.exit(-1);
         }
-
-        while (listening)
-            new GetReccomendationsThread(serverSocket.accept()).start();
-
-        serverSocket.close();
+        
+        try {
+            while (listening)
+                new GetReccomendationsThread(serverSocket.accept()).start();
+        } catch (Exception e) {} 
          
     }
     

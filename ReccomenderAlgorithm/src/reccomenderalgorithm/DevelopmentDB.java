@@ -8,6 +8,7 @@ package reccomenderalgorithm;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,34 +20,47 @@ import java.util.HashMap;
  * @author grzala
  */
 public class DevelopmentDB implements Database{
+        
+    String filePath;
     
     //interests and groups are fixed, restart algorithm server if changes are made
     public HashMap<Integer, String> interest_groups = new HashMap<>();
     public HashMap<Integer, Interest> interests = new HashMap<>();
     
+    //statements
     Connection con = null;
-    
-    private final String HOSTNAME = "unimatch.ddns.net";
+    final String getUsersSTMT = "SELECT * FROM users;";
+    final String getUserByIDSTMT = "SELECT * FROM users WHERE id = ?";
+    final String getUserInterestsSTMT = "SELECT * FROM user_interests WHERE user_id = ? ;";
+    final String getInterestGroupsSTMT = "SELECT * FROM interest_groups";
+    final String getInterestsSTMT = "SELECT * FROM interests";
 
-    String url = "jdbc:mysql://"+HOSTNAME;
-    String user = "alg";
-    String password = "alg";
     
-    public DevelopmentDB() {
+    public DevelopmentDB(String filePath) {
+        this.filePath = filePath;
         connect();
         
         populateTables();
-        
-        close();
-        
+    }
+    
+    private void connect() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            con = DriverManager.getConnection("jdbc:sqlite:" + filePath);
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        //System.out.println("Opened database successfully");
     }
     
     //gets user By ID alongside with his interests
     public User getUserByID(int id) { 
         User usr = null;
         try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM users WHERE id = " + id + ";" );
+            PreparedStatement getUser = con.prepareStatement(getUserByIDSTMT);
+            getUser.setInt(1, id);
+            ResultSet rs = getUser.executeQuery();
             
             String name = rs.getString("name");
             String surname = rs.getString("surname");
@@ -63,7 +77,7 @@ public class DevelopmentDB implements Database{
         ArrayList<User> result = new ArrayList<User>();
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM users;" );
+            ResultSet rs = stmt.executeQuery(getUsersSTMT);
             
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -80,8 +94,9 @@ public class DevelopmentDB implements Database{
     public ArrayList<Interest> getUserInterests(int id) {
         ArrayList<Interest> result = new ArrayList<Interest>();
         try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM user_interests WHERE user_id = " + id + ";" );
+            PreparedStatement getUserInterest = con.prepareStatement(getUserInterestsSTMT);
+            getUserInterest.setInt(1, id);
+            ResultSet rs = getUserInterest.executeQuery();
             
             while (rs.next()) {
                 int interest_id = rs.getInt("interest_id");
@@ -107,7 +122,7 @@ public class DevelopmentDB implements Database{
             Statement stmt = con.createStatement();
             ResultSet rs; 
             //interest groups
-            rs = stmt.executeQuery( "SELECT * FROM interest_groups" );
+            rs = stmt.executeQuery(getInterestGroupsSTMT);
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -116,7 +131,7 @@ public class DevelopmentDB implements Database{
             }
             
             //interests 
-            rs = stmt.executeQuery( "SELECT * FROM interests" );
+            rs = stmt.executeQuery(getInterestsSTMT);
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -129,18 +144,12 @@ public class DevelopmentDB implements Database{
         }
     }
     
-    private void connect() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection("jdbc:sqlite:../unimatch_rails/db/development.sqlite3");
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        System.out.println("Opened database successfully");
-    }
-    
     public void close() {
+        try {
+            con.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
         
 }

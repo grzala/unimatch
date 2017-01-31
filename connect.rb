@@ -29,4 +29,4 @@ class Connector
 	end
 end
 
-puts Connector.get_user_matches(41)
+puts Connector.get_user_matches(12)

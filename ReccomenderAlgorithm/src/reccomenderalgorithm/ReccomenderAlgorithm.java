@@ -22,21 +22,15 @@ public class ReccomenderAlgorithm {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //Database db = new Database();
-
-        //HashMap<Integer, Float> matches = new HashMap<>();
-        //matches = Reccomender.get_matches(10, db);
-
-        //System.out.println(matches.size());
-
+        
         Server s = new Server();
         try {
+            Database d = new DevelopmentDB("../unimatch_rails/db/development.sqlite3");
+            s.setDatabase(d);
             s.run();
         } catch(Exception e) {
-            
         }
        
     }
-    
     
 }

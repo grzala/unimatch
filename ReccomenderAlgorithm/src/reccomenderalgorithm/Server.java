@@ -25,10 +25,13 @@ import org.json.JSONObject;
 public class Server {
     
     public static Database db;
+    final private int port;
     
-    public Server() {
+    public Server(int port) {
          //init db
          db = null;
+         
+         this.port = port;
     }
     
     public void setDatabase(Database db) {
@@ -42,7 +45,7 @@ public class Server {
         boolean listening = true;
 
         try {
-            serverSocket = new ServerSocket(6789);
+            serverSocket = new ServerSocket(port);
         } catch (Exception e) {
             System.err.println("Could not listen on port: 6789.");
             System.exit(-1);

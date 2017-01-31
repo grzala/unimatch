@@ -38,6 +38,7 @@
             <obfuscate>
                 <fileset dir="${build.classes.dir}"/>
             </obfuscate>
+            <copy file="build.xml" todir="${dist.dir}"/>   
         </target>
 
     For list of available properties check the imported 
@@ -69,5 +70,8 @@
     properties which you can use, check the target you are overriding in the
     nbproject/build-impl.xml file. 
 
-    -->
+	-->
+	<target name="-post-compile">
+		<copy file="config.properties" todir="${dist.dir}"/>   
+	</target>
 </project>

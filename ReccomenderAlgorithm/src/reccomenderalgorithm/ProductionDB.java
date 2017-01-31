@@ -7,7 +7,6 @@ package reccomenderalgorithm;
 
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
-import com.sun.corba.se.impl.util.Version;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,36 +20,50 @@ import java.util.logging.Logger;
  *
  * @author grzala
  */
-public class ProductionDB {
+public class ProductionDB implements Database {
+    
+    String url;
+    String user;
+    String password;
     
     public HashMap<Integer, String> interest_groups = new HashMap<>();
     public HashMap<Integer, Interest> interests = new HashMap<>();
-    public HashMap<Integer, User> users = new HashMap<>();
     
+    
+    //statements
     Connection con = null;
-    
-    private final String HOSTNAME = "unimatch.ddns.net";
+    final String getUsersSTMT = "SELECT * FROM unimatch.users;";
+    final String getUserByIDSTMT = "SELECT * FROM unimatch.users WHERE id = ?";
+    final String getUserInterestsSTMT = "SELECT * FROM unimatch.user_interests WHERE user_id = ? ;";
+    final String getInterestGroupsSTMT = "SELECT * FROM unimatch.interest_groups";
+    final String getInterestsSTMT = "SELECT * unimatch.FROM interests";
 
-    String url = "jdbc:mysql://"+HOSTNAME;
-    String user = "alg";
-    String password = "alg";
     
-    public ProductionDB() {
+    public ProductionDB(String HOSTNAME, String user, String password) {
+        this.url = "jdbc:mysql://" + HOSTNAME;
+        this.user = user;
+        this.password = password;
         connect();
         
         populateTables();
-        
-        close();
-        
+    }
+    
+    private void connect() {
+        try {
+            con = (Connection) DriverManager.getConnection(url, user, password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     
     private void populateTables() {
-        ResultSet rs = null;
-        PreparedStatement pst = null;
+        
         try {
+            PreparedStatement stmt = con.prepareStatement(getInterestGroupsSTMT);
+            ResultSet rs; 
+            
             //interest groups
-            pst = con.prepareStatement("SELECT * FROM unimatch.interest_groups");
-            rs = pst.executeQuery();
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -58,69 +71,81 @@ public class ProductionDB {
                 interest_groups.put(id, name);
             }
             
-            //interests /////////////////change this, dont need so much sql here
-            pst = con.prepareStatement("SELECT * FROM unimatch.interests");
-            rs = pst.executeQuery();
-
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                int group_id = rs.getInt("interest_group_id");
-                String name = rs.getString("name");
-                interests.put(id, new Interest(id, name, interest_groups.get(group_id)));
-            }
-            
-            
-            //users
-            pst = con.prepareStatement("SELECT * FROM unimatch.users");
-            rs = pst.executeQuery();
+            //interests 
+            stmt = con.prepareStatement(getInterestsSTMT);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                String surname = rs.getString("surname");
-                users.put(id, new User(id, name, surname));
+                Interest interest = new Interest(id, name, interest_groups.get(rs.getInt("interest_group_id")));
+                interests.put(id, interest);
             }
-            
-            //add user interests
-            PreparedStatement get_user_interests = con.prepareStatement("SELECT interest_id FROM unimatch.user_interests WHERE user_id = ?");
-            ResultSet user_interests = null;
-            
-            for (int key : users.keySet()) {
-                get_user_interests.setInt(1, key);
-                user_interests = get_user_interests.executeQuery();
-                while (user_interests.next()) {
-                    int interest_id = user_interests.getInt("interest_id");
-                    Interest in = interests.get(interest_id);
-                    users.get(key).interests.add(in);
-                }
-            }
-            
-            //close statements
-            if(user_interests != null) {
-                user_interests.close();
-                get_user_interests.close();
-            }
-            
-        } catch (SQLException ex) {
-            reportException(ex);
-        } finally {
-            try {
-                if(rs != null) 
-                    rs.close();
-                if(pst != null)
-                    pst.close();
-            } catch (SQLException ex) {
-                reportException(ex);
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
-    private void connect() {
+    public User getUserByID(int id) { 
+        User usr = null;
         try {
-            con = (Connection) DriverManager.getConnection(url, user, password);
-        } catch (SQLException ex) {
-            reportException(ex);
+            PreparedStatement getUser = con.prepareStatement(getUserByIDSTMT);
+            getUser.setInt(1, id);
+            ResultSet rs = getUser.executeQuery();
+            
+            String name = rs.getString("name");
+            String surname = rs.getString("surname");
+            usr = new User(id, name, surname);
+            usr.interests = getUserInterests(usr.id);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return usr;
+    }
+    
+    public ArrayList<User> getUsers() {
+        ArrayList<User> result = new ArrayList<User>();
+        try {
+            PreparedStatement stmt = con.prepareStatement(getUsersSTMT);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                result.add(getUserByID(id));
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public ArrayList<Interest> getUserInterests(int id) {
+        ArrayList<Interest> result = new ArrayList<Interest>();
+        try {
+            PreparedStatement getUserInterest = con.prepareStatement(getUserInterestsSTMT);
+            getUserInterest.setInt(1, id);
+            ResultSet rs = getUserInterest.executeQuery();
+            
+            while (rs.next()) {
+                int interest_id = rs.getInt("interest_id");
+                result.add(findInterestByID(interest_id));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public ArrayList<Interest> getInterests() {
+        return new ArrayList<Interest>(interests.values());
+    }
+    
+    public Interest findInterestByID(int id) {
+        return interests.get(id);
     }
     
     public void close() {
@@ -129,13 +154,8 @@ public class ProductionDB {
                 con.close();
             }
         } catch (SQLException ex) {
-            reportException(ex);
+            ex.printStackTrace();
         }
-    }
-    
-    private void reportException(SQLException ex) {
-        Logger lgr = Logger.getLogger(Version.class.getName());
-        lgr.log(Level.SEVERE, ex.getMessage(), ex);
     }
     
 }

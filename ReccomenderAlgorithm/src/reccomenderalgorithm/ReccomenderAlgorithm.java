@@ -22,7 +22,8 @@ public class ReccomenderAlgorithm {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        //Production DB
+        //Database d = new ProductionDB("127.0.0.1", "alg", "alg");
         Server s = new Server();
         try {
             Database d = new DevelopmentDB("../unimatch_rails/db/development.sqlite3");

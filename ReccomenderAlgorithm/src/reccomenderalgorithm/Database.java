@@ -18,4 +18,6 @@ public interface Database {
     
     public ArrayList<Interest> getInterests();
     
+    public void close();
+    
 }

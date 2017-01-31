@@ -1,7 +1,7 @@
 module Connect
     class Connector
         
-        @hostname = 'unimatch.ddns.net'
+        @hostname = '127.0.0.1' #localhost
         @port = 6789
         
         def Connector.get_user_matches(id)
@@ -18,12 +18,5 @@ module Connect
             return matches
         end
         
-        def Connector.reinitialize_algorithm_db
-            s = TCPSocket.open(@hostname, @port)
-            a = "restartdb"
-            s.puts(a)
-            
-            a = s.gets.chomp
-        end
     end
 end

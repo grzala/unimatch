@@ -5,20 +5,17 @@
  */
 package reccomenderalgorithm;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author u01ydd14
+ * @author u02mfp14
  */
-public class User extends Reccomendable {
+public class Society extends Reccomendable {
     
-    public String name, surname;
+    public String name;
     
-    public User(int id, String name, String surname) {
+    public Society(int id, String name) {
         this.id = id;
         this.name = name;
-        this.surname = surname;
     }
     
 }

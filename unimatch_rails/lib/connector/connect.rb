@@ -8,7 +8,7 @@ module Connect
             begin
             s = TCPSocket.open(@hostname, @port)
             a = id.to_s
-            s.puts(a)
+            s.puts("usermatch "+a)
             json = s.gets.chomp
             json = JSON.parse(json)
             matches = {}

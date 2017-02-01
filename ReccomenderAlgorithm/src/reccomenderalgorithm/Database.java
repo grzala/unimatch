@@ -15,10 +15,12 @@ public interface Database {
     
     public User getUserByID(int id);
     public ArrayList<User> getUsers();
+    public ArrayList<Society> getSocieties();
     
     public ArrayList<Interest> getInterests();
     
     public void connect();
     public void close();
+    public boolean isClosed();
     
 }

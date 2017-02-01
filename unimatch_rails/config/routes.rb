@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   
   controller :society do
      get '/society/list' => :list
@@ -13,6 +13,15 @@ Rails.application.routes.draw do
   end
   resources :event
   
+  controller :conversations do
+      get '/user/:id/conversations/list' => :list
+      get '/user/:id/conversations' => :index
+      
+  end
+  
+  resources :conversations do
+    resources :messages
+  end
 
   
   controller :user do

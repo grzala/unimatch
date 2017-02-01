@@ -1,0 +1,21 @@
+<div class="ui segment">
+ <h3>Mailbox</h3>
+ <div class="ui list">
+  <div class=”item”>
+   <% @conversations.each do |conversation| %>
+    <%= link_to @recipient_id, conversation_messages_path(conversation)%>
+   <% end %>
+  </div>
+ </div>
+</div>
+<div class="ui segment">
+ <h3>All Users</h3>
+  <div class="ui list">
+   <% @users.each do |user| %>
+   
+    <div class="item">
+   <%= user.name %> <%= link_to 'Message me!', conversations_path(sender_id: params[:id], recipient_id: user.id), method: 'post'%>
+ </div>
+  <% end %>
+ </div>
+</div>

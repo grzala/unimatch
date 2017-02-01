@@ -20,6 +20,7 @@
         <li><%= link_to 'Societies', :controller => :society, :action=> :list %></li>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Society Matches', :controller => :society, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', '#' %></li>
       </ul>
       </div>

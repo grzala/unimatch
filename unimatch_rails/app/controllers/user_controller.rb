@@ -30,7 +30,6 @@ class UserController < ApplicationController
   def create
     @user = User.new(user_param)
     @user.save
-    Connector.reinitialize_algorithm_db
     
     redirect_to root_path
   end

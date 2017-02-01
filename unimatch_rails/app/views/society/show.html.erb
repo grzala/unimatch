@@ -6,5 +6,5 @@
 
 <p>Events:</p>
 <% @society.get_events.each do |event| %>
-    <p><%= event.name %></p>
+    <p><%= link_to event.name, {:controller => :event, :action => :show, :id => event.id} %></p>
 <% end %>

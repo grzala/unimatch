@@ -40,8 +40,6 @@ class SocietyController < ApplicationController
             @society.add_interest(params[:selected_interests][param].to_i) #THIS CANNOT STAY LIKE THIS
         end
         
-        
-        Connector.reinitialize_algorithm_db
         redirect_to :action => :list
     end
     

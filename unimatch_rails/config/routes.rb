@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   controller :society do
      get '/society/list' => :list
      get '/society/join/:id' => :join_leave
+    get '/society/match/:id' => :match
   end
   resources :society
   
@@ -12,8 +13,6 @@ Rails.application.routes.draw do
     
   end
   resources :event
-  
-
   
   controller :user do
     get '/user/list' => :list

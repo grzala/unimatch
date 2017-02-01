@@ -1,9 +1,7 @@
-<% @matched_users.each do |user, coefficient| %>
+<% @matched_societies.each do |society, coefficient| %>
     <% if coefficient > 0 %>
-        <%= user.name %>
-        <%= user.surname %>
+        <%= society.name %>
         <% coefficient = ((coefficient*100).to_f).ceil %>
-        
         <%
             match_type = "NO MATCH"
             if coefficient > 0 && coefficient <= 20

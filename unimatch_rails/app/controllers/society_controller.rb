@@ -56,6 +56,16 @@ class SocietyController < ApplicationController
         @society_interest = @society.get_interest
     end
     
+    def match
+        @matches = Connector.get_society_matches(params[:id])
+        puts @matches
+        @matched_societies = {}
+        @matches.each do |id, coefficient|
+          @matched_societies[Society.find(id)] = coefficient
+        end
+        @matched_societies = @matched_societies.sort_by {|k,v| v}.reverse
+    end
+    
     private
     def society_param
         params.require(:society).permit(:name, :description)

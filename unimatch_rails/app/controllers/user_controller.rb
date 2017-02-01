@@ -13,8 +13,8 @@ class UserController < ApplicationController
   def match
     @matches = Connector.get_user_matches(params[:id])
     @matched_users = {}
-    User.all.each do |user|
-      @matched_users[user] = @matches[user.id]
+    @matches.each do |id, coefficient|
+      @matched_users[User.find(id)] = coefficient
     end
     @matched_users = @matched_users.sort_by {|k,v| v}.reverse
   end

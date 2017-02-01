@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.json.JSONException;
 
@@ -27,6 +28,9 @@ public class Server {
     public static Database db;
     public static int dbSemaphore = 0;
     final private int port;
+    
+    final private String userMatchType = "usermatch";
+    final private String societyMatchType = "societymatch";
     
     public Server(int port) {
          //init db
@@ -92,9 +96,15 @@ public class Server {
                 BufferedReader inFromClient =
                    new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 
+                //message looks like this
+                //usermatch 1 ;Match users for user with ID 1
+                //societymatch 12 ;Match societies for user with ID 12
+                
                 String message = inFromClient.readLine();
-                int id = Integer.parseInt(message);
-                String toSend = getMatches(id);
+                String[] messageParts = message.split(" ");
+                String type = messageParts[0];
+                int id = Integer.parseInt(messageParts[1]);
+                String toSend = getMatches(type, id);
                 
                 final DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream()); // OutputStream where to send the map in case of network you get it from the Socket instance.
                 outputStream.writeBytes(toSend+"\n");
@@ -104,11 +114,24 @@ public class Server {
             dbSemaphore--;
         }
         
-        private String getMatches(int id) throws JSONException, IOException {
+        private String getMatches(String type, int id) throws JSONException, IOException {
             //get matches, convert to json
             final HashMap<Integer, Float> matches;
             System.out.println("Matching for: " + db.getUserByID(id).name);
-            matches = Reccomender.get_matches(db.getUserByID(id), db.getUsers(), db.getInterests(), false);
+            Reccomendable matchFor = null;
+            ArrayList<Reccomendable> matchAgainst = new ArrayList<Reccomendable>();
+            
+            if (type.equals(userMatchType)) {
+                matchFor = db.getUserByID(id);
+                matchAgainst = (ArrayList)db.getUsers();
+            } else if (type.equals(societyMatchType)) {
+                matchFor = db.getUserByID(id);
+                matchAgainst = (ArrayList)db.getSocieties();
+                ArrayList<Reccomendable> temp = new ArrayList<Reccomendable>();
+            }
+            
+            matches = Reccomender.getMatches(matchFor, matchAgainst, db.getInterests(), false);
+            
             JSONObject jsonMatches = hashMapToJson(matches);
             System.out.println("done matching");
             return jsonMatches.toString();

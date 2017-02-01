@@ -1,15 +1,18 @@
 <% @matched_users.each do |user, coefficient| %>
-    <%= user.name %>
-    <%= user.surname %>
-    <%= coefficient %>
-    <% if coefficient <= 0 %>
-        NO MATCH
-    <% elsif coefficient > 0 && coefficient <= 0.20 %>
-        WEAK MATCH
-    <% elsif coefficient > 0.20 && coefficient <= 0.50 %>
-        NORMAL MATCH
-    <% elsif coefficient > 0.50 %>
-        STRONG MATCH
+    <% if coefficient > 0 %>
+        <%= user.name %>
+        <%= user.surname %>
+        <%= coefficient = ((coefficient*100).to_f).ceil %>
+        <% if coefficient <= 0 %>
+           NO MATCH
+        <% elsif coefficient > 0 && coefficient <= 0.20 %>
+            % WEAK MATCH
+        <% elsif coefficient > 0.20 && coefficient <= 0.50 %>
+            % NORMAL MATCH
+        <% elsif coefficient > 0.50 %>
+            % STRONG MATCH
+        <% end %>
+        </br>
+        </br>
     <% end %>
-    </br>
 <% end %>

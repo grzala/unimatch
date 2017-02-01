@@ -33,8 +33,11 @@ public class ProductionDB implements Database {
     //statements
     Connection con = null;
     final String getUsersSTMT = "SELECT * FROM unimatch.users;";
+    final String getSocietiesSTMT = "SELECT * FROM unimatch.societies;";
     final String getUserByIDSTMT = "SELECT * FROM unimatch.users WHERE id = ?";
+    final String getSocietyByIDSTMT = "SELECT * FROM unimatch.society WHERE id = ?";
     final String getUserInterestsSTMT = "SELECT * FROM unimatch.user_interests WHERE user_id = ? ;";
+    final String getSocietyInterestsSTMT = "SELECT * FROM unimatch.society_interests WHERE society_id = ? ;";
     final String getInterestGroupsSTMT = "SELECT * FROM unimatch.interest_groups";
     final String getInterestsSTMT = "SELECT * unimatch.FROM interests";
 
@@ -97,7 +100,7 @@ public class ProductionDB implements Database {
             String name = rs.getString("name");
             String surname = rs.getString("surname");
             usr = new User(id, name, surname);
-            usr.interests = getUserInterests(usr.id);
+            usr.setInterests(getUserInterests(usr.id));
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,6 +144,59 @@ public class ProductionDB implements Database {
         return result;
     }
     
+public Society getSocietyByID(int id) { 
+        Society soc = null;
+        try {
+            PreparedStatement getUser = con.prepareStatement(getSocietyByIDSTMT);
+            getUser.setInt(1, id);
+            ResultSet rs = getUser.executeQuery();
+            
+            String name = rs.getString("name");
+            soc = new Society(id, name);
+            soc.setInterests(getSocietyInterests(soc.id));
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return soc;
+    }
+    
+    public ArrayList<Society> getSocieties() {
+        ArrayList<Society> result = new ArrayList<Society>();
+        try {
+            PreparedStatement stmt = con.prepareStatement(getSocietiesSTMT);
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                result.add(getSocietyByID(id));
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
+    public ArrayList<Interest> getSocietyInterests(int id) {
+        ArrayList<Interest> result = new ArrayList<Interest>();
+        try {
+            PreparedStatement getSocInterest = con.prepareStatement(getSocietyInterestsSTMT);
+            getSocInterest.setInt(1, id);
+            ResultSet rs = getSocInterest.executeQuery();
+            
+            while (rs.next()) {
+                int interest_id = rs.getInt("interest_id");
+                result.add(findInterestByID(interest_id));
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+    
     public ArrayList<Interest> getInterests() {
         return new ArrayList<Interest>(interests.values());
     }
@@ -160,4 +216,12 @@ public class ProductionDB implements Database {
         }
     }
     
+    public boolean isClosed() {
+        try {
+            return con == null || con.isClosed();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }  
 }

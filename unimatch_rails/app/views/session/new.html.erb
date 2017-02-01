@@ -19,7 +19,7 @@
         <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= password_field_tag :password, params[:password] %>
       </div>
       <div>
-        <%= submit_tag "Login" %>
+        <%= submit_tag "Login", {:id => 'login'} %>
         <%= link_to "register", controller: 'user', action: 'new'  %>
       </div>
     </fieldset>

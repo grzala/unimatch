@@ -10,7 +10,7 @@
 
   <body>
     
-    <img class="inline_block" src="/assets/unimatch_logo.png" alt="UniMatch Logo" height="100" >
+    <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {class: "inline_block"} %>
     <% if session[:user_id] %>
       <div class="nav_left">
       <div id="desktop_nav">
@@ -19,7 +19,7 @@
         <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
         <li><%= link_to 'Societies', :controller => :society, :action=> :list %></li>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Society_Matches', :controller => :society, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Society Matches', :controller => :society, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', '#' %></li>
       </ul>
       </div>

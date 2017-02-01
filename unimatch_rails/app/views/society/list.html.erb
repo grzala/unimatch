@@ -1,6 +1,6 @@
 <p></p><%= link_to "Create new society", controller: 'society', action: 'new' %></p>
 
-<p>When you create a society you automatically become an admin. you cannot leave society before you resign as admin. there is currently no way to stop being an admin, sodon't be surprised if you cannot leave the group</p>
+<p>When you create a society you automatically become an admin. You cannot leave a society before you resign as an admin. There is currently no way to stop being an admin, so do not be surprised if you cannot leave the group.</p>
 
 <% @societies.each do |society| %>
     <%= link_to society.name, controller: 'society', action: 'show', id: society.id %>

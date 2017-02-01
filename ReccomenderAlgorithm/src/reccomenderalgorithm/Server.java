@@ -25,6 +25,7 @@ import org.json.JSONObject;
 public class Server {
     
     public static Database db;
+    public static int dbSemaphore = 0;
     final private int port;
     
     public Server(int port) {
@@ -51,9 +52,25 @@ public class Server {
             System.exit(-1);
         }
         
+        //if no threads are running, close the connection
+        new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    if (dbSemaphore <= 0)
+                        db.close();
+                    try {
+                        Thread.sleep(5000); //no need to keep this thread running as fast as possible
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } 
+            }
+        }).start();
+        
         try {
-            while (listening)
+            while (listening) {
                 new GetReccomendationsThread(serverSocket.accept()).start();
+            }
         } catch (Exception e) {} 
          
     }
@@ -68,6 +85,8 @@ public class Server {
         }
         
         public void run() {
+            db.connect();
+            dbSemaphore++;
             try {
                 //get id
                 BufferedReader inFromClient =
@@ -82,13 +101,14 @@ public class Server {
             } catch(Exception e) {
                 
             }
+            dbSemaphore--;
         }
         
         private String getMatches(int id) throws JSONException, IOException {
             //get matches, convert to json
             final HashMap<Integer, Float> matches;
             System.out.println("Matching for: " + db.getUserByID(id).name);
-            matches = Reccomender.get_matches(db.getUserByID(id), db.getUsers(), db.getInterests(), true);
+            matches = Reccomender.get_matches(db.getUserByID(id), db.getUsers(), db.getInterests(), false);
             JSONObject jsonMatches = hashMapToJson(matches);
             System.out.println("done matching");
             return jsonMatches.toString();

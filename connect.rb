@@ -20,13 +20,6 @@ class Connector
 		return matches
 	end
 	
-	def Connector.reinitialize_algorithm_db
-		s = TCPSocket.open(@hostname, @port)
-		a = "restartdb"
-		s.puts(a)
-		
-		a = s.gets.chomp
-	end
 end
 
-puts Connector.get_user_matches(12)
+puts Connector.get_user_matches(2)

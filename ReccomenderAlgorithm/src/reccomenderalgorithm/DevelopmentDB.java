@@ -43,8 +43,9 @@ public class DevelopmentDB implements Database{
         populateTables();
     }
     
-    private void connect() {
+    public void connect() {
         try {
+            if (con != null && !con.isClosed()) return;
             Class.forName("org.sqlite.JDBC");
             con = DriverManager.getConnection("jdbc:sqlite:" + filePath);
         } catch ( Exception e ) {
@@ -146,7 +147,10 @@ public class DevelopmentDB implements Database{
     
     public void close() {
         try {
-            con.close();
+            if (con != null) {
+                con.close();
+                con = null;
+            }
         } catch(SQLException e) {
             e.printStackTrace();
         }

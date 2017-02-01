@@ -48,8 +48,9 @@ public class ProductionDB implements Database {
         populateTables();
     }
     
-    private void connect() {
+    public void connect() {
         try {
+            if (con != null && !con.isClosed()) return;
             con = (Connection) DriverManager.getConnection(url, user, password);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -152,6 +153,7 @@ public class ProductionDB implements Database {
         try {
             if (con != null) {
                 con.close();
+                con = null;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

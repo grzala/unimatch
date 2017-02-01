@@ -25,10 +25,15 @@ When(/^I click logout$/) do
   click_link("logout")
 end
 
-Then(/^I should not see the welcome message for "(.*?)"$/) do |usr|
-  page.should have_content("Hello, " + usr)
-end
-
 Then(/^I should see the message "(.*?)"$/) do |message|
   page.should have_content(message)
+end
+
+Then(/^I should not see the message "(.*?)"$/) do |message|
+  page.should_not have_content(message)
+end
+
+Then(/^I should see the logout link$/) do 
+  page.should have_content("logout")
+  expect(find_link('logout').visible?).to be
 end

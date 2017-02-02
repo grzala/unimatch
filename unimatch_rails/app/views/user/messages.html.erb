@@ -8,8 +8,6 @@ number_od mesageas <%= @msgs.length %>
 <br/><br/>
 
 <% @msgs.each do |msg| %>
-    <% puts @users %>
-    <% puts msg.sender_id %>
 
     <p>FROM: <%= @users[msg.sender_id].name %> AT: <%= msg.created_at %></p>
     <p><%= msg.body %></p>

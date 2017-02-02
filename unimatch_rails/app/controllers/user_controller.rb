@@ -72,7 +72,6 @@ class UserController < ApplicationController
     @users = {}
     @users[session[:user_id]] = User.find(session[:user_id])
     @users[params[:id].to_i] = User.find(params[:id])
-    puts @users
     
     @message = Message.new()
     

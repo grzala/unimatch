@@ -5,4 +5,7 @@
     <p><%= @user.email %></p>
     <p><%= link_to 'Edit these details', controller: 'user', action: 'edit', id: @user.id %></p>
     <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.id %></p>
+    <% if session[:user_id] != @user.id %>
+        <p><%= link_to 'Message me', controller: 'user', action: 'messages', id: @user.id %></p>
+    <% end %>
 </div>

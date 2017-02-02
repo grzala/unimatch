@@ -1,1 +1,28 @@
-ASAFKJNADSGKJN
+CONVERSATION ID <%= @con.id %>
+<br/>
+
+USER ID <%= @con.recipient_id %>
+<br/>
+
+number_od mesageas <%= @msgs.length %>
+
+<br/><br/>
+
+<% @msgs.each do |msg| %>
+
+    <p>FROM: <%= @users[msg.user_id].name %></p>
+    <p><%= msg.body %></p>
+    
+    <br/><br/>
+    
+    
+<% end %>
+
+
+<%= form_for(@message, :url => {:controller => 'conversation', :action => 'create_message'}) do |f| %>
+    <p> Message: <%= f.text_field :body %></p>
+    <%= f.hidden_field :recipient_id, :value => @con.recipient_id %>
+    
+    
+    <%= f.submit :Send %>
+<% end %>

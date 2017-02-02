@@ -5,7 +5,7 @@
 <br>
 
 <% @matched_users.each do |user, coefficient| %>
-    <% if coefficient > 0 %>
+    <% if coefficient > 0 && session[:user_id] != user.id %>
         <p><%= user.name %>
         <%= user.surname %>
         <% coefficient = ((coefficient*100).to_f).ceil %>

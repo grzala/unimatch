@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>UnimatchRails</title>
+    <title>Unimatch</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -16,8 +16,8 @@
       <div id="desktop_nav">
       <ul>
         <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
-        <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', '#' %></li>
       </ul>

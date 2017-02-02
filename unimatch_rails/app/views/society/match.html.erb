@@ -6,7 +6,7 @@
 
 <% @matched_societies.each do |society, coefficient| %>
     <% if coefficient > 0 %>
-        <%= link_to society.name, controller: 'society', action: 'show', id: society.id %>
+        <p><%= link_to society.name, controller: 'society', action: 'show', id: society.id %>
         <% coefficient = ((coefficient*100).to_f).ceil %>
         <%
             match_type = "NO MATCH"

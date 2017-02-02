@@ -17,12 +17,11 @@
     <div class="item">
    <%= user.name %> 
    <li>
-    <%= form_for(:conversation, :url => {:controller => 'conversation', :action => 'create'}) do |f| %>
+    <%= form_for(:conversation, :url => {:controller => 'conversation', :action => 'create'},:html => {:id => "form_" + user.id.to_s}) do |f| %>
         <%= f.hidden_field :sender_id, :value => session[:user_id] %>
         <%= f.hidden_field :recipient_id, :value => user.id %>
-       
         
-        <%= f.submit :whaterer %>
+        <a href="#" onclick= <%= "document.getElementById('form_#{user.id}').submit();" %> >MESSAGE ME</a>
     <% end %>
    </li>
  </div>

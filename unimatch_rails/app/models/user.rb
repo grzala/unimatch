@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+	has_many :messages
 	has_many :members
 	has_many :societies, :through => :members
 	
@@ -14,6 +15,14 @@ class User < ApplicationRecord
 	def User.encrypt_password(password, salt)
 	Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end
+	
+	
+	def mailboxer_email(object)
+ 
+		return email
+
+	end
+
 	
 	def password=(password)
 		@password = password

@@ -1,6 +1,12 @@
+<div class="wrapper">
+
+<h2>Your Matches</h2>
+<h5>Below are a list of all users that match with your interests.</h5>
+<br>
+
 <% @matched_users.each do |user, coefficient| %>
-    <% if coefficient > 0 %>
-        <%= user.name %>
+    <% if coefficient > 0 && session[:user_id] != user.id %>
+        <p><%= user.name %>
         <%= user.surname %>
         <% coefficient = ((coefficient*100).to_f).ceil %>
         
@@ -15,9 +21,9 @@
             end
         %>
         
-        <%= coefficient.to_s + "% " + match_type %>
-        
-        </br>
+        <%= coefficient.to_s + "% " + match_type %></p>
         </br>
     <% end %>
 <% end %>
+
+</div>

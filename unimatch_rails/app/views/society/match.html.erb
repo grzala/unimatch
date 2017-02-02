@@ -1,6 +1,12 @@
+<div class="wrapper">
+<h2>Matched Socieites</h2>
+<br>
+<h5>You have been matched with the following socities according to the interests you selected.</h5>
+<br>
+
 <% @matched_societies.each do |society, coefficient| %>
     <% if coefficient > 0 %>
-        <%= society.name %>
+        <%= link_to society.name, controller: 'society', action: 'show', id: society.id %>
         <% coefficient = ((coefficient*100).to_f).ceil %>
         <%
             match_type = "NO MATCH"
@@ -25,3 +31,6 @@
         </br>
     <% end %>
 <% end %>
+
+<h5><%= link_to 'View all socities', :controller => :society, :action => :list %></h5>
+</div>

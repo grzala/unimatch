@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>UnimatchRails</title>
+    <title>Unimatch</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -10,15 +10,14 @@
 
   <body>
     
-    <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {class: "inline_block"} %>
     <% if session[:user_id] %>
-      <div class="nav_left">
+      <div class="nav">
+      <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {class: "inline_block"} %>
       <div id="desktop_nav">
       <ul>
         <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
-        <li><%= link_to 'Societies', :controller => :society, :action=> :list %></li>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Society Matches', :controller => :society, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', '#' %></li>
       </ul>

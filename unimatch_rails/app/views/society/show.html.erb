@@ -1,4 +1,5 @@
-<p><%= @society.name %> <%= @society.description %></p>
+<h2><%= @society.name %></h2>
+<p><%= @society.description %></p>
 <p>interests:</p>
 <% @society.get_interests_by_name.each do |interest| %>
     <p><%= interest %></p>

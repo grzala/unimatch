@@ -66,6 +66,19 @@ class UserController < ApplicationController
     redirect_to :action => :list
   end
   
+  def messages
+    @msgs = Message.get_messages(session[:user_id], params[:id])
+    @msgs = @msgs.sort_by { |msg| msg.created_at }
+    
+    @users = {}
+    @users[session[:user_id]] = User.find(session[:user_id])
+    @users[params[:id].to_i] = User.find(params[:id])
+    puts @users
+    
+    @message = Message.new()
+    
+  end
+  
   private
   def user_param
     params.require(:user).permit(:email, :name, :surname, :password)

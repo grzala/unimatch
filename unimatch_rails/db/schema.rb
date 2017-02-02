@@ -129,12 +129,11 @@ ActiveRecord::Schema.define(version: 20170131213639) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "body"
-    t.integer  "conversation_id"
-    t.integer  "user_id"
-    t.boolean  "read",            default: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.boolean  "read",         default: false
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "societies", force: :cascade do |t|

@@ -16,14 +16,11 @@ Rails.application.routes.draw do
   resources :message
   
   controller :conversation do
-     # get '/user/:id/conversations/list' => :list
+     #get '/user/:id/conversations/list' => :list
       post '/conversation/create_message' => :create_message
       
   end
   
-  resources :conversation do
-    resources :messages
-  end
 
   
   controller :user do
@@ -32,7 +29,9 @@ Rails.application.routes.draw do
     get '/user/match/:id' => :match
     get '/user/choose/:id' => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
+    get 'user/:id/messages' => :messages
   end
+  
   resources :user
   
   controller :session do

@@ -13,13 +13,18 @@ Rails.application.routes.draw do
   end
   resources :event
   
-  controller :conversations do
-      get '/user/:id/conversations/list' => :list
-      get '/user/:id/conversations' => :index
+  controller :messages do 
+    get '/user/:id/conversations/:conversation_id/messages' => :index
+  end
+  resources :messages
+  
+  controller :conversation do
+     # get '/user/:id/conversations/list' => :list
+      get '/user/:id/conversation' => :index
       
   end
   
-  resources :conversations do
+  resources :conversation do
     resources :messages
   end
 

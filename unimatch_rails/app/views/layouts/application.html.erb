@@ -10,10 +10,25 @@
   <body>
     
     <% if session[:user_id] %>
-      <div class="nav">
-      <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {class: "inline_block"} %>
+      <div class="header">
+      <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {id: "unimatch_logo", class: "inline_block"} %>
+      
+      <button id="burger_menu">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      </button>
+      <div id="container" class="container_hidden">
+        <ul id="navigation_mobile">
+        <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
+        <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+        <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
+      </ul>
+      </div>
       <div id="desktop_nav">
-      <ul>
+      <ul id="navigation">
         <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>

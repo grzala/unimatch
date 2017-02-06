@@ -18,11 +18,18 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
 
+/* colours */
+
 $primary-color: white
 $red: #FF6868
 $blue: #3B579D
 $grey: #D8D8D8
 $black: #606060
+
+/* media queries */
+
+$break-phone: 4000px
+$break-tablet: 900px
 
 body
     text-align: center
@@ -48,9 +55,10 @@ h4
     font-size: 18
     color: $black
     
-.nav 
+.header 
     margin-bottom: 50px
     
+
 ul 
     list-style-type: none
     padding: 0
@@ -80,11 +88,13 @@ li a:hover
     display: inline-block
 
 #desktop_nav
-    display: inline-block
     float: right
     position: absolute
     left: 20px
     top: 20px
+    display: none
+    @media screen and (min-width: $break-tablet)
+        display: inline-block
 
 
 p 
@@ -116,3 +126,39 @@ a:active
     width: 500px
     margin-left: auto
     margin-right: auto
+    
+/* mobile navigation */
+
+#burger_menu
+    display: inline-block
+    float: right
+    position: absolute
+    left: 20px
+    top: 20px
+    @media screen and (min-width: $break-tablet)
+        display: none
+    
+
+.line
+    width: 20px
+    height: 4px
+    background-color: $black
+    margin-bottom: 4px
+        
+.container_hidden
+    height: 100%
+    width: 100px
+    float: left
+    background-color: $red
+    display: none
+    
+
+.container_show
+    display: block
+    float: left
+    margin-top: 30px
+    
+#navigation_mobile ul
+    list-style-type: none
+    padding: 0
+    

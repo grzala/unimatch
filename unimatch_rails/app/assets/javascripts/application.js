@@ -17,9 +17,17 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-$(function() {
-  $("#startdate").datepicker();
+$(document).on('turbolinks:load', function() {
+    
+    $("#startdate").datepicker();
+    
+    $("#burger_menu").click(function(){
+        $("#container").toggleClass("container_show")});
+
 });
+
+
+
 
 
 

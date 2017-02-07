@@ -19,9 +19,11 @@
       <div class="input-group">
         <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= password_field_tag :password, params[:password] %>
       </div>
+      <br>
       <div>
         <%= submit_tag "Login", {:id => 'login'} %>
-        <button type="button"><%= link_to "register", controller: 'user', action: 'new'  %></button>
+        <%= button_to "Register", new_user_path, method: :get %>
+        
       </div>
     </fieldset>
   </div>

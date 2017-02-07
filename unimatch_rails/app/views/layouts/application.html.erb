@@ -20,11 +20,14 @@
       </button>
       <div id="container" class="container_hidden">
         <ul id="navigation_mobile">
+        <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %></p>
         <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
+        <li><%= link_to "logout", logout_url %></li>
+        
       </ul>
       </div>
       <div id="desktop_nav">

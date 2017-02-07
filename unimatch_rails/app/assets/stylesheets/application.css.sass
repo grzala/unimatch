@@ -34,13 +34,16 @@ $break-tablet: 900px
 
 /* css stuff */ 
 
-button
-    style: none
+
 
 .center
     display: block
     margin-left: auto
     margin-right: auto
+    
+#login_form
+    width: 200px
+    
 body
     text-align: center
     align-content: center
@@ -88,11 +91,13 @@ li a:hover
     transition: 0.2s
     
 #details
-    display: inline-block
+    display: none
     float: right
     position: absolute
     right: 20px
     top: 20px
+    @media screen and (min-width: $break-tablet)
+        display: inline-block
     
 .inline_block
     display: inline-block
@@ -156,19 +161,22 @@ a:active
     margin-bottom: 4px
         
 .container_hidden
-    height: 100%
-    width: 100px
+    height: 200px
+    width: 200px
     float: left
     background-color: $red
+    float: left
     display: none
     
 
 .container_show
     display: block
-    float: left
-    margin-top: 30px
+    margin-top: 40px
     
 #navigation_mobile ul
     list-style-type: none
     padding: 0
+    
+#navigation_mobile a
+    color: white
     

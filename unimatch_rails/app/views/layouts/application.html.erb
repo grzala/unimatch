@@ -8,10 +8,10 @@
   </head>
 
   <body>
-    
-    <% if session[:user_id] %>
-      <div class="header">
+    <div class="header">
       <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {id: "unimatch_logo", class: "inline_block"} %>
+    <% if session[:user_id] %>
+      
       
       <button id="burger_menu">
       <div class="line"></div>

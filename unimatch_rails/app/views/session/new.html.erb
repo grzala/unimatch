@@ -9,7 +9,8 @@
   </div>
 <% end %>
 <%= form_tag do %>
-  <div class="login_form">
+<div class="center"
+  <div class="Sign_Form">
     <fieldset>
       <div class="input-group">
         <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= text_field_tag :email, params[:email] %>
@@ -20,8 +21,10 @@
       </div>
       <div>
         <%= submit_tag "Login", {:id => 'login'} %>
-        <%= link_to "register", controller: 'user', action: 'new'  %>
+        <button type="button"><%= link_to "register", controller: 'user', action: 'new'  %></button>
       </div>
     </fieldset>
+  </div>
+  </div>
   </div>
 <% end %>

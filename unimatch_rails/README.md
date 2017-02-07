@@ -21,4 +21,8 @@ Things you may want to cover:
 
 * Deployment instructions
 
+to start algorithm: sh bin/run.sh 
+
+to start rails server: rails s -b $IP -p $PORT
+
 * ...

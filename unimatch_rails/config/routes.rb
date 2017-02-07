@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   
   controller :society do
      get '/society/list' => :list
@@ -14,13 +14,17 @@ Rails.application.routes.draw do
   end
   resources :event
   
+  resources :message
+  
   controller :user do
     get '/user/list' => :list
     post '/user/:id' => :update
     get '/user/match/:id' => :match
     get '/user/choose/:id' => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
+    get 'user/:id/messages' => :messages
   end
+  
   resources :user
   
   controller :session do

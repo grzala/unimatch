@@ -1,23 +1,35 @@
+<div class="wrapper">
+
+<h2>Your Matches</h2>
+<h5>Below are a list of all users that match with your interests.</h5>
+<br>
+
 <% @matched_users.each do |user, coefficient| %>
-    <% if coefficient > 0 %>
-        <%= user.name %>
+    <% if coefficient > 0 && session[:user_id] != user.id %>
+        <%= link_to user.name, :controller => :user, :action => :show, :id => user.id %>
         <%= user.surname %>
+        <%=  link_to "MESSAGE ME", :controller => :user, :action => :messages, :id => user.id %>
         <% coefficient = ((coefficient*100).to_f).ceil %>
         
         <%
             match_type = "NO MATCH"
             if coefficient > 0 && coefficient <= 20
                 match_type = "WEAK MATCH"
+                class_type = "weak_match"
             elsif coefficient > 20 && coefficient <= 50
                 match_type = "NORMAL MATCH"
+                class_type = "normal_match"
             elsif coefficient > 50 
                 match_type = "STRONG MATCH"
+                class_type = "strong_match"
             end
         %>
         
-        <%= coefficient.to_s + "% " + match_type %>
+         <%= coefficient.to_s + "% "%>
+        <span class=<%= class_type %>><%= match_type  %></span>
         
-        </br>
         </br>
     <% end %>
 <% end %>
+
+</div>

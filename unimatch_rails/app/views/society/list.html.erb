@@ -1,17 +1,17 @@
-<p></p><%= link_to "Create new society", controller: 'society', action: 'new' %></p>
+<div class="wrapper">
 
-<p>When you create a society you automatically become an admin. You cannot leave a society before you resign as an admin. There is currently no way to stop being an admin, so do not be surprised if you cannot leave the group.</p>
-
+<h2>All Socities</h2>
+<br>
 <% @societies.each do |society| %>
-    <%= link_to society.name, controller: 'society', action: 'show', id: society.id %>
-    <%= society.description %>
-    </br>
-    Is Member: <%= society.has_member(session[:user_id]) %>
-    Is Admin: <%= society.has_admin(session[:user_id]) %>
-    Interests: <%= society.get_interests_by_name %>
+    <h4><%= link_to society.name, controller: 'society', action: 'show', id: society.id %></h5>
+    <p><%= society.description %></p>
     <p>
         <% str = !society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
         <%= link_to str, controller: 'society', action: 'join_leave', id: society.id %>
     </p>
     </br>
 <% end %>
+<p></p><%= link_to "Create new society", controller: 'society', action: 'new' %></p>
+<br>
+<p>When you create a society you automatically become an admin. You cannot leave a society before you resign as an admin. There is currently no way to stop being an admin, so do not be surprised if you cannot leave the group.</p>
+</div>

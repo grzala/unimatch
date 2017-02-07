@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require jquery-ui
  *= require_tree .
  *= require_self
  */
@@ -17,10 +18,18 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
 
+/* colours */
+
 $primary-color: white
 $red: #FF6868
 $blue: #3B579D
 $grey: #D8D8D8
+$black: #606060
+
+/* media queries */
+
+$break-phone: 4000px
+$break-tablet: 900px
 
 body
     text-align: center
@@ -28,16 +37,28 @@ body
     margin-top: 10px
 
 h1
-    color: $primary-color
-    font-size: 5em
+    font-family: 'Lato', sans-serif
+    font-size: 30
+    color: $black
+    
+h2
+    font-family: 'Lato', sans-serif
+    font-size: 30
+    color: $black
     
 h1 .header_text
     display: inline
     border: 1px
     
-#nav_left 
-    display: inline-block
+h4
+    font-family: 'Lato', sans-serif
+    font-size: 18
+    color: $black
     
+.header 
+    margin-bottom: 50px
+    
+
 ul 
     list-style-type: none
     padding: 0
@@ -64,12 +85,80 @@ li a:hover
     top: 20px
     
 .inline_block
-    margin-bottom: 100px
     display: inline-block
 
 #desktop_nav
+    float: right
+    position: absolute
+    left: 20px
+    top: 20px
+    display: none
+    @media screen and (min-width: $break-tablet)
+        display: inline-block
+
+
+p 
+    font-family: 'Lato', sans-serif
+    font-size: 12
+    color: $black
+    
+h5 
+    font-family: 'Lato', sans-serif
+    font-size: 18
+    color: $black
+    
+a:link 
+    text-decoration: none
+
+a:visited 
+    text-decoration: none
+
+a:hover 
+    text-decoration: underline
+
+a:active 
+    text-decoration: underline
+    
+.link
+    text-decoration: none
+    
+.wrapper
+    width: 500px
+    margin-left: auto
+    margin-right: auto
+    
+/* mobile navigation */
+
+#burger_menu
     display: inline-block
     float: right
     position: absolute
     left: 20px
     top: 20px
+    @media screen and (min-width: $break-tablet)
+        display: none
+    
+
+.line
+    width: 20px
+    height: 4px
+    background-color: $black
+    margin-bottom: 4px
+        
+.container_hidden
+    height: 100%
+    width: 100px
+    float: left
+    background-color: $red
+    display: none
+    
+
+.container_show
+    display: block
+    float: left
+    margin-top: 30px
+    
+#navigation_mobile ul
+    list-style-type: none
+    padding: 0
+    

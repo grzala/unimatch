@@ -1,0 +1,27 @@
+YOUR ID <%= session[:user_id] %>
+<br/>
+USER ID <%= params[:id] %>
+<br/>
+
+number_of messages <%= @msgs.length %>
+
+<br/><br/>
+
+<% @msgs.each do |msg| %>
+
+    <p>FROM: <%= @users[msg.sender_id].name %> AT: <%= msg.created_at %></p>
+    <p><%= msg.body %></p>
+    
+    <br/><br/>
+    
+    
+<% end %>
+
+
+<%= form_for(@message, :url => {:controller => 'message', :action => 'create'}) do |f| %>
+    <p> Message: <%= f.text_field :body %></p>
+    <%= f.hidden_field :recipient_id, :value => params[:id] %>
+    
+    
+    <%= f.submit :Send %>
+<% end %>

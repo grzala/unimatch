@@ -40,8 +40,6 @@ class SocietyController < ApplicationController
             @society.add_interest(params[:selected_interests][param].to_i) #THIS CANNOT STAY LIKE THIS
         end
         
-        
-        Connector.reinitialize_algorithm_db
         redirect_to :action => :list
     end
     
@@ -54,6 +52,16 @@ class SocietyController < ApplicationController
         @cathegories = InterestGroup.all
         @society = Society.find(params[:id])
         @society_interest = @society.get_interest
+    end
+    
+    def match
+        @matches = Connector.get_society_matches(params[:id])
+        puts @matches
+        @matched_societies = {}
+        @matches.each do |id, coefficient|
+          @matched_societies[Society.find(id)] = coefficient
+        end
+        @matched_societies = @matched_societies.sort_by {|k,v| v}.reverse
     end
     
     private

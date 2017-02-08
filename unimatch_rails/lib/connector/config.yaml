@@ -1,0 +1,5 @@
+hostname: '127.0.0.1' #localhost
+port: 6789
+
+usermatchmsg: 'usermatch'
+societymatchmsg: 'societymatch'

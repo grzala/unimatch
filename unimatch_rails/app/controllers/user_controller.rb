@@ -13,8 +13,8 @@ class UserController < ApplicationController
   def match
     @matches = Connector.get_user_matches(params[:id])
     @matched_users = {}
-    User.all.each do |user|
-      @matched_users[user] = @matches[user.id]
+    @matches.each do |id, coefficient|
+      @matched_users[User.find(id)] = coefficient
     end
     @matched_users = @matched_users.sort_by {|k,v| v}.reverse
   end
@@ -30,7 +30,6 @@ class UserController < ApplicationController
   def create
     @user = User.new(user_param)
     @user.save
-    Connector.reinitialize_algorithm_db
     
     redirect_to root_path
   end
@@ -64,6 +63,18 @@ class UserController < ApplicationController
   def delete
     User.find(params[:id]).destroy
     redirect_to :action => :list
+  end
+  
+  def messages
+    @msgs = Message.get_messages(session[:user_id], params[:id])
+    @msgs = @msgs.sort_by { |msg| msg.created_at }
+    
+    @users = {}
+    @users[session[:user_id]] = User.find(session[:user_id])
+    @users[params[:id].to_i] = User.find(params[:id])
+    
+    @message = Message.new()
+    
   end
   
   private

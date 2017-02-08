@@ -1,4 +1,5 @@
-<p><%= @society.name %> <%= @society.description %></p>
+<h2><%= @society.name %></h2>
+<p><%= @society.description %></p>
 <p>interests:</p>
 <% @society.get_interests_by_name.each do |interest| %>
     <p><%= interest %></p>
@@ -6,5 +7,5 @@
 
 <p>Events:</p>
 <% @society.get_events.each do |event| %>
-    <p><%= event.name %></p>
+    <p><%= link_to event.name, {:controller => :event, :action => :show, :id => event.id} %></p>
 <% end %>

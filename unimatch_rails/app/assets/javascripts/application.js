@@ -12,6 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('turbolinks:load', function() {
+    
+    $("#startdate").datepicker();
+    
+    $("#burger_menu").click(function(){
+        $("#container").toggleClass("container_show")});
+
+});
+
+
+
+
+
+

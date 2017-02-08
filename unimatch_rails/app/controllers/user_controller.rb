@@ -42,7 +42,6 @@ class UserController < ApplicationController
   
   def update_interests
     User.find_by_id(params[:id]).update_interests_by_ids(params[:interests])
-    Connector.reinitialize_algorithm_db
     
     redirect_to user_url, :id => params[:id]
   end
@@ -55,7 +54,6 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     
     if @user.update_attributes(user_param)
-      Connector.reinitialize_algorithm_db
       redirect_to :action => :list
     end
   end

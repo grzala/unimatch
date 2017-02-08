@@ -127,7 +127,6 @@ public class Server {
             } else if (type.equals(societyMatchType)) {
                 matchFor = db.getUserByID(id);
                 matchAgainst = (ArrayList)db.getSocieties();
-                ArrayList<Reccomendable> temp = new ArrayList<Reccomendable>();
             }
             
             matches = Reccomender.getMatches(matchFor, matchAgainst, db.getInterests(), false);

@@ -35,11 +35,11 @@ public class ProductionDB implements Database {
     final String getUsersSTMT = "SELECT * FROM unimatch.users;";
     final String getSocietiesSTMT = "SELECT * FROM unimatch.societies;";
     final String getUserByIDSTMT = "SELECT * FROM unimatch.users WHERE id = ?";
-    final String getSocietyByIDSTMT = "SELECT * FROM unimatch.society WHERE id = ?";
+    final String getSocietyByIDSTMT = "SELECT * FROM unimatch.societies WHERE id = ?";
     final String getUserInterestsSTMT = "SELECT * FROM unimatch.user_interests WHERE user_id = ? ;";
     final String getSocietyInterestsSTMT = "SELECT * FROM unimatch.society_interests WHERE society_id = ? ;";
     final String getInterestGroupsSTMT = "SELECT * FROM unimatch.interest_groups";
-    final String getInterestsSTMT = "SELECT * unimatch.FROM interests";
+    final String getInterestsSTMT = "SELECT * FROM unimatch.interests";
 
     
     public ProductionDB(String HOSTNAME, String user, String password) {
@@ -97,6 +97,7 @@ public class ProductionDB implements Database {
             getUser.setInt(1, id);
             ResultSet rs = getUser.executeQuery();
             
+            rs.first();
             String name = rs.getString("name");
             String surname = rs.getString("surname");
             usr = new User(id, name, surname);
@@ -150,6 +151,7 @@ public Society getSocietyByID(int id) {
             PreparedStatement getUser = con.prepareStatement(getSocietyByIDSTMT);
             getUser.setInt(1, id);
             ResultSet rs = getUser.executeQuery();
+            rs.first();
             
             String name = rs.getString("name");
             soc = new Society(id, name);

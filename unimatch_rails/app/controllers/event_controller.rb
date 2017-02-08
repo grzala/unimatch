@@ -10,7 +10,7 @@ class EventController < ApplicationController
     def new
         @choices = []
         temp = {}
-        temp["name"] = ""
+        temp["name"] = "No society"
         temp["value"] = nil
         @choices << temp
         

@@ -37,8 +37,8 @@ public class ReccomenderAlgorithm {
                 d = new DevelopmentDB(filePath);
             } else if (props.get("ENV").equals("production")) {
                 String dbHostname = (String)props.get("HOSTNAME");
-                String dbUser = (String)props.get("HOSTNAME");
-                String dbPassword = (String)props.get("HOSTNAME");
+                String dbUser = (String)props.get("USER");
+                String dbPassword = (String)props.get("PASSWORD");
                 
                 d = new ProductionDB(dbHostname, dbUser, dbPassword);
             }

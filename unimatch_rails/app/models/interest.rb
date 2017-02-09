@@ -7,6 +7,8 @@ class Interest < ApplicationRecord
     has_many :societies
     has_many :societies, :through => :society_interests
     
+    validates :name, :presence => true, :uniqueness => {:case_sensitive => false}
+    
     
     def self.retrieve_as_dictionary
        toreturn = {}

@@ -6,10 +6,42 @@ sports:
     - football
     - basketball
     - cricket
-    - horseback riding
+    - equestrian (horse riding)
     - golf
     - rugby
-
+    - squash
+    - american football
+    - lacrosse
+    - chess
+    - bmx
+    - darts
+    - pool
+    - snooker
+    - dodgeball
+    - fencing
+    - cycling
+    - circus
+    - yoga
+    - winter sports
+    - fighting
+    - shooting
+    - rowing
+    - swimming
+    - sailing
+    - surfing
+    - caneoing
+    - kayaking
+    - diving
+    - floorball
+    - walking
+    - climbing
+    - netball
+    - polo
+    - table tennis
+    - ultimate frisbee
+    - underwater hockey
+    - weightlifting
+    
 science:
     - programming
     - chemistry
@@ -17,6 +49,9 @@ science:
     - space science
     - genetics
     - geology
+    - engineering
+    - chemical engineering
+    - rocks
    
 cooking:
     - mexican
@@ -26,6 +61,8 @@ cooking:
     - spanish
     - thai
     - chinese
+    - vegan
+    - vegatarian
 
 music:
     - rock
@@ -36,15 +73,39 @@ music:
     - jazz
     - radio
     - dance
+    - guitar
+    - accapella
+    - metal
+    - ambient
 
 culture:
     - languages
+    - french
+    - british
+    - italian
     - travel
     - religion
     - history
     - ancient history
-
+    - african
+    - carribean
+    - arab
+    - benelux
+    - celtic
+    - film
+    - literature
+    - beverages
+    
 health:
     - fitness
     - bodybuilding
     - healthy eating
+    - gardening
+    
+social:
+    - business enterprise
+    - energy
+    - volunteering
+    - comedy
+    - gaming
+    - public speaking

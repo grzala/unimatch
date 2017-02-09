@@ -31,7 +31,17 @@ class UserController < ApplicationController
     @user = User.new(user_param)
     @user.save
     
-    redirect_to root_path
+    if @user.save
+      flash[:notice] = "Account created"
+      redirect_to root_url
+    else
+      flash[:notice] = "Account not created"
+      puts flash[:notice]
+      redirect_to :action => :new
+    end
+    
+    
+    
   end
   
   def choose_interests

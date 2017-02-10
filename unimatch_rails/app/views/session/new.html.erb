@@ -22,7 +22,7 @@
       <br>
       <div>
         <%= submit_tag "Login", {:id => 'login'} %>
-       <%= button_to "Register", new_user_path, method: :get %>
+        <%= link_to "Register", controller: 'user', action: 'new'  %>
         
       </div>
     </fieldset>

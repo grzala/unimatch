@@ -2,7 +2,7 @@
 
 <div class="Sign_Form">
     <h2>Sign up</h2>
-    <p>You email address need to end in .ac..uk to be able to create an account. No other email addresses will be accepted.</p>
+    <p>You email address needs to end in .ac.uk to be able to create an account. No other email addresses will be accepted.</p>
     <%= form_for(:user, :url => {:controller => 'user', :action => 'create'}) do |f| %>
         <p> Email: </br> <%= f.text_field :email %></p>
         <p> password: </br> <%= f.password_field :password %> </p>

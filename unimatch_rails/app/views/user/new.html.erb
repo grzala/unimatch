@@ -6,6 +6,7 @@
     <%= form_for(:user, :url => {:controller => 'user', :action => 'create'}) do |f| %>
         <p> Email: </br> <%= f.text_field :email %></p>
         <p> password: </br> <%= f.password_field :password %> </p>
+         <p> password: </br> <%= f.password_field :password_confirmation %> </p>
         <p> name: </br> <%= f.text_field :name %></p>
         <p> surname: </br> <%= f.text_field :surname %></p>
         

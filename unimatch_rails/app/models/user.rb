@@ -9,9 +9,12 @@ class User < ApplicationRecord
 	has_many :interests, :through => :user_interests
 	
 	validates :name, :presence => true, :uniqueness => false, length: {maximum: 50}
+	validates :password, confirmation: true, presence: true,
+                       length: { minimum: 4 }, on: :create
+	validates_confirmation_of :password, :message => "should match confirmation"
 	VALID_EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+ac.uk)\z/i
 	validates :email, :presence => true, :uniqueness => {:case_sensitive => false}, format: { with: VALID_EMAIL_REGEX }, length: {maximum: 255}
-	
+	attr_accessor :password, :password_confirmation
 	def User.encrypt_password(password, salt)
 	Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end

@@ -35,6 +35,11 @@ Rails.application.routes.draw do
   
   root "session#new"
   
+  controller :welcome do
+    get '/welcome' => :index
+  end
+
+  
   #match ':controller'(/:action(/:id))', :via => get
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

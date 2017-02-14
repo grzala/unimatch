@@ -1,3 +1,3 @@
 class WelcomeController < ApplicationController
-    layout "false"
+    layout false
 end

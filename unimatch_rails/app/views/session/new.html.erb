@@ -1,7 +1,12 @@
+<!DOCTYPE html>
+<html>
 <head>
     <title>Unimatch Login</title>
     <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'login_page', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
+<body>
+<div class="block_centre" id="login_container">
 <%= image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo", :class => "logo", :class => "block_centre") %>
 <h1>Please Log In</h1>
 <%= form_tag do %>
@@ -25,4 +30,6 @@
     </div>
     </div>
 <% end %>
+</div>
+</body>
 

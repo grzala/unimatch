@@ -1,5 +1,7 @@
 class SessionController < ApplicationController
     
+    layout 'login'
+    
     def new
         if session[:user_id]
            redirect_to user_url(id: session[:user_id])

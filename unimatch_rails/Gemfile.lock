@@ -119,6 +119,7 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    normalize-rails (4.1.1)
     passenger (5.0.30)
       rack
       rake (>= 0.8.1)
@@ -233,6 +234,7 @@ DEPENDENCIES
   jquery-ui-rails
   listen (~> 3.0.5)
   mysql2
+  normalize-rails
   passenger
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)

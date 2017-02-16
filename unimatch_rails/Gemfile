@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.5'
 # For seeding
 gem 'seedbank'
 
+gem 'normalize-rails'
+
 
 
 group :development, :test do

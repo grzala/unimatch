@@ -1,3 +1,4 @@
 class WelcomeController < ApplicationController
-    layout false
+    layout 'login'
 end
+

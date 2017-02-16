@@ -1,8 +1,5 @@
 /* 
  *= require normalize-rails
- *= require jquery-ui
- *= require_tree .
- *= require_self
  */
 
 
@@ -19,9 +16,15 @@ $black: #606060
 $break-phone: 4000px
 $break-tablet: 900px
 
-body
-  background-color: transparent
-
+.logo
+  margin-top: 50px
+  @media screen and (min-width: $break-tablet)
+    margin-top: 100px
+    
+.block_centre
+  display: block
+  margin-left: auto
+  margin-right: auto
 
 html
   background: url("background_image.jpg") no-repeat center center fixed
@@ -29,18 +32,3 @@ html
   -moz-background-size: cover
   -o-background-size: cover
   background-size: cover
-
-.logo
-  margin-top: 50px
-  @media screen and (min-width: $break-tablet)
-    margin-top: 100px
-    
-#form
-  margin-top: 50px
-  max-width: 450px
-  margin-left: auto
-  
-.block_centre
-  display: block
-  margin-left: auto
-  margin-right: auto

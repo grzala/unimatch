@@ -1,0 +1,28 @@
+<head>
+    <title>Unimatch Login</title>
+    <%= csrf_meta_tags %>
+</head>
+<%= image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo", :class => "logo", :class => "block_centre") %>
+<h1>Please Log In</h1>
+<%= form_tag do %>
+    <div class="center" id="login_form">
+    <div class="Sign_Form">
+    <fieldset>
+    <div class="input-group">
+    <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= text_field_tag :email, params[:email] %>
+    </div>
+    <br>
+    <div class="input-group">
+    <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= password_field_tag :password, params[:password] %>
+    </div>
+    <br>
+    <div>
+    <%= submit_tag "Log In", {:id => 'login'} %>
+    </div>
+    </fieldset>
+    </div>
+    </div>
+    </div>
+    </div>
+<% end %>
+

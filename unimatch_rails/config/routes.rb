@@ -33,7 +33,12 @@ Rails.application.routes.draw do
     get 'logout' => :destroy
   end
   
-  root "session#new"
+  root :to => 'welcome#index'
+  
+  controller :welcome do
+    get '/welcome' => :index
+  end
+
   
   #match ':controller'(/:action(/:id))', :via => get
 

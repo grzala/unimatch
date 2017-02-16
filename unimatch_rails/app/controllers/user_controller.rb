@@ -31,7 +31,22 @@ class UserController < ApplicationController
     @user = User.new(user_param)
     @user.save
     
-    redirect_to root_path
+    if @user.save
+      flash[:notice] = "Account created"
+      redirect_to root_url
+    elsif (:password) != (:password_confirmation)
+      flash[:notice] = "Passwords are different"
+      puts flash[:notice]
+      redirect_to :action => :new
+        
+    else
+      flash[:notice] = "Account not created"
+      puts flash[:notice]
+      redirect_to :action => :new
+    end
+    
+    
+    
   end
   
   def choose_interests
@@ -77,7 +92,7 @@ class UserController < ApplicationController
   
   private
   def user_param
-    params.require(:user).permit(:email, :name, :surname, :password)
+    params.require(:user).permit(:email, :name, :surname, :password, :password_confirmation)
   end
 end
 

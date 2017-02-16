@@ -2,8 +2,7 @@
 
 <div class="Edit_Form">
     <h2>Edit Details</h2>
-    <%= form_for(:user, :url => {:action => 'update', :id => @user.id}, mehod: :put) do |f| %>
-        <p> Email: </br> <%= f.text_field :email %></p>
+    <%= form_for(:user, :url => {:action => 'update', :id => @user.id}, method: :put) do |f| %>
         <p> name: </br> <%= f.text_field :name %></p>
         <p> surname: </br> <%= f.text_field :surname %></p>
         

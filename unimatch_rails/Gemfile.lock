@@ -120,12 +120,8 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
-<<<<<<< HEAD
     normalize-rails (4.1.1)
-    passenger (5.0.30)
-=======
     passenger (5.1.2)
->>>>>>> 3c823667bd8e963a5fcc7616f9ce78587d53a696
       rack
       rake (>= 0.8.1)
     public_suffix (2.0.5)

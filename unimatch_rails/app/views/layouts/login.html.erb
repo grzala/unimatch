@@ -10,6 +10,13 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
+    <%= image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo", :class => "logo", :class => "block_centre") %>
+    <% if flash[:alert] %>
+      <div class="panel-heading" id="notice">
+        <legend><%= flash[:alert] %></legend>
+      </div>
+    <% end %>
+    </div>
     <%= yield %>
     </body>
 </html>

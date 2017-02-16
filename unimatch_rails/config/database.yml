@@ -24,9 +24,9 @@ production:
   adapter: mysql2
   encoding: utf8
   database: unimatch
-  username: root
-  password: ernestoisgod
-  host: unimatch.ddns.net
+  username: rails
+  password: unimatch123
+  host: localhost
   port: 3306
 
 cucumber:

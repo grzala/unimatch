@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Unimatch</title>
+    <title>UniMatch</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'index', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
 <body>
-<div id="bg">
-   <%= image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo", :class => "logo", :class => "block_centre") %> 
-</div>
+
+    <section id="screen1">
+        <div id="nav_bar">
+           <div class="left">
+                <div id="navigation_left" class="navigation_inner nonselect">
+                    <a href="#">
+                        <h3>Home</h3>
+                    </a>
+                    <a href="#">
+                        <h3>Features</h3>
+                    </a>
+                    <a href="#">
+                        <h3>About</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="right">
+                <div id="navigation_right" class="navigation_inner nonselect">
+                    <a href="#">
+                        <h3>Login</h3>
+                    </a>
+                    <a href="#">
+                        <h3>Register</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="home_logo centered nonselect">
+            <%= image_tag("unimatch_logo.png", border: 0, height: "100px", alt: "UniMatch Logo", :class => "logo", :class => "block_centre") %>
+        </div>
+        <div class="text-wrapper nonselect">
+            <h1 class="centered">Meet people at your Uni<br> with simmilar interests</h1>
+        </div>
+    </section>
+
 </body>

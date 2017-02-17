@@ -25,14 +25,25 @@
     <%= submit_tag "Log In", {:id => 'login'} %>
     </div>
     </fieldset>
-    <div id="button">
-    <p><%= link_to 'Register', :controller => :user, :action => :new %></p>
     </div>
     </div>
     </div>
     </div>
     </div>
 <% end %>
+<div class="sign_form">
+    <h2>Sign up</h2>
+    <p>You email address needs to end in .ac.uk to be able to create an account. No other email addresses will be accepted.</p>
+    <%= form_for(:user, :url => {:controller => 'user', :action => 'create'}) do |f| %>
+        <p> Email: </br> <%= f.text_field :email %></p>
+        <p> password: </br> <%= f.password_field :password %> </p>
+         <p> password: </br> <%= f.password_field :password_confirmation %> </p>
+        <p> name: </br> <%= f.text_field :name %></p>
+        <p> surname: </br> <%= f.text_field :surname %></p>
+        
+        
+        <%= f.submit :Signup %>
+    <% end %>
 </div>
 </body>
 

@@ -5,7 +5,7 @@ class SessionController < ApplicationController
     def new
         if session[:user_id]
            redirect_to user_url(id: session[:user_id])
-       end
+        end
     end
     
 
@@ -18,7 +18,7 @@ class SessionController < ApplicationController
             interests = user.get_interests
             
             if interests.length > 00
-                redirect_to root_url
+                redirect_to :controller => :user, :action => :show, :id => session[:user_id]
             else
                 redirect_to :controller => :user, :action => :choose_interests, :id => session[:user_id]
             end

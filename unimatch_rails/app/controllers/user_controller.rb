@@ -33,16 +33,16 @@ class UserController < ApplicationController
     
     if @user.save
       flash[:notice] = "Account created"
-      redirect_to root_url
+      redirect_to :controller => :session, action => :new
     elsif (:password) != (:password_confirmation)
       flash[:notice] = "Passwords are different"
       puts flash[:notice]
-      redirect_to :action => :new
+      redirect_to :controller => :session, action => :new
         
     else
       flash[:notice] = "Account not created"
       puts flash[:notice]
-      redirect_to :action => :new
+      redirect_to :controller => :session, action => :new
     end
     
     

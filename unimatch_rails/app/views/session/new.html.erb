@@ -22,7 +22,7 @@
                     <fieldset class="block_centre">
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= text_field_tag :email, params[:email] %>
+                            <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" autofocus <%= text_field_tag :email, params[:email] %>
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
@@ -42,24 +42,24 @@
                 <fieldset class="block_centre">
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= text_field_tag :email, params[:email] %>
+                        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= f.text_field :email %>
                         <small id="emailHelp" class="form-text text-muted">Needs to end in .ac.uk</small>
                     </div>
                     <div class="form-group">
                         <label>Password</label>
-                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= text_field_tag :password, params[:password] %>
+                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password %>
                     </div>
                     <div class="form-group">
                         <label>Password confirmation</label>
-                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= text_field_tag :password_confirmation, params[:password_confirmation] %>
+                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password_confirmation %>
                     </div>
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" placeholder="name" aria-describedby="basic-addon2" <%= text_field_tag :name, params[:name] %>
+                        <input type="text" class="form-control" placeholder="name" aria-describedby="basic-addon2" <%= f.text_field :name %>
                     </div>
                     <div class="form-group">
                         <label>Surname</label>
-                        <input type="text" class="form-control" placeholder="surname" aria-describedby="basic-addon2" <%= text_field_tag :surname, params[:surname] %>
+                        <input type="text" class="form-control" placeholder="surname" aria-describedby="basic-addon2" <%= f.text_field :surname %>
                     </div>
                 </fieldset>
                 <%= submit_tag "Register", {:id => 'login', :class => "btn btn-primary"} %>
@@ -68,4 +68,3 @@
         </div>
     </div>
 </body>
-

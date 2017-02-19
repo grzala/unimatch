@@ -12,10 +12,20 @@ $break-phone: 450px
 $break-tablet: 900px
 
 #form_container
+    display: block
+    width: 90%
+    text-align: center
+    margin-top: 20px
+    background: rgba(255,255,255,0.87)
+    border-radius: 8px
+    padding-bottom: 20px
     width: 400px
     display: block
     bottom: 20px
     margin-bottom: 30px
+    @media screen and (min-width: $break-phone)
+        width: 350px
+        margin-top: 40px
     
     
 body
@@ -33,19 +43,6 @@ body
     
 #register_form
     display: none
-    
-#form_container
-    display: block
-    width: 90%
-    text-align: center
-    margin-top: 20px
-    background: rgba(255,255,255,0.87)
-    border: 1px solid #979797
-    border-radius: 8px
-    padding-bottom: 20px
-    @media screen and (min-width: $break-phone)
-        width: 350px
-        margin-top: 40px
     
 #login_title
     display: inline-block

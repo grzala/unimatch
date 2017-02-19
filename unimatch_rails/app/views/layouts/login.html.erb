@@ -2,20 +2,27 @@
 <html>
     <head>
     <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'login', 'data-turbolinks-track': 'reload' %>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%= javascript_include_tag 'login', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-    <% if flash[:alert] %>
-      <div class="panel-heading" id="notice">
-        <legend><%= flash[:alert] %></legend>
+    <% if flash[:success] %>
+      <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:success] %></strong>
       </div>
     <% end %>
-    </div>
+    <% if flash[:warning] %>
+      <div class="alert alert-warning fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:warning] %></strong>
+      </div>
+    <% end %>
     <%= yield %>
     </body>
 </html>

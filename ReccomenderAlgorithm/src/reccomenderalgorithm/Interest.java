@@ -13,6 +13,7 @@ public class Interest {
     
     public int id;
     String name, group;
+    boolean important;
     
     public Interest(int id, String name, String group) {
         this.id = id;

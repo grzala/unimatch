@@ -20,7 +20,6 @@ public class ReccomenderAlgorithm {
     public static void main(String[] args) {
         //Production DB
         //Database d = new ProductionDB("127.0.0.1", "alg", "alg");
-        
         int port = 6789;
         String filePath = "";
         Database d = null;

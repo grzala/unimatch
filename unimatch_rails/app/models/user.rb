@@ -141,7 +141,7 @@ class User < ApplicationRecord
 		societies = get_societies
 		events = []
 		societies.each do |soc|
-			events << soc.get_current_events
+			events += soc.get_current_events
 		end
 		return events
 	end

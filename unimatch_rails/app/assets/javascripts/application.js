@@ -13,9 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.qtip
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+//= require moment.min
+//= require fullcalendar/fullcalendar
 
 $(document).on('turbolinks:load', function() {
     

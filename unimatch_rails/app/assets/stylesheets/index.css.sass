@@ -3,10 +3,109 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-body
-    background-image:    url(background_image.jpg)
-    background-repeat: no-repeat
-    background-size: 100%
+html
+    height: 100%
     
+body
+    height: 100%
+    
+.centered
+    text-align: center
+    margin: 0 auto
+    
+.nonselect
+    -webkit-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+
+#screen1
+    height: 100%
+    width: 100%
+    background: url("background.jpg") no-repeat center center fixed
+    -webkit-background-size: cover
+    -moz-background-size: cover
+    -o-background-size: cover
+    background-size: cover
+    margin-bottom: 10px
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    
+.text
+    color: #606060
+    text-align: center
+    padding: 20px
+    font-family: 'Lato', sans-serif
+    font-size: 12
+    
+.text-wrapper
+    width: 100%
+    margin-top: 250px
+    
+.text-wrapper h1
+    font-family: 'Lato', sans-serif
+    font-weight: bold
+    color: #fff
+    font-size: 45px
+    text-shadow: 4px 3px 5px rgba(0, 0, 0, 0.7)
+    
+.text-wrapper h1:hover
+    cursor: default
+    
+#nav_bar
+    padding: 0
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+
+.navigation_inner
+    display: flex
+
+.navigation_inner h3
+    margin: 16px 10px
+    font-family: 'Lato', sans-serif
+    font-weight: bold
+    color: #606060
+    
+.navigation_inner a
+    text-decoration: none
+    
+.navigation_inner a:hover
+    background-color: rgba(0, 0, 0, 0.1)
+
+.left
+    display: flex
+    flex-direction: row
+    min-width: 250px
+    margin-left: 20px
+
+.right
+    display: flex
+    flex-direction: row-reverse
+    min-width: 250px
+    margin-right: 20px
+    
+.home_logo
+    margin: 90px auto
+    
+.feature
+    width: 300px
+    padding-top: 25px
+    margin: 50px 0px
+    background-color: #f3f3f3
+    
+.section
+    display: flex
+    flex-direction: row
+    justify-content: center
+    flex-wrap: wrap
+    background-color: #f3f3f3
+
+
+.feature_text
+    font-family: 'Lato'
+    font-size: 25px
+    
+
     
 

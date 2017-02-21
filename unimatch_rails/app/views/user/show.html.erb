@@ -10,4 +10,7 @@
     <% if session[:user_id] != @user.id %>
         <p><%= link_to 'Message me', controller: 'user', action: 'messages', id: @user.id %></p>
     <% end %>
+    <%= week_calendar number_of_weeks do |date| %>
+      <%= date %>
+    <% end %>
 </div>

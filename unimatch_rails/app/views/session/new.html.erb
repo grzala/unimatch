@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unimatch Login</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'login_page', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+    <%= image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo", :class => "logo") %>
+    <div class="block_centre" id="form_container">
+        <div id="login_header">
+            <div id="login_title" >
+                <h2 id="login_text" class="active">Login</h2>
+            </div>
+            <div id="register_title">
+                <h2 id="register_text">Register</h2>
+            </div>
+        </div>
+        <div id="form_inputs">
+        <div class="block_centre" id="login_form"> 
+                <%= form_tag do %>
+                    <fieldset class="block_centre">
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" autofocus <%= text_field_tag :email, params[:email] %>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= password_field_tag :password, params[:password] %>
+                        </div>
+                        <br>
+                        <div>
+                            <%= submit_tag "Log In", {:id => 'login', :class => "btn btn-primary"} %>
+                        </div>
+                    </fieldset>
+                <% end %>
+            </div>
+        </div>
+        <div class="block_centre" id="register_form">
+            <%= form_for(:user, :url => {:controller => 'user', :action => 'create'}) do |f| %>
+                <fieldset class="block_centre">
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= f.text_field :email %>
+                        <small id="emailHelp" class="form-text text-muted">Needs to end in .ac.uk</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password %>
+                    </div>
+                    <div class="form-group">
+                        <label>Password confirmation</label>
+                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password_confirmation %>
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="name" aria-describedby="basic-addon2" <%= f.text_field :name %>
+                    </div>
+                    <div class="form-group">
+                        <label>Surname</label>
+                        <input type="text" class="form-control" placeholder="surname" aria-describedby="basic-addon2" <%= f.text_field :surname %>
+                    </div>
+                </fieldset>
+                <%= submit_tag "Register", {:id => 'login', :class => "btn btn-primary"} %>
+            <% end %>
+        </div>
+        </div>
+    </div>
+</body>

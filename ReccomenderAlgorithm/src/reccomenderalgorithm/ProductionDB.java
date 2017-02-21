@@ -36,7 +36,7 @@ public class ProductionDB implements Database {
     final String getSocietiesSTMT = "SELECT * FROM unimatch.societies;";
     final String getUserByIDSTMT = "SELECT * FROM unimatch.users WHERE id = ?";
     final String getSocietyByIDSTMT = "SELECT * FROM unimatch.societies WHERE id = ?";
-    final String getUserInterestsSTMT = "SELECT * FROM unimatch.user_interests WHERE user_id = ? ;";
+    final String getUserInterestsSTMT = "SELECT * FROM unimatch.user_interests WHERE user_id = ? AND important = ? ;";
     final String getSocietyInterestsSTMT = "SELECT * FROM unimatch.society_interests WHERE society_id = ? ;";
     final String getInterestGroupsSTMT = "SELECT * FROM unimatch.interest_groups";
     final String getInterestsSTMT = "SELECT * FROM unimatch.interests";
@@ -101,7 +101,7 @@ public class ProductionDB implements Database {
             String name = rs.getString("name");
             String surname = rs.getString("surname");
             usr = new User(id, name, surname);
-            usr.setInterests(getUserInterests(usr.id));
+            usr.setInterests(getUserInterests(usr.id, false), getUserInterests(usr.id, true));
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,11 +127,13 @@ public class ProductionDB implements Database {
         return result;
     }
     
-    public ArrayList<Interest> getUserInterests(int id) {
+    public ArrayList<Interest> getUserInterests(int id, boolean important) {
         ArrayList<Interest> result = new ArrayList<Interest>();
         try {
             PreparedStatement getUserInterest = con.prepareStatement(getUserInterestsSTMT);
             getUserInterest.setInt(1, id);
+            int b = important ? 1 : 0;
+            getUserInterest.setInt(2, b);
             ResultSet rs = getUserInterest.executeQuery();
             
             while (rs.next()) {
@@ -155,7 +157,8 @@ public Society getSocietyByID(int id) {
             
             String name = rs.getString("name");
             soc = new Society(id, name);
-            soc.setInterests(getSocietyInterests(soc.id));
+            //all society interests are important
+            soc.setInterests(new ArrayList<Interest>(), getSocietyInterests(soc.id));
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,6 +181,7 @@ public Society getSocietyByID(int id) {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
         return result;
     }
     

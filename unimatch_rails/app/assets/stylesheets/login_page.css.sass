@@ -1,0 +1,89 @@
+/* colours */
+
+$primary-color: white
+$red: #FF6868
+$blue: #3B579D
+$grey: #D8D8D8
+$black: #606060
+
+/* media queries */
+
+$break-phone: 450px
+$break-tablet: 900px
+
+#form_container
+    display: block
+    width: 90%
+    text-align: center
+    margin-top: 20px
+    background: rgba(255,255,255,0.87)
+    border-radius: 8px
+    padding-bottom: 20px
+    width: 400px
+    display: block
+    bottom: 20px
+    margin-bottom: 30px
+    @media screen and (min-width: $break-phone)
+        width: 350px
+        margin-top: 40px
+    
+    
+body
+    min-height: 100%
+    background: url("background.jpg") no-repeat center center fixed
+    -webkit-background-size: cover
+    -moz-background-size: cover
+    -o-background-size: cover
+    background-size: cover
+    
+.logo
+    display: block
+    margin-left: auto
+    margin-right: auto
+    
+#register_form
+    display: none
+    
+#login_title
+    display: inline-block
+    float: left
+    width: 45%
+    cursor: pointer
+    border-right: 1px solid $grey
+    @media screen and (min-width: $break-phone)
+        width: 174px
+    
+    
+#register_title
+    display: inline-block
+    float: right
+    width: 45%
+    cursor: pointer
+    @media screen and (min-width: $break-phone)
+        width: 174px
+    
+    
+#login_header
+    height: 80px
+    
+fieldset
+    width: 250px
+    
+h2
+    font-family: 'Lato', sans-serif
+    font-size: 15px
+    color: $grey
+    
+label
+    float: left
+    
+.btn-primary
+    background: $red
+    
+.btn-primary:hover
+    background: $red
+    
+h2.active
+    font-size: 20px
+    color: $red
+    margin-top: 17px

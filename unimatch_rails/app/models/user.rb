@@ -15,6 +15,9 @@ class User < ApplicationRecord
 	VALID_EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+ac.uk)\z/i
 	validates :email, :presence => true, :uniqueness => {:case_sensitive => false}, format: { with: VALID_EMAIL_REGEX }, length: {maximum: 255}
 	attr_accessor :password, :password_confirmation
+	
+	IMPORTANT_INTERESTS_NO ||= 5
+	
 	def User.encrypt_password(password, salt)
 	Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end
@@ -53,6 +56,15 @@ class User < ApplicationRecord
 		return @interests
 	end
 	
+	def get_important_interests
+		@ii = UserInterest.where(user_id: self.id, important: true)
+		@interests = []
+		@ii.each do |i|
+			@interests << Interest.find_by_id(i.interest_id)
+		end
+		return @interests
+	end
+	
 	def get_interests_by_id
 		@interests = get_interests
 		@interest_ids = []
@@ -84,10 +96,13 @@ class User < ApplicationRecord
 		return @new
 	end
 	
+	#if less than 5 important, add as important
 	def add_interest(id)
 		@interests = get_interests_by_id
 		if !@interests.include? id
-			UserInterest.create(user_id: self.id, interest_id: id)
+			@ui = UserInterest.new(user_id: self.id, interest_id: id)
+			if get_important_interests.length < IMPORTANT_INTERESTS_NO then @ui.important = true end
+			@ui.save
 		end
 	end
 	

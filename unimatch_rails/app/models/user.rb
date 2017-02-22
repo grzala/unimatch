@@ -2,6 +2,8 @@ class User < ApplicationRecord
 	has_many :messages
 	has_many :members
 	has_many :societies, :through => :members
+	has_many :participants
+	has_many :events, :through => :participants
 	
 	has_one :university
 	
@@ -136,6 +138,38 @@ class User < ApplicationRecord
 		end
 		return socs
 	end
+	
+	def get_events_ids
+		participants= Participant.where(user_id: self.id)
+		ev_ids = []
+		participants.each do |par|
+			ev_ids << par.event_id
+		end
+		return ev_ids
+	end
+	
+	def get_events
+		ev_ids = get_events_ids
+		evs = []
+		ev_ids.each do |stuff|
+			evs << Event.find(stuff)
+		end
+		return evs
+	end
+			
+	
+	def get_user_events
+		allevents = Event.all
+		userevents = []
+		allevents.each do |ev|
+			if ev.has_participant(id) == true 
+				userevents << ev
+			end
+		end
+		return userevents
+		
+	end
+	
 	
 	def get_society_current_events
 		societies = get_societies

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   controller :event do
     get '/event/list' => :list
+    get '/event/join/:id' => :join_leave
     
   end
   resources :event

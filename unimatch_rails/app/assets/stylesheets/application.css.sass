@@ -34,9 +34,7 @@ $black: #606060
 $break-phone: 450px
 $break-tablet: 900px
 
-/* css stuff */ 
-
-
+/* css stuff */
 
 .center
     display: block
@@ -46,7 +44,7 @@ $break-tablet: 900px
 body
     text-align: center
     align-content: center
-    margin-top: 10px
+    margin-top: 80px
 
 h1
     font-family: 'Lato', sans-serif
@@ -58,17 +56,39 @@ h2
     font-size: 30
     color: $black
     
-h1 .header_text
-    display: inline
-    border: 1px
+#header_text_container
+    display: block
+    margin-left: auto
+    margin-right: auto
+    @media screen and (min-width: $break-tablet)
+        position: fixed
+        top: -10px
+        left: 35px
+
+#header_text
+    font-size: 20
+    
+    
+white
+    color: white
     
 h4
     font-family: 'Lato', sans-serif
     font-size: 18
     color: $black
     
-.header 
+.header
+    height: 60px
+    width: 100%
     margin-bottom: 50px
+    background: $red
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50)
+    top: 0px
+    position: fixed
+    z-index: 99999
+    padding-top: 10px
+    padding-left: 10px
+    padding-right: 10px
     
 
 ul 
@@ -84,32 +104,43 @@ li
 ul li a 
     font-family: 'Lato', sans-serif
     font-size: 15
-
-li a:hover 
-    color: #009ad3
-    transition: 0.2s
+    color: white
     
-#details
-    display: none
-    float: right
-    position: absolute
-    right: 20px
-    top: 20px
-    @media screen and (min-width: $break-tablet)
-        display: inline-block
+
     
 .inline_block
     display: inline-block
 
 #desktop_nav
-    float: right
-    position: absolute
-    left: 20px
-    top: 20px
     display: none
     @media screen and (min-width: $break-tablet)
         display: inline-block
+        position: fixed
+        top: 19px
+        right: 85px
 
+#user_image
+    display: none
+    @media screen and (min-width: $break-phone)
+        display: inline-block
+        border-radius: 50%
+        width: 30px
+        height: 30px
+        background: $grey
+        position: fixed
+        top: 10px
+        right: 35px
+        
+#user_name
+    display: none
+    @media screen and (min-width: $break-phone)
+        display: inline-block
+        position: fixed
+        top: 40px
+        right: 28px
+    
+#details_dropdown
+    display: none
 
 p 
     font-family: 'Lato', sans-serif
@@ -137,27 +168,28 @@ a:active
     text-decoration: none
     
 .wrapper
-    width: 500px
+    width: 90%
     margin-left: auto
     margin-right: auto
+    max-width: 500px
     
 /* mobile navigation */
 
 #burger_menu
     display: inline-block
-    float: right
-    position: absolute
-    left: 20px
-    top: 20px
+    position: fixed
+    left: 10px
+    top: 10px
     @media screen and (min-width: $break-tablet)
         display: none
     
 
 .line
-    width: 20px
-    height: 4px
-    background-color: $black
-    margin-bottom: 4px
+    width: 25px
+    height: 3px
+    background-color: white
+    margin-bottom: 5px
+
         
 .container_hidden
     height: 200px

@@ -21,6 +21,24 @@ class UserController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @events = @user.get_society_current_events
+    
+    @events_json = []
+    
+    @events.each do |event|
+      temp = {
+        title: "\n" + event.get_owner_name,
+        url: url_for(:controller => :event, :action => :show, :id => event.id),
+      	start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + event.date.day.to_s + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
+      	description: event.name + "\n" + event.description,
+      }
+      
+      @events_json << temp
+      
+    end
+    
+    @events_json = @events_json.to_json.html_safe
+    
   end
   
   def new

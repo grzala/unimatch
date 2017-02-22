@@ -119,6 +119,33 @@ class User < ApplicationRecord
 		return @societies
 	end
 	
+	def get_societies_ids
+		members = Member.where(user_id: self.id)
+		soc_ids = []
+		members.each do |member|
+			soc_ids << member.society_id
+		end
+		return soc_ids
+	end
+	
+	def get_societies
+		soc_ids = get_societies_ids
+		socs = []
+		soc_ids.each do |id|
+			socs << Society.find(id)
+		end
+		return socs
+	end
+	
+	def get_society_current_events
+		societies = get_societies
+		events = []
+		societies.each do |soc|
+			events += soc.get_current_events
+		end
+		return events
+	end
+	
 	private ############################# private methods below ##################################
 	
 	def password_must_be_present

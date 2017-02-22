@@ -98,7 +98,19 @@ class Society < ApplicationRecord
   
   def get_events
     return Event.where(society_id: self.id)
+  end
+  
+  def get_current_events
+    events = get_events
+    current_events = []
     
+    events.each do |event| 
+      if event.date > DateTime.now and event.date < DateTime.now + 2.months
+        current_events << event
+      end
+    end
+    
+    return current_events
   end
   
   private

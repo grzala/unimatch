@@ -10,4 +10,51 @@
     <% if session[:user_id] != @user.id %>
         <p><%= link_to 'Message me', controller: 'user', action: 'messages', id: @user.id %></p>
     <% end %>
+    
+    
+    
 </div>
+
+<div id='calendar-wrapper' style='width: 50%; margin-right:auto; margin-left: auto'>
+    <div id='calendar'></div>
+</div>
+    
+    
+    
+<script>
+$(document).ready(function() {
+
+     function render(event, element) {
+        console.log("RENDER");
+        element.find('.fc-content').append('<div class="fc-separator"></div><p class="fc-description">'+ event.description + '</p></div>');
+    }
+    
+    $('#calendar').fullCalendar({
+        header: {
+            left: 'prev',
+            center: 'title',
+            right: 'next',
+        },
+		defaultView: 'basicWeek',
+		height: 500,
+        timeFormat: 'H(:mm)', // uppercase H for 24-hour clock
+        
+        
+		
+		events: <%= @events_json %>,
+		
+	    eventRender: render,
+    })
+    
+});
+</script>
+
+<!--
+[
+	{
+		'title': 'Click for Google \n description and crap',
+		url: 'http://google.com/',
+		start: '2017-02-21T23:30:00',
+	},
+]
+-->

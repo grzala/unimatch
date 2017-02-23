@@ -15,14 +15,14 @@
     <h1 id="header_text">Uni<white>Match</white></h1>
     </div>
     <% if session[:user_id] %>
-      <button id="burger_menu">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      </button>
-      <div id="container" class="container_hidden">
-        <ul id="navigation_mobile">
-        <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %></p>
+      <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+      <label for="nav-trigger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </label>
+      <div id="navigation_mobile_container">
+      <ul id="navigation_mobile">
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Messages', :controller => :user, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Societies', :controller => :event, :action => :new,  id: session[:user_id] %></li>
@@ -52,6 +52,8 @@
     <% if flash[:notice] %>
       <div class="notice"><legend><%= flash[:notice] %></legend></div>
     <% end %>
+    <div id="site-wrap">
     <%= yield %>
+    </div>
   </body>
 </html>

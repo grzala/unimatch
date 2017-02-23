@@ -10,10 +10,10 @@
         <div id="nav_bar">
            <div class="left">
                 <div id="navigation_left" class="navigation_inner nonselect">
-                    <a href="#">
+                    <a href="https://unimatch-jordan14.c9users.io">
                         <h3>Home</h3>
                     </a>
-                    <a href="#">
+                    <a href="#screen2">
                         <h3>Features</h3>
                     </a>
                     <a href="#">
@@ -23,7 +23,7 @@
             </div>
             <div class="right">
                 <div id="navigation_right" class="navigation_inner nonselect">
-                    <a href="#">
+                    <a href="https://unimatch-jordan14.c9users.io/login">
                         <h3>Login</h3>
                     </a>
                     <a href="#">
@@ -73,8 +73,7 @@
             <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
         </div>
     </section>
-    
-     <section id="screen4">
+    <section id="screen4">
         <div class="text_box">
             <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
         </div>
@@ -82,5 +81,34 @@
            <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %> 
         </div>
     </section>
-
+    
+    <section id="screen5">
+        <div class="image_box">
+            <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %> 
+        </div>
+        <div class="text_box">
+            <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
+        </div>
+    </section>
+    
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    
+    <script>
+        $(function() {
+          $('a[href*="#"]:not([href="#"])').click(function() {
+            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+              if (target.length) {
+                $('html, body').animate({
+                  scrollTop: target.offset().top
+                }, 1000);
+                return false;
+              }
+            }
+          });
+        });
+    </script>
+    
 </body>

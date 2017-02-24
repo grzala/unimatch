@@ -1,7 +1,5 @@
 YOUR ID <%= session[:user_id] %>
 <br/>
-USER ID <%= params[:id] %>
-<br/>
 
 number_of messages <%= @msgs.length %>
 
@@ -17,11 +15,10 @@ number_of messages <%= @msgs.length %>
     
 <% end %>
 
-
-<%= form_for(@message, :url => {:controller => 'message', :action => 'create'}) do |f| %>
-    <p> Message: <%= f.text_field :body %></p>
-    <%= f.hidden_field :recipient_id, :value => params[:id] %>
+<%= form_tag create_message_path do %>
+    <p> Message: <%= text_field_tag :body %></p>
+    <%= hidden_field_tag :conversation_id,  @con.id %>
     
     
-    <%= f.submit :Send %>
+    <%= submit_tag :Send %>
 <% end %>

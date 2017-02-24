@@ -8,7 +8,7 @@
     <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.id %></p>
     <% end %>
     <% if session[:user_id] != @user.id %>
-        <p><%= link_to 'Message me', controller: 'user', action: 'messages', id: @user.id %></p>
+        <p><%= link_to 'Message me', controller: 'conversation', action: 'message', id: @user.id %></p>
     <% end %>
     
     

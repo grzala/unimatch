@@ -15,15 +15,12 @@ Rails.application.routes.draw do
   end
   resources :event
   
-  resources :message
-  
   controller :user do
     get '/user/list' => :list
     post '/user/:id' => :update
     get '/user/match/:id' => :match
     get '/user/choose/:id' => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
-    get 'user/:id/messages' => :messages
   end
   
   resources :user
@@ -38,6 +35,12 @@ Rails.application.routes.draw do
   
   controller :welcome do
     get '/welcome' => :index
+  end
+  
+  controller :conversation do
+    get '/conversation/:id' => :show
+    get '/conversation/message/:id' => :message
+    post '/conversation/create_message' => :create_message, :as => :create_message
   end
 
   

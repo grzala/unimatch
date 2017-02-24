@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170222133405) do
+ActiveRecord::Schema.define(version: 20170224155444) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(version: 20170222133405) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["society_id"], name: "index_billing_histories_on_society_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "event_groups", force: :cascade do |t|
@@ -69,11 +74,12 @@ ActiveRecord::Schema.define(version: 20170222133405) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "body"
-    t.boolean  "read",         default: false
+    t.boolean  "read",            default: false
     t.integer  "sender_id"
-    t.integer  "recipient_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "conversation_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -83,6 +89,15 @@ ActiveRecord::Schema.define(version: 20170222133405) do
     t.integer  "event_id",   null: false
     t.index ["event_id"], name: "index_participants_on_event_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "recipients", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "conversation_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["conversation_id"], name: "index_recipients_on_conversation_id"
+    t.index ["user_id"], name: "index_recipients_on_user_id"
   end
 
   create_table "societies", force: :cascade do |t|

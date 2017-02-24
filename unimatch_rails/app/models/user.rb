@@ -170,7 +170,6 @@ class User < ApplicationRecord
 		
 	end
 	
-	
 	def get_society_current_events
 		societies = get_societies
 		events = []

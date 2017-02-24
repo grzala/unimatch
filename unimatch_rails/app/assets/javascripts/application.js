@@ -19,6 +19,7 @@
 //= require_tree .
 //= require moment.min
 //= require fullcalendar/fullcalendar
+//= require cable
 
 $(document).on('turbolinks:load', function() {
     

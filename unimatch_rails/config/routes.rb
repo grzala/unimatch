@@ -42,6 +42,8 @@ Rails.application.routes.draw do
     get '/conversation/message/:id' => :message
     post '/conversation/create_message' => :create_message, :as => :create_message
   end
+  
+  mount ActionCable.server => '/cable'
 
   
   #match ':controller'(/:action(/:id))', :via => get

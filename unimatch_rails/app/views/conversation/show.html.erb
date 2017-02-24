@@ -16,11 +16,41 @@ number_of messages <%= @msgs.length %>
 <% end %>
 
 <%= form_tag create_message_path do %>
-    <p> Message: <%= text_field_tag :body %></p>
-    <%= hidden_field_tag :conversation_id,  @con.id %>
+    <p> Message: <%= text_field_tag :body, "", :id => "body"%></p>
+    <%= hidden_field_tag :conversation_id,  @con.id, :id => "conversation_id" %>
     
     
-    <%= submit_tag :Send %>
+    <%= submit_tag :Send, :id => "send_message" %>
 <% end %>
 
-<!-- nothing -->
+<script>
+    $('#send_message').click(function(e){
+        
+        e.preventDefault();
+        
+        var msg = $("#body").val();
+        var con_id = $("#conversation_id").val();
+        
+        $.ajax({
+            type: "POST",
+            url: "<%= create_message_path %>",
+            data: {
+                conversation_id: con_id,
+                body: msg
+            },
+            success: function() {
+                App.conversation.message(con_id, msg);
+                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(xhr.statusText);
+                alert(xhr.responseText);
+            }
+        })
+            
+        console.log("hello");
+        
+    });
+    
+</script>

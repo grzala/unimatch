@@ -46,7 +46,7 @@ class ConversationController < ApplicationController
         @message.conversation_id = @con.id
         @message.sender_id = @user.id
         @message.save
-        redirect_to :controller => :conversation, :action => :message, :id => @con.id
+        #redirect_to :controller => :conversation, :action => :message, :id => @con.id
     end
     
     

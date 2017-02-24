@@ -26,6 +26,18 @@ class EventController < ApplicationController
         @events = Event.all
     end
     
+    def join_leave
+        @event = Event.find(params[:id])
+        if !@event.has_participant(session[:user_id])
+            
+            @event.add_participant(session[:user_id])  
+        else
+            @event.delete_participant(session[:user_id])
+        end
+        
+        redirect_to :action => :list
+    end
+    
     def create
         if params[:recurring]
             startdate = Date.parse(params[:startdate])
@@ -60,9 +72,12 @@ class EventController < ApplicationController
         @event.user_id = user_id
         @event.society_id = society_id
         @event.event_group_id = event_group_id
-        
+        @event.add_participant(session[:user_id])
         if !@event.save then puts @event.errors.full_messages end
     end
     
-
+    private
+    def event_param
+        params.require(:event).permit(:name, :description, :location, :cost, :date)
+    end
 end

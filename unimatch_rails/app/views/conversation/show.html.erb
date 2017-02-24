@@ -11,15 +11,18 @@ number_of messages <%= @msgs.length %>
 
 <br/><br/>
 
-<% @msgs.each do |msg| %>
-
-    <p>FROM: <%= @users[msg.sender_id].name %> AT: <%= msg.created_at %></p>
-    <p><%= msg.body %></p>
+<div class="messages">
+    <% @msgs.each do |msg| %>
     
-    <br/><br/>
+        <p>FROM: <%= @users[msg.sender_id].name %> AT: <%= msg.created_at %></p>
+        <p><%= msg.body %></p>
+        
+        <br/><br/>
+    <% end %>
+    
+</div>
     
     
-<% end %>
 
 <%= form_tag create_message_path do %>
     <p> Message: <%= text_field_tag :body, "", :id => "body"%></p>
@@ -54,8 +57,6 @@ number_of messages <%= @msgs.length %>
                 alert(xhr.responseText);
             }
         })
-            
-        console.log("hello");
         
     });
     
@@ -76,16 +77,21 @@ number_of messages <%= @msgs.length %>
     function render_messages(messages) {
         messages.reverse()
         
-        console.log(LAST_MESSAGE_TIME);
+        var lastTime = LAST_MESSAGE_TIME;
         
         for (var i = 0; i < messages.length; i++) {
             var message = messages[i];
             
             var date = new Date(message.created_at);
             
-            console.log(date.getTime());
+            if (date.getTime() > LAST_MESSAGE_TIME) {
+               lastTime = date.getTime();
+               
+               $(".messages").append("<p>" + message.body + "</p><br/><br/>");
+               
+            }
             
-            
+            LAST_MESSAGE_TIME = lastTime;
         }
     }
     

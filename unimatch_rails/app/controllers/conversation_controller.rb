@@ -4,6 +4,11 @@ class ConversationController < ApplicationController
     def show
         @con = Conversation.find(params[:id])
         
+        if !@con.is_member?(User.find(session[:user_id]))
+            flash[:warning] = "YOU DONT GET TO DO THAT"
+            redirect_to root_path
+        end
+        
         @msgs = @con.get_messages
         
         @msgs = @msgs.sort_by { |msg| msg.created_at }
@@ -15,6 +20,23 @@ class ConversationController < ApplicationController
         @users[@conusers[1].id] = @conusers[1]
         
         @message = Message.new()
+        
+		respond_to do |format|
+			format.html { 
+			    
+			}
+			
+			format.json {
+				render json: @msgs
+			}
+	    end
+        
+    end
+    
+    def get_messages
+        @con = Conversation.find(params[:id])
+        
+        @msgs = @con.get_messages
     end
     
     def message
@@ -46,7 +68,6 @@ class ConversationController < ApplicationController
         @message.conversation_id = @con.id
         @message.sender_id = @user.id
         @message.save
-        #redirect_to :controller => :conversation, :action => :message, :id => @con.id
     end
     
     

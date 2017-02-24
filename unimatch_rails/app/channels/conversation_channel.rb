@@ -8,8 +8,6 @@ class ConversationChannel < ApplicationCable::Channel
   end
 
   def message(data)
-    puts "ASGGGGGGGGGGGGGGGG"
-    puts data
     
     ActionCable.server.broadcast "conversation_channel", data
     

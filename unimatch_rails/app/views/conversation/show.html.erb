@@ -1,3 +1,9 @@
+<script>
+    var CON_ID = <%= @con.id %>
+    var LAST_MESSAGE_TIME = new Date("<%= @msgs[-1].read_attribute_before_type_cast("created_at") %>");
+    LAST_MESSAGE_TIME = LAST_MESSAGE_TIME.getTime();
+</script>
+
 YOUR ID <%= session[:user_id] %>
 <br/>
 
@@ -24,7 +30,7 @@ number_of messages <%= @msgs.length %>
 <% end %>
 
 <script>
-    $('#send_message').click(function(e){
+    $('#send_message').click(function(e) {
         
         e.preventDefault();
         
@@ -52,5 +58,35 @@ number_of messages <%= @msgs.length %>
         console.log("hello");
         
     });
+    
+    function reload_messages(id) {
+        var url = "/conversation/" + id;
+        
+		$.ajax({
+			type: "GET",
+			url: url,
+			dataType: "json",
+			success: function(messages) {
+			    render_messages(messages);
+			}
+		});
+    
+    }
+    
+    function render_messages(messages) {
+        messages.reverse()
+        
+        console.log(LAST_MESSAGE_TIME);
+        
+        for (var i = 0; i < messages.length; i++) {
+            var message = messages[i];
+            
+            var date = new Date(message.created_at);
+            
+            console.log(date.getTime());
+            
+            
+        }
+    }
     
 </script>

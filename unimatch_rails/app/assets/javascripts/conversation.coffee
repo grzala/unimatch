@@ -9,5 +9,7 @@ App.conversation = App.cable.subscriptions.create "ConversationChannel",
         @perform 'message', conversation_id: conversation_id
         
     received: (data) -> 
-        alert(data["conversation_id"]) #speak function 
-
+        if parseInt(data["conversation_id"]) == CON_ID
+            reload_messages(data["conversation_id"])
+        
+    

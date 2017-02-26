@@ -34,7 +34,7 @@ body
     position: relative
     z-index: 50
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
-    @media screen and (min-width: $break-tablet)
+    @media screen and (min-width: $break-phone)
         background: url("background.jpg") no-repeat center center fixed
         -webkit-background-size: cover
         -moz-background-size: cover
@@ -50,7 +50,8 @@ body
     
 .text-wrapper
     width: 100%
-    margin-top: 95%
+    position: absolute
+    bottom: 30px
     @media screen and (min-width: $break-tablet)
         margin-top: 17%
     
@@ -66,10 +67,14 @@ body
     cursor: default
     
 #nav_bar
-    display: none
+    // display: none
+    display: flex
+    padding: 0
+    flex-direction: row
+    justify-content: center
     @media screen and (min-width: $break-tablet)
-        padding: 0
         display: flex
+        padding: 0
         flex-direction: row
         justify-content: space-between
 
@@ -78,11 +83,18 @@ body
     display: flex
 
 .navigation_inner h3
-    margin: 16px 10px
     font-family: 'Lato', sans-serif
     font-weight: bold
     color: #606060
     font-size: 20px
+    margin-left: 3px
+    margin-right: 3px
+    @media screen and (min-width: $break-tablet)
+        margin: 16px 10px
+        font-family: 'Lato', sans-serif
+        font-weight: bold
+        color: #606060
+        font-size: 20px
     
     
 .navigation_inner a
@@ -94,17 +106,24 @@ body
 .left
     display: flex
     flex-direction: row
-    min-width: 150px
-    margin-left: 20px
-
+    @media screen and (min-width: $break-tablet)
+        display: flex
+        flex-direction: row
+        min-width: 150px
+        margin-left: 20px
 .right
     display: flex
     flex-direction: row-reverse
-    min-width: 250px
-    margin-right: 20px
+    @media screen and (min-width: $break-tablet)
+        display: flex
+        flex-direction: row-reverse
+        min-width: 250px
+        margin-right: 20px
     
 .home_logo
-    margin: 90px auto
+    margin-top: 90px
+    @media screen and (min-width: $break-phone)
+        // margin: 90px auto
     
 .feature
     width: 300px

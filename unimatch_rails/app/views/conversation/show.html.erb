@@ -39,7 +39,6 @@ number_of messages <%= @msgs.length %>
         
         var msg = $("#body").val();
         var con_id = $("#conversation_id").val();
-        
         $.ajax({
             type: "POST",
             url: "<%= create_message_path %>",
@@ -49,7 +48,6 @@ number_of messages <%= @msgs.length %>
             },
             success: function() {
                 App.conversation.message(con_id, msg);
-                
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 alert(xhr.status);

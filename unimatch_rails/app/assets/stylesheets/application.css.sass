@@ -36,9 +36,7 @@ $black: #606060
 $break-phone: 450px
 $break-tablet: 900px
 
-/* css stuff */ 
-
-
+/* css stuff */
 
 .center
     display: block
@@ -48,7 +46,11 @@ $break-tablet: 900px
 body
     text-align: center
     align-content: center
-    margin-top: 10px
+    margin-top: 0px
+    
+    
+#content
+    margin-top: 80px
 
 h1
     font-family: 'Lato', sans-serif
@@ -60,62 +62,100 @@ h2
     font-size: 30
     color: $black
     
-h1 .header_text
-    display: inline
-    border: 1px
+#header_text_container
+    display: block
+    margin-left: auto
+    margin-right: auto
+    position: relative
+    top: -20px
+    @media screen and (min-width: $break-tablet)
+        position: fixed
+        top: -10px
+        left: 35px
+
+#header_text
+    font-size: 20
+    
+    
+white
+    color: white
     
 h4
     font-family: 'Lato', sans-serif
     font-size: 18
     color: $black
     
-.header 
+.header
+    height: 60px
+    width: 100%
     margin-bottom: 50px
-
-
-//ul 
-//    list-style-type: none
-//    padding: 0
-//    display: inline-block
-//    vertical-align: middle
-//
-//li 
-//    display: inline
-//    margin-right: 5px
-//
-//ul li a 
-//    font-family: 'Lato', sans-serif
-//    font-size: 15
-//
-//li a:hover 
-//    color: #009ad3
-//    transition: 0.2s
+    background: $red
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50)
+    top: 0px
+    position: fixed
+    padding-top: 10px
+    padding-left: 10px
+    padding-right: 10px
+    z-index: 99
     
-#details
-    display: none
-    float: right
-    position: absolute
-    right: 20px
-    top: 20px
-    @media screen and (min-width: $break-tablet)
-        display: inline-block
+
+ul 
+    list-style-type: none
+    padding: 0
+    display: inline-block
+    vertical-align: middle
+
+li 
+    display: inline
+    margin-right: 5px
+
+ul li a 
+    font-family: 'Lato', sans-serif
+    font-size: 15
+    color: white
     
 .inline_block
     display: inline-block
 
 #desktop_nav
-    float: right
-    position: absolute
-    left: 20px
-    top: 20px
     display: none
     @media screen and (min-width: $break-tablet)
         display: inline-block
+        position: fixed
+        top: 19px
+        right: 110px
 
+#user_image
+    @media screen and (min-width: $break-phone)
+        display: inline-block
+        border-radius: 50%
+        width: 30px
+        height: 30px
+        background: $grey
+        
+#user_name
+    @media screen and (min-width: $break-phone)
+        display: block
+        margin-left: auto
+        margin-right: auto
+
+#details
+    display: none
+    width: 120px
+    height: 60px
+    @media screen and (min-width: $break-phone)
+        display: inline-block
+        position: fixed
+        top: 5px
+        right: 0px
+  
+#details_dropdown
+    display: none
 
 p 
     font-family: 'Lato', sans-serif
     font-size: 12
+    font-weight: 300
     color: $black
     
 h5 
@@ -130,53 +170,99 @@ a:visited
     text-decoration: none
 
 a:hover 
-    text-decoration: underline
+    text-decoration: none
 
 a:active 
-    text-decoration: underline
+    text-decoration: none
     
 .link
     text-decoration: none
     
+    
+#header_text a 
+    color: white
+    transition: color 0.5s
+
+#header_text a:hover
+    color: $black
+    
 .wrapper
-    width: 500px
+    width: 90%
     margin-left: auto
     margin-right: auto
+    max-width: 500px
     
 /* mobile navigation */
 
 #burger_menu
     display: inline-block
-    float: right
-    position: absolute
-    left: 20px
+    position: fixed
+    left: 15px
     top: 20px
+    cursor: pointer
     @media screen and (min-width: $break-tablet)
         display: none
     
 
 .line
-    width: 20px
-    height: 4px
-    background-color: $black
-    margin-bottom: 4px
-        
-.container_hidden
-    height: 200px
-    width: 200px
-    float: left
-    background-color: $red
-    float: left
-    display: none
-    
-
-.container_show
-    display: block
-    margin-top: 40px
+    width: 25px
+    height: 3px
+    background-color: white
+    margin-bottom: 5px
     
 #navigation_mobile ul
-    list-style-type: none
-    padding: 0
-    
-#navigation_mobile a
+    margin-top: 50px
+    list-style: none
+    display: block
+    background: #111
+ 
+#navigation_mobile  li
+    width: 180px
+    display: block
+    margin-left: auto
+    margin-right: auto
+
+#nav_trigger
+    position: fixed
+    top: 20px
+    left: 15px
+    width: 30px
+    height: 30px
+    cursor: pointer
+    z-index: 999
+    @media screen and (min-width: $break-tablet)
+        display: none
+
+/* The side navigation menu */
+.sidenav
+    height: 100%
+    width: 0
+    position: fixed
+    z-index: 9999
+    top: 0
+    left: 0
+    background-color: $red
+    overflow-x: hidden
+    padding-top: 60px
+    transition: 0.5s
+
+/* The navigation menu links */
+.sidenav a 
+    padding: 8px 8px 8px 32px
+    text-decoration: none
+    font-size: 25px
     color: white
+    display: block
+    transition: 0.3s
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus
+    color: $grey
+
+/* Position and style the close button (top right corner) */
+.sidenav #closebtn 
+    position: absolute
+    top: 0
+    right: 25px
+    font-size: 36px
+    margin-left: 50px

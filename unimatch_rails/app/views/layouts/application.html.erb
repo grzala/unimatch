@@ -6,6 +6,7 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
@@ -42,7 +43,7 @@
       </div>
       <div id = "details">
       <div id = "user_image"></div>
-      <p id="user_name"><%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %></p>
+      <p id="user_name"><%= session[:user_name] %></p>
       <div id = "details_dropdown">
       <p> <%= link_to "logout", logout_url %></p>
       </div>

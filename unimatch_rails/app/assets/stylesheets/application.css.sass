@@ -123,34 +123,39 @@ ul li a
         display: inline-block
         position: fixed
         top: 19px
-        right: 85px
+        right: 110px
 
 #user_image
-    display: none
     @media screen and (min-width: $break-phone)
         display: inline-block
         border-radius: 50%
         width: 30px
         height: 30px
         background: $grey
-        position: fixed
-        top: 10px
-        right: 35px
         
 #user_name
+    @media screen and (min-width: $break-phone)
+        display: block
+        margin-left: auto
+        margin-right: auto
+
+#details
     display: none
+    width: 120px
+    height: 60px
     @media screen and (min-width: $break-phone)
         display: inline-block
         position: fixed
-        top: 40px
-        right: 28px
-    
+        top: 5px
+        right: 0px
+  
 #details_dropdown
     display: none
 
 p 
     font-family: 'Lato', sans-serif
     font-size: 12
+    font-weight: 300
     color: $black
     
 h5 
@@ -165,10 +170,10 @@ a:visited
     text-decoration: none
 
 a:hover 
-    text-decoration: underline
+    text-decoration: none
 
 a:active 
-    text-decoration: underline
+    text-decoration: none
     
 .link
     text-decoration: none
@@ -213,7 +218,6 @@ a:active
     position: fixed
     top: 20px
     left: 15px
-    z-index: 2
     width: 30px
     height: 30px
     cursor: pointer
@@ -245,7 +249,7 @@ a:active
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover, .offcanvas a:focus
-    color: #f1f1f1
+    color: $grey
 
 /* Position and style the close button (top right corner) */
 .sidenav #closebtn 

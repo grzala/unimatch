@@ -12,6 +12,7 @@ class ConversationController < ApplicationController
         @msgs = @con.get_messages
         
         @msgs = @msgs.sort_by { |msg| msg.created_at }
+        @newest_message = @msgs.length > 0 ? @msgs[-1].read_attribute_before_type_cast("created_at") : DateTime.now.to_s 
         
         @conusers = @con.get_users
         

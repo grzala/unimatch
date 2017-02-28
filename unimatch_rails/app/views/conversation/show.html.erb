@@ -1,6 +1,6 @@
 <script>
     var CON_ID = <%= @con.id %>
-    var LAST_MESSAGE_TIME = new Date("<%= @msgs[-1].read_attribute_before_type_cast("created_at") %>");
+    var LAST_MESSAGE_TIME = new Date("<%= @newest_message %>");
     LAST_MESSAGE_TIME = LAST_MESSAGE_TIME.getTime();
 </script>
 

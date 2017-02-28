@@ -16,6 +16,8 @@
  *= require_self
  *= stub login_page
  *= stub index
+ *= require fullcalendar/fullcalendar
+ *= require jquery.qtip
  */
 
 @import "bootstrap-sprockets"
@@ -44,6 +46,10 @@ $break-tablet: 900px
 body
     text-align: center
     align-content: center
+    margin-top: 0px
+    
+    
+#content
     margin-top: 80px
 
 h1
@@ -90,6 +96,7 @@ h4
     padding-top: 10px
     padding-left: 10px
     padding-right: 10px
+    z-index: 99
     
 
 ul 
@@ -106,8 +113,6 @@ ul li a
     font-family: 'Lato', sans-serif
     font-size: 15
     color: white
-    
-
     
 .inline_block
     display: inline-block
@@ -191,52 +196,20 @@ a:active
     height: 3px
     background-color: white
     margin-bottom: 5px
-
-        
-.container_hidden
-    height: 200px
-    width: 200px
-    float: left
-    background-color: $red
-    float: left
-    display: none
-    
-
-.container_show
-    display: block
-    margin-top: 40px
     
 #navigation_mobile ul
+    margin-top: 50px
     list-style: none
+    display: block
     background: #111
-    width: 100%
-    height: 100%
-    position: fixed
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    z-index: 0
-    
-#navigation_mobile_container
-    @media screen and (min-width: $break-tablet)
-        display: none
-    
+ 
+#navigation_mobile  li
+    width: 180px
+    display: block
+    margin-left: auto
+    margin-right: auto
 
-#site-wrap
-    min-width: 100%
-    min-height: 100%
-    position: relative
-    top: 0
-    bottom: 100%
-    left: 0
-    z-index: 1
-    
-.nav-trigger
-    position: absolute
-    clip: rect(0, 0, 0, 0)
-
-label[for="nav-trigger"]
+#nav_trigger
     position: fixed
     top: 20px
     left: 15px
@@ -244,21 +217,46 @@ label[for="nav-trigger"]
     width: 30px
     height: 30px
     cursor: pointer
+    z-index: 999
     @media screen and (min-width: $break-tablet)
         display: none
-    
-.nav-trigger:checked + label
-    left: 215px
 
-.nav-trigger:checked ~ .site-wrap
-    left: 200px
-    box-shadow: 0 0 5px 5px rgba(0,0,0,0.5)
-
-.nav-trigger + label, .site-wrap
-    transition: left 0.2s
-    
-body
+/* The side navigation menu */
+.sidenav
+    height: 100%
+    width: 0
+    position: fixed
+    z-index: 9999
+    top: 0
+    left: 0
+    background-color: $red
     overflow-x: hidden
-    
-#navigation_mobile a
+    padding-top: 60px
+    transition: 0.5s
+
+/* The navigation menu links */
+.sidenav a 
+    padding: 8px 8px 8px 32px
+    text-decoration: none
+    font-size: 25px
     color: white
+    display: block
+    transition: 0.3s
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus
+    color: #f1f1f1
+
+/* Position and style the close button (top right corner) */
+.sidenav #closebtn 
+    position: absolute
+    top: 0
+    right: 25px
+    font-size: 36px
+    margin-left: 50px
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main
+    transition: margin-left .5s
+    padding: 20px
+    overflow: hidden

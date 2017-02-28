@@ -17,6 +17,9 @@ class User < ApplicationRecord
 	attr_accessor :password, :password_confirmation
 	
 	IMPORTANT_INTERESTS_NO ||= 5
+
+	mount_uploader :avatar, AvatarUploader
+
 	
 	def User.encrypt_password(password, salt)
 	Digest::SHA2.hexdigest(password + "wibble" + salt)

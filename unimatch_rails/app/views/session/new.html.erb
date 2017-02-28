@@ -61,6 +61,10 @@
                         <label>Surname</label>
                         <input type="text" class="form-control" placeholder="surname" aria-describedby="basic-addon2" <%= f.text_field :surname %>
                     </div>
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <input type="file" class="form-control" placeholder="profile pic" aria-describedby="basic-addon2" <%= f.file_field :avatar %>
+                    </div>
                 </fieldset>
                 <%= submit_tag "Register", {:id => 'login', :class => "btn btn-primary"} %>
             <% end %>

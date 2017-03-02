@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   root :to => 'welcome#index'
   
   controller :welcome do
-    get '/welcome' => :index
+    get '/index' => :index
   end
 
   

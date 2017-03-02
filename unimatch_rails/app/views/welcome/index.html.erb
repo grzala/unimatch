@@ -6,14 +6,15 @@
     <%= stylesheet_link_tag 'index', media: 'all', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width initial-scale = 1.0 maximum-scale=1.0 user-scalable=no" />
     </head>
+
 <body>
     <section id="screen1">
         <div id="nav_bar">
            <div class="left">
                 <div id="navigation_left" class="navigation_inner nonselect">
-                    <a href="https://unimatch-jordan14.c9users.io">
-                        <h3>Home</h3>
-                    </a>
+                    <%= link_to 'index', :controller => :welcome do %>
+                        <h3> Home </h3>
+                    <% end %>
                     <a href="#screen2">
                         <h3>Features</h3>
                     </a>
@@ -40,56 +41,114 @@
             <h1 class="centered">Meet people at your Uni <br>with similar interests</h1>
         </div>
     </section>
-    <section id="screen2">
-        <div class="feature">
-            <div class="icon">
-                <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature1", :class => "logo", :class => "block_centre") %>
+    
+    <div id="desktop">
+        <section id="screen2">
+            <div class="feature">
+                <div class="icon nonselect">
+                    <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature1", :class => "logo", :class => "block_centre") %>
+                </div>
+                <div class="text nonselect">
+                    <h2>Message others using our intuitive chat functionality</h2>
+                </div>
             </div>
-            <div class="text">
-                <h2>Message others using our intuitive chat functionality</h2>
+            <div class="feature">
+                <div class="icon nonselect">
+                    <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature2", :class => "logo", :class => "block_centre") %>
+                </div>
+                <div class="text nonselect">
+                    <h2>Choose your interests and get matched with similar people at your Uni</h2>
+                </div>
             </div>
-        </div>
-        <div class="feature">
-            <div class="icon">
-                <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature2", :class => "logo", :class => "block_centre") %>
+            <div class="feature">
+                <div class="icon nonselect">
+                    <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature3", :class => "logo", :class => "block_centre") %>
+                </div>
+                <div class="text nonselect">
+                    <h2>Join Societies and keep updated through notifications</h2>
+                </div>
             </div>
-            <div class="text">
-                <h2>Choose your interests and get matched with similar people at your Uni</h2>
+        </section>
+        <section id="screen3">
+            <div class="image_box nonselect">
+                <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %>
             </div>
-        </div>
-        <div class="feature">
-            <div class="icon">
-                <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature3", :class => "logo", :class => "block_centre") %>
+            <div class="text_box nonselect">
+                <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
             </div>
-            <div class="text">
-                <h2>Join Societies and keep updated through notifications</h2>
+        </section>
+        <section id="screen4">
+            <div class="text_box nonselect">
+                <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
             </div>
-        </div>
-    </section>
-    <section id="screen3">
-        <div class="image_box">
-            <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %>
-        </div>
-        <div class="text_box">
-            <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
-        </div>
-    </section>
-    <section id="screen4">
-        <div class="text_box">
-            <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
-        </div>
-        <div class="image_box">
-           <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %> 
-        </div>
-    </section>
-    <section id="screen5">
-        <div class="image_box">
-            <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %> 
-        </div>
-        <div class="text_box">
-            <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
-        </div>
-    </section>
+            <div class="image_box nonselect">
+               <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %> 
+            </div>
+        </section>
+        <section id="screen5">
+            <div class="image_box nonselect">
+                <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %> 
+            </div>
+            <div class="text_box nonselect">
+                <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
+            </div>
+        </section>
+    </div>
+    
+    
+    <div id="mobile">
+        <section id="screen2">
+            <div class="feature">
+                <div class="icon nonselect">
+                    <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature1", :class => "logo", :class => "block_centre") %>
+                </div>
+                <div class="text nonselect">
+                    <h2>Message others using our intuitive chat functionality</h2>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="icon nonselect">
+                    <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature2", :class => "logo", :class => "block_centre") %>
+                </div>
+                <div class="text nonselect">
+                    <h2>Choose your interests and get matched with similar people at your Uni</h2>
+                </div>
+            </div>
+            <div class="feature">
+                <div class="icon nonselect">
+                    <%= image_tag("icon.png", border: 0, height: "100px", alt: "feature3", :class => "logo", :class => "block_centre") %>
+                </div>
+                <div class="text nonselect">
+                    <h2>Join Societies and keep updated through notifications</h2>
+                </div>
+            </div>
+        </section>
+        <section id="screen3">
+            <div class="image_box nonselect">
+                <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %>
+            </div>
+            <div class="text_box nonselect">
+                <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
+            </div>
+        </section>
+        <section id="screen4">
+            <div class="image_box nonselect">
+                <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %>
+            </div>
+            <div class="text_box nonselect">
+                <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
+            </div>
+        </section>
+        <section id="screen5">
+            <div class="image_box nonselect">
+                <%= image_tag("icon.png", border: 0, height: "200px", alt: "feature1", :class => "logo", :class => "block_centre") %> 
+            </div>
+            <div class="text_box nonselect">
+                <h2>The central Hub<br> for everything<br> going on at your Uni</h2>
+            </div>
+        </section>
+    </div>
+    
     <script src="/assets/scroll.js"></script>
     
 </body>

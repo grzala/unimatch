@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228140142) do
+# schema number from profile picture branch below
+# ActiveRecord::Schema.define(version: 20170228140142) do
+
+ActiveRecord::Schema.define(version: 20170222133405) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"

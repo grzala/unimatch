@@ -16,12 +16,138 @@ $black: #606060
 
 $break-phone: 450px
 $break-tablet: 900px
-
-.logo
-  @media screen and (min-width: $break-tablet)
-    margin-top: 60px
     
 .block_centre
   display: block
   margin-left: auto
   margin-right: auto
+  
+#form_container
+  display: block
+  width: 90%
+  text-align: center
+  margin-top: 20px
+  background: rgba(255,255,255,0.87)
+  border-radius: 8px
+  padding-bottom: 10px
+  padding-top: 10px
+  max-width: 350px
+  display: block
+  bottom: 20px
+  margin-bottom: 30px
+  @media screen and (min-width: $break-phone)
+    margin-top: 30px
+    
+    
+body
+  min-height: 100%
+  background: url("background.jpg") no-repeat center center fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+    
+.logo
+  display: block
+  margin-left: auto
+  margin-right: auto
+    
+#login_title
+  display: inline-block
+  float: left
+  width: 45%
+  cursor: pointer
+  border-right: 1px solid $grey
+  @media screen and (min-width: $break-phone)
+    width: 174px
+    
+    
+#register_title
+  display: inline-block
+  float: right
+  width: 45%
+  cursor: pointer
+  @media screen and (min-width: $break-phone)
+    width: 174px
+    
+    
+#login_header
+  height: 80px
+    
+fieldset
+  width: 250px
+    
+h2
+  font-family: 'Lato', sans-serif
+  font-size: 25px
+  color: $black
+    
+label
+  float: left
+    
+.btn-primary
+  background: $red
+    
+.btn-primary:hover
+  background: $red
+    
+h2.active
+  font-size: 20px
+  color: $red
+  margin-top: 17px
+  
+fieldset 
+  border: 0px
+  
+.home_logo
+  margin-top: 25px
+  @media screen and (min-width: $break-phone)
+    // margin: 90px auto
+    
+.nonselect
+  -webkit-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+#nav_bar
+  display: none
+  @media screen and (min-width: $break-tablet)
+    display: flex
+    padding: 0
+    flex-direction: row
+    justify-content: space-between
+
+
+.navigation_inner
+  display: flex
+
+.navigation_inner h3
+  font-family: 'Lato', sans-serif
+  font-weight: bold
+  color: #606060
+  font-size: 20px
+  margin-left: 3px
+  margin-right: 3px
+  @media screen and (min-width: $break-tablet)
+    margin: 16px 10px
+    font-family: 'Lato', sans-serif
+    font-weight: bold
+    color: #606060
+    font-size: 20px
+    
+    
+.navigation_inner a
+  text-decoration: none
+    
+.navigation_inner a:hover h3
+  color: #FF6868
+    
+.left
+  display: flex
+  flex-direction: row
+  @media screen and (min-width: $break-tablet)
+    display: flex
+    flex-direction: row
+    min-width: 150px
+    margin-left: 20px

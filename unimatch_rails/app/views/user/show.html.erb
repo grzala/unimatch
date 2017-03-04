@@ -1,4 +1,6 @@
-<div class="wrapper">
+<div class="container">
+<div class="row">
+<div class="col-md-8">
     <% if session[:user_id] == @user.id %>
     <h2>Your Account Details</h2>
     <%= image_tag @user.avatar_url(:display), :class => "user_image" %>
@@ -14,16 +16,18 @@
         <%= image_tag @user.avatar_url(:display), :class => "user_image" %>
         <p><%= link_to 'Message me', controller: 'user', action: 'messages', id: @user.id %></p>
     <% end %>
-    
-    
-    
+<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
+    <div id='calendar'>
+    </div>
+</div>
+</div>
+<div class="col-md-4">
+    <h4>Attending Events</h4>
+    <h4>In Societies</h4>
 </div>
 
-<div id='calendar-wrapper' style='width: 50%; margin-right:auto; margin-left: auto'>
-    <div id='calendar'></div>
 </div>
-    
-    
+</div>
     
 <script>
 $(document).ready(function() {

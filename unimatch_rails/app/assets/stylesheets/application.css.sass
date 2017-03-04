@@ -20,9 +20,6 @@
  *= require jquery.qtip
  */
 
-@import "bootstrap-sprockets"
-@import "bootstrap"
-
 /* colours */
 
 $primary-color: white
@@ -38,6 +35,18 @@ $break-tablet: 900px
 
 /* css stuff */
 
+.container
+    margin-top: 50px
+    margin-bottom: 25px
+    padding-top: 25px
+    width: 90%
+    max-width: 1000px
+    background: white
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.50)
+    @media screen and (min-width: $break-tablet)
+        width: 75%
+    
+
 .center
     display: block
     margin-left: auto
@@ -47,6 +56,7 @@ body
     text-align: center
     align-content: center
     margin-top: 0px
+    background-color: $grey
     
     
 #content
@@ -186,11 +196,12 @@ a:active
 #header_text a:hover
     color: $black
     
-.wrapper
     width: 90%
     margin-left: auto
     margin-right: auto
-    max-width: 500px
+    max-width: 1000px
+    @media screen and (min-width: $break-tablet)
+        width: 75%
     
 /* mobile navigation */
 

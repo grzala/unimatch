@@ -10,6 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+# schema number from profile picture branch below
+# ActiveRecord::Schema.define(version: 20170228140142) do
+
 ActiveRecord::Schema.define(version: 20170222133405) do
 
   create_table "billing_histories", force: :cascade do |t|
@@ -181,6 +184,7 @@ ActiveRecord::Schema.define(version: 20170222133405) do
     t.string   "salt"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "avatar"
   end
 
 end

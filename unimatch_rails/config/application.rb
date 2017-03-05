@@ -14,6 +14,6 @@ module UnimatchRails
     # -- all .rb files in that directory are automatically loaded.
     
     config.autoload_paths += %W(#{config.root}/lib/connector)
-    
+    ActiveSupport::JSON::Encoding.time_precision = 3
   end
 end

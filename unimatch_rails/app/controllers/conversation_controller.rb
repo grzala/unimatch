@@ -12,7 +12,7 @@ class ConversationController < ApplicationController
         @msgs = @con.get_messages
         
         @msgs = @msgs.sort_by { |msg| msg.created_at }
-        @newest_message = @msgs.length > 0 ? @msgs[-1].read_attribute_before_type_cast("created_at") : DateTime.now.to_s 
+        @newest_message = @msgs.length > 0 ? @msgs[-1].created_at.to_json.html_safe : DateTime.now.to_json.html_safe
         
         @conusers = @con.get_users
         
@@ -69,6 +69,7 @@ class ConversationController < ApplicationController
         @message.conversation_id = @con.id
         @message.sender_id = @user.id
         @message.save
+        render :body => nil
     end
     
     

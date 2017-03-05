@@ -1,6 +1,7 @@
 <script>
     var CON_ID = <%= @con.id %>
-    var LAST_MESSAGE_TIME = new Date("<%= @newest_message %>");
+    var LAST_MESSAGE_TIME = new Date(<%= @newest_message %>);
+    var users = <%= @users.to_json.html_safe %>
     LAST_MESSAGE_TIME = LAST_MESSAGE_TIME.getTime();
 </script>
 
@@ -85,7 +86,10 @@ number_of messages <%= @msgs.length %>
             if (date.getTime() > LAST_MESSAGE_TIME) {
                lastTime = date.getTime();
                
-               $(".messages").append("<p>" + message.body + "</p><br/><br/>");
+               $(".messages").append(
+                   "<p>FROM: " + users[message.sender_id]['name'] + " AT: " + message['created_at'] + "</p>" +
+                   "<p>" + message.body + "</p><br/><br/>"
+                );
                
             }
             

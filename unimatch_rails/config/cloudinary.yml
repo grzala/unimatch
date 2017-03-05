@@ -1,0 +1,9 @@
+development:
+  cloud_name: "unimatch"
+  api_key: "961573846232446"
+  api_secret: "xpmDRXNgZlEc_zgXhGEDZqWPAWM"
+
+production:
+  cloud_name: "unimatch"
+  api_key: "961573846232446"
+  api_secret: "xpmDRXNgZlEc_zgXhGEDZqWPAWM"

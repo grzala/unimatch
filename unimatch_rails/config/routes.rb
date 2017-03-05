@@ -29,15 +29,15 @@ Rails.application.routes.draw do
   resources :user
   
   controller :session do
-    get  'login' => :new
-    post 'login' => :create
-    get 'logout' => :destroy
+    post '/register' => :register
+    get '/register' => :new
   end
   
   root :to => 'welcome#index'
   
   controller :welcome do
-    get '/welcome' => :index
+    post '' => :create
+    get 'logout' => :destroy
   end
 
   

@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// colours
+
+$primary-color: white
+$red: #FF6868
+$blue: #3B579D
+$grey: #D8D8D8
+$black: #606060
+
+//variables
+$break-phone: 450px
+$break-tablet: 900px
 
 html
     height: 100%
@@ -12,98 +23,152 @@ body
 .centered
     text-align: center
     margin: 0 auto
-    
-.nonselect
-    -webkit-user-select: none
-    -moz-user-select: none
-    -ms-user-select: none
-    user-select: none
 
 #screen1
-    height: 100%
+    height: calc(100% - 54px)
     width: 100%
-    background: url("background.jpg") no-repeat center center fixed
+    background: url("background.jpg") no-repeat center center
     -webkit-background-size: cover
     -moz-background-size: cover
     -o-background-size: cover
+    -ms-background: cover
     background-size: cover
-    margin-bottom: 10px
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    position: relative
+    z-index: 50
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    @media screen and (min-width: $break-phone)
+        background: url("background.jpg") no-repeat center center fixed
+        -webkit-background-size: cover
+        -moz-background-size: cover
+        -o-background-size: cover
+        background-size: cover
     
 .text
     color: #606060
     text-align: center
     padding: 20px
     font-family: 'Lato', sans-serif
-    font-size: 12
+    font-size: 1em
     
 .text-wrapper
     width: 100%
-    margin-top: 250px
+    position: absolute
+    bottom: 30px
+    @media screen and (min-width: $break-tablet)
+        margin-top: 17%
     
 .text-wrapper h1
     font-family: 'Lato', sans-serif
     font-weight: bold
     color: #fff
-    font-size: 45px
-    
+    // font-size: 23px
+    @media screen and (min-width: $break-tablet)
+        font-size: 3em
+
 .text-wrapper h1:hover
     cursor: default
     
-#nav_bar
-    padding: 0
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-
-
-.navigation_inner
-    display: flex
-
-.navigation_inner h3
-    margin: 16px 10px
-    font-family: 'Lato', sans-serif
-    font-weight: bold
-    color: #606060
-    font-size: 20px
-    
-    
-.navigation_inner a
-    text-decoration: none
-    
-.navigation_inner a:hover h3
-    color: #FF6868
-    
-.left
-    display: flex
-    flex-direction: row
-    min-width: 250px
-    margin-left: 20px
 
 .right
     display: flex
     flex-direction: row-reverse
-    min-width: 250px
-    margin-right: 20px
-    
-.home_logo
-    margin: 90px auto
+    @media screen and (min-width: $break-tablet)
+        display: flex
+        flex-direction: row-reverse
+        min-width: 250px
+        margin-right: 20px
     
 .feature
     width: 300px
     padding-top: 25px
-    margin: 50px 0px
+    margin: 80px 0px
     background-color: #f3f3f3
     
-.section
+#screen2
     display: flex
     flex-direction: row
     justify-content: center
     flex-wrap: wrap
     background-color: #f3f3f3
+    position: relative
+    margin-top: -10px
+    z-index: 40
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 16px 20px 0 rgba(0, 0, 0, 0.19)
 
 
 h2
     font-family: 'Lato', sans-serif
     font-size: 20px
     
+#screen3
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    flex-wrap: wrap
+    background-color: #FF6868
+    position: relative
+    margin-top: -10px
+    z-index: 30
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    
+
+.image_box
+    margin: 8% 0% 8% 0%
+    // -webkit-margin: 8% 0% 8% 0%
+    // -moz-margin: 8% 0% 8% 0%
+    // -o-margin: 8% 0% 8% 0%
+    // -ms-margin: 8% 0% 8% 0%
+    
+    
+.text_box
+    margin: 8% 0% 8% 0%
+    // -webkit-margin: 8% 0% 8% 0%
+    // -moz-margin: 8% 0% 8% 0%
+    // -o-margin: 8% 0% 8% 0%
+    // -ms-margin: 8% 0% 8% 0%
+    
+
+.text_box h2
+    font-size: 30px
+    color: white
+    text-align: center
+    font-family: 'Lato', sans-serif
+    @media screen and (min-width: $break-tablet)
+        font-size: 45px
+    
+#screen4
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    flex-wrap: wrap
+    background-color: #f3f3f3
+    position: relative
+    margin-top: -10px
+    z-index: 20
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    
+#screen4 .text_box h2
+    color: #606060
+    // text-align: right
+    
+    
+#screen5
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    flex-wrap: wrap
+    background-color: #FF6868
+    position: relative
+    margin-top: -10px
+    z-index: 10
+
+#desktop
+    display: none
+    @media screen and (min-width: $break-tablet)
+        display: unset
+
+
+#mobile
+    display: unset
+    @media screen and (min-width: $break-tablet)
+        display: none

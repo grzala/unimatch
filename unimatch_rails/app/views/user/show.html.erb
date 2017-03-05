@@ -12,7 +12,7 @@
         <p><%= @user.name %></p>
         <p><%= @user.surname %></p>
         <%= image_tag @user.avatar_url(:display), :class => "user_image" %>
-        <p><%= link_to 'Message me', controller: 'user', action: 'messages', id: @user.id %></p>
+        <p><%= link_to 'Message me', controller: 'conversation', action: 'message', id: @user.id %></p>
     <% end %>
     
     

@@ -18,6 +18,7 @@
 //= require bootstrap-sprockets
 //= require moment.min
 //= require fullcalendar/fullcalendar
+//= require cable
 //= require_tree .
 
 $(document).on('turbolinks:load', function() {

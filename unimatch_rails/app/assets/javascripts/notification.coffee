@@ -7,14 +7,14 @@ $.fn.addNotifications = (notifications) ->
         addNotification(this, notifications[i])
         
 addNotification = (div, notification) ->
-    classes = "notification "
+    classes = 'notification '
     console.log(notification['seen'])
     if notification['seen']
-        classes += "seen"
+        classes += 'seen'
     else
-        classes += "unseen"
+        classes += 'unseen'
     
-    toAppend = ""
+    toAppend = ''
     toAppend += '<a href="' + notification['link'] + '">'
     toAppend += '<div class="' + classes + '">'
     

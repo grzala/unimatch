@@ -182,6 +182,15 @@ class User < ApplicationRecord
 		return events
 	end
 	
+	def notify(link, info, msg_id = nil)
+		@notification = Notification.new
+		@notification.link = link
+		@notification.information = info
+		@notification.user_id = self.id
+		@notification.message_id = msg_id
+		@notification.save
+	end
+	
 	private ############################# private methods below ##################################
 	
 	def password_must_be_present

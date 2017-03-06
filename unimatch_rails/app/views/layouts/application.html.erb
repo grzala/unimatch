@@ -51,5 +51,19 @@
       <div class="notice"><legend><%= flash[:notice] %></legend></div>
     <% end %>
     <%= yield %>
+    
+    <div class="notifications">
+        <% @notifs.each do |notif| %>
+            <% classes = "notification " %>
+            <% classes += notif.seen ? "seen" : "unseen" %>
+            
+            <a href="<%= notif.link %>">
+                <div class="<%= classes %>">
+                    <p class="information"><%= notif.information %></p>
+                </div>
+            </a>
+        <% end %>
+    </div>
+    
   </body>
 </html>

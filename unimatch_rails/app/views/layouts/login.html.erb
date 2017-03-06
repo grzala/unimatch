@@ -24,15 +24,16 @@
         <strong><%= flash[:warning] %></strong>
       </div>
     <% end %>
-    <button id="burger_menu">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      </button>
-      <div id="container" class="container_hidden">
-        <ul id="navigation_mobile">
+    <div id="nav_trigger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div id="mySidenav" class="sidenav">
+      <ul id="navigation_mobile">
+        <a href="javascript:void(0)" id="closebtn" >&times;</a>
         <li><%= link_to 'Home' %></li>
-        <li><%= link_to 'Features'  %></li>
+        <li><%= link_to 'Features' %></li>
         <li><%= link_to 'About' %></li>
       </ul>
       </div>

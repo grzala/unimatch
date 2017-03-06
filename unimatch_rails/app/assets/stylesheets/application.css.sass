@@ -16,8 +16,7 @@
  *= require_self
  *= stub login_page
  *= stub index
- *= require fullcalendar/fullcalendar
- *= require jquery.qtip
+ *= stub login
  */
 
 /* colours */
@@ -33,7 +32,9 @@ $black: #606060
 $break-phone: 450px
 $break-tablet: 900px
 
-/* css stuff */
+/* css stuff */ 
+
+
 
 .container
     margin-top: 50px
@@ -52,9 +53,13 @@ $break-tablet: 900px
     margin-left: auto
     margin-right: auto
     
+fieldset 
+    border: 0px
+    
 body
     text-align: center
     align-content: center
+
     margin-top: 0px
     margin-bottom: 0px
     background-color: #f8f8f8
@@ -73,6 +78,7 @@ h2
     font-size: 30
     color: $black
     
+
 #header_text_container
     display: block
     margin-left: auto
@@ -96,10 +102,9 @@ h4
     font-size: 18
     color: $black
     
-.header
-    height: 60px
-    width: 100%
+.header 
     margin-bottom: 50px
+
     background: $red
     // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50)
     top: 0px
@@ -108,6 +113,7 @@ h4
     padding-left: 10px
     padding-right: 10px
     z-index: 99
+
     
 
 ul 
@@ -123,50 +129,36 @@ li
 ul li a 
     font-family: 'Lato', sans-serif
     font-size: 15
-    color: white
+
+li a:hover 
+    color: #009ad3
+    transition: 0.2s
+    
+#details
+    display: none
+    float: right
+    position: absolute
+    right: 20px
+    top: 20px
+    @media screen and (min-width: $break-tablet)
+        display: inline-block
     
 .inline_block
     display: inline-block
 
 #desktop_nav
+    float: right
+    position: absolute
+    left: 20px
+    top: 20px
     display: none
     @media screen and (min-width: $break-tablet)
         display: inline-block
-        position: fixed
-        top: 19px
-        right: 110px
 
-#user_image
-    @media screen and (min-width: $break-phone)
-        display: inline-block
-        border-radius: 50%
-        width: 30px
-        height: 30px
-        background: $grey
-        
-#user_name
-    @media screen and (min-width: $break-phone)
-        display: block
-        margin-left: auto
-        margin-right: auto
-
-#details
-    display: none
-    width: 120px
-    height: 60px
-    @media screen and (min-width: $break-phone)
-        display: inline-block
-        position: fixed
-        top: 5px
-        right: 0px
-  
-#details_dropdown
-    display: none
 
 p 
     font-family: 'Lato', sans-serif
     font-size: 12
-    font-weight: 300
     color: $black
     
 h5 
@@ -181,10 +173,10 @@ a:visited
     text-decoration: none
 
 a:hover 
-    text-decoration: none
+    text-decoration: underline
 
 a:active 
-    text-decoration: none
+    text-decoration: underline
     
 .link
     text-decoration: none

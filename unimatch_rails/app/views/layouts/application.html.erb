@@ -13,9 +13,7 @@
   </head>
   <body>
     <div class="header">
-    <div id="header_text_container">
-    <h1 id="header_text"><%= link_to 'UniMatch', :controller => :user, :action => :show ,  id: session[:user_id] %></h1>
-    </div>
+      <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {id: "unimatch_logo", class: "inline_block"} %>
     <% if session[:user_id] %>
       <div id="nav_trigger">
         <div class="line"></div>
@@ -43,17 +41,13 @@
       </ul>
       </div>
       <div id = "details">
-      <div id = "user_image"></div>
-      <p id="user_name"><%= session[:user_name] %></p>
-      <div id = "details_dropdown">
-      <p> <%= link_to "logout", logout_url %></p>
+      <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %> <%= link_to "logout", logout_url %></p>
       </div>
       </div>
     <% end %>
     <% if flash[:notice] %>
       <div class="notice"><legend><%= flash[:notice] %></legend></div>
     <% end %>
-    </div>
     <div class="container">
     <%= yield %>
     </div>

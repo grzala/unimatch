@@ -15,30 +15,35 @@ Rails.application.routes.draw do
   end
   resources :event
   
-  resources :message
-  
   controller :user do
     get '/user/list' => :list
     post '/user/:id' => :update
     get '/user/match/:id' => :match
     get '/user/choose/:id' => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
-    get 'user/:id/messages' => :messages
   end
   
   resources :user
   
   controller :session do
-    get  'login' => :new
-    post 'login' => :create
-    get 'logout' => :destroy
+    post '/register' => :register
+    get '/register' => :new
   end
   
   root :to => 'welcome#index'
   
   controller :welcome do
-    get '/welcome' => :index
+    post '' => :create
+    get 'logout' => :destroy
   end
+  
+  controller :conversation do
+    get '/conversation/:id' => :show
+    get '/conversation/message/:id' => :message
+    post '/conversation/create_message' => :create_message, :as => :create_message
+  end
+  
+  mount ActionCable.server => '/cable'
 
   
   #match ':controller'(/:action(/:id))', :via => get

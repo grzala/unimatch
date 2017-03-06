@@ -24,6 +24,21 @@
         <strong><%= flash[:warning] %></strong>
       </div>
     <% end %>
+    <div id="nav_bar">
+           <div class="left">
+                <div id="navigation_left" class="navigation_inner nonselect">
+                    <%= link_to 'index', :controller => :welcome do %>
+                        <h3> Home </h3>
+                    <% end %>
+                    <a href="#screen2">
+                        <h3>Features</h3>
+                    </a>
+                    <a href="#">
+                        <h3>About</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
     <%= yield %>
     </body>
 </html>

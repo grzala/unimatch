@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     end
     
   
-    @notifs = User.find(session[:user_id]).get_notifications
+    @notifs = User.find(session[:user_id]).get_notifications.to_json.html_safe
   end
   
 end

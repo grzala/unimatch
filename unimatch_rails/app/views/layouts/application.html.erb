@@ -41,7 +41,7 @@
       </div>
       <div id = "details">
         <p>
-          <a href="#" class="notifications-link">Notifications</a>
+          <a href="" class="notifications-link">Notifications</a>
           You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %> <%= link_to "logout", logout_url %>
         </p>
       </div>
@@ -52,18 +52,11 @@
     <% end %>
     <%= yield %>
     
-    <div class="notifications">
-        <% @notifs.each do |notif| %>
-            <% classes = "notification " %>
-            <% classes += notif.seen ? "seen" : "unseen" %>
-            
-            <a href="<%= notif.link %>">
-                <div class="<%= classes %>">
-                    <p class="information"><%= notif.information %></p>
-                </div>
-            </a>
-        <% end %>
-    </div>
+    <div class="notifications"></div>
+    <!-- list of notifs defined as json in application_controller -->
+    <script>
+      $(".notifications").addNotifications(<%= @notifs %>);
+    </script>
     
   </body>
 </html>

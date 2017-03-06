@@ -86,11 +86,11 @@ ActiveRecord::Schema.define(version: 20170306095632) do
     t.string   "link"
     t.string   "information"
     t.integer  "user_id"
-    t.integer  "message_id"
-    t.boolean  "seen",        default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.index ["message_id"], name: "index_notifications_on_message_id"
+    t.integer  "conversation_id"
+    t.boolean  "seen",            default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.index ["conversation_id"], name: "index_notifications_on_conversation_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 

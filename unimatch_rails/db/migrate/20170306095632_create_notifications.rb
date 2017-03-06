@@ -6,7 +6,7 @@ class CreateNotifications < ActiveRecord::Migration[5.0]
       t.string :information
       
       t.belongs_to :user
-      t.belongs_to :message, :null => true
+      t.belongs_to :conversation, :null => true
       
       t.boolean :seen, :default => false
       

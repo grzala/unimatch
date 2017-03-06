@@ -15,6 +15,10 @@ class WelcomeController < ApplicationController
             session[:user_id] = @current_user.id
             session[:user_name] = @current_user.name
             
+            #####
+            cookies.signed[:user_id] = @current_user.id
+            #####
+            
             user = User.find(session[:user_id])
             interests = user.get_interests
             
@@ -32,6 +36,11 @@ class WelcomeController < ApplicationController
     def destroy
         session[:user_id] = nil
         @current_user = nil
+        
+        #####
+            cookies.signed[:user_id] = nil
+        #####
+        
         redirect_to root_url
     end
     

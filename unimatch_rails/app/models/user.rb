@@ -182,13 +182,23 @@ class User < ApplicationRecord
 		return events
 	end
 	
-	def notify(link, info, msg_id = nil)
+	def notify(link, info, con_id = nil)
+		
+		#if conversation exists, just one notification is needed. this prevents an overflow of notifications
+		if con_id != nil
+			@notifs = Notification.where(user_id: self.id, conversation_id: con_id)
+			@notifs.each {|notif| Notification.destroy(notif.id) }
+		end
+		
 		@notification = Notification.new
 		@notification.link = link
 		@notification.information = info
 		@notification.user_id = self.id
-		@notification.message_id = msg_id
+		@notification.conversation_id = con_id
 		@notification.save
+		
+		
+    	ActionCable.server.broadcast "notification_channel_#{self.id}", {aaaa: "yoyoy"}
 	end
 	
 	private ############################# private methods below ##################################

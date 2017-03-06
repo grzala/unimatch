@@ -24,6 +24,18 @@
         <strong><%= flash[:warning] %></strong>
       </div>
     <% end %>
+    <button id="burger_menu">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      </button>
+      <div id="container" class="container_hidden">
+        <ul id="navigation_mobile">
+        <li><%= link_to 'Home' %></li>
+        <li><%= link_to 'Features'  %></li>
+        <li><%= link_to 'About' %></li>
+      </ul>
+      </div>
     <div id="nav_bar">
            <div class="left">
                 <div id="navigation_left" class="navigation_inner nonselect">

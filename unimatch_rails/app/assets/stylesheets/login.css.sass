@@ -17,6 +17,16 @@ $black: #606060
 $break-phone: 450px
 $break-tablet: 900px
     
+body
+  height: 100%
+  width: 100%
+  background: url("background.jpg") no-repeat center center
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  -ms-background: cover
+  background-size: cover
+    
 .block_centre
   display: block
   margin-left: auto
@@ -37,19 +47,6 @@ $break-tablet: 900px
   margin-bottom: 30px
   @media screen and (min-width: $break-phone)
     margin-top: 30px
-
-body
-  min-height: 100%
-  background: url("background.jpg") no-repeat center center fixed
-  -webkit-background-size: cover
-  -moz-background-size: cover
-  -o-background-size: cover
-  background-size: cover
-    
-.logo
-  display: block
-  margin-left: auto
-  margin-right: auto
     
 #login_title
   display: inline-block
@@ -98,10 +95,11 @@ h2.active
 fieldset 
   border: 0px
   
-.home_logo
-  margin-top: 25px
-  @media screen and (min-width: $break-phone)
-    // margin: 90px auto
+.logo
+  margin-top: 40px
+  margin-left: auto
+  margin-right: auto
+  display: block
     
 .nonselect
   -webkit-user-select: none
@@ -111,6 +109,7 @@ fieldset
 
 #nav_bar
   display: none
+  background-color: transparent
   @media screen and (min-width: $break-tablet)
     display: flex
     padding: 0
@@ -150,3 +149,40 @@ fieldset
     flex-direction: row
     min-width: 150px
     margin-left: 20px
+    
+/* mobile navigation */
+
+#burger_menu
+  display: inline-block
+  float: right
+  position: absolute
+  left: 20px
+  top: 20px
+  @media screen and (min-width: $break-tablet)
+    display: none
+    
+
+.line
+  width: 20px
+  height: 4px
+  background-color: $black
+  margin-bottom: 4px
+        
+.container_hidden
+  height: 200px
+  width: 200px
+  float: left
+  background-color: $red
+  float: left
+  display: none
+    
+.container_show
+  display: block
+  margin-top: 40px
+    
+#navigation_mobile ul
+  list-style-type: none
+  padding: 0
+    
+#navigation_mobile a
+  color: white

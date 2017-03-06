@@ -16,13 +16,13 @@ Rails.application.routes.draw do
   resources :event
   
   controller :user do
+    #match '/user/:name' => 'user#show'
     get '/user/list' => :list
     post '/user/:id' => :update
     get '/user/match/:id' => :match
     get '/user/choose/:id' => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
   end
-  
   resources :user
   
   controller :session do

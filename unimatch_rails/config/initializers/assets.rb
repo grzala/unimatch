@@ -18,5 +18,3 @@ Rails.application.config.assets.precompile += %w( index.css )
 Rails.application.config.assets.precompile += %w( login.js )
 
 Rails.application.config.assets.precompile += %w( login_page.css )
-
-Rails.application.config.assets.precompile += %w( index1.css )

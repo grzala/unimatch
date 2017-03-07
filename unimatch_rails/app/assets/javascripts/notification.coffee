@@ -2,6 +2,7 @@
 window.current_notifs = {}
 
 $.fn.addNotifications = (notifications) ->
+    this.empty()
     window.current_notifs = {}
     $(".notifications-link").click (event)->
         event.preventDefault()

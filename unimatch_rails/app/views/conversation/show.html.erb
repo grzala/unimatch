@@ -23,7 +23,6 @@ number_of messages <%= @msgs.length %>
     
 </div>
     
-    
 
 <%= form_tag create_message_path do %>
     <p> Message: <%= text_field_tag :body, "", :id => "body"%></p>
@@ -42,6 +41,8 @@ number_of messages <%= @msgs.length %>
         sendMessage("<%= create_message_path %>", msg, con_id);
     });
     
+    //the code beneath was not rewritten into coffe files, it needs to be in the view
+    //it uses LAST_MESSAGE_TIME from ruby
     function reloadMessages(id) {
         var url = "/conversation/" + id;
         
@@ -53,7 +54,6 @@ number_of messages <%= @msgs.length %>
 			    render_messages(messages);
 			}
 		});
-    
     }
     
     function render_messages(messages) {
@@ -73,12 +73,9 @@ number_of messages <%= @msgs.length %>
                    "<p>FROM: " + users[message.sender_id]['name'] + " AT: " + message['created_at'] + "</p>" +
                    "<p>" + message.body + "</p><br/><br/>"
                 );
-               
             }
-            
             LAST_MESSAGE_TIME = lastTime;
         }
-        
         scrollMessages()
     }
     

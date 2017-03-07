@@ -4,30 +4,31 @@
     <title>UniMatch</title>
     <%= csrf_meta_tags %>
     <%= favicon_link_tag 'favicon.ico' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-
   <body>
     <div class="header">
       <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {id: "unimatch_logo", class: "inline_block"} %>
     <% if session[:user_id] %>
-      <button id="burger_menu">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      </button>
-      <div id="container" class="container_hidden">
-        <ul id="navigation_mobile">
-        <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %></p>
-        <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
+      <div id="nav_trigger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div id="mySidenav" class="sidenav">
+      <ul id="navigation_mobile">
+        <a href="javascript:void(0)" id="closebtn" >&times;</a>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+        <li><%= link_to 'Messages', :controller => :user, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Societies', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+        <li><%= link_to 'Notifications', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
         <li><%= link_to "logout", logout_url %></li>
-        
       </ul>
       </div>
       <div id="desktop_nav">
@@ -50,6 +51,7 @@
     <% if flash[:notice] %>
       <div class="notice"><legend><%= flash[:notice] %></legend></div>
     <% end %>
+    <div class="container">
     <%= yield %>
     
     <div class="notifications"></div>
@@ -58,5 +60,6 @@
       $(".notifications").addNotifications(<%= @notifs %>);
     </script>
     
+    </div>
   </body>
 </html>

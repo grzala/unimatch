@@ -20,6 +20,14 @@ html
 body
     height: 100%
     
+body:empty .image_box  
+    margin-top: 50px
+    margin-bottom: 50px 
+
+body:empty .text_box  
+    margin-top: 50px
+    margin-bottom: 50px 
+    
 .centered
     text-align: center
     margin: 0 auto
@@ -35,7 +43,7 @@ body
     background-size: cover
     position: relative
     z-index: 50
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2)
     @media screen and (min-width: $break-phone)
         background: url("background.jpg") no-repeat center center fixed
         -webkit-background-size: cover
@@ -54,8 +62,10 @@ body
     width: 100%
     position: absolute
     bottom: 30px
+    display: none
     @media screen and (min-width: $break-tablet)
         margin-top: 17%
+        display: unset
     
 .text-wrapper h1
     font-family: 'Lato', sans-serif
@@ -112,21 +122,11 @@ h2
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
     
 
-.image_box
+#image_box
     margin: 8% 0% 8% 0%
-    // -webkit-margin: 8% 0% 8% 0%
-    // -moz-margin: 8% 0% 8% 0%
-    // -o-margin: 8% 0% 8% 0%
-    // -ms-margin: 8% 0% 8% 0%
-    
-    
-.text_box
+
+#text_box
     margin: 8% 0% 8% 0%
-    // -webkit-margin: 8% 0% 8% 0%
-    // -moz-margin: 8% 0% 8% 0%
-    // -o-margin: 8% 0% 8% 0%
-    // -ms-margin: 8% 0% 8% 0%
-    
 
 .text_box h2
     font-size: 30px
@@ -172,3 +172,6 @@ h2
     display: unset
     @media screen and (min-width: $break-tablet)
         display: none
+
+.home_logo
+    // position: fixed

@@ -12,8 +12,12 @@ class ApplicationController < ActionController::Base
       return
     end
     
-  
-    @notifs = User.find(session[:user_id]).get_notifications.to_json.html_safe
+    @notifs = User.find(session[:user_id]).get_notifications
+    @notifs = @notifs.sort_by { |msg| msg.created_at }
+    #@notifs = @notifs.reverse
+    @notifs = @notifs[0...10]
+    
+    @notifs = @notifs.to_json.html_safe
   end
   
 end

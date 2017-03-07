@@ -4,11 +4,14 @@ $.fn.addNotifications = (notifications) ->
         $(".notifications").toggle()
     
     for i in [0...notifications.length]
-        addNotification(this, notifications[i])
+        this.addNotification(notifications[i])
         
-addNotification = (div, notification) ->
+$.fn.addNotification = (notification) ->
     classes = 'notification '
+    
+    console.log(notification)
     console.log(notification['seen'])
+    
     if notification['seen']
         classes += 'seen'
     else
@@ -22,8 +25,7 @@ addNotification = (div, notification) ->
     
     toAppend += '</div>'
     toAppend += '</a>'
-    div.append(toAppend)
-    
+    this.prepend(toAppend)
     
     return
         

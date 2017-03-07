@@ -10,4 +10,4 @@ jQuery(document).on 'turbolinks:load', ->
       @perform 'notify'
     
     received: (data) ->
-      #no need to do anythying, check conversation.coffee
+      $(".notifications").addNotification(data['notification'])

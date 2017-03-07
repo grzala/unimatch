@@ -12,12 +12,12 @@
  *
  *= require normalize-rails
  *= require jquery-ui
- *= require_tree .
- *= require_self
  *= stub login_page
  *= stub index
  *= require fullcalendar/fullcalendar
  *= stub login
+ *= require_tree .
+ *= require_self
  */
 
 /* colours */
@@ -38,7 +38,6 @@ $break-tablet: 900px
 /* css stuff */ 
 
 
-
 .container
     margin-top: 50px
     margin-bottom: 25px
@@ -52,7 +51,6 @@ $break-tablet: 900px
     @media screen and (min-width: $break-tablet)
         position: relative
         width: 80%
-    
 
 .center
     display: block
@@ -61,11 +59,10 @@ $break-tablet: 900px
     
 fieldset 
     border: 0px
-    
+
 body
     text-align: center
     align-content: center
-
     margin-top: 0px
     margin-bottom: 0px
     background-color: #f8f8f8
@@ -118,8 +115,6 @@ h4
     position: fixed
     padding-top: 10px
     z-index: 99
-
-    
 
 ul 
     list-style-type: none
@@ -212,15 +207,6 @@ a:active
 #header_text a 
     color: white
     transition: color 0.5s
-
-#header_text a:hover
-    color: $black
-    width: 90%
-    margin-left: auto
-    margin-right: auto
-    max-width: 1000px
-    @media screen and (min-width: $break-tablet)
-        width: 75%
         
 #header_text a:hover
     color: $black

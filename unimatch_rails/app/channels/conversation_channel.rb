@@ -18,6 +18,11 @@ class ConversationChannel < ApplicationCable::Channel
     @users.each do |user|
       ActionCable.server.broadcast "conversation_channel_#{user.id}", data
       
+      #no need to notify yourself
+      if current_user.id == user.id
+        next 
+      end
+      
       @senders = ""
       @users.each do |sender|
         if sender.id != user.id #not append the receiver, you know that YOU ARE RECEIPEIENENTNT

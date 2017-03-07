@@ -13,20 +13,22 @@ $.fn.addNotifications = (notifications) ->
     return
         
 $.fn.addNotification = (notification) ->
+    #remove duplicates
+    #we want just one notification for a given conversation
+    children = $(this).children(".notification")
+    for i in [0...children.length]
+        #if already notified
+        if parseInt($(children[i]).attr("conversation_id")) == parseInt(notification['conversation_id'])
+            $(children[i]).remove()
     classes = 'notification '
-    
-    #console.log(notification)
-    #console.log(notification['seen'])
     
     if notification['seen']
         classes += 'seen'
     else
         classes += 'unseen'
     
-    console.log(notification)
-    
     toAppend = ''
-    toAppend += '<div class="' + classes + '" conversation_id="' + notification['con_id'] + '">'
+    toAppend += '<div class="' + classes + '" conversation_id="' + notification['conversation_id'] + '">'
     toAppend += '<a href="' + notification['link'] + '">'
     toAppend += '<div class="notification-wrapper">'
     

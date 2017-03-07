@@ -50,4 +50,14 @@ class Conversation < ApplicationRecord
        @messages = Message.where(conversation_id: self.id)
        return @messages
     end
+    
+    def seen_by(id)
+       @notifs = Notification.where(user_id: id, conversation_id: self.id)
+       
+       @notifs.each do |notif|
+           notif.seen = true
+           notif.save
+       end
+        
+    end
 end

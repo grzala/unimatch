@@ -41,7 +41,10 @@
       </ul>
       </div>
       <div id = "details">
-      <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %> <%= link_to "logout", logout_url %></p>
+        <p>
+          <a href="" class="notifications-link">Notifications</a>
+          You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %> <%= link_to "logout", logout_url %>
+        </p>
       </div>
       </div>
     <% end %>
@@ -50,6 +53,13 @@
     <% end %>
     <div class="container">
     <%= yield %>
+    
+    <div class="notifications"></div>
+    <!-- list of notifs defined as json in application_controller -->
+    <script>
+      $(".notifications").addNotifications(<%= @notifs %>);
+    </script>
+    
     </div>
   </body>
 </html>

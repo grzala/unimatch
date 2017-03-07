@@ -1,5 +1,4 @@
 class UserController < ApplicationController
-  
   before_action :authorize, :only => [:edit, :match, :choose_interests, :delete]
   
   def authorize
@@ -76,6 +75,9 @@ class UserController < ApplicationController
   
   def update_interests
     User.find_by_id(params[:id]).update_interests_by_ids(params[:interests])
+    if request.path != user_path(@user)
+      redirect_to @user, status: :moved_permanently
+    end
     
     redirect_to user_url, :id => params[:id]
   end
@@ -86,7 +88,9 @@ class UserController < ApplicationController
   
   def update
     @user = User.friendly.find(params[:id])
-    
+    if request.path != user_path(@user)
+      redirect_to @user, status: :moved_permanently
+    end
     if @user.update_attributes(user_param)
       redirect_to :action => :list
     end

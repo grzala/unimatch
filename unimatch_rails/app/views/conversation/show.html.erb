@@ -35,31 +35,14 @@ number_of messages <%= @msgs.length %>
 
 <script>
     $('#send_message').click(function(e) {
-        
         e.preventDefault();
         
         var msg = $("#body").val();
         var con_id = $("#conversation_id").val();
-        $.ajax({
-            type: "POST",
-            url: "<%= create_message_path %>",
-            data: {
-                conversation_id: con_id,
-                body: msg
-            },
-            success: function() {
-                App.conversation.message(con_id, msg);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.status);
-                alert(xhr.statusText);
-                alert(xhr.responseText);
-            }
-        })
-        
+        sendMessage("<%= create_message_path %>", msg, con_id);
     });
     
-    function reload_messages(id) {
+    function reloadMessages(id) {
         var url = "/conversation/" + id;
         
 		$.ajax({

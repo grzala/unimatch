@@ -10,4 +10,4 @@ jQuery(document).on 'turbolinks:load', ->
       @perform 'notify'
     
     received: (data) ->
-      $(".notifications").addNotification(data['notification'])
+      $(".notifications").addNotification(JSON.parse(data['notification']))

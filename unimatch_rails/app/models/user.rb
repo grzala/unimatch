@@ -203,7 +203,7 @@ class User < ApplicationRecord
 		@notification.save
 		
 		
-    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: @notification.to_json.html_safe}
+    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: Notification.find(@notification.id).to_json.html_safe}
 	end
 	
 	private ############################# private methods below ##################################

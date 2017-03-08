@@ -2,6 +2,8 @@
 //= require jquery_ujs
 //= require turbolinks
 
+/*
+
 function show_login(e=false) {
 	 	$("#register_form").hide();
 		$("#login_form").fadeIn(100);
@@ -27,10 +29,12 @@ $(document).on('ready turbolinks:load',function(){
 	}, 0)
 	
 })
+*/
 	
 	
 $(document).on('turbolinks:load', function() {
 
+/*
 $(function() {
 
 	    $('#login_title').click(function(e){
@@ -42,5 +46,16 @@ $(function() {
 		});
 
 });
+*/
+
+	/* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+    $("#nav_trigger").click(function(){
+        document.getElementById("mySidenav").style.width = "250px";
+    });
+
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+    $("#closebtn").click(function(){
+        document.getElementById("mySidenav").style.width = "0";
+    });
 
 });

@@ -47,6 +47,9 @@
       <p id="user_name"><%= session[:user_name] %></p>
       <div id = "details_dropdown">
       <p> <%= link_to "logout", logout_url %></p>
+        <p>
+          <a href="" class="notifications-link">Notifications</a>
+        </p>
       </div>
       </div>
     <% end %>
@@ -55,6 +58,13 @@
     <% end %>
     <div class="container">
     <%= yield %>
+    
+    <div class="notifications"></div>
+    <!-- list of notifs defined as json in application_controller -->
+    <script>
+      $(".notifications").addNotifications(<%= @notifs %>);
+    </script>
+    
     </div>
   </body>
 </html>

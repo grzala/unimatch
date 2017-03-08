@@ -11,7 +11,5 @@ jQuery(document).on 'turbolinks:load', ->
             @perform 'message', conversation_id: conversation_id
             
         received: (data) -> 
-            if CON_ID != null and parseInt(data["conversation_id"]) == CON_ID
-                reload_messages(data["conversation_id"])
-        
-    
+            if CON_ID? and parseInt(data["conversation_id"]) == CON_ID
+                reloadMessages(data["conversation_id"])

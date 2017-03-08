@@ -182,6 +182,30 @@ class User < ApplicationRecord
 		return events
 	end
 	
+	def get_notifications
+		@notifs = Notification.where(user_id: self.id)
+		return @notifs
+	end
+	
+	def notify(link, info, con_id = nil)
+		
+		#if conversation exists, just one notification is needed. this prevents an overflow of notifications
+		if con_id != nil
+			@notifs = Notification.where(user_id: self.id, conversation_id: con_id)
+			@notifs.each {|notif| Notification.destroy(notif.id) }
+		end
+		
+		@notification = Notification.new
+		@notification.link = link
+		@notification.information = info
+		@notification.user_id = self.id
+		@notification.conversation_id = con_id
+		@notification.save
+		
+		
+    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: Notification.find(@notification.id).to_json.html_safe}
+	end
+	
 	private ############################# private methods below ##################################
 	
 	def password_must_be_present

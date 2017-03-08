@@ -1,4 +1,7 @@
 class ConversationChannel < ApplicationCable::Channel
+  
+  include Rails.application.routes.url_helpers
+  
   def subscribed
      stream_from "conversation_channel_#{current_user.id}"
   end
@@ -14,6 +17,21 @@ class ConversationChannel < ApplicationCable::Channel
     
     @users.each do |user|
       ActionCable.server.broadcast "conversation_channel_#{user.id}", data
+      
+      #no need to notify yourself
+      if current_user.id == user.id
+        next 
+      end
+      
+      @senders = ""
+      @users.each do |sender|
+        if sender.id != user.id #not append the receiver, you know that YOU ARE RECEIPEIENENTNT
+          @senders += sender.name + " " + sender.surname + ", "
+        end
+      end
+      @senders = @senders[0...-2]
+      
+      user.notify(conversation_path(:id => @conversation.id), "You received a message from: " + @senders, @conversation.id)
     end
     
   end

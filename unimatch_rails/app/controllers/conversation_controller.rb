@@ -22,6 +22,8 @@ class ConversationController < ApplicationController
         
         @message = Message.new()
         
+        @con.seen_by(session[:user_id])
+        
 		respond_to do |format|
 			format.html { 
 			    

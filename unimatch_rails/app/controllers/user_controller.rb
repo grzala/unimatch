@@ -6,6 +6,11 @@ class UserController < ApplicationController
     if session[:user_id] != params[:id].to_i then redirect_to :root end
   end
   
+  def index
+    @user = User.find(session[:user_id])
+    @notifs = Notification.where(user_id: @user.id)
+  end
+  
   def list
     @users = User.all
   end

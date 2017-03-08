@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170306095632) do
 
   create_table "billing_histories", force: :cascade do |t|
@@ -74,12 +75,11 @@ ActiveRecord::Schema.define(version: 20170306095632) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "body"
-    t.boolean  "read",            default: false
+    t.boolean  "read",         default: false
     t.integer  "sender_id"
-    t.integer  "conversation_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "notifications", force: :cascade do |t|

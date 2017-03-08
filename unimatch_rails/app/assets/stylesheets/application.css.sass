@@ -37,7 +37,6 @@ $break-tablet: 900px
 
 /* css stuff */ 
 
-
 .container
     margin-top: 50px
     margin-bottom: 25px
@@ -45,12 +44,10 @@ $break-tablet: 900px
     width: 100%
     max-width: 1000px
     background: white
-    box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.50)
     top: 0px
-    position: absolute
     @media screen and (min-width: $break-tablet)
-        position: relative
         width: 80%
+        box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.50)
 
 .center
     display: block
@@ -63,8 +60,8 @@ fieldset
 body
     text-align: center
     align-content: center
-    margin-top: 0px
-    margin-bottom: 0px
+    margin: 0
+    padding: 0
     background-color: #f8f8f8
     
     
@@ -87,9 +84,9 @@ h2
     margin-left: auto
     margin-right: auto
     position: relative
-    top: -25px
+    top: -20px
     @media screen and (min-width: $break-tablet)
-        // position: fixed
+        position: absolute
         top: -10px
         left: 35px
 
@@ -108,12 +105,14 @@ h4
 .header 
     height: 60px
     width: 100%
-    // margin-bottom: 50px
+    margin-bottom: 50px
     background: $red
     // box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50)
     top: 0px
     // position: fixed
     padding-top: 10px
+    padding-left: 10px
+    padding-right: 10px
     z-index: 99
 
 ul 
@@ -138,18 +137,18 @@ ul li a
     display: none
     @media screen and (min-width: $break-tablet)
         display: inline-block
-        position: fixed
+        position: absolute
         top: 19px
         right: 110px
         
 #details
     display: none
-    float: right
-    position: absolute
-    right: 35px
-    top: 5px
     @media screen and (min-width: $break-tablet)
         display: inline-block
+        float: right
+        position: absolute
+        right: 35px
+        top: 5px
         
 #user_image
     @media screen and (min-width: $break-phone)
@@ -193,12 +192,6 @@ a:link
 
 a:visited 
     text-decoration: none
-
-a:hover 
-    text-decoration: underline
-
-a:active 
-    text-decoration: underline
     
 .link
     text-decoration: none
@@ -215,7 +208,7 @@ a:active
 
 #burger_menu
     display: inline-block
-    position: fixed
+    position: absolute
     left: 15px
     top: 20px
     cursor: pointer
@@ -242,7 +235,7 @@ a:active
     margin-right: auto
 
 #nav_trigger
-    position: fixed
+    position: absolute
     top: 20px
     left: 15px
     width: 30px

@@ -24,15 +24,15 @@ html
 #screen1
     height: 100%
     width: 100%
-    //background: url("background.jpg") no-repeat center center
-    //-webkit-background-size: cover
-    //-moz-background-size: cover
-    //-o-background-size: cover
-    //-ms-background: cover
+    background: url("background.jpg") no-repeat center center
+    -webkit-background-size: cover
+    -moz-background-size: cover
+    -o-background-size: cover
+    -ms-background: cover
     background-color: transparent
-    //position: relative
+    position: relative
     z-index: 50
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)
     @media screen and (min-width: $break-tablet)
         height: calc(100% - 54px)
     
@@ -48,6 +48,7 @@ html
     width: 100%
     position: absolute
     bottom: 30px
+    display: none
     @media screen and (min-width: $break-tablet)
         margin-top: 17%
     

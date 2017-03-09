@@ -79,14 +79,6 @@ body:empty .text_box
     cursor: default
     
 
-.right
-    display: flex
-    flex-direction: row-reverse
-    @media screen and (min-width: $break-tablet)
-        display: flex
-        flex-direction: row-reverse
-        min-width: 250px
-        margin-right: 20px
     
 .feature
     width: 300px
@@ -122,10 +114,10 @@ h2
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
     
 
-#image_box
+.image_box
     margin: 8% 0% 8% 0%
 
-#text_box
+.text_box
     margin: 8% 0% 8% 0%
 
 .text_box h2
@@ -172,6 +164,3 @@ h2
     display: unset
     @media screen and (min-width: $break-tablet)
         display: none
-
-.home_logo
-    // position: fixed

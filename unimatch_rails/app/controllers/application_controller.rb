@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   #connect to algorithm
   include Connect
   
-  before_filter :get_notifications
+  before_action :get_notifications
   
   
   def get_notifications

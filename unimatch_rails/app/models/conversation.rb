@@ -18,11 +18,19 @@ class Conversation < ApplicationRecord
     
     def Conversation.create_between(user1, user2)
         @con = Conversation.create
-        
-        Recipient.create(user_id: user1.id, conversation_id: @con.id)
-        Recipient.create(user_id: user2.id, conversation_id: @con.id)
+        @con.add_user(user1)
+        @con.add_user(user2)
         
         return @con
+    end
+    
+    def add_user(user1)
+       Recipient.create(user_id: user1.id, conversation_id: self.id) 
+    end
+    
+    def remove_user(user1)
+        @r = Recipient.find_by_user_id_and_conversation_id(user1.id, self.id)
+        if @r then Recipient.destroy(@r) end
     end
     
     def get_users

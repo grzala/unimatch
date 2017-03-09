@@ -30,7 +30,18 @@ class Conversation < ApplicationRecord
     
     def remove_user(user1)
         @r = Recipient.find_by_user_id_and_conversation_id(user1.id, self.id)
-        if @r then Recipient.destroy(@r) end
+        if @r then Recipient.destroy(@r.id) end
+    end
+    
+    def send_message(user1, body)
+        if !is_member?(user1)
+            return nil
+        end
+        @msg = Message.new(sender_id: user1.id, conversation_id: self.id, body: body)
+        
+        if !@msg.save then return nil end
+        
+        return @msg
     end
     
     def get_users
@@ -42,6 +53,10 @@ class Conversation < ApplicationRecord
         end
         
         return @users
+    end
+    
+    def get_members
+        return get_users
     end
     
     def is_member?(user1)

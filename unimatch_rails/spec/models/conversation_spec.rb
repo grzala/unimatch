@@ -40,8 +40,35 @@ RSpec.describe Conversation, type: :model do
         expect(users1).to match_array(users3)
         expect(users3).not_to include(@user3)
         expect(@conversation.is_member? @user3).not_to be
-        
     end
     
+    it "relays messages between users" do
+        #send messages
+        message1 = "sent from user1"
+        message2 = "sent from user2"
+        @conversation.send_message(@user1, message1)
+        @conversation.send_message(@user2, message2)
+        expect(@conversation.get_messages.length).to eq(2)
+        expect(@conversation.get_messages.map {|message| message.body}).to include(message1)
+        expect(@conversation.get_messages.map {|message| message.body}).to include(message2)
+        
+        
+        #cannot message if not member of conversation
+        @initial_messages = @conversation.get_messages
+        message3 = "sent from user 3"
+        @msg = @conversation.send_message(@user3, message3)
+        expect(@msg).to eq(nil)
+        expect(@initial_messages).to match_array(@conversation.get_messages)
+        expect(@conversation.get_messages.map {|message| message.body}).not_to include(message3)
+        
+        #add as member and send message
+        @conversation.add_user(@user3)
+        @msg = @conversation.send_message(@user3, message3)
+        expect(@msg).to be
+        expect(@initial_messages).not_to match_array(@conversation.get_messages)
+        expect(@conversation.get_messages).to include(@msg)
+        expect(@conversation.get_messages.map {|message| message.body}).to include(message3)
+        
+    end
     
 end

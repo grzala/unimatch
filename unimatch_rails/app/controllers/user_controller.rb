@@ -44,6 +44,7 @@ class UserController < ApplicationController
     
     @events_json = @events_json.to_json.html_safe
     
+    @image_url = @user.avatar_url(:display)
   end
   
   def new

@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
 	
 	def User.encrypt_password(password, salt)
-	Digest::SHA2.hexdigest(password + "wibble" + salt)
+		Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end
 	
 	

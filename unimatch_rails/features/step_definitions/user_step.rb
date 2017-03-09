@@ -1,5 +1,5 @@
 When(/^I click register$/) do
-  click_link("register");
+  find('#register').click
 end
 
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |input, value|
@@ -7,7 +7,7 @@ When(/^I fill in "(.*?)" with "(.*?)"$/) do |input, value|
 end
 
 When(/^submit register form$/) do
-  click_button("Signup")
+  find('#register').click
 end
 
 Then(/^I should see the welcome message for "(.*?)"$/) do |usr|
@@ -18,11 +18,10 @@ When(/^I log in as "(.*?)" "(.*?)"$/) do |name, pass|
   fill_in("email", :with => name)
   fill_in("password", :with => pass)
   click_button("login")
-
 end
 
 When(/^I click logout$/) do
-  click_link("logout")
+  first("#logout").click
 end
 
 Then(/^I should see the message "(.*?)"$/) do |message|
@@ -34,6 +33,16 @@ Then(/^I should not see the message "(.*?)"$/) do |message|
 end
 
 Then(/^I should see the logout link$/) do 
-  page.should have_content("logout")
-  expect(find_link('logout').visible?).to be
+  #more than one logout link (because mobile)
+  logouts = page.all('a#logout')
+  
+  #at least one visible
+  visible = false
+  logouts.each do |logout|
+    if logout.visible?
+      visible = true
+      break
+    end
+  end
+  expect(visible).to be
 end

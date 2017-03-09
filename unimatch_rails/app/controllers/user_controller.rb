@@ -57,7 +57,7 @@ class UserController < ApplicationController
     
     if @user.save
       flash[:success] = "Account created successfuly. Please log in."
-      redirect_to :controller => :session, :action => :new
+      redirect_to root_path
     elsif (:password) != (:password_confirmation)
       flash[:warning] = "Passwords are different"
       puts flash[:warning]

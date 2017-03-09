@@ -19,6 +19,9 @@ RSpec.describe Conversation, type: :model do
     it "can get users" do
         users = @conversation.get_users 
         expect(users).to match_array([@user2, @user1]) #order should not be important
+        
+        expect(@conversation.is_member? @user1).to be
+        expect(@conversation.is_member? @user2).to be
     end
     
     it "can add and remove users" do
@@ -28,6 +31,7 @@ RSpec.describe Conversation, type: :model do
         
         expect(users1).not_to match_array(users2)
         expect(users2).to include(@user3)
+        expect(@conversation.is_member? @user3).to be
         expect(users1.length).to eq(users2.length-1)
         
         
@@ -35,6 +39,7 @@ RSpec.describe Conversation, type: :model do
         users3 = @conversation.get_users
         expect(users1).to match_array(users3)
         expect(users3).not_to include(@user3)
+        expect(@conversation.is_member? @user3).not_to be
         
     end
     

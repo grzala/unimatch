@@ -1,31 +1,50 @@
-<div class="row">
-<div class="col-md-8">
-    <% if session[:user_id] == @user.id %>
-    <h2>Your Account Details</h2>
-    <%= image_tag @user.avatar_url(:display), :class => "user_image" %>
-    <p><%= @user.name %></p>
-    <p><%= @user.surname %></p>
-    <p><%= @user.email %></p>
-    <p><%= link_to 'Edit these details', controller: 'user', action: 'edit', id: @user.id %></p>
-    <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.id %></p>
-    <% end %>
+<div class="row" id="user_info">
+<div class="col-md-2">
+    <%= image_tag @user.avatar_url(:display), :id => "profile_image" %>
     <% if session[:user_id] != @user.id %>
         <p><%= @user.name %></p>
         <p><%= @user.surname %></p>
         <%= image_tag @user.avatar_url(:display), :class => "user_image" %>
         <p><%= link_to 'Message me', controller: 'conversation', action: 'message', id: @user.id %></p>
     <% end %>
-<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
-    <div id='calendar'>
+</div>
+<div class="col-md-3">
+    <div class="left" id="user_details">
+    <h2 class="inline_block"><%= @user.name %></h2>
+    <p class="inline_block">University of Aberdeen</p>
+    <% if false %>
+    <% if session[:user_id] == @user.id %>
+    <p><%= @user.surname %></p>
+    <p><%= @user.email %></p>
+    <p><%= link_to 'Edit these details', controller: 'user', action: 'edit', id: @user.id %></p>
+    <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.id %></p>
+    <% end %>
+    <% end %>
     </div>
 </div>
+<div class="col-md-3">
+    <div class="left" id="percentage">
+    <p>Percentage Match:</p>
+    </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-8">
+    <h4 class="left">Similar Interests</h4>
 </div>
 <div class="col-md-4">
     <h4>Attending Events</h4>
     <h4>In Societies</h4>
 </div>
 </div>
-    
+<div class="row">
+<div class="col-md-8">
+<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
+    <div id='calendar'>
+    </div>
+</div>
+</div>
+</div>   
 <script>
 $(document).ready(function() {
 

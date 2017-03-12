@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* colours */
+
+$primary-color: white
+$red: #FF6868
+$blue: #3B579D
+$grey: #D8D8D8
+$black: #606060
+
+/* media queries breakpoints */
+
+$break-phone: 450px
+$break-tablet: 900px
 
 .normal_match
     color: #6eb8d3
@@ -15,3 +27,35 @@
 .user_image
     width: 150px
     height: 150px
+    
+#user_image
+    display: inline-block
+    border-radius: 50%
+    width: 30px
+    height: 30px
+    background: $grey
+    
+    
+#profile_image
+    display: inline-block
+    border-radius: 50%
+    width: 100%
+    max-width: 150px
+    border: 1px solid #979797
+    float: left
+    
+.left
+    text-align: left
+    
+#user_details
+    @media screen and (min-width: $break-tablet)
+    position: relative
+    top: 20px
+    
+#percentage
+    @media screen and (min-width: $break-tablet)
+    position: relative
+    top: 82px
+    
+#user_info
+    margin-bottom: 30px

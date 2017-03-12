@@ -48,14 +48,23 @@ $break-tablet: 900px
     text-align: left
     
 #user_details
-    @media screen and (min-width: $break-tablet)
     position: relative
+    left: 20px
+    @media screen and (min-width: $break-tablet)
+    left: 0px
     top: 20px
     
 #percentage
-    @media screen and (min-width: $break-tablet)
     position: relative
+    left: 20px
+    @media screen and (min-width: $break-tablet)
+    left: 0px
     top: 82px
     
 #user_info
     margin-bottom: 30px
+    
+.inline_block_user
+    display: block
+    @media screen and (min-width: $break-tablet)
+        display: inline-block

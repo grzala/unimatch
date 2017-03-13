@@ -77,7 +77,13 @@ class Conversation < ApplicationRecord
     def get_messages_limit(from, to)
         @msgs = Message.where(conversation_id: self.id).order(created_at: :desc).limit(to).offset(from)
         
-        return @msgs.reverse
+        return @msgs
+    end
+    
+    def get_messages_newer(date)
+        @msgs = Message.where("conversation_id == ? AND created_at > ?", self.id, date).order(created_at: :desc)
+        
+        return @msgs
     end
     
     def seen_by(id)

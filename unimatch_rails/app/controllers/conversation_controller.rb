@@ -37,12 +37,22 @@ class ConversationController < ApplicationController
     def get_messages
         @con = Conversation.find(params[:id])
         
-        @msgs = @con.get_messages_limit(params[:from], params[:to])
+        @msgs = []
+        
+        if (params[:last].nil?)
+            @msgs = @con.get_messages_limit(params[:from], params[:to])
+        else
+            time = params[:last].to_f / 1000.0
+            puts time
+            time = Time.at(time)
+            puts "PARAMS LAST: " + time.to_s
+            @msgs = @con.get_messages_newer(time)
+        end
         
         @users = {}
         
         @con.get_users.each do |u|
-            @users[u.id] = User.find(u)
+            @users[u.id] = User.find(u.id)
         end
         
         @temp = []

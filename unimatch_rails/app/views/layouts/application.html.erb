@@ -30,7 +30,7 @@
         <li><%= link_to 'Societies', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Notifications', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
-        <li><%= link_to "logout", logout_url %></li>
+        <li><%= link_to "logout", logout_url, id: 'logout' %></li>
       </ul>
       </div>
       <div id="desktop_nav">
@@ -46,12 +46,12 @@
       <div id = "user_image"></div>
       <p id="user_name"><%= session[:user_name] %></p>
       <div id = "details_dropdown">
-      <p> <%= link_to "logout", logout_url %></p>
+        <p> <%= link_to "logout", logout_url, id: 'logout' %></p>
         <p>
           <a href="" class="notifications-link">Notifications</a>
         </p>
       </div>
-      </div>
+    </div>
     <% end %>
     <% if flash[:notice] %>
       <div class="notice"><legend><%= flash[:notice] %></legend></div>

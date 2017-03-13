@@ -13,15 +13,14 @@ number_of messages <%= @msgs.length %>
 <br/><br/>
 
 <div class="messages">
-    <% @msgs.each do |msg| %>
-    
-        <p>FROM: <%= @users[msg.sender_id].name %> AT: <%= msg.created_at %></p>
-        <p><%= msg.body %></p>
-        
-        <br/><br/>
-    <% end %>
     
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('.messages').messages(CON_ID);
+    })
+</script>
     
 
 <%= form_tag create_message_path do %>

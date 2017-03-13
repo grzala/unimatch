@@ -37,7 +37,27 @@ class ConversationController < ApplicationController
     def get_messages
         @con = Conversation.find(params[:id])
         
-        @msgs = @con.get_messages
+        @msgs = @con.get_messages_limit(params[:from], params[:to])
+        
+        @users = {}
+        
+        @con.get_users.each do |u|
+            @users[u.id] = User.find(u)
+        end
+        
+        @temp = []
+        @msgs.each do |msg|
+            m = {}
+            m[:body] = msg.body
+            @temp << m
+        end
+        @msgs = @temp
+        
+        respond_to do |format|
+            format.json {
+                render json: @msgs.to_json.html_safe
+            }
+        end
     end
     
     #messaging view - create conversation and redirect to show

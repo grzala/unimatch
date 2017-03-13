@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     get '/conversation/:id' => :show, :as => :conversation
     get '/conversation/message/:id' => :message
     post '/conversation/create_message' => :create_message, :as => :create_message
+    post '/message' => :get_messages
   end
   
   controller :notification do

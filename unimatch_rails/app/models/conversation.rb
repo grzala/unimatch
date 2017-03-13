@@ -74,6 +74,12 @@ class Conversation < ApplicationRecord
        return @messages
     end
     
+    def get_messages_limit(from, to)
+        @msgs = Message.where(conversation_id: self.id).order(created_at: :desc).limit(to).offset(from)
+        
+        return @msgs
+    end
+    
     def seen_by(id)
        @notifs = Notification.where(user_id: id, conversation_id: self.id)
        

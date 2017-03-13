@@ -44,6 +44,8 @@ class UserController < ApplicationController
     
     @events_json = @events_json.to_json.html_safe
     
+    @in_societies = @user.get_societies
+    
   end
   
   def new

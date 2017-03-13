@@ -1,31 +1,51 @@
 /* global $ */
 
 var loadMore = false
+var current_notif = 0
+var NOTIF_SET = 10
 
 $.fn.addNotifications = function(notifications) {
+    //prepare
     this.empty();
     loadMore = false
     
-    requestNotifications();
+    //get notifications by ajax
+    this.append('<div class="notifications-wrapper"></div>')
+    requestNotifications(current_notif, current_notif + NOTIF_SET);
+    current_notif += NOTIF_SET
     
-    window.current_notifs = {};
+    //link
     $(".notifications-link").click(function(event) {
         event.preventDefault();
         $(".notifications").toggle();
+        $(".notifications").css("left", event.pageX - $(".notifications").width())
+        $(".notifications").css("top", event.pageY)
     });
-
+    
+    //hide
+    $(document).click(function(event) {
+        var container = $("notifications");
+    
+        if (!container.is(event.target) && container.has(event.target).length === 0) {
+            container.hide();
+        }
+    });
         
-    this.append("<div><p>LOADING ICON </p></div>");
+    //loading icon
+    this.append('<div><img class="loading-icon" src="/assets/loading.png" /></div>');
     
-    this.scrollNotifs();
-    
+    //scroll listener
     this.scroll(function() {
         if (loadMore && $(this).scrollTop() + $(this).innerHeight() >= $(this).prop("scrollHeight" ) - 30) {
             console.log("load more");
+            requestNotifications(current_notif, NOTIF_SET)
+            current_notif += NOTIF_SET
             loadMore = false;
         }
     });
 
+    //scroll to top
+    this.scrollNotifs();
     
     return;
 };
@@ -68,18 +88,18 @@ $.fn.scrollNotifs = function() {
     this.scrollTop(0);
 };
 
-function requestNotifications() {
+function requestNotifications(from, to) {
 	$.ajax({
 		type: 'POST',
 		url: '/notification',
 		dataType: "json",
 		data: {
-		  from: 0,
-		  to: 10,
+		  from: from,
+		  to: to,
 		},
 		success: function(data) {    
 		    for (var i = 0; i < data.length; i++) {
-                $('.notifications').prepend(makeNotif(data[i]));
+                $('.notifications .notifications-wrapper').append(makeNotif(data[i]));
             }
             loadMore = true;
 		}

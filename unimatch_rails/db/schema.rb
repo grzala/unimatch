@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306125850) do
+ActiveRecord::Schema.define(version: 20170313162900) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20170306125850) do
     t.datetime "updated_at",      null: false
     t.string   "avatar"
     t.string   "slug"
+    t.index ["slug"], name: "index_users_on_slug"
   end
 
 end

@@ -5,8 +5,8 @@
     <p><%= @user.name %></p>
     <p><%= @user.surname %></p>
     <p><%= @user.email %></p>
-    <p><%= link_to 'Edit these details', controller: 'user', action: 'edit', id: @user.id %></p>
-    <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.id %></p>
+    <p><%= link_to 'Edit these details', controller: 'user', action: 'edit', id: @user.slug %></p>
+    <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.slug %></p>
     <% end %>
     <% if session[:user_id] != @user.id %>
         <p><%= @user.name %></p>

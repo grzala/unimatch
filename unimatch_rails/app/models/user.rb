@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 	extend FriendlyId
-	friendly_id :name, use: :slugged
+	friendly_id :name, use: [:slugged, :history]
 	has_many :messages
 	has_many :members
 	has_many :societies, :through => :members
@@ -30,9 +30,9 @@ class User < ApplicationRecord
 	Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end
 
-	def should_generate_new_friendly_id?
-    	new_record?
-	end
+	#def should_generate_new_friendly_id?
+    #	new_record?
+	#end
 	
 	def mailboxer_email(object)
  

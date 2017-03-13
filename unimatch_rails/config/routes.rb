@@ -43,6 +43,11 @@ Rails.application.routes.draw do
     post '/conversation/create_message' => :create_message, :as => :create_message
   end
   
+  controller :notification do
+    post '/notification' => :get_notifications
+    
+  end
+  
   mount ActionCable.server => '/cable'
 
   

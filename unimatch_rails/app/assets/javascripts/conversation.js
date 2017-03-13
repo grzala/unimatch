@@ -14,7 +14,7 @@ window.sendMessage = (url, msg, con_id) ->
             conversation_id: con_id
             body: msg
         },
-        success: (data) ->
+        success: () ->
             App.conversation.message(con_id, msg)
         
         error: (xhr, ajaxOptions, thrownError) ->

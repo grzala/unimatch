@@ -48,7 +48,11 @@ class ConversationController < ApplicationController
         @temp = []
         @msgs.each do |msg|
             m = {}
+            sender = @users[msg.sender_id]
             m[:body] = msg.body
+            m[:sender] = sender.name + " " + sender.surname
+            m[:sender_id] = sender.id
+            m[:date] = msg.created_at
             @temp << m
         end
         @msgs = @temp

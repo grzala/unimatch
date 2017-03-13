@@ -77,7 +77,7 @@ class Conversation < ApplicationRecord
     def get_messages_limit(from, to)
         @msgs = Message.where(conversation_id: self.id).order(created_at: :desc).limit(to).offset(from)
         
-        return @msgs
+        return @msgs.reverse
     end
     
     def seen_by(id)

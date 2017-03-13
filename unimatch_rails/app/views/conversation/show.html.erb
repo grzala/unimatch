@@ -23,7 +23,7 @@ number_of messages <%= @msgs.length %>
 </script>
     
 
-<%= form_tag create_message_path do %>
+<% form_tag create_message_path do %>
     <p> Message: <%= text_field_tag :body, "", :id => "body"%></p>
     <%= hidden_field_tag :conversation_id,  @con.id, :id => "conversation_id" %>
     
@@ -32,13 +32,6 @@ number_of messages <%= @msgs.length %>
 <% end %>
 
 <script>
-    $('#send_message').click(function(e) {
-        e.preventDefault();
-        
-        var msg = $("#body").val();
-        var con_id = $("#conversation_id").val();
-        sendMessage("<%= create_message_path %>", msg, con_id);
-    });
     
     //the code beneath was not rewritten into coffe files, it needs to be in the view
     //it uses LAST_MESSAGE_TIME from ruby

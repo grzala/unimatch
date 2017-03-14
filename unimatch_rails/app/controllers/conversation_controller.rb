@@ -37,7 +37,41 @@ class ConversationController < ApplicationController
     def get_messages
         @con = Conversation.find(params[:id])
         
-        @msgs = @con.get_messages
+        @msgs = []
+        
+        if (params[:last].nil?)
+            @msgs = @con.get_messages_limit(params[:from], params[:to])
+        else
+            time = params[:last].to_f / 1000.0
+            puts time
+            time = Time.at(time)
+            puts "PARAMS LAST: " + time.to_s
+            @msgs = @con.get_messages_newer(time)
+        end
+        
+        @users = {}
+        
+        @con.get_users.each do |u|
+            @users[u.id] = User.find(u.id)
+        end
+        
+        @temp = []
+        @msgs.each do |msg|
+            m = {}
+            sender = @users[msg.sender_id]
+            m[:body] = msg.body
+            m[:sender] = sender.name + " " + sender.surname
+            m[:sender_id] = sender.id
+            m[:date] = msg.created_at
+            @temp << m
+        end
+        @msgs = @temp
+        
+        respond_to do |format|
+            format.json {
+                render json: @msgs.to_json.html_safe
+            }
+        end
     end
     
     #messaging view - create conversation and redirect to show

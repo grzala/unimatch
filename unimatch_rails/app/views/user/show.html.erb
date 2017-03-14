@@ -54,12 +54,15 @@ $(document).ready(function() {
 });
 </script>
 
-<!--
-[
-	{
-		'title': 'Click for Google \n description and crap',
-		url: 'http://google.com/',
-		start: '2017-02-21T23:30:00',
-	},
-]
--->
+<% if !@con.nil? %>
+    <div class="messages">
+        
+    </div>
+    
+    <script>
+        var CON_ID = <%= @con.id %>
+        $(document).ready(function() {
+            $('.messages').messages(CON_ID);
+        })
+    </script>
+<% end %>

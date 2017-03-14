@@ -1,5 +1,39 @@
 class Conversation < ApplicationRecord
     
+    #this is different
+    #i don't know how
+    #dont delete, i need to revisit this
+    def Conversation.get_conversation_between(user1, user2)
+        @conversations1 = Recipient.where(user_id: user1.id)
+        @conversations2 = Recipient.where(user_id: user2.id)
+        
+        @cons = []
+        
+        for i in 0...@conversations1.length do
+            for j in 0...@conversations2.length do
+                if @conversations1[i].conversation_id == @conversations2[j].conversation_id
+                    @cons << Conversation.find(@conversations1[i].conversation_id)
+                end
+            end
+        end
+        
+        @con = nil
+        #find JUST for these two guys
+        @cons.each do |con| 
+            if con.get_users.length == 2
+                @con = con
+                break
+            end
+        end
+       
+        if @con.nil?
+            @con = Conversation.create_between(user1, user2)
+        end
+        
+        return @con
+        
+    end
+    
     #if nothing is found, create a conversation
     def Conversation.find_conversation(user1, user2)
         @conversations1 = Recipient.where(user_id: user1.id)
@@ -72,6 +106,19 @@ class Conversation < ApplicationRecord
     def get_messages
        @messages = Message.where(conversation_id: self.id)
        return @messages
+    end
+    
+    def get_messages_limit(from, to)
+        count = to.to_i - from.to_i
+        @msgs = Message.where(conversation_id: self.id).order(created_at: :desc).limit(count).offset(from)
+        
+        return @msgs
+    end
+    
+    def get_messages_newer(date)
+        @msgs = Message.where("conversation_id == ? AND created_at > ?", self.id, date).order(created_at: :desc)
+        
+        return @msgs
     end
     
     def seen_by(id)

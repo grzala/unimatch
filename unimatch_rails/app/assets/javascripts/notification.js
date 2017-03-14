@@ -12,7 +12,6 @@ $.fn.addNotifications = function(notifications) {
     //get notifications by ajax
     this.append('<div class="notifications-wrapper"></div>');
     requestNotifications(current_notif, current_notif + NOTIF_SET);
-    current_notif += NOTIF_SET;
     
     //link
     $(".notifications-link").click(function(event) {
@@ -37,9 +36,7 @@ $.fn.addNotifications = function(notifications) {
     //scroll listener
     this.scroll(function() {
         if (loadMore && $(this).scrollTop() + $(this).innerHeight() >= $(this).prop("scrollHeight") - 30) {
-            console.log("load more");
-            requestNotifications(current_notif, NOTIF_SET);
-            current_notif += NOTIF_SET;
+            requestNotifications(current_notif, current_notif + NOTIF_SET);
             loadMore = false;
         }
     });
@@ -100,6 +97,7 @@ function requestNotifications(from, to) {
 		success: function(data) {    
 		    for (var i = 0; i < data.length; i++) {
                 $('.notifications .notifications-wrapper').append(makeNotif(data[i]));
+                current_notif++;
             }
             loadMore = true;
 		}

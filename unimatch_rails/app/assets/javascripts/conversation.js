@@ -26,7 +26,6 @@ $.fn.messages = function(con_id){
     });
     
     requestMessages(currentMessage, currentMessage + messagePortion, con_id);
-    currentMessage += messagePortion
     
     
     //scroll listener
@@ -35,8 +34,6 @@ $.fn.messages = function(con_id){
     messageBox.scroll(function() {
         if (loadMore && messageBox.scrollTop() <= 20) {
             requestMessages(currentMessage, currentMessage + messagePortion, con_id)
-            currentMessage += messagePortion
-            
             loadMore = false
         }
     });
@@ -60,6 +57,8 @@ function requestMessages(from, to, con_id) {
 		    for (var i = 0; i < data.length; i++) {
 		        var msg = makeMessage(data[i]);
                 $('.messages .messages-container').prepend(msg);
+                currentMessage++
+                
                 if (LAST_MESSAGE_TIME == null && i+1 == data.length) {
                     LAST_MESSAGE_TIME = msg.created_at
                 }
@@ -146,8 +145,9 @@ function reloadMessages(id) {
                 //Date is compared in SQL Query. Query does not have milliseconcs accuracy, so it is double checked here.
                 //Fail to do it and you will add copies of the same message a few times.
                 if (date.getTime() > LAST_MESSAGE_TIME) {
-                   $('.messages .messages-container').append(makeMessage(data[i]));
-                   lastTime = date.getTime();
+                    $('.messages .messages-container').append(makeMessage(data[i]));
+                    currentMessage++
+                    lastTime = date.getTime();
                 }
             }
             LAST_MESSAGE_TIME = lastTime;

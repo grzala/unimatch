@@ -8,9 +8,10 @@ class NotificationController < ActionController::Base
         @user = User.find(session[:user_id])
         
         from = params[:from]
-        to  = params[:to]
+        to = params[:to]
+        count = to.to_i - from.to_i
         
-        @notifs = Notification.where(:user_id => session[:user_id]).order(created_at: :desc).limit(to).offset(from)
+        @notifs = Notification.where(:user_id => session[:user_id]).order(created_at: :desc).limit(count).offset(from)
         
         @notifs = @notifs.to_json.html_safe
         

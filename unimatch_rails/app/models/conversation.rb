@@ -75,7 +75,8 @@ class Conversation < ApplicationRecord
     end
     
     def get_messages_limit(from, to)
-        @msgs = Message.where(conversation_id: self.id).order(created_at: :desc).limit(to).offset(from)
+        count = to.to_i - from.to_i
+        @msgs = Message.where(conversation_id: self.id).order(created_at: :desc).limit(count).offset(from)
         
         return @msgs
     end

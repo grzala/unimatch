@@ -1,6 +1,12 @@
 /* global $ */
 
 var LAST_MESSAGE_TIME = null
+var loadMore = false
+var scrollOnReceive = false
+
+//for loading old crap
+var currentMessage = 0
+var messagePortion = 10
 
 $.fn.messages = function(con_id){
     this.append('<div class="messages-container"></div>')
@@ -19,7 +25,21 @@ $.fn.messages = function(con_id){
         sendMessage('/conversation/create_message', msg, con_id);
     });
     
-    requestMessages(0, 10, con_id);
+    requestMessages(currentMessage, currentMessage + messagePortion, con_id);
+    currentMessage += messagePortion
+    
+    
+    //scroll listener
+    scrollMessages();
+    var messageBox = $(this).find(".messages-container")
+    messageBox.scroll(function() {
+        if (loadMore && messageBox.scrollTop() <= 20) {
+            requestMessages(currentMessage, currentMessage + messagePortion, con_id)
+            currentMessage += messagePortion
+            
+            loadMore = false
+        }
+    });
     
 }
 
@@ -34,7 +54,9 @@ function requestMessages(from, to, con_id) {
 		  id: con_id
 		},
 		success: function(data) {    
-		    console.log("requesting")
+            var messageBox = $(".messages .messages-container")
+            var initialHeight = messageBox.prop("scrollHeight")
+            
 		    for (var i = 0; i < data.length; i++) {
 		        var msg = makeMessage(data[i]);
                 $('.messages .messages-container').prepend(msg);
@@ -42,11 +64,11 @@ function requestMessages(from, to, con_id) {
                     LAST_MESSAGE_TIME = msg.created_at
                 }
             }
+            var endHeight = messageBox.prop("scrollHeight")
+            if (endHeight - initialHeight > 0)
+                messageBox.scrollTop(endHeight - initialHeight) //Scroll the amount of messages added
             
-            
-            
-            scrollMessages();
-            //loadMore = true;
+            loadMore = true;
 		},
         error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status)
@@ -77,12 +99,6 @@ function scrollMessages() {
     $('.messages-container').scrollTop($('.messages-container').prop("scrollHeight"));
 }
 
-//scroll to bottom of messages
-$(document).ready(function() {
-    scrollMessages();
-    return;
-});
-
   
 function sendMessage(url, msg, con_id) {
     $.ajax({
@@ -93,6 +109,9 @@ function sendMessage(url, msg, con_id) {
             body: msg
         },
         success: function() { 
+            if ($('.messages .messages-container').scrollTop() + $('.messages .messages-container').innerHeight() >= $('.messages .messages-container').prop("scrollHeight") - 30) 
+                scrollOnReceive = true;
+            
             App.conversation.message(con_id, msg)
         },
         
@@ -120,22 +139,23 @@ function reloadMessages(id) {
 		success: function(data) {
 		    data.reverse()
 		    
-		    console.log("-----------------------------")
-		    
 		    var lastTime = LAST_MESSAGE_TIME;
 		    for (var i = 0; i < data.length; i++) {
-                $('.messages .messages-container').append(makeMessage(data[i]));
                 var date = new Date(data[i].date);
-                console.log("LAST TIME" + lastTime);
-                console.log("current" + date.getTime());
-                console.log("")
         
+                //Date is compared in SQL Query. Query does not have milliseconcs accuracy, so it is double checked here.
+                //Fail to do it and you will add copies of the same message a few times.
                 if (date.getTime() > LAST_MESSAGE_TIME) {
+                   $('.messages .messages-container').append(makeMessage(data[i]));
                    lastTime = date.getTime();
                 }
             }
-           LAST_MESSAGE_TIME = lastTime;
-            scrollMessages();
+            LAST_MESSAGE_TIME = lastTime;
+            
+            if (scrollOnReceive) {
+                scrollMessages()
+                scrollOnReceive = false
+            }
 		},
         error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status)

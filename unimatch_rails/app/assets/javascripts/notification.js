@@ -36,7 +36,7 @@ $.fn.addNotifications = function(notifications) {
     
     //scroll listener
     this.scroll(function() {
-        if (loadMore && $(this).scrollTop() + $(this).innerHeight() >= $(this).prop("scrollHeight" ) - 30) {
+        if (loadMore && $(this).scrollTop() + $(this).innerHeight() >= $(this).prop("scrollHeight") - 30) {
             console.log("load more");
             requestNotifications(current_notif, NOTIF_SET);
             current_notif += NOTIF_SET;

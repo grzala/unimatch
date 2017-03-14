@@ -47,10 +47,16 @@ $.fn.addNotifications = function(notifications) {
     return;
 };
 
+$.fn.addNotification = function(notification) {
+    var n = makeNotif(notification);
+    this.prepend(n);
+    current_notif++;
+}
+
 function makeNotif(notification) {
     //remove duplicates
     //we want just one notification for a given conversation
-    var children = $(this).children(".notification");
+    var children = $('.notifications').find('.notifications-wrapper').children(".notification");
     for (var i = 0; i < children.length; i++) {
         //if already notified
         if (parseInt($(children[i]).attr("conversation_id"), 10) == parseInt(notification['conversation_id'], 10)) {

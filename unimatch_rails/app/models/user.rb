@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	extend FriendlyId
+	friendly_id :name, use: [:slugged, :history]
 	has_many :messages
 	has_many :members
 	has_many :societies, :through => :members
@@ -9,6 +11,7 @@ class User < ApplicationRecord
 	
 	has_many :interests
 	has_many :interests, :through => :user_interests
+	
 	
 	validates :name, :presence => true, :uniqueness => false, length: {maximum: 50}
 	validates :password, confirmation: true, presence: true,
@@ -26,7 +29,10 @@ class User < ApplicationRecord
 	def User.encrypt_password(password, salt)
 		Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end
-	
+
+	#def should_generate_new_friendly_id?
+    #	new_record?
+	#end
 	
 	def mailboxer_email(object)
  

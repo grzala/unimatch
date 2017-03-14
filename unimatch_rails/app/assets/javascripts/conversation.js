@@ -73,9 +73,9 @@ function requestMessages(from, to, con_id) {
 		        var msg = makeMessage(data[i]);
                 $('.messages .messages-container').prepend(msg);
                 currentMessage++
-                
-                if (LAST_MESSAGE_TIME == null && i+1 == data.length) {
-                    LAST_MESSAGE_TIME = msg.created_at
+                if (LAST_MESSAGE_TIME == null && i+1 == data.length) { //last message, new time, call only on init
+                    var time = new Date(data[i].date)
+                    LAST_MESSAGE_TIME = time.getTime();
                 }
             }
             var endHeight = messageBox.prop("scrollHeight")
@@ -137,8 +137,6 @@ function sendMessage(url, msg, con_id) {
 	});
 }
 
-//the code beneath was not rewritten into coffe files, it needs to be in the view
-//it uses LAST_MESSAGE_TIME from ruby
 function reloadMessages(id) {
     var url = "/conversation/" + id;
     
@@ -179,27 +177,4 @@ function reloadMessages(id) {
         }
 	});
 	
-}
-
-function render_messages(messages) {
-    messages.reverse()
-    
-    //var lastTime = LAST_MESSAGE_TIME;
-    
-    for (var i = 0; i < messages.length; i++) {
-        var message = messages[i];
-        
-        var date = new Date(message.created_at);
-        
-        //if (date.getTime() > LAST_MESSAGE_TIME) {
-           //lastTime = date.getTime();
-           
-           //$(".messages").append(
-            //   "<p>FROM: " + users[message.sender_id]['name'] + " AT: " + message['created_at'] + "</p>" +
-             //  "<p>" + message.body + "</p><br/><br/>"
-            //);
-        //}
-        LAST_MESSAGE_TIME = lastTime;
-    }
-    scrollMessages()
 }

@@ -1,5 +1,8 @@
-<div class="wrapper">
-
+<div class="row">
+<div class="col-md-3">
+    <p>Add conditions and filters here</p>
+</div>
+<div class="col-md-9">
 <h2>Your Matches</h2>
 <h5>Below are a list of all users that match with your interests.</h5>
 <br>
@@ -8,7 +11,6 @@
     <% if coefficient > 0 && session[:user_id] != user.id %>
         <%= link_to user.name, :controller => :user, :action => :show, :id => user.id %>
         <%= user.surname %>
-        <%=  link_to "MESSAGE ME", :controller => :user, :action => :messages, :id => user.id %>
         <% coefficient = ((coefficient*100).to_f).ceil %>
         
         <%
@@ -31,5 +33,5 @@
         </br>
     <% end %>
 <% end %>
-
+</div>
 </div>

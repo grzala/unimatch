@@ -57,6 +57,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails'
   gem 'factory_girl'
+  gem 'selenium-webdriver', '<= 2.53.0'
 end
 
 group :development do

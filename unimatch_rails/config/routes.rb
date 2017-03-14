@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
   
   controller :conversation do
-    get '/conversation/:id' => :show
+    get '/conversation/:id' => :show, :as => :conversation
     get '/conversation/message/:id' => :message
     post '/conversation/create_message' => :create_message, :as => :create_message
   end

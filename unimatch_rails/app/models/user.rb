@@ -27,7 +27,7 @@ class User < ApplicationRecord
 
 	
 	def User.encrypt_password(password, salt)
-	Digest::SHA2.hexdigest(password + "wibble" + salt)
+		Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end
 
 	#def should_generate_new_friendly_id?
@@ -186,6 +186,30 @@ class User < ApplicationRecord
 			events += soc.get_current_events
 		end
 		return events
+	end
+	
+	def get_notifications
+		@notifs = Notification.where(user_id: self.id)
+		return @notifs
+	end
+	
+	def notify(link, info, con_id = nil)
+		
+		#if conversation exists, just one notification is needed. this prevents an overflow of notifications
+		if con_id != nil
+			@notifs = Notification.where(user_id: self.id, conversation_id: con_id)
+			@notifs.each {|notif| Notification.destroy(notif.id) }
+		end
+		
+		@notification = Notification.new
+		@notification.link = link
+		@notification.information = info
+		@notification.user_id = self.id
+		@notification.conversation_id = con_id
+		@notification.save
+		
+		
+    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: Notification.find(@notification.id).to_json.html_safe}
 	end
 	
 	private ############################# private methods below ##################################

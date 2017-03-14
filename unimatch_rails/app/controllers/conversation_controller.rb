@@ -1,6 +1,4 @@
 class ConversationController < ApplicationController
-    
-    
     def show
         @con = Conversation.find(params[:id])
         
@@ -22,6 +20,8 @@ class ConversationController < ApplicationController
         
         @message = Message.new()
         
+        @con.seen_by(session[:user_id])
+        
 		respond_to do |format|
 			format.html { 
 			    
@@ -40,6 +40,7 @@ class ConversationController < ApplicationController
         @msgs = @con.get_messages
     end
     
+    #messaging view - create conversation and redirect to show
     def message
         @user1 = User.find(session[:user_id])
         @user2 = User.find(params[:id])

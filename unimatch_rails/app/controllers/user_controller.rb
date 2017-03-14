@@ -5,13 +5,14 @@ class UserController < ApplicationController
     if session[:user_id] != params[:id].to_i then redirect_to :root end
   end
   
-  #def ul
-   
-   # @user = User.friendly.find(params[:id])
-    #if request.path != user_path(@user)
-     # redirect_to @user, status: :moved_permanently
-    #end
-#  end
+
+  
+
+  def index
+    @user = User.find(session[:user_id])
+    @notifs = Notification.where(user_id: @user.id)
+  end
+
   
   def list
     @users = User.all
@@ -49,6 +50,7 @@ class UserController < ApplicationController
     
     @events_json = @events_json.to_json.html_safe
     
+    @image_url = @user.avatar_url(:display)
   end
   
   def new
@@ -61,7 +63,7 @@ class UserController < ApplicationController
     
     if @user.save
       flash[:success] = "Account created successfuly. Please log in."
-      redirect_to :controller => :session, :action => :new
+      redirect_to root_path
     elsif (:password) != (:password_confirmation)
       flash[:warning] = "Passwords are different"
       puts flash[:warning]

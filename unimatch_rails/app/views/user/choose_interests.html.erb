@@ -4,10 +4,20 @@
         <% @interests.each do |interest_group, interests| %>
             <p><%= interest_group.name %>:</p>
             <% interests.each do |interest| %>
+                <div class="checkbox_wrapper">
                 <% checked = @user_interests.include? interest %>
-                <p style="margin-left: 20px"><%= interest.name %><%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %></p>
+                <input type="checkbox" style="opacity:0" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
+                <label><%= interest.name %></label>
+                </div>
             <% end %>
         <% end %>
         <%= submit_tag :Update %>
     <% end %>
+    
+    
+    <div class="checkbox_wrapper">
+    <input type="checkbox" style="opacity:0"/>
+    <label>asd</label>
+    </div>
+
 </div>

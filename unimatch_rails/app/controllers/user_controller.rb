@@ -53,7 +53,7 @@ class UserController < ApplicationController
     @image_url = @user.avatar_url(:display)
     
     if session[:user_id] != params[:id]
-      @con = Conversation.get_conversation_between(User.find(session[:user_id]), User.find(params[:id]))
+      @con = Conversation.get_conversation_between(User.friendly.find(session[:user_id]), User.friendly.find(params[:id]))
     end
   end
   

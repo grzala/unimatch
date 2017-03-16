@@ -107,6 +107,52 @@ class User < ApplicationRecord
 		return @new
 	end
 	
+	def User.get_common_interests(usr1, usr2, important = false)
+		usr1i = []
+		usr2i = []
+		
+		if !important
+			usr1i = usr1.get_interests
+			usr2i = usr2.get_interests
+		else
+			usr1i = usr1.get_important_interests
+			usr2i = usr2.get_important_interests
+		end
+		
+		common = []
+		usr1i.each do |i|
+			if usr2i.include? i
+				common << i
+			end
+		end
+		return common
+	end
+	
+	def User.get_common_interests_fixed(usr1, usr2, len)
+		important_list = User.get_common_interests(usr1, usr2, important = true)
+		list = User.get_common_interests(usr1, usr2)
+		
+		lists = [important_list, list]
+		l_i = 0
+		cur_list = lists[l_i]
+		
+		i = 0
+		toreturn = []
+		while toreturn.length < len and i < len do
+			if i >= cur_list.length
+				l_i += 1
+				if l_i >= lists.length
+					break
+				end
+				cur_list = lists[i]
+			end
+			toreturn << cur_list[i]
+			i += 1
+		end
+		
+		return toreturn
+	end
+	
 	#if less than 5 important, add as important
 	def add_interest(id)
 		@interests = get_interests_by_id

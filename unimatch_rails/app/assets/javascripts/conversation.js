@@ -9,7 +9,7 @@ var currentMessage = 0
 var messagePortion = 10
 
 $.fn.messages = function(con_id){
-    curent_message = 0;
+    curentMessage = 0;
     this.empty();
     this.append('<div class="messages-container"></div>')
     

@@ -146,7 +146,9 @@ class User < ApplicationRecord
 				end
 				cur_list = lists[i]
 			end
-			toreturn << cur_list[i]
+			if !toreturn.include? cur_list[i]
+				toreturn << cur_list[i]
+			end
 			i += 1
 		end
 		

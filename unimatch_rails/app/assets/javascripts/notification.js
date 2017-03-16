@@ -27,6 +27,7 @@ function refreshNotifLen() {
 
 $.fn.addNotifications = function(notifications) {
     //prepare
+    current_notif = 0
     this.empty();
     loadMore = false;
     
@@ -115,12 +116,18 @@ function requestNotifications(from, to) {
 		  to: to,
 		},
 		success: function(data) {    
+		    console.log(data)
 		    for (var i = 0; i < data.length; i++) {
                 $('.notifications .notifications-wrapper').append(makeNotif(data[i]));
                 current_notif++;
             }
             loadMore = true;
             refreshNotifLen();
-		}
+		},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status)
+            alert(xhr.statusText)
+            alert(xhr.responseText)	
+        }
 	});
 }

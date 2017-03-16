@@ -4,6 +4,27 @@ var loadMore = false;
 var current_notif = 0;
 var NOTIF_SET = 10;
 
+var active_notifs = 0;
+
+$.fn.notificationsLink = function() {
+    this.empty();
+    //link
+    this.append('<img src="/assets/bell.png" /><div class="new-notif-length"></div>')
+    $(".notifications-link").click(function(event) {
+        event.preventDefault();
+        $(".notifications").toggle();
+        $(".notifications").css("left", event.pageX - $(".notifications").width());
+        $(".notifications").css("top", event.pageY);
+    });
+}
+
+function refreshNotifLen() {
+    console.log("call")
+    if (active_notifs > 0) {
+        $('.new-notif-length').text((active_notifs))
+    }
+}
+
 $.fn.addNotifications = function(notifications) {
     //prepare
     this.empty();
@@ -12,14 +33,6 @@ $.fn.addNotifications = function(notifications) {
     //get notifications by ajax
     this.append('<div class="notifications-wrapper"></div>');
     requestNotifications(current_notif, current_notif + NOTIF_SET);
-    
-    //link
-    $(".notifications-link").click(function(event) {
-        event.preventDefault();
-        $(".notifications").toggle();
-        $(".notifications").css("left", event.pageX - $(".notifications").width());
-        $(".notifications").css("top", event.pageY);
-    });
     
     //hide
     $(document).mouseup(function(event) {
@@ -30,8 +43,6 @@ $.fn.addNotifications = function(notifications) {
         }
     });
         
-    //loading icon
-    this.append('<div><img class="loading-icon" src="/assets/loading.png" /></div>');
     
     //scroll listener
     this.scroll(function() {
@@ -51,6 +62,7 @@ $.fn.addNotification = function(notification) {
     var n = makeNotif(notification);
     this.prepend(n);
     current_notif++;
+    refreshNotifLen();
 }
 
 function makeNotif(notification) {
@@ -65,10 +77,12 @@ function makeNotif(notification) {
     }
     var classes = 'notification ';
     
+    //if seen
     if (notification['seen']) {
         classes += 'seen';
     } else {
         classes += 'unseen';
+        active_notifs += 1
     }
     
     var toAppend = '';
@@ -106,6 +120,7 @@ function requestNotifications(from, to) {
                 current_notif++;
             }
             loadMore = true;
+            refreshNotifLen();
 		}
 	});
 }

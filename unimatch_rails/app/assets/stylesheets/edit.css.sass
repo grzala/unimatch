@@ -12,9 +12,11 @@
 
 input[type=checkbox] 
     display:none
+    width: 200px
+    height: 200px
 
 
-/*label[type=checkbox]
+label[type=checkbox]
     background: #999
     height: 50px
     width: 50px
@@ -29,17 +31,30 @@ input[type=checkbox]
     width: 50px
     display:inline-block
     padding: 0 0 0 0px
-
-.checkbox_wrapper
-    position: relative
+/*.checkbox_wrapper + label
     height: 200px
     width: 200px
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 2
+    opacity: 1
+
+/*.checkbox_wrapper:checked + label
+    height: 200px
+    width: 200px
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 2
+    opacity: 0.5
+
 
 
 input[type="checkbox"] 
-    //opacity:0
-    height: auto
-    width: auto
+    opacity: 0
+    height: 220px
+    width: 215px
     position: absolute
     top: 0
     left: 0
@@ -47,19 +62,20 @@ input[type="checkbox"]
     
 input[type="checkbox"]:checked 
     //opacity:0
-    opacity: 0.5
-    height: 200px
-    width: 200px
+    opacity: 1
+    height: 220px
+    width: 215px
     position: absolute
     top: 0
     left: 0
     z-index: 2
+        
 
 
-input[type="checkbox"] + label
+input[type="checkbox"]+label
     //background: image-url('Interests/rugby.jpg') no-repeat
-    height: auto
-    width: auto
+    height: 220px
+    width: 215px
     display:inline-block
     padding: 0 0 0 0px
     position: absolute
@@ -68,13 +84,21 @@ input[type="checkbox"] + label
     z-index: 1
 
 
-input[type="checkbox"]:checked + label
+input[type="checkbox"]:checked+label
     //background: image-url('Interests/rugby.jpg') no-repeat
     opacity: 0.1
-    height: 200px
-    width: 200px
+    height: 220px
+    width: 215px
     display:inline-block
     padding: 0 0 0 0px
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 1
+
+#pic:hover
+    opacity: 0.2
+    
 
 
 .container

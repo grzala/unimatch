@@ -14,7 +14,7 @@ input[type=checkbox]
     display:none
 
 
-label[type=checkbox]
+/*label[type=checkbox]
     background: #999
     height: 50px
     width: 50px
@@ -22,7 +22,7 @@ label[type=checkbox]
     padding: 0 0 0 0px
 
 
-label[type=checkbox]:checked 
+/*label[type=checkbox]:checked 
     background: #999 
     opacity: 0.5
     height: 50px
@@ -32,14 +32,24 @@ label[type=checkbox]:checked
 
 .checkbox_wrapper
     position: relative
-    height: 50px
-    width: 50px
+    height: 200px
+    width: 200px
 
 
 input[type="checkbox"] 
     //opacity:0
-    height: 50px
-    width: 50px
+    height: auto
+    width: auto
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 2
+    
+input[type="checkbox"]:checked 
+    //opacity:0
+    opacity: 0.5
+    height: 200px
+    width: 200px
     position: absolute
     top: 0
     left: 0
@@ -47,9 +57,9 @@ input[type="checkbox"]
 
 
 input[type="checkbox"] + label
-    background: #999
-    height: 50px
-    width: 50px
+    //background: image-url('Interests/rugby.jpg') no-repeat
+    height: auto
+    width: auto
     display:inline-block
     padding: 0 0 0 0px
     position: absolute
@@ -59,9 +69,15 @@ input[type="checkbox"] + label
 
 
 input[type="checkbox"]:checked + label
-    background: #000
-    opacity: 0.5
-    height: 50px
-    width: 50px
+    //background: image-url('Interests/rugby.jpg') no-repeat
+    opacity: 0.1
+    height: 200px
+    width: 200px
     display:inline-block
     padding: 0 0 0 0px
+
+
+.container
+    min-width: 200px
+    width: auto !important
+    width: 200px

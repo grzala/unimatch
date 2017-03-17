@@ -87,6 +87,14 @@ class UserController < ApplicationController
       redirect_to choose_interests_path, status: :moved_permanently
     end
     @interests = Interest.retrieve_as_dictionary
+    @allinterests = Interest.all
+    @interests1 = @allinterests.where(interest_group_id: 1)
+    @interests2 = @allinterests.where(interest_group_id: 2)
+    @interests3 = @allinterests.where(interest_group_id: 3)
+    @interests4 = @allinterests.where(interest_group_id: 4)
+    @interests5 = @allinterests.where(interest_group_id: 5)
+    @interests6 = @allinterests.where(interest_group_id: 6)
+    @interests7 = @allinterests.where(interest_group_id: 7)
     @user_interests = @user.get_interests
   end
   

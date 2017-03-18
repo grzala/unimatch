@@ -15,7 +15,8 @@ class NotificationController < ActionController::Base
         
         @notifs = @notifs.to_json.html_safe
         
-        puts params
+        puts count
+        puts from
         
 		respond_to do |format|
 			format.json {

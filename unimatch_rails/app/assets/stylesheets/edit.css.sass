@@ -48,10 +48,10 @@ label[type=checkbox]
     left: 0
     z-index: 2
     opacity: 0.5
+//useless
 
 
-
-input[type="checkbox"] 
+/*input[type="checkbox"] 
     opacity: 0
     height: 220px
     width: 215px
@@ -60,7 +60,7 @@ input[type="checkbox"]
     left: 0
     z-index: 2
     
-input[type="checkbox"]:checked 
+/*input[type="checkbox"]:checked 
     //opacity:0
     opacity: 1
     height: 220px
@@ -72,7 +72,7 @@ input[type="checkbox"]:checked
         
 
 
-input[type="checkbox"]+label
+/*input[type="checkbox"]+label
     //background: image-url('Interests/rugby.jpg') no-repeat
     height: 220px
     width: 215px
@@ -84,7 +84,7 @@ input[type="checkbox"]+label
     z-index: 1
 
 
-input[type="checkbox"]:checked+label
+/*input[type="checkbox"]:checked+label
     //background: image-url('Interests/rugby.jpg') no-repeat
     opacity: 0.1
     height: 220px
@@ -105,3 +105,17 @@ input[type="checkbox"]:checked+label
     min-width: 200px
     width: auto !important
     width: 200px
+
+input[type=checkbox], input[type=checkbox] 
+    display: none
+
+
+img
+    height: 200px
+    width: 200px
+
+input[type=radio]:checked +label, input[type=checkbox]:checked +label 
+    //border: 10px solid transparent
+    display: inline-block
+    //border-radius: 10px
+    opacity : 0.6

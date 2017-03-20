@@ -17,6 +17,16 @@ $black: #606060
 $break-phone: 450px
 $break-tablet: 900px
     
+body
+  height: 100%
+  width: 100%
+  background: url("background.jpg") no-repeat center center
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  -ms-background: cover
+  background-size: cover
+    
 .block_centre
   display: block
   margin-left: auto
@@ -37,19 +47,6 @@ $break-tablet: 900px
   margin-bottom: 30px
   @media screen and (min-width: $break-phone)
     margin-top: 30px
-
-body
-  min-height: 100%
-  background: url("background.jpg") no-repeat center center fixed
-  -webkit-background-size: cover
-  -moz-background-size: cover
-  -o-background-size: cover
-  background-size: cover
-    
-.logo
-  display: block
-  margin-left: auto
-  margin-right: auto
     
 #login_title
   display: inline-block
@@ -95,13 +92,21 @@ h2.active
   color: $red
   margin-top: 17px
   
+p 
+  font-family: 'Lato', sans-serif
+  font-weight: 200
+  font-size: 12
+  color: $black
+  text-align: justify
+  
 fieldset 
   border: 0px
   
-.home_logo
-  margin-top: 25px
-  @media screen and (min-width: $break-phone)
-    // margin: 90px auto
+.logo
+  margin-top: 40px
+  margin-left: auto
+  margin-right: auto
+  display: block
     
 .nonselect
   -webkit-user-select: none
@@ -111,6 +116,7 @@ fieldset
 
 #nav_bar
   display: none
+  background-color: transparent
   @media screen and (min-width: $break-tablet)
     display: flex
     padding: 0
@@ -150,3 +156,78 @@ fieldset
     flex-direction: row
     min-width: 150px
     margin-left: 20px
+    
+/* mobile navigation */
+
+#burger_menu
+  display: inline-block
+  position: fixed
+  left: 15px
+  top: 20px
+  cursor: pointer
+  @media screen and (min-width: $break-tablet)
+    display: none
+    
+
+.line
+  width: 25px
+  height: 3px
+  background-color: white
+  margin-bottom: 5px
+    
+#navigation_mobile ul
+  margin-top: 50px
+  list-style: none
+  display: block
+  background: #111
+ 
+#navigation_mobile  li
+  width: 180px
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+#nav_trigger
+  position: fixed
+  top: 20px
+  left: 15px
+  width: 30px
+  height: 30px
+  cursor: pointer
+  z-index: 999
+  @media screen and (min-width: $break-tablet)
+    display: none
+
+/* The side navigation menu */
+.sidenav
+  height: 100%
+  width: 0
+  position: fixed
+  z-index: 9999
+  top: 0
+  left: 0
+  background-color: $red
+  overflow-x: hidden
+  padding-top: 60px
+  transition: 0.5s
+
+/* The navigation menu links */
+.sidenav a 
+  padding: 8px 8px 8px 32px
+  text-decoration: none
+  font-size: 25px
+  color: white
+  display: block
+  transition: 0.3s
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover, .offcanvas a:focus
+  color: $grey
+
+/* Position and style the close button (top right corner) */
+.sidenav #closebtn 
+  position: absolute
+  top: 0
+  right: 25px
+  font-size: 36px
+  margin-left: 50px

@@ -1,10 +1,3 @@
-<script>
-    var CON_ID = <%= @con.id %>
-    var LAST_MESSAGE_TIME = new Date(<%= @newest_message %>);
-    var users = <%= @users.to_json.html_safe %>
-    LAST_MESSAGE_TIME = LAST_MESSAGE_TIME.getTime();
-</script>
-
 YOUR ID <%= session[:user_id] %>
 <br/>
 
@@ -13,70 +6,12 @@ number_of messages <%= @msgs.length %>
 <br/><br/>
 
 <div class="messages">
-    <% @msgs.each do |msg| %>
-    
-        <p>FROM: <%= @users[msg.sender_id].name %> AT: <%= msg.created_at %></p>
-        <p><%= msg.body %></p>
-        
-        <br/><br/>
-    <% end %>
     
 </div>
-    
-
-<%= form_tag create_message_path do %>
-    <p> Message: <%= text_field_tag :body, "", :id => "body"%></p>
-    <%= hidden_field_tag :conversation_id,  @con.id, :id => "conversation_id" %>
-    
-    
-    <%= submit_tag :Send, :id => "send_message" %>
-<% end %>
 
 <script>
-    $('#send_message').click(function(e) {
-        e.preventDefault();
-        
-        var msg = $("#body").val();
-        var con_id = $("#conversation_id").val();
-        sendMessage("<%= create_message_path %>", msg, con_id);
-    });
-    
-    //the code beneath was not rewritten into coffe files, it needs to be in the view
-    //it uses LAST_MESSAGE_TIME from ruby
-    function reloadMessages(id) {
-        var url = "/conversation/" + id;
-        
-		$.ajax({
-			type: "GET",
-			url: url,
-			dataType: "json",
-			success: function(messages) {
-			    render_messages(messages);
-			}
-		});
-    }
-    
-    function render_messages(messages) {
-        messages.reverse()
-        
-        var lastTime = LAST_MESSAGE_TIME;
-        
-        for (var i = 0; i < messages.length; i++) {
-            var message = messages[i];
-            
-            var date = new Date(message.created_at);
-            
-            if (date.getTime() > LAST_MESSAGE_TIME) {
-               lastTime = date.getTime();
-               
-               $(".messages").append(
-                   "<p>FROM: " + users[message.sender_id]['name'] + " AT: " + message['created_at'] + "</p>" +
-                   "<p>" + message.body + "</p><br/><br/>"
-                );
-            }
-            LAST_MESSAGE_TIME = lastTime;
-        }
-        scrollMessages()
-    }
-    
+    var CON_ID = <%= @con.id %>
+    $(document).ready(function() {
+        $('.messages').messages(CON_ID);
+    })
 </script>

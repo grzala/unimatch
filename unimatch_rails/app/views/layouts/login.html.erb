@@ -24,6 +24,19 @@
         <strong><%= flash[:warning] %></strong>
       </div>
     <% end %>
+    <div id="nav_trigger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div id="mySidenav" class="sidenav">
+      <ul id="navigation_mobile">
+        <a href="javascript:void(0)" id="closebtn" >&times;</a>
+        <li><%= link_to 'Home' %></li>
+        <li><%= link_to 'Features' %></li>
+        <li><%= link_to 'About' %></li>
+      </ul>
+      </div>
     <div id="nav_bar">
            <div class="left">
                 <div id="navigation_left" class="navigation_inner nonselect">

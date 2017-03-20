@@ -29,6 +29,7 @@ var fcViews = FC.views = {};
 
 
 $.fn.fullCalendar = function(options) {
+	this.empty();
 	var args = Array.prototype.slice.call(arguments, 1); // for a possible method call
 	var res = this; // what this function will return (this jQuery object by default)
 

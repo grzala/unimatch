@@ -127,10 +127,13 @@ ul
     padding: 0
     display: inline-block
     vertical-align: middle
+    float: left
 
 li 
-    display: inline
+    display: inline-block
     margin-right: 5px
+    overflow: hidden
+    float: left
 
 ul li a 
     font-family: 'Lato', sans-serif
@@ -154,9 +157,42 @@ ul li a
         display: inline-block
         float: right
         position: absolute
-        right: 35px
-        top: 5px
+        right: 45px
+        top: 12px
+        width: 30px
+        height: 30px
+    
+    &:hover
+        cursor: pointer
         
+#details_dropdown
+    margin-top: 15px
+    display: none
+    position: absolute
+    left: 0px
+    text-align: left
+    width: 100px
+    left: -25px
+
+        
+#details_dropdown a
+    padding-top: 5px
+    display: block
+        
+
+#user_image
+    @media screen and (min-width: $break-phone)
+        display: inline-block
+        border-radius: 50%
+        width: 30px
+        height: 30px
+        background: $grey
+        margin: auto
+
+.user_image_thubmnail
+    width: inherit
+    height: inherit
+
 #user_name
     @media screen and (min-width: $break-phone)
         display: block
@@ -168,11 +204,6 @@ li a:hover
     transition: 0.2s
     
 
-        
-#details_dropdown
-    //display: none
-    //i changed this temporarily so i can test stuff there was no way to make this visible
-    display: block
     
 .inline_block
     display: inline-block

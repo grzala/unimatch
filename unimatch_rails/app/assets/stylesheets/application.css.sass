@@ -147,8 +147,10 @@ ul li a
         display: inline-block
         float: right
         position: absolute
-        right: 35px
-        top: 5px
+        right: 45px
+        top: 12px
+        width: 30px
+        height: 30px
         
 #user_image
     @media screen and (min-width: $break-phone)
@@ -157,6 +159,11 @@ ul li a
         width: 30px
         height: 30px
         background: $grey
+        margin: auto
+
+.user_image_thubmnail
+    width: inherit
+    height: inherit
         
 #user_name
     @media screen and (min-width: $break-phone)
@@ -171,9 +178,7 @@ li a:hover
 
         
 #details_dropdown
-    //display: none
-    //i changed this temporarily so i can test stuff there was no way to make this visible
-    display: block
+    display: none
     
 .inline_block
     display: inline-block

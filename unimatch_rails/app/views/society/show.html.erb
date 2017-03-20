@@ -2,6 +2,8 @@
 <div class="col-md-8">
 <h2><%= @society.name %></h2>
 <p><%= @society.description %></p>
+<p><%= link_to "Join Society", :controller => :my_controller, :action => :index %></p>
+
 <p>interests:</p>
 <% @society.get_interests_by_name.each do |interest| %>
     <p><%= interest %></p>

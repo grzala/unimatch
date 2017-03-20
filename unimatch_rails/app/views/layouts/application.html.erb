@@ -64,9 +64,9 @@
     <% if flash[:notice] %>
       <div class="notice"><legend><%= flash[:notice] %></legend></div>
     <% end %>
+    </div>
     <div class="container">
     <%= yield %>
-    
     <div class="notifications"></div>
     <!-- list of notifs defined as json in application_controller -->
     <script>
@@ -80,7 +80,6 @@
         $(".notifications").addNotifications(<%= @notifs %>);
       });
     </script>
-    
     </div>
   </body>
 </html>

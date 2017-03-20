@@ -37,6 +37,12 @@ $break-tablet: 900px
 
 /* css stuff */ 
 
+#user_image
+    display: inline-block
+    border-radius: 50%
+    width: 30px
+    height: 30px
+
 .container
     margin-top: 50px
     margin-bottom: 25px
@@ -45,10 +51,11 @@ $break-tablet: 900px
     max-width: 1000px
     background: white
     top: 0px
+    padding: 20px
     @media screen and (min-width: $break-tablet)
         width: 80%
         box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.50)
-
+        padding: 40px
 .center
     display: block
     margin-left: auto
@@ -172,6 +179,7 @@ ul li a
     padding-top: 5px
     display: block
         
+
 #user_image
     @media screen and (min-width: $break-phone)
         display: inline-block
@@ -184,7 +192,7 @@ ul li a
 .user_image_thubmnail
     width: inherit
     height: inherit
-        
+
 #user_name
     @media screen and (min-width: $break-phone)
         display: block

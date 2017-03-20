@@ -8,8 +8,8 @@ class ApplicationController < ActionController::Base
   
   def get_user_image
     if !session[:user_id].nil?
-      user = User.find(session[:user_id])
-      @image_thumbnail = user.avatar_url(:display)
+      @logged_user = User.find(session[:user_id])
+      @image_thumbnail = @logged_user.avatar_url(:display)
     end
   end
   

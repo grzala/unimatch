@@ -6,11 +6,11 @@ sports:
     - football
     - basketball
     - cricket
-    - equestrian (horse riding)
+    - equestrian
     - golf
     - rugby
     - squash
-    - american football
+    - americanfootball
     - lacrosse
     - chess
     - bmx
@@ -22,7 +22,7 @@ sports:
     - cycling
     - circus
     - yoga
-    - winter sports
+    - wintersports
     - fighting
     - shooting
     - rowing
@@ -37,9 +37,9 @@ sports:
     - climbing
     - netball
     - polo
-    - table tennis
-    - ultimate frisbee
-    - underwater hockey
+    - tabletennis
+    - ultimatefrisbee
+    - underwaterhockey
     - weightlifting
     
 science:
@@ -50,7 +50,7 @@ science:
     - genetics
     - geology
     - engineering
-    - chemical engineering
+    - chemicalengineering
     - rocks
    
 cooking:
@@ -86,7 +86,7 @@ culture:
     - travel
     - religion
     - history
-    - ancient history
+    - ancienthistory
     - african
     - carribean
     - arab
@@ -99,13 +99,13 @@ culture:
 health:
     - fitness
     - bodybuilding
-    - healthy eating
+    - healthyeating
     - gardening
     
 social:
-    - business enterprise
+    - businessenterprise
     - energy
     - volunteering
     - comedy
     - gaming
-    - public speaking
+    - publicspeaking

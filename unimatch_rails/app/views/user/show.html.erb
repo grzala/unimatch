@@ -5,10 +5,6 @@
 <div class="col-md-3">
     <div class="left" id="user_details">
     <h2 class="inline_block_user"><%= @user.name %></h2>
-    <% if session[:user_id] == @user.id %>
-    <p><%= link_to 'Edit these details', controller: 'user', action: 'edit', id: @user.id %></p>
-    <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.id %></p>
-    <% end %>
     </div>
 </div>
 <div class="col-md-3">
@@ -20,7 +16,8 @@
 </div>
 <div class="row">
 <div class="col-md-8">
-    <h4 class="left">Similar Interests</h4>
+    <h4 class="left"><% if session[:user_id] != @user.id %>Similar<%end %> Interests</h4>
+    <%= common_interests(session[:user_id], @user.id) %>
 </div>
 <div class="col-md-4" class="left">
     <% if session[:user_id] != @user.id %>
@@ -52,6 +49,8 @@
 </div>
 <% else %>
 <h4 class="left">Your conversation with <%= @user.name %></h4>
+<div class="messages">
+</div>
 <% end %>
 </div>
 </div>   
@@ -85,9 +84,6 @@ $(document).ready(function() {
 </script>
 
 <% if !@con.nil? %>
-    <div class="messages">
-        
-    </div>
     
     <script>
         var CON_ID = <%= @con.id %>

@@ -10,7 +10,7 @@ sports:
     - golf
     - rugby
     - squash
-    - americanfootball
+    - american football
     - lacrosse
     - chess
     - bmx
@@ -29,7 +29,7 @@ sports:
     - swimming
     - sailing
     - surfing
-    - caneoing
+    - canoeing
     - kayaking
     - diving
     - floorball
@@ -50,8 +50,7 @@ science:
     - genetics
     - geology
     - engineering
-    - chemicalengineering
-    - rocks
+    - chemical engineering
    
 cooking:
     - mexican
@@ -74,7 +73,6 @@ music:
     - radio
     - dance
     - guitar
-    - accapella
     - metal
     - ambient
 

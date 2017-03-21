@@ -5,9 +5,6 @@ class UserController < ApplicationController
     if session[:user_id] != params[:id].to_i then redirect_to :root end
   end
   
-
-  
-
   def index
     @user = User.find(session[:user_id])
     @notifs = Notification.where(user_id: @user.id)
@@ -26,6 +23,7 @@ class UserController < ApplicationController
     end
     @matched_users = @matched_users.sort_by {|k,v| v}.reverse
   end
+  
   
   def show
     @user = User.friendly.find(params[:id])
@@ -131,6 +129,13 @@ class UserController < ApplicationController
     @message = Message.new()
     
   end
+
+  
+  def common_interests(user1, user2)
+      #return User.get_common_interests(user1, user2, important = true)
+  end
+  
+  helper_method :common_interests
   
   private
   def user_param

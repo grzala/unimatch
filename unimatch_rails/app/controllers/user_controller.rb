@@ -50,6 +50,8 @@ class UserController < ApplicationController
     
     @events_json = @events_json.to_json.html_safe
     
+    @in_societies = @user.get_societies
+    
     @image_url = @user.avatar_url(:display)
     
     if session[:user_id] != params[:id]

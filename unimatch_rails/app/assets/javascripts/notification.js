@@ -4,22 +4,40 @@ var loadMore = false;
 var current_notif = 0;
 var NOTIF_SET = 10;
 
-$.fn.addNotifications = function(notifications) {
-    //prepare
+$.fn.notificationsLink = function() {
     this.empty();
-    loadMore = false;
-    
-    //get notifications by ajax
-    this.append('<div class="notifications-wrapper"></div>');
-    requestNotifications(current_notif, current_notif + NOTIF_SET);
-    
     //link
+    this.append('<img src="/assets/bell.png" /><div class="new-notif-length"></div>')
     $(".notifications-link").click(function(event) {
         event.preventDefault();
         $(".notifications").toggle();
         $(".notifications").css("left", event.pageX - $(".notifications").width());
         $(".notifications").css("top", event.pageY);
     });
+}
+
+function refreshNotifLen() {
+    var active_notifs = 0
+    
+    var children = $('.notifications').find('.notifications-wrapper').children(".notification");
+    for (var i = 0; i < children.length; i++) {
+        if ($(children[i]).hasClass("unseen")) {
+            active_notifs += 1
+        }
+    }
+    
+    $('.new-notif-length').text((active_notifs > 0 ? active_notifs : ""))
+}
+
+$.fn.addNotifications = function(notifications) {
+    //prepare
+    current_notif = 0
+    this.empty();
+    loadMore = false;
+    
+    //get notifications by ajax
+    this.append('<div class="notifications-wrapper"></div>');
+    requestNotifications(current_notif, current_notif + NOTIF_SET);
     
     //hide
     $(document).mouseup(function(event) {
@@ -30,8 +48,6 @@ $.fn.addNotifications = function(notifications) {
         }
     });
         
-    //loading icon
-    this.append('<div><img class="loading-icon" src="/assets/loading.png" /></div>');
     
     //scroll listener
     this.scroll(function() {
@@ -49,8 +65,9 @@ $.fn.addNotifications = function(notifications) {
 
 $.fn.addNotification = function(notification) {
     var n = makeNotif(notification);
-    this.prepend(n);
+    this.find('.notifications-wrapper').prepend(n);
     current_notif++;
+    refreshNotifLen();
 }
 
 function makeNotif(notification) {
@@ -60,11 +77,13 @@ function makeNotif(notification) {
     for (var i = 0; i < children.length; i++) {
         //if already notified
         if (parseInt($(children[i]).attr("conversation_id"), 10) == parseInt(notification['conversation_id'], 10)) {
+            
             $(children[i]).remove();
         }
     }
     var classes = 'notification ';
     
+    //if seen
     if (notification['seen']) {
         classes += 'seen';
     } else {
@@ -106,6 +125,12 @@ function requestNotifications(from, to) {
                 current_notif++;
             }
             loadMore = true;
-		}
+            refreshNotifLen();
+		},
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status)
+            alert(xhr.statusText)
+            alert(xhr.responseText)	
+        }
 	});
 }

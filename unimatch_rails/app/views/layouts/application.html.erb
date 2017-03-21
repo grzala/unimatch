@@ -46,7 +46,7 @@
           <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
           <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
           <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
-          <li><div class="notifications-link"></div></li>
+          <li><div class="notifications-link"><div class="notifications"></div></div></li>
         </ul>
       </div>
       <div id="details">
@@ -67,7 +67,6 @@
     </div>
     <div class="container">
     <%= yield %>
-    <div class="notifications"></div>
     <!-- list of notifs defined as json in application_controller -->
     <script>
       $(document).ready(function() {

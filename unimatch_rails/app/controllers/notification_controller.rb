@@ -13,10 +13,23 @@ class NotificationController < ActionController::Base
         
         @notifs = Notification.where(:user_id => session[:user_id]).order(created_at: :desc).limit(count).offset(from)
         
-        @notifs = @notifs.to_json.html_safe
         
-        puts count
-        puts from
+        #compile imortant information
+        temp = []
+        @notifs.each do |notif|
+            temp_dic = {}
+            temp_dic['seen'] = notif.seen
+            temp_dic['sender'] = notif.sender
+            temp_dic['link'] = notif.link
+            temp_dic['information'] = notif.information
+            temp_dic['image_url'] = User.find(notif.sender.to_i).avatar_url(:display)
+            temp << temp_dic
+        end
+        
+        #@notifs = @notifs.to_json.html_safe
+        @notifs = temp.to_json.html_safe
+        
+        
         
 		respond_to do |format|
 			format.json {

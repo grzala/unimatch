@@ -5,14 +5,14 @@ var current_notif = 0;
 var NOTIF_SET = 10;
 
 $.fn.notificationsLink = function() {
-    this.empty();
+    //this.empty();
     //link
     this.append('<img src="/assets/bell.png" /><div class="new-notif-length"></div>')
     $(".notifications-link").click(function(event) {
-        event.preventDefault();
+        //event.preventDefault();
         $(".notifications").toggle();
-        $(".notifications").css("left", event.pageX - $(".notifications").width());
-        $(".notifications").css("top", event.pageY);
+        //$(".notifications").css("left", event.pageX - $(".notifications").width());
+        //$(".notifications").css("top", event.pageY);
     });
 }
 
@@ -26,6 +26,13 @@ function refreshNotifLen() {
         }
     }
     
+    if (active_notifs > 0) {
+        $('.new-notif-length').text(active_notifs)
+        $('.new-notif-length').show()
+    } else {
+        $('.new-notif-length').text("")
+        $('.new-notif-length').hide()
+    }
     $('.new-notif-length').text((active_notifs > 0 ? active_notifs : ""))
 }
 
@@ -43,7 +50,7 @@ $.fn.addNotifications = function(notifications) {
     $(document).mouseup(function(event) {
         var container = $(".notifications");
     
-        if (!container.is(event.target) && container.has(event.target).length === 0) {
+        if (( !container.is(event.target)) && container.has(event.target).length === 0) {
             container.hide();
         }
     });
@@ -92,6 +99,7 @@ function makeNotif(notification) {
     
     var toAppend = '';
     toAppend += '<div class="' + classes + '" conversation_id="' + notification['conversation_id'] + '">';
+    toAppend += '<img src ="' + notification['image_url'] + '"';
     toAppend += '<a href="' + notification['link'] + '">';
     toAppend += '<div class="notification-wrapper">';
     

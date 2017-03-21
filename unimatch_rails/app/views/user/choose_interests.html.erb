@@ -28,7 +28,7 @@
                         <% a=interest.name.tr(" ","") %>
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>>
                         <label for=picture5 class="lbl">
-                        <%= image_tag("Interests/#{a}.jpg?id=#{a}"), , :class => "choose_img"%>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
                         </label>
                         </div>
                          <script>

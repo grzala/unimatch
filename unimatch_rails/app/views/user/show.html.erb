@@ -9,15 +9,33 @@
 </div>
 <div class="col-md-3">
     <div class="left" id="percentage">
-    <p>Percentage Match: </p>
+    <!--<p>Percentage Match: </p>
+    <p></p>-->
 
     </div>
 </div>
 </div>
 <div class="row">
-<div class="col-md-8">
-    <h4 class="left"><% if session[:user_id] != @user.id %>Similar<%end %> Interests</h4>
-    <%= common_interests(session[:user_id], @user.id) %>
+<div class="col-md-8 left">
+    <h4 class="left">
+        <% if session[:user_id] == @user.id %>
+            Your
+        <% else %>
+            Similar
+        <% end %>
+        Interests
+    </h4>
+    <% User.get_common_interests(User.find(session[:user_id]), User.find(@user.id), important = true).each do |i| %>
+    <div class="interest">
+    <% a=i.name.tr(" -","") %>
+    <div class="int_image">
+    <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "int_img")%>   
+    </div>
+    <%= i.name.split.map(&:capitalize).join(' ') %>
+    </div>
+    <% end %>
+    <br>
+    <br>
 </div>
 <div class="col-md-4" class="left">
     <% if session[:user_id] != @user.id %>

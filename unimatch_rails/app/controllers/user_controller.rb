@@ -24,6 +24,7 @@ class UserController < ApplicationController
     @matched_users = @matched_users.sort_by {|k,v| v}.reverse
   end
   
+  
   def show
     @user = User.friendly.find(params[:id])
     if request.path != user_path(@user)
@@ -128,9 +129,10 @@ class UserController < ApplicationController
     @message = Message.new()
     
   end
+
   
   def common_interests(user1, user2)
-      return User.find_common_interests(user1, user2, important = true)
+      #return User.get_common_interests(user1, user2, important = true)
   end
   
   helper_method :common_interests

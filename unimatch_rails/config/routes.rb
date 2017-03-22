@@ -16,13 +16,14 @@ Rails.application.routes.draw do
   resources :event
   
   controller :user do
-    get '/user/list' => :list
+    #get 'user/:id' => :show
+    #get 'user/slug/edit' => :edit
+    get '/user/all/list' => :list
     post '/user/:id' => :update
     get '/user/match/:id' => :match
-    get '/user/choose/:id' => :choose_interests
+    get '/user/choose/:id' => :choose_interests, :as => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
   end
-  
   resources :user
   
   controller :session do
@@ -41,6 +42,12 @@ Rails.application.routes.draw do
     get '/conversation/:id' => :show, :as => :conversation
     get '/conversation/message/:id' => :message
     post '/conversation/create_message' => :create_message, :as => :create_message
+    post '/message' => :get_messages
+  end
+  
+  controller :notification do
+    post '/notification' => :get_notifications
+    
   end
   
   mount ActionCable.server => '/cable'

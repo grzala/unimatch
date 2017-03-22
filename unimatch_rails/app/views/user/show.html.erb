@@ -1,35 +1,81 @@
+<div class="row" id="user_info">
+<div class="col-md-2">
+    <%= image_tag @user.avatar_url(:display), :id => "profile_image" %>
+</div>
+<div class="col-md-3">
+    <div class="left" id="user_details">
+    <h2 class="inline_block_user"><%= @user.name %></h2>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="left" id="percentage">
+    <!--<p>Percentage Match: </p>
+    <p></p>-->
+
+    </div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-8 left">
+    <h4 class="left">
+        <% if session[:user_id] == @user.id %>
+            Your
+        <% else %>
+            Similar
+        <% end %>
+        Interests
+    </h4>
+    <% User.get_common_interests(User.find(session[:user_id]), User.find(@user.id), important = true).each do |i| %>
+    <div class="interest">
+    <% a=i.name.tr(" -","") %>
+    <div class="int_image">
+    <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "int_img")%>   
+    </div>
+    <%= i.name.split.map(&:capitalize).join(' ') %>
+    </div>
+    <% end %>
+    <br>
+    <br>
+</div>
+<div class="col-md-4" class="left">
+    <% if session[:user_id] != @user.id %>
+    <h4>Attending Events</h4>
+    <% if @events.length == 0 %>
+    <p>Not attending any events</p>
+    <% else %>
+    <% @events.each do |event| %>
+    <%= link_to event.name :controller => :event, :action => :show, :id => event.id %>
+    <% end %>
+    <% end %>
+    <% end %>
+    <h4>In Societies</h4>
+    <% if @in_societies.length == 0 %>
+    <p>Not in any societies</p>
+    <% else %>
+    <% @in_societies.each do %>
+    <%= link_to society.name :controller => :society, :action => :show, :id => society.id %>
+    <% end %>
+    <% end %>
+</div>
+</div>
 <div class="row">
 <div class="col-md-8">
-    <% if session[:user_id] == @user.id %>
-    <h2>Your Account Details</h2>
-    <%= image_tag @user.avatar_url(:display), :class => "user_image" %>
-    <p><%= @user.name %></p>
-    <p><%= @user.surname %></p>
-    <p><%= @user.email %></p>
-    <p><%= link_to 'Edit these details', controller: 'user', action: 'edit', id: @user.id %></p>
-    <p><%= link_to 'Edit Choices', controller: 'user', action: 'choose_interests', id: @user.id %></p>
-    <% end %>
-    <% if session[:user_id] != @user.id %>
-        <p><%= @user.name %></p>
-        <p><%= @user.surname %></p>
-        <%= image_tag @user.avatar_url(:display), :class => "user_image" %>
-        <p><%= link_to 'Message me', controller: 'conversation', action: 'message', id: @user.id %></p>
-    <% end %>
+<% if session[:user_id] == @user.id %>
 <div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
     <div id='calendar'>
     </div>
 </div>
+<% else %>
+<h4 class="left">Your conversation with <%= @user.name %></h4>
+<div class="messages">
 </div>
-<div class="col-md-4">
-    <h4>Attending Events</h4>
-    <h4>In Societies</h4>
+<% end %>
 </div>
-</div>
-    
+</div>   
 <script>
 $(document).ready(function() {
 
-     function render(event, element) {
+    function render(event, element) {
         console.log("RENDER");
         element.find('.fc-content').append('<div class="fc-separator"></div><p class="fc-description">'+ event.description + '</p></div>');
     }
@@ -49,17 +95,18 @@ $(document).ready(function() {
 		events: <%= @events_json %>,
 		
 	    eventRender: render,
-    })
+    });
+    
     
 });
 </script>
 
-<!--
-[
-	{
-		'title': 'Click for Google \n description and crap',
-		url: 'http://google.com/',
-		start: '2017-02-21T23:30:00',
-	},
-]
--->
+<% if !@con.nil? %>
+    
+    <script>
+        var CON_ID = <%= @con.id %>
+        $(document).ready(function() {
+            $('.messages').messages(CON_ID);
+        })
+    </script>
+<% end %>

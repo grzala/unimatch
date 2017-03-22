@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 // colours
+
 
 $primary-color: white
 $red: #FF6868
@@ -10,7 +12,9 @@ $blue: #3B579D
 $grey: #D8D8D8
 $black: #606060
 
-//variables
+
+/* media queries breakpoints */
+
 $break-phone: 450px
 $break-tablet: 900px
 
@@ -27,13 +31,15 @@ $break-tablet: 900px
     width: 150px
     height: 150px
     
-.profile_pic
+
+    
+#profile_image
+    display: inline-block
     border-radius: 50%
     width: 100%
     max-width: 150px
     border: 1px solid #979797
-    display: block
-    
+
 .margin_bottom
     margin-bottom: 15px
     
@@ -86,4 +92,59 @@ $break-tablet: 900px
     background-color: $red
     
 .row
-    max-height: 150px
+    float: left
+    
+.left
+    text-align: left
+    
+#user_details
+    position: relative
+    left: 20px
+    @media screen and (min-width: $break-tablet)
+    left: 0px
+    top: 48px
+    
+#percentage
+    position: relative
+    left: 20px
+    @media screen and (min-width: $break-tablet)
+    left: 0px
+    top: 82px
+    
+#user_info
+    margin-bottom: 30px
+    
+.inline_block_user
+    display: block
+    @media screen and (min-width: $break-tablet)
+        display: inline-block
+        
+.interest
+    width: 100px
+    height: 150px
+    display: inline-block
+    margin-right: 5px
+    border: 1px solid #979797
+    border-radius: 3px
+    z-index: 1
+    text-align: center
+    
+    
+.int_image
+    width: 98px
+    height: 100px
+    
+.int_img
+    width: 100%
+    height: 100%
+    border-top-left-radius: 2px
+    border-top-right-radius: 2px
+    z-index: 0
+    
+.left
+    align-content: left
+    
+.choose_img
+    width: 200px
+    height: 200px
+

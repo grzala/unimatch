@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	extend FriendlyId
+	friendly_id :name, use: [:slugged, :history]
 	has_many :messages
 	has_many :members
 	has_many :societies, :through => :members
@@ -9,6 +11,7 @@ class User < ApplicationRecord
 	
 	has_many :interests
 	has_many :interests, :through => :user_interests
+	
 	
 	validates :name, :presence => true, :uniqueness => false, length: {maximum: 50}
 	validates :password, confirmation: true, presence: true,
@@ -24,9 +27,12 @@ class User < ApplicationRecord
 
 	
 	def User.encrypt_password(password, salt)
-	Digest::SHA2.hexdigest(password + "wibble" + salt)
+		Digest::SHA2.hexdigest(password + "wibble" + salt)
 	end
-	
+
+	#def should_generate_new_friendly_id?
+    #	new_record?
+	#end
 	
 	def mailboxer_email(object)
  
@@ -99,6 +105,54 @@ class User < ApplicationRecord
 			@new << i.name
 		end
 		return @new
+	end
+	
+	def User.get_common_interests(usr1, usr2, important = false)
+		usr1i = []
+		usr2i = []
+		
+		if !important
+			usr1i = usr1.get_interests
+			usr2i = usr2.get_interests
+		else
+			usr1i = usr1.get_important_interests
+			usr2i = usr2.get_important_interests
+		end
+		
+		common = []
+		usr1i.each do |i|
+			if usr2i.include? i
+				common << i
+			end
+		end
+		return common
+	end
+	
+	def User.get_common_interests_fixed(usr1, usr2, len)
+		important_list = User.get_common_interests(usr1, usr2, important = true)
+		list = User.get_common_interests(usr1, usr2)
+		
+		lists = [important_list, list]
+		l_i = 0
+		cur_list = lists[l_i]
+		
+		i = 0
+		toreturn = []
+		while toreturn.length < len and i < len do
+			if i >= cur_list.length
+				l_i += 1
+				if l_i >= lists.length
+					break
+				end
+				cur_list = lists[i]
+			end
+			if !toreturn.include? cur_list[i]
+				toreturn << cur_list[i]
+			end
+			i += 1
+		end
+		
+		return toreturn
 	end
 	
 	#if less than 5 important, add as important

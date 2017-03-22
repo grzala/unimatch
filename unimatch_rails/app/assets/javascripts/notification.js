@@ -127,11 +127,17 @@ function requestNotifications(from, to) {
 		  from: from,
 		  to: to,
 		},
-		success: function(data) {    
+		success: function(data) {   
+		    if (data.length <= 0) {
+		        $('.notifications .notifications-wrapper').append('<p>No new notifications</p>');
+		        return;
+		    }
+		    
 		    for (var i = 0; i < data.length; i++) {
                 $('.notifications .notifications-wrapper').append(makeNotif(data[i]));
                 current_notif++;
             }
+            
             loadMore = true;
             refreshNotifLen();
 		},

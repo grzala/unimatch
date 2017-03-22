@@ -2,6 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// colours
+
+$primary-color: white
+$red: #FF6868
+$blue: #3B579D
+$grey: #D8D8D8
+$black: #606060
+
+//variables
+$break-phone: 450px
+$break-tablet: 900px
 
 .normal_match
     color: #6eb8d3
@@ -42,6 +53,7 @@
 
 .message_button
     float: left
+    margin-right: 20px
     
 .favourites_button
     float: left
@@ -49,9 +61,24 @@
 .buttons
     display: flex
     flex-direction: row
-    justify-content: space-around
+    justify-content: start
     
 .common_interests
     display: flex
     flex-direction: row
     justify-content: start
+    
+.name h3
+    font-family: "Lato", sans-serif
+    font-size: 22px
+    font-weight: bold
+    text-decoration: none
+    color: $black
+    
+.name
+    display: flex
+    flex-direction: row
+    justify-content: start
+
+.btn 
+    min-width: 134px

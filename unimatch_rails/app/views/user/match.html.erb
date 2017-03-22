@@ -13,9 +13,11 @@
                 <%= image_tag user.avatar_url(:display), :class => "profile_pic" %>
             </div>
         
-            <div class="col-md-6" id="some_text">
+            <div class="col-md-5" id="some_text">
                 <div class="name">
-                    <%= link_to user.name, :controller => :user, :action => :show, :id => user.id %>
+                    <%= link_to user.name, :controller => :user, :action => :show, :id => user.id do %>
+                        <h3><%= user.name %></h3>
+                    <% end %>
                 </div>
                 
                 <div class="common_interests">
@@ -37,7 +39,7 @@
             <script>
                 
             </script>
-            <div class="col-md-3" id="percentage_bar">
+            <div class="col-md-4" id="percentage_bar">
                 <% coefficient1 = coefficient.round(2) %>
                 <div class="coefficient"><%= ((coefficient1*100).round).to_s + "%"%></div>
                 <div id="progress<%= user.id %>"></div>

@@ -17,13 +17,7 @@ class NotificationController < ActionController::Base
         #compile imortant information
         temp = []
         @notifs.each do |notif|
-            temp_dic = {}
-            temp_dic['seen'] = notif.seen
-            temp_dic['sender'] = notif.sender
-            temp_dic['link'] = notif.link
-            temp_dic['information'] = notif.information
-            temp_dic['image_url'] = User.find(notif.sender.to_i).avatar_url(:display)
-            temp << temp_dic
+            temp << notif.prepare
         end
         
         #@notifs = @notifs.to_json.html_safe

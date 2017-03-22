@@ -257,8 +257,13 @@ class User < ApplicationRecord
 		@notification.conversation_id = con_id
 		@notification.save
 		
+		notif = Notification.find(@notification.id)
 		
-    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: Notification.find(@notification.id).to_json.html_safe}
+        notif = notif.prepare
+        
+        notif = notif.to_json.html_safe
+		
+    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: notif}
 	end
 	
 	private ############################# private methods below ##################################

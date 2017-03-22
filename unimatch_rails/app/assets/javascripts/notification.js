@@ -7,7 +7,7 @@ var NOTIF_SET = 10;
 $.fn.notificationsLink = function() {
     //this.empty();
     //link
-    this.append('<img src="/assets/bell.png" /><div class="new-notif-length"></div>')
+    this.append('<img class="bell" src="/assets/bell.png" /><div class="new-notif-length"></div>')
     $(".notifications-link").click(function(event) {
         //event.preventDefault();
         $(".notifications").toggle();
@@ -67,6 +67,8 @@ $.fn.addNotifications = function(notifications) {
     //scroll to top
     this.scrollNotifs();
     
+    refreshNotifLen();
+    
     return;
 };
 
@@ -99,12 +101,16 @@ function makeNotif(notification) {
     
     var toAppend = '';
     toAppend += '<div class="' + classes + '" conversation_id="' + notification['conversation_id'] + '">';
-    toAppend += '<img src ="' + notification['image_url'] + '"';
     toAppend += '<a href="' + notification['link'] + '">';
     toAppend += '<div class="notification-wrapper">';
     
-    toAppend += '<p class="information">' + notification['information'] + '</p>';
-    
+    ///////////////////////////////
+    toAppend += '<div class="notif-thumbnail"><img src ="' + notification['image_url'] + '" /></div>';
+    toAppend += '<div class="notif-info">'
+    toAppend += '<p>' + notification['sender'] + '</p>';
+    toAppend += '<p>' + notification['information'] + '</p>';
+    toAppend += '</div>'
+    ///////////////////////////////
     toAppend += '</div>';
     toAppend += '</a>';
     toAppend += '</div>';

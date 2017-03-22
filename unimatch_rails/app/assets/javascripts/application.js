@@ -21,6 +21,7 @@
 //= require cable
 //= require_tree .
 
+
 $(document).on('turbolinks:load', function() {
     
     $("#startdate").datepicker({ dateFormat: 'yymmdd' });

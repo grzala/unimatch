@@ -31,7 +31,7 @@ class ConversationChannel < ApplicationCable::Channel
       end
       @senders = @senders[0...-2]
       
-      user.notify(conversation_path(:id => @conversation.id), "You received a message from: " + @senders, @conversation.id)
+      user.notify(conversation_path(:id => @conversation.id), "You received a message from: " + @senders, current_user.id.to_s, @conversation.id)
     end
     
   end

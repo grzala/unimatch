@@ -116,7 +116,7 @@ class Conversation < ApplicationRecord
     end
     
     def get_messages_newer(date)
-        @msgs = Message.where("conversation_id == ? AND created_at > ?", self.id, date).order(created_at: :desc)
+        @msgs = Message.where("conversation_id = ? AND created_at > ?", self.id, date).order(created_at: :desc)
         
         return @msgs
     end

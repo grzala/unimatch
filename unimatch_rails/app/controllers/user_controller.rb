@@ -1,19 +1,19 @@
 class UserController < ApplicationController
   before_action :authorize, :only => [:match, :delete]
-  
+  #contains all the function that we need for users
   def authorize
     if session[:user_id] != params[:id].to_i then redirect_to :root end
-  end
+  end#if user id is not the same as id then it redirects to root, a security feature
   
   def index
     @user = User.find(session[:user_id])
     @notifs = Notification.where(user_id: @user.id)
-  end
+  end#displays the user
 
   
   def list
     @users = User.all
-  end
+  end#lists all the users, used in developement stages
   
   def match
     @matches = Connector.get_user_matches(params[:id])
@@ -55,7 +55,7 @@ class UserController < ApplicationController
     if session[:user_id] != params[:id]
       @con = Conversation.get_conversation_between(User.friendly.find(session[:user_id]), User.friendly.find(params[:id]))
     end
-  end
+  end#used to display users own profile page and also other users profile pages, using json request for the calendar
   
   def new
     @user = User.new
@@ -79,7 +79,7 @@ class UserController < ApplicationController
       redirect_to :controller => :session, action => :new
     end
     
-  end
+  end#creates new user account, relates to the welcom controller
   
   def choose_interests
     @user = User.friendly.find(params[:id])
@@ -96,7 +96,7 @@ class UserController < ApplicationController
     @interests6 = @allinterests.where(interest_group_id: 6)
     @interests7 = @allinterests.where(interest_group_id: 7)
     @user_interests = @user.get_interests
-  end
+  end#used for choosing the interests
   
   def update_interests
     redirect_to user_url, :id => params[:id]
@@ -104,7 +104,7 @@ class UserController < ApplicationController
   
   def edit
     @user = User.friendly.find(params[:id])
-  end
+  end#used to edit users details
   
   def update
     @user = User.find_by_id(params[:id])
@@ -116,7 +116,7 @@ class UserController < ApplicationController
   def delete
     User.find(params[:id]).destroy
     redirect_to :action => :list
-  end
+  end#deletes user
   
   def messages
     @msgs = Message.get_messages(session[:user_id], params[:id])
@@ -128,18 +128,14 @@ class UserController < ApplicationController
     
     @message = Message.new()
     
-  end
+  end#used for messages with other users, u message them from their profile page
 
-  
-  def common_interests(user1, user2)
-      #return User.get_common_interests(user1, user2, important = true)
-  end
   
   helper_method :common_interests
   
   private
   def user_param
     params.require(:user).permit(:email, :name, :surname, :password, :password_confirmation, :avatar, :slug)
-  end
+  end#private params for security reasons
 end
 

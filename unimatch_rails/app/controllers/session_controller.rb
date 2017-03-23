@@ -1,5 +1,5 @@
 class SessionController < ApplicationController
-    
+    #same as welcome controller
     layout 'login'
     
     def new

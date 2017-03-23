@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  
+  #application controller, a supper class
   #connect to algorithm
   include Connect
   

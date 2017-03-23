@@ -8,3 +8,4 @@ class Message < ApplicationRecord
   
 
 end
+#message belongs to conversation and to the user that receives it, foreign key is the sender

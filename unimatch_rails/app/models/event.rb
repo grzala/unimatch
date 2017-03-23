@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+    #event model, used for basic event functions
     belongs_to :user
     
     has_many :users
@@ -12,7 +13,7 @@ class Event < ApplicationRecord
             return User.find(self.user_id).name
         end
         
-    end
+    end#returns the 'owner' of the event, either a user or a society
     
     def get_participants
 		@ep = Participant.where(event_id: self.id)
@@ -21,7 +22,7 @@ class Event < ApplicationRecord
 			@participants << User.find_by_id(m.user_id)
 		end
 		return @participants
-    end
+    end#returns all the people that will participate on the event
     
     
     
@@ -34,12 +35,12 @@ class Event < ApplicationRecord
 		if !@participants.include? id
 			Participant.create(user_id: id, event_id: self.id)
 		end
-    end
+    end#add a participant to a event
     
     def delete_participant(id)
         @p = Participant.find_by_event_id_and_user_id(self.id, id) #not using .where method as just 1 record is expected to be found
         if @p != nil then @p.destroy end
-    end
+    end#when user doesnt wanto attend the event anymore
     
     def has_participant(id)
         return get_participants_by_id.include? id

@@ -1,5 +1,5 @@
 class EventController < ApplicationController
-    
+  #contains all the functions required for events to work  
     #if no society - choose interests
     
     def show
@@ -20,11 +20,11 @@ class EventController < ApplicationController
             temp["value"] = society.id
             @choices << temp
         end
-    end
+    end#creates the new event, if user is admin of a society then he can create an event on the societies behalf
     
     def list
         @events = Event.all
-    end
+    end#lists all the events
     
     def join_leave
         @event = Event.find(params[:id])
@@ -36,7 +36,7 @@ class EventController < ApplicationController
         end
         
         redirect_to :action => :list
-    end
+    end#allows user to participate on events
     
     def create
         if params[:recurring]
@@ -59,7 +59,7 @@ class EventController < ApplicationController
         
         
         redirect_to :action => :list
-    end
+    end#creates now event, get parameteers and send them to save event function
     
     def save_event(name, description, location, cost, date, hour, minute, user_id, society_id = nil, event_group_id = nil)
         @event = Event.new
@@ -73,10 +73,10 @@ class EventController < ApplicationController
         @event.society_id = society_id
         @event.event_group_id = event_group_id
         if !@event.save then puts @event.errors.full_messages end
-    end
+    end#saves the event to db
     
     private
     def event_param
         params.require(:event).permit(:name, :description, :location, :cost, :date)
-    end
+    end#private params for security reasons
 end

@@ -39,22 +39,23 @@
 </div>
 <div class="col-md-4" class="left">
     <% if session[:user_id] != @user.id %>
-    <h4>Attending Events</h4>
-    <% if @events.length == 0 %>
-    <p>Not attending any events</p>
-    <% else %>
-    <% @events.each do |event| %>
-    <%= link_to event.name :controller => :event, :action => :show, :id => event.id %>
+        <h4>Attending Events</h4>
+        <% if @events.length == 0 %>
+            <p>Not attending any events</p>
+        <% else %>
+            <% @events.each do |event| %>
+            <%= link_to event.name :controller => :event, :action => :show, :id => event.id %>
+            <% end %>
+        <% end %>
     <% end %>
-    <% end %>
-    <% end %>
+    
     <h4>In Societies</h4>
     <% if @in_societies.length == 0 %>
-    <p>Not in any societies</p>
+        <p>Not in any societies</p>
     <% else %>
-    <% @in_societies.each do %>
-    <%= link_to society.name :controller => :society, :action => :show, :id => society.id %>
-    <% end %>
+        <% @in_societies.each do |society|%>
+            <%= link_to society.name, :controller => :society, :action => :show, :id => society.id %>
+        <% end %>
     <% end %>
 </div>
 </div>

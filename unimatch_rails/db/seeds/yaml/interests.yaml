@@ -29,7 +29,7 @@ sports:
     - swimming
     - sailing
     - surfing
-    - caneoing
+    - canoeing
     - kayaking
     - diving
     - floorball
@@ -51,7 +51,6 @@ science:
     - geology
     - engineering
     - chemical engineering
-    - rocks
    
 cooking:
     - mexican
@@ -74,7 +73,6 @@ music:
     - radio
     - dance
     - guitar
-    - accapella
     - metal
     - ambient
 

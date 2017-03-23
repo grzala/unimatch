@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20170313162900) do
   end
 
   create_table "notifications", force: :cascade do |t|
+    t.string   "sender"
     t.string   "link"
     t.string   "information"
     t.integer  "user_id"

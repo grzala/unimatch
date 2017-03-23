@@ -15,6 +15,7 @@
 //= require jquery-ui
 //= require jquery.qtip
 //= require turbolinks
+//= require bootstrap
 //= require bootstrap-sprockets
 //= require moment.min
 //= require fullcalendar/fullcalendar

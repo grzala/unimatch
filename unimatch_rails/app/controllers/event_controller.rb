@@ -54,7 +54,7 @@ class EventController < ApplicationController
             
         else 
             date = Date.parse(params[:startdate])
-            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], session[:user_id], params[:society_id])
+            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], params[:user_id], params[:society_id])
         end
         
         
@@ -72,7 +72,6 @@ class EventController < ApplicationController
         @event.user_id = user_id
         @event.society_id = society_id
         @event.event_group_id = event_group_id
-        @event.add_participant(session[:user_id])
         if !@event.save then puts @event.errors.full_messages end
     end
     

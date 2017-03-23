@@ -10,7 +10,7 @@ sports:
     - golf
     - rugby
     - squash
-    - americanfootball
+    - american football
     - lacrosse
     - chess
     - bmx
@@ -22,14 +22,14 @@ sports:
     - cycling
     - circus
     - yoga
-    - wintersports
+    - winter sports
     - fighting
     - shooting
     - rowing
     - swimming
     - sailing
     - surfing
-    - caneoing
+    - canoeing
     - kayaking
     - diving
     - floorball
@@ -37,9 +37,9 @@ sports:
     - climbing
     - netball
     - polo
-    - tabletennis
-    - ultimatefrisbee
-    - underwaterhockey
+    - table tennis
+    - ultimate frisbee
+    - underwater hockey
     - weightlifting
     
 science:
@@ -50,8 +50,7 @@ science:
     - genetics
     - geology
     - engineering
-    - chemicalengineering
-    - rocks
+    - chemical engineering
    
 cooking:
     - mexican
@@ -74,7 +73,6 @@ music:
     - radio
     - dance
     - guitar
-    - accapella
     - metal
     - ambient
 
@@ -86,7 +84,7 @@ culture:
     - travel
     - religion
     - history
-    - ancienthistory
+    - ancient history
     - african
     - carribean
     - arab
@@ -99,13 +97,13 @@ culture:
 health:
     - fitness
     - bodybuilding
-    - healthyeating
+    - healthy eating
     - gardening
     
 social:
-    - businessenterprise
+    - business enterprise
     - energy
     - volunteering
     - comedy
     - gaming
-    - publicspeaking
+    - public speaking

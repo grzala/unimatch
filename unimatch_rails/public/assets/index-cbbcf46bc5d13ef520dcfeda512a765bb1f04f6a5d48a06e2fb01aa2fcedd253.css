@@ -1,0 +1,242 @@
+/* line 17, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+html {
+  height: 100%;
+}
+
+/* line 20, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.centered {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* line 24, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#screen1 {
+  height: calc(100% - 30px);
+  width: 100%;
+  background: url("background.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -ms-background: cover;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 50;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+}
+@media screen and (min-width: 900px) {
+  /* line 24, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+  #screen1 {
+    height: calc(100% - 54px);
+  }
+}
+
+/* line 40, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.text {
+  color: #606060;
+  text-align: center;
+  padding: 20px;
+  font-family: "Lato", sans-serif;
+  font-size: 1em;
+}
+
+/* line 47, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.text-wrapper {
+  width: 100%;
+  position: absolute;
+  bottom: 30px;
+  display: none;
+}
+@media screen and (min-width: 900px) {
+  /* line 47, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+  .text-wrapper {
+    margin-top: 17%;
+  }
+}
+
+/* line 55, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.text-wrapper h1 {
+  font-family: "Lato", sans-serif;
+  font-weight: bold;
+  color: #fff;
+}
+@media screen and (min-width: 900px) {
+  /* line 55, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+  .text-wrapper h1 {
+    font-size: 3em;
+  }
+}
+
+/* line 63, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.text-wrapper h1:hover {
+  cursor: default;
+}
+
+/* line 67, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+@media screen and (min-width: 900px) {
+  /* line 67, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+  .right {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    min-width: 250px;
+    margin-right: 20px;
+  }
+}
+
+/* line 76, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.feature {
+  width: 300px;
+  padding-top: 25px;
+  margin: 80px 0px;
+  background-color: #f3f3f3;
+}
+
+/* line 82, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#screen2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #f3f3f3;
+  position: relative;
+  margin-top: -10px;
+  z-index: 40;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 16px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* line 94, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+h2 {
+  font-family: "Lato", sans-serif;
+  font-size: 20px;
+}
+
+/* line 98, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#screen3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #FF6868;
+  position: relative;
+  margin-top: -10px;
+  z-index: 30;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* line 110, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.image_box {
+  margin: 8% 0% 8% 0%;
+}
+
+/* line 118, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.text_box {
+  margin: 8% 0% 8% 0%;
+}
+
+/* line 126, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+.text_box h2 {
+  font-size: 30px;
+  color: white;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+}
+@media screen and (min-width: 900px) {
+  /* line 126, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+  .text_box h2 {
+    font-size: 45px;
+  }
+}
+
+/* line 134, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#screen4 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #f3f3f3;
+  position: relative;
+  margin-top: -10px;
+  z-index: 20;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* line 145, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#screen4 .text_box h2 {
+  color: #606060;
+}
+
+/* line 150, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#screen5 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  background-color: #FF6868;
+  position: relative;
+  margin-top: -10px;
+  z-index: 10;
+}
+
+/* line 160, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#desktop {
+  display: none;
+}
+@media screen and (min-width: 900px) {
+  /* line 160, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+  #desktop {
+    display: unset;
+  }
+}
+
+/* line 166, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+#mobile {
+  display: unset;
+}
+@media screen and (min-width: 900px) {
+  /* line 166, /var/www/unimatch/unimatch_rails/app/assets/stylesheets/index.css.sass */
+  #mobile {
+    display: none;
+  }
+}

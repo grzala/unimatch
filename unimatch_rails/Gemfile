@@ -37,7 +37,13 @@ gem 'jbuilder', '~> 2.5'
 # For seeding
 gem 'seedbank'
 
+gem 'normalize-rails'
 
+gem 'database_cleaner'
+
+#gems for profile picture
+gem 'carrierwave'
+gem 'cloudinary'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,8 +56,8 @@ group :test do
   
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails'
-  gem 'database_cleaner'
   gem 'factory_girl'
+  gem 'selenium-webdriver', '<= 2.53.0'
 end
 
 group :development do
@@ -72,3 +78,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'friendly_id', '~> 5.2'

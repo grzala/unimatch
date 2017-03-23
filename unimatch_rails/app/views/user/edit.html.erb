@@ -1,10 +1,13 @@
 <% @page_title = "edit" %>
-
+<link rel="stylesheet" href="edit.css">
 <div class="Edit_Form">
     <h2>Edit Details</h2>
-    <%= form_for(:user, :url => {:action => 'update', :id => @user.id}, mehod: :put) do |f| %>sh bin/run.sh 
+    <%= form_for(:user, :url => {:action => 'update', :id => @user.id}, method: :put) do |f| %>
         <p> name: </br> <%= f.text_field :name %></p>
         <p> surname: </br> <%= f.text_field :surname %></p>
+        <p> change profile picture: </p>
+        <%= image_tag @user.avatar_url(:display) %></br>
+        <center><p style=' margin-left: 75px'><%= f.file_field :avatar%></p><center>
         
         <%= f.submit :Edit %>
     <% end %>

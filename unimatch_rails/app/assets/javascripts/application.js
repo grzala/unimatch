@@ -13,16 +13,41 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require jquery.qtip
 //= require turbolinks
+//= require bootstrap
 //= require bootstrap-sprockets
+//= require moment.min
+//= require fullcalendar/fullcalendar
+//= require cable
 //= require_tree .
+
 
 $(document).on('turbolinks:load', function() {
     
-    $("#startdate").datepicker();
+    $("#startdate").datepicker({ dateFormat: 'yymmdd' });
+    $("#enddate").datepicker({ dateFormat: 'yymmdd' });
     
+    /*
     $("#burger_menu").click(function(){
         $("#container").toggleClass("container_show")});
+        
+    $("#nav_trigger").click(function(){
+    console.log("nav trigger clicked");
+    $("#navigation_mobile_container").toggleClass("on");
+    
+    });
+    */
+    
+    /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
+    $("#nav_trigger").click(function(){
+        document.getElementById("mySidenav").style.width = "250px";
+    });
+
+    /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
+    $("#closebtn").click(function(){
+        document.getElementById("mySidenav").style.width = "0";
+    });
 
 });
 

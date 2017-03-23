@@ -1,0 +1,99 @@
+@import application
+
+$notif_height: 50px
+
+.notifications
+    border: solid 1px #babdc4
+    background-color: white
+    top: 42px
+    left:  40%
+    position: absolute
+    z-index: 20
+    width: 300px
+    margin: auto
+    max-height: 200px
+    overflow: hidden
+    overflow-y: scroll
+    padding: 1px
+    display: none
+
+.notifications .seen
+    background-color: #f78a8a
+    border-color: #f78a8a
+
+.notifications .unseen
+    background-color: $red
+
+.notifications .notification p
+    color: white
+    text-decoration: none
+    margin: 0px
+
+.notification
+    padding: 2px
+    margin: 0px
+    margin-bottom: 5px
+    padding: 2px 5px 2px 5px
+    height: $notif_height
+    border: solid 1px $red
+
+//fills all space
+.notification-wrapper
+    width: 100%
+    height: 100%
+    padding: 5px
+    
+.notifications .loading-icon
+    width: 25px
+    height: 25px
+
+.notifications-link
+    width: 30px
+    height: 30px
+    display: inline-block
+    margin: 0px auto
+    text-align: center
+    &:hover 
+        cursor: pointer
+        color: black
+
+.notifications-link .bell
+    width: 26px
+    height: 26px
+
+/* the little number showing how many notifs there are */
+.new-notif-length
+    border-radius: 100%
+    background-color: white
+    font-size: 8px
+    text-align: center
+    position: relative
+    z-index: 20
+    top: -25px
+    left: 8px
+    width: 12px
+    height: 12px
+    margin: auto
+    
+.notification .notif-thumbnail
+    width: 35px
+    height: 35px
+    float: left
+    position: relative
+    border-radius: 50%
+    background-color: $grey
+    z-index: 5
+
+.notification .notif-thumbnail img
+    width: inherit
+    height: inherit
+    border-radius: 50%
+    
+.notification .notif-info
+    float: left
+    text-align: left
+    padding-top: 2px
+    padding-left: 10px
+    
+.notification .notif-info p:first-child
+    font-size: 10px

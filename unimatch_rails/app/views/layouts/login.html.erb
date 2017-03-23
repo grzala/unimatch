@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>UniMatch</title>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%= stylesheet_link_tag    'login', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'login', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <% if flash[:success] %>
+      <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:success] %></strong>
+      </div>
+    <% end %>
+    <% if flash[:warning] %>
+      <div class="alert alert-warning fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:warning] %></strong>
+      </div>
+    <% end %>
+    <div id="nav_trigger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div id="mySidenav" class="sidenav">
+      <ul id="navigation_mobile">
+        <a href="javascript:void(0)" id="closebtn" >&times;</a>
+        <li><%= link_to 'Home' %></li>
+        <li><%= link_to 'Features' %></li>
+        <li><%= link_to 'About' %></li>
+      </ul>
+      </div>
+    <div id="nav_bar">
+           <div class="left">
+                <div id="navigation_left" class="navigation_inner nonselect">
+                    <%= link_to 'index', :controller => :welcome do %>
+                        <h3> Home </h3>
+                    <% end %>
+                    <a href="#screen2">
+                        <h3>Features</h3>
+                    </a>
+                    <a href="#">
+                        <h3>About</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <%= yield %>
+    </body>
+</html>

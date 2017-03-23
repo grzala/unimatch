@@ -1,0 +1,17 @@
+YOUR ID <%= session[:user_id] %>
+<br/>
+
+number_of messages <%= @msgs.length %>
+
+<br/><br/>
+
+<div class="messages">
+    
+</div>
+
+<script>
+    var CON_ID = <%= @con.id %>
+    $(document).ready(function() {
+        $('.messages').messages(CON_ID);
+    })
+</script>

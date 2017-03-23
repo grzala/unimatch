@@ -4,14 +4,16 @@
     <h2>Create Event</h2>
     <%= form_tag(:event_index) do %>
         <p> Name: </br> <%= text_field_tag :name %></p>
-        <p> Description: </br> <%= text_field_tag :description %></p>
+        <p> Description: </br> <%= text_area_tag :description, cols: 20, rows: 10 %> </p>
         <p> Location: </br> <%= text_field_tag :location %></p>
         <p> Cost: </br> <%= text_field_tag :cost, "0" %>£</p>
         <p> Date of Event: </br> <%= text_field_tag :startdate %></p>
-        <p> TIME(24hr format): </br> <%= text_field_tag :hour %> : <%= text_field_tag :minute %></p>
-        <p> Recurring: <%= check_box_tag :recurring %></p>
-        <p> Frequency(ENSURE ENTERING INTEGERS): </br> <%= text_field_tag :frequency %></p>
-        <p> Date of the last event: </br> <%= text_field_tag :enddate %></p>
+        <p> Time(HH:MM): </br> <%= text_field_tag :hour %> : <%= text_field_tag :minute %></p>
+        <p> Recurring (Check this box if the event is happening many times, on the same day of the week): <%= check_box_tag :recurring %></p>
+        <div id="burger-recurring">
+            <p> Frequency (1 every week, 2 every two weeks, etc.): </br> <%= text_field_tag :frequency %></p>
+            <p> Date of the last event: </br> <%= text_field_tag :enddate %></p>
+        </div>
         
         <!-- drop down list of societies administered by logged in user -->
         <p> <%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %></p>
@@ -20,14 +22,17 @@
     <% end %>
 </div>
 
-<!--
-<p> Name: </br> <input type="text" name="name" /></p>
-<p> Description: </br> <input type="text" name="description" />/p>
-<p> Location: </br> <input type="text" name="location" /></p>
-<p> Cost: </br> <input type="text" name="cost" value="0" />£</p>
-<p> Date Event(JQUERY DATEPICKER): </br><input type="text" name="startdate" /></p>
-<p> TIME(JQUERY TIMEPICKER): </br> <input type="text" name="hour" /> : <input type="text" name="minute" /></p>
-<p> Recurring: <input type="checkbox" name="recurring" value="recurring"></p>
-<p> Frequency(ENSURE ENTERING INTEGERS): </br> <input type="text" name="frequency" /></p>
-<p> Date of the last event: </br> <input type="text" name="enddate" /></p>
--->
+<script>
+    $(document).ready(function() {
+        $("#burger-recurring").hide();
+    });
+    
+    $("#recurring").change(function(){
+        if ($('#recurring').is(":checked")) {
+            $("#burger-recurring").show();
+        } else {
+            $("#burger-recurring").hide();
+        }
+    });
+    
+</script>

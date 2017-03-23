@@ -10,30 +10,48 @@ Rails.application.routes.draw do
   
   controller :event do
     get '/event/list' => :list
+    get '/event/join/:id' => :join_leave
     
   end
   resources :event
   
-  resources :message
-  
   controller :user do
-    get '/user/list' => :list
+    #get 'user/:id' => :show
+    #get 'user/slug/edit' => :edit
+    get '/user/all/list' => :list
     post '/user/:id' => :update
     get '/user/match/:id' => :match
-    get '/user/choose/:id' => :choose_interests
+    get '/user/choose/:id' => :choose_interests, :as => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
-    get 'user/:id/messages' => :messages
   end
-  
   resources :user
   
   controller :session do
-    get  'login' => :new
-    post 'login' => :create
+    post '/register' => :register
+    get '/register' => :new
+  end
+  
+  root :to => 'welcome#index'
+  
+  controller :welcome do
+    post '' => :create
     get 'logout' => :destroy
   end
   
-  root "session#new"
+  controller :conversation do
+    get '/conversation/:id' => :show, :as => :conversation
+    get '/conversation/message/:id' => :message
+    post '/conversation/create_message' => :create_message, :as => :create_message
+    post '/message' => :get_messages
+  end
+  
+  controller :notification do
+    post '/notification' => :get_notifications
+    
+  end
+  
+  mount ActionCable.server => '/cable'
+
   
   #match ':controller'(/:action(/:id))', :via => get
 

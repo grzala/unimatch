@@ -1,33 +1,47 @@
-
-<% if flash[:alert] %>
-  <div class="panel-heading" id="notice">
-    <legend><%= flash[:alert] %></legend>
-  </div>
-<% else %>
-  <div class="panel-heading">  
-  <legend>Please Log In</legend>
-  </div>
-<% end %>
-<%= form_tag do %>
-<div class="center" id="login_form">
-  <div class="Sign_Form">
-    <fieldset>
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= text_field_tag :email, params[:email] %>
-      </div>
-      <br>
-      <div class="input-group">
-        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= password_field_tag :password, params[:password] %>
-      </div>
-      <br>
-      <div>
-        <%= submit_tag "Login", {:id => 'login'} %>
-        <%= link_to "Register", controller: 'user', action: 'new'  %>
-        
-      </div>
-    </fieldset>
-  </div>
-  </div>
-  </div>
-  </div>
-<% end %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unimatch Login</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag 'login_page', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+        <%= image_tag("unimatch_logo.png", border: 0, height: "100px", alt: "UniMatch Logo", :class => "logo") %>
+    <div class="block_centre" id="form_container">
+                <h2>Register</h2>
+        <div class="block_centre">
+            <%= form_for(:user, :url => {:controller => 'user', :action => 'create'}) do |f| %>
+                <fieldset class="block_centre">
+                    <div class="form-group">
+                        <label>Email address</label>
+                        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= f.text_field :email %>
+                        <small id="emailHelp" class="form-text text-muted">Needs to end in .ac.uk</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password %>
+                    </div>
+                    <div class="form-group">
+                        <label>Password confirmation</label>
+                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password_confirmation %>
+                    </div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="name" aria-describedby="basic-addon2" <%= f.text_field :name %>
+                    </div>
+                    <div class="form-group">
+                        <label>Surname</label>
+                        <input type="text" class="form-control" placeholder="surname" aria-describedby="basic-addon2" <%= f.text_field :surname %>
+                    </div>
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <input type="file" class="form-control" placeholder="profile pic" aria-describedby="basic-addon2" <%= f.file_field :avatar %>
+                    </div>
+                </fieldset>
+                <%= submit_tag "Register", {:id => 'register', :class => "btn btn-primary"} %>
+            <% end %>
+        </div>
+        </div>
+        </div>
+    </div>
+</body>

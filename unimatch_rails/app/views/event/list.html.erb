@@ -3,6 +3,12 @@
 <% @events.each do |event| %>
     
    
-    <p>asdsssadas <%=event.name%></p>
+    <p><%= link_to event.name, :controller => :event, :action => :show, :id => event.id %></p>
+    <p><%= event.description %></p>
+    <p>
+        <% str = !event.has_participant(session[:user_id]) ? "Join Event" : "Leave Event" %>
+        <%= link_to str, controller: 'event', action: 'join_leave', id: event.id %>
+    </p>
+    </br>
   
 <% end %>

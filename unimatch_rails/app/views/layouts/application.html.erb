@@ -1,52 +1,85 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Unimatch</title>
+    
+    <title>UniMatch</title>
+    
     <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="/assets/circle-progress.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="turbolinks-cache-control" content="no-cache">
   </head>
-
   <body>
+    <script>
+      window.onunload = function(){}
+    </script>
     <div class="header">
-      <%= link_to image_tag("unimatch_logo.png", border: 0, height: "100", alt: "UniMatch Logo"), root_path, {id: "unimatch_logo", class: "inline_block"} %>
+      <div id="header_text_container">
+        <h1 id="header_text"><%= link_to 'UniMatch', :controller => :user, :action => :show ,  id: session[:user_id] %></h1>
+      </div>
     <% if session[:user_id] %>
-      
-      
-      <button id="burger_menu">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-      </button>
-      <div id="container" class="container_hidden">
-        <ul id="navigation_mobile">
-        <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %></p>
-        <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
+      <div id="nav_trigger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div id="mySidenav" class="sidenav">
+      <ul id="navigation_mobile">
+        <a href="javascript:void(0)" id="closebtn" >&times;</a>
         <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+        <li><%= link_to 'Messages', :controller => :user, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Societies', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+        <li><%= link_to 'Notifications', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
-        <li><%= link_to "logout", logout_url %></li>
-        
+        <li><%= link_to "logout", logout_url, id: 'logout' %></li>
       </ul>
       </div>
       <div id="desktop_nav">
-      <ul id="navigation">
-        <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
-        <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
-        <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
-      </ul>
+        <ul id="navigation">
+          <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
+          <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
+          <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
+          <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+          <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
+          <li><div class="notifications-link"><div class="notifications"></div></div></li>
+        </ul>
       </div>
-      <div id = "details">
-      <p>You are logged in as <%= link_to session[:user_name], controller: 'user', action: 'show', id: session[:user_id] %> <%= link_to "logout", logout_url %></p>
-      </div>
+      <div id="details">
+        <div id="user_image">
+          <%= image_tag @image_thumbnail, :class => "user_image_thubmnail" %>
+        </div>
+        <div id = "details_dropdown">
+          <%= link_to session[:user_name], controller: :user, action: :show, id: session[:user_id] %>
+          <%= link_to "Logout", logout_url, id: 'logout' %>
+          <%= link_to 'Edit details', controller: 'user', action: 'edit', id: @logged_user.slug %>
+          <%= link_to 'Edit interests', controller: 'user', action: 'choose_interests', id: @logged_user.slug %>
+        </div>
       </div>
     <% end %>
     <% if flash[:notice] %>
       <div class="notice"><legend><%= flash[:notice] %></legend></div>
     <% end %>
+    <div class="container shadow">
+
     <%= yield %>
+    <!-- list of notifs defined as json in application_controller -->
+    <script>
+      $(document).ready(function() {
+        $('#details').click(function (e) {
+          $('#details_dropdown').toggle();
+        })
+        
+        
+        $(".notifications-link").notificationsLink();
+        $(".notifications").addNotifications(<%= @notifs %>);
+      });
+    </script>
+    </div>
   </body>
 </html>

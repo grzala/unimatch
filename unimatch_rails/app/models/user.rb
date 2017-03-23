@@ -141,6 +141,7 @@ class User < ApplicationRecord
 		while toreturn.length < len and i < len do
 			if i >= cur_list.length
 				l_i += 1
+				i = 0
 				if l_i >= lists.length
 					break
 				end
@@ -151,6 +152,8 @@ class User < ApplicationRecord
 			end
 			i += 1
 		end
+		
+		toreturn = toreturn.compact
 		
 		return toreturn
 	end

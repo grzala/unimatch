@@ -10,20 +10,37 @@
     <% if coefficient > 0 && session[:user_id] != user.id %>
         <div class="row margin_bottom">
             <div class="col-md-3" id="some_image">
-                <%= image_tag user.avatar_url(:display), :class => "profile_pic" %>
+                <%= image_tag user.avatar_url(:display), :class => "profile_image" %>
             </div>
         
-            <div class="col-md-5" id="some_text">
+            <div class="col-md-6" id="some_text">
+                
                 <div class="name">
-                    <%= link_to user.name, :controller => :user, :action => :show, :id => user.id do %>
-                        <h3><%= user.name %></h3>
-                    <% end %>
+                    <h3><%= link_to user.name, :controller => :user, :action => :show, :id => user.id %></h3>
                 </div>
                 
                 <div class="common_interests">
-                    <h5>Text</h5>
-                    <%= User.get_common_interests_fixed(User.find(5), User.find(4), 5) %>
-                    <h5>Text</h5>
+                    
+                    <% interests = User.get_common_interests_fixed(User.find(session[:user_id]), User.find(user.id), 3) %>
+                    <% 
+                        interest_names = []
+                        interests.each do |i|
+                            interest_names << i.name 
+                        end
+                    %>
+                    
+                    <% if interest_names.length > 0 %>
+                       <h5><%= interest_names[0].capitalize %></h5> 
+                        <% length = interest_names.length %>
+                        <% if length > 1 %>
+                            <% interest_names[1..interest_names.length].each do |interest_name| %>
+                                <h5>,&nbsp;<%= interest_name.capitalize %></h5>
+                            <% end %>
+                        <% end %>
+                    <% else %>
+                        <h5>No common interests</h5>
+                    <% end %>
+                    
                 </div>
                 
                 <div class="buttons">
@@ -32,7 +49,7 @@
                    </div>
                    
                    <div class="favourites_button">
-                       <button type="button" class="btn btn-danger">Add to favourites</button>
+                       <!--<button type="button" class="btn btn-danger">Add to favourites</button>-->
                    </div>
                 </div>
             </div>
@@ -40,20 +57,19 @@
             <script>
                 
             </script>
-            <div class="col-md-4" id="percentage_bar">
+            <div class="col-md-3" id="percentage_bar">
                 <% coefficient1 = coefficient.round(2) %>
                 <div class="coefficient"><%= ((coefficient1*100).round).to_s + "%"%></div>
                 <div id="progress<%= user.id %>"></div>
                 <script>
-                console.log(<%= coefficient1 %>)
                     $('#progress<%= user.id %>').circleProgress({
-                        value: <%= coefficient1 %> ,
+                        value:  <%= coefficient1 %> ,
                         size: 145,
-                        startAngle: 4.71 ,
+                        startAngle: 4.71,
                         thickness: 7,
+                        lineCap: "round",
                         fill: {
-                            gradient: ["green", "yellow", "#FF6868"]
-                            // gradient: [["red", .2], ["green", .3], ["blue", .8]]
+                            gradient: ["green","yellow" , "#FF6868"],
                         }
                     });
                 </script>
@@ -61,38 +77,6 @@
         </div>
     <% end %>
     <% end %>
-
-
-
-
-
-
-                                        <% @matched_users.each do |user, coefficient| %>
-                                            <% if coefficient > 0 && session[:user_id] != user.id %>
-                                                <%= link_to user.name, :controller => :user, :action => :show, :id => user.id %>
-                                                <%= user.surname %>
-                                                <% coefficient = ((coefficient*100).to_f).ceil %>
-                                                
-                                                <%
-                                                    match_type = "NO MATCH"
-                                                    if coefficient > 0 && coefficient <= 20
-                                                        match_type = "WEAK MATCH"
-                                                        class_type = "weak_match"
-                                                    elsif coefficient > 20 && coefficient <= 50
-                                                        match_type = "NORMAL MATCH"
-                                                        class_type = "normal_match"
-                                                    elsif coefficient > 50 
-                                                        match_type = "STRONG MATCH"
-                                                        class_type = "strong_match"
-                                                    end
-                                                %>
-                                                
-                                                 <%= coefficient.to_s + "% "%>
-                                                <span class=<%= class_type %>><%= match_type  %></span>
-                                                
-                                                </br>
-                                            <% end %>
-                                        <% end %>
 </div>
 
 

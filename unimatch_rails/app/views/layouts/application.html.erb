@@ -8,7 +8,6 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/assets/circle-progress.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -48,7 +47,7 @@
           <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
           <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
           <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
-          <li><div class="notifications-link"></div></li>
+          <li><div class="notifications-link"><div class="notifications"></div></div></li>
         </ul>
       </div>
       <div id="details">
@@ -73,7 +72,6 @@
     <div class="container">
 
     <%= yield %>
-    <div class="notifications"></div>
     <!-- list of notifs defined as json in application_controller -->
     <script>
       $(document).ready(function() {

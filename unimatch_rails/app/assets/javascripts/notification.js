@@ -5,14 +5,14 @@ var current_notif = 0;
 var NOTIF_SET = 10;
 
 $.fn.notificationsLink = function() {
-    this.empty();
+    //this.empty();
     //link
-    this.append('<img src="/assets/bell.png" /><div class="new-notif-length"></div>')
+    this.append('<img class="bell" src="/assets/bell.png" /><div class="new-notif-length"></div>')
     $(".notifications-link").click(function(event) {
-        event.preventDefault();
+        //event.preventDefault();
         $(".notifications").toggle();
-        $(".notifications").css("left", event.pageX - $(".notifications").width());
-        $(".notifications").css("top", event.pageY);
+        //$(".notifications").css("left", event.pageX - $(".notifications").width());
+        //$(".notifications").css("top", event.pageY);
     });
 }
 
@@ -26,6 +26,13 @@ function refreshNotifLen() {
         }
     }
     
+    if (active_notifs > 0) {
+        $('.new-notif-length').text(active_notifs)
+        $('.new-notif-length').show()
+    } else {
+        $('.new-notif-length').text("")
+        $('.new-notif-length').hide()
+    }
     $('.new-notif-length').text((active_notifs > 0 ? active_notifs : ""))
 }
 
@@ -43,7 +50,7 @@ $.fn.addNotifications = function(notifications) {
     $(document).mouseup(function(event) {
         var container = $(".notifications");
     
-        if (!container.is(event.target) && container.has(event.target).length === 0) {
+        if (( !container.is(event.target)) && container.has(event.target).length === 0) {
             container.hide();
         }
     });
@@ -59,6 +66,8 @@ $.fn.addNotifications = function(notifications) {
 
     //scroll to top
     this.scrollNotifs();
+    
+    refreshNotifLen();
     
     return;
 };
@@ -95,8 +104,13 @@ function makeNotif(notification) {
     toAppend += '<a href="' + notification['link'] + '">';
     toAppend += '<div class="notification-wrapper">';
     
-    toAppend += '<p class="information">' + notification['information'] + '</p>';
-    
+    ///////////////////////////////
+    toAppend += '<div class="notif-thumbnail"><img src ="' + notification['image_url'] + '" /></div>';
+    toAppend += '<div class="notif-info">'
+    toAppend += '<p>' + notification['sender'] + '</p>';
+    toAppend += '<p>' + notification['information'] + '</p>';
+    toAppend += '</div>'
+    ///////////////////////////////
     toAppend += '</div>';
     toAppend += '</a>';
     toAppend += '</div>';
@@ -119,11 +133,17 @@ function requestNotifications(from, to) {
 		  from: from,
 		  to: to,
 		},
-		success: function(data) {    
+		success: function(data) {   
+		    if (data.length <= 0) {
+		        $('.notifications .notifications-wrapper').append('<p>No new notifications</p>');
+		        return;
+		    }
+		    
 		    for (var i = 0; i < data.length; i++) {
                 $('.notifications .notifications-wrapper').append(makeNotif(data[i]));
                 current_notif++;
             }
+            
             loadMore = true;
             refreshNotifLen();
 		},

@@ -7,7 +7,7 @@
     
 <div id="matches">
     <% @matched_users.each do |user, coefficient| %>
-    <% if coefficient > 0 && session[:user_id] != user.id %>
+    <% if coefficient > 0.25 && session[:user_id] != user.id %>
         <div class="row margin_bottom">
             <div class="col-md-3" id="some_image">
                 <%= image_tag user.avatar_url(:display), :class => "profile_image" %>
@@ -44,13 +44,17 @@
                 </div>
                 
                 <div class="buttons">
-                   <div class="message_button">
-                       <button type="button" class="btn btn-danger">Message</button>
-                   </div>
+                  
+                   
+                   <%= link_to :controller => :user, :action => :show, :id => user.id, :class => "btn-danger" do %>
+                       <div class="btn btn-danger">Message</div>
+                   <% end %>
+                   
                    
                    <div class="favourites_button">
                        <!--<button type="button" class="btn btn-danger">Add to favourites</button>-->
                    </div>
+                   
                 </div>
             </div>
             

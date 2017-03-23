@@ -7,7 +7,7 @@ var NOTIF_SET = 10;
 $.fn.notificationsLink = function() {
     //this.empty();
     //link
-    //this.append('<img class="bell" src="/assets/bell.png" /><div class="new-notif-length"></div>')
+    this.append('<div class="new-notif-length"></div>')
     $(".notifications-link").click(function(event) {
         //event.preventDefault();
         $(".notifications").toggle();

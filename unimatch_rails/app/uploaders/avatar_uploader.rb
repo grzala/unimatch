@@ -1,6 +1,6 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   
-  include Cloudinary::CarrierWave
+  include CarrierWave::MiniMagick
   
   def default_url(*args)
     def default_url(*args)
@@ -8,15 +8,19 @@ class AvatarUploader < CarrierWave::Uploader::Base
     end
   end
   
+  def store_dir
+    'profile_pictures'
+  end
+  
   
   version :display do
-    process :eager => true
-    process :resize_to_fill => [300, 300, :north]
+    #process :eager => true
+    #process :resize_to_fill => [300, 300, :north]
   end
 
   version :thumbnail do
-    process :eager => true
-    process :resize_to_fill => [100, 100, :north]
+    #process :eager => true
+    #process :resize_to_fill => [100, 100, :north]
   end
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick

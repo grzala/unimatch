@@ -11,7 +11,7 @@
 </div>
 <div class="col-md-4">
 <p>Upcoming Events:</p>
-<% @society.get_events.each do |event| %>
+<% @events.each do |event| %>
     <p><%= link_to event.name, {:controller => :event, :action => :show, :id => event.id} %></p>
 <% end %>
 </div>

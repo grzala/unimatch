@@ -135,6 +135,7 @@ class User < ApplicationRecord
 		while toreturn.length < len and i < len do
 			if i >= cur_list.length
 				l_i += 1
+				i = 0
 				if l_i >= lists.length
 					break
 				end
@@ -145,6 +146,8 @@ class User < ApplicationRecord
 			end
 			i += 1
 		end
+		
+		toreturn = toreturn.compact
 		
 		return toreturn
 	end#does the same thing as the function above, just take one more input, which is the number of comon intererst to return
@@ -235,7 +238,7 @@ class User < ApplicationRecord
 		return @notifs
 	end#returns notificaties
 	
-	def notify(link, info, con_id = nil)
+	def notify(link, info, sender_id, con_id = nil)
 		
 		#if conversation exists, just one notification is needed. this prevents an overflow of notifications
 		if con_id != nil
@@ -245,13 +248,19 @@ class User < ApplicationRecord
 		
 		@notification = Notification.new
 		@notification.link = link
+		@notification.sender = sender_id
 		@notification.information = info
 		@notification.user_id = self.id
 		@notification.conversation_id = con_id
 		@notification.save
 		
+		notif = Notification.find(@notification.id)
 		
-    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: Notification.find(@notification.id).to_json.html_safe}
+        notif = notif.prepare
+        
+        notif = notif.to_json.html_safe
+		
+    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: notif}
 	end
 	
 	private ############################# private methods below ##################################

@@ -2,7 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-/* colours */
+
+// colours
+
 
 $primary-color: white
 $red: #FF6868
@@ -10,32 +12,83 @@ $blue: #3B579D
 $grey: #D8D8D8
 $black: #606060
 
+
 /* media queries breakpoints */
 
 $break-phone: 450px
 $break-tablet: 900px
 
-.normal_match
-    color: #6eb8d3
-    
-.strong_match
-    color: #00ff1d
-    
-.weak_match
-    color: #db6d00
+
 
 .user_image
     width: 150px
     height: 150px
     
+
     
-#profile_image
+.profile_image
     display: inline-block
     border-radius: 50%
     width: 100%
     max-width: 150px
     border: 1px solid #979797
+
+.margin_bottom
+    margin-bottom: 15px
+    
+#matches
+    margin-left: 15%
+    margin-right: 15%
+
+#percentage_bar
+    position: relative
+    
+.coefficient
+    position: absolute
+    top: 38%
+    left: 40%
+    font-family: "Lato", sans-serif
+    font-size: 25px
+
+// .message_button
+//     float: left
+//     margin-right: 20px
+//     background-color: $red
+//     border: 0
+//     min-width: 134px
+
+    
+.favourites_button
     float: left
+    
+.buttons
+    display: flex
+    flex-direction: row
+    justify-content: start
+    
+.common_interests
+    display: flex
+    flex-direction: row
+    justify-content: start
+    
+.name h3 a
+    font-family: "Lato", sans-serif
+    font-size: 22px
+    font-weight: bold
+    text-decoration: none
+    color: $black
+    
+.name
+    display: flex
+    flex-direction: row
+    justify-content: start
+
+.btn-danger
+    min-width: 134px
+    border: 0
+    background-color: $red
+    border-radius: 4px
+    // margin-right: 10px
     
 .left
     text-align: left
@@ -90,3 +143,10 @@ $break-tablet: 900px
 .choose_img
     width: 200px
     height: 200px
+
+.common_interests h5
+    font-family: "Lato", sans-serif
+    font-size: 16px
+    
+#some_text
+    min-width: 280px

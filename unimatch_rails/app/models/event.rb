@@ -46,6 +46,15 @@ class Event < ApplicationRecord
         return get_participants_by_id.include? id
     end
     
+    def get_invited
+        return EventInvite.where(event_id: self.id)
+    end
+    
+    def invite(sender, receiver)
+        EventInvite.create(sender: sender, recipient: receiver, event_id: self.id)
+    end   
+    
+    
     private
     def filter_by_id(array)
         @ids = []

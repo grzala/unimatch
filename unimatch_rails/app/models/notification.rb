@@ -1,4 +1,10 @@
 class Notification < ApplicationRecord
+    # types
+    # F - favorite
+    # M - message
+    # E - event invite
+    
+
     
     def prepare
         temp_dic = {}

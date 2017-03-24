@@ -99,6 +99,7 @@ class UserController < ApplicationController
   end#used for choosing the interests
   
   def update_interests
+    User.friendly.find(params[:id]).update_interests_by_ids(params[:interests])
     redirect_to user_url, :id => params[:id]
   end
   

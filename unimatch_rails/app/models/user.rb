@@ -11,8 +11,8 @@ class User < ApplicationRecord
 	
 	has_many :interests
 	has_many :interests, :through => :user_interests
-	
-	
+	#user model, the most important one, user has mesages, interest, a university, users email has to be unique, but two users can have the same name
+	#validates pasword
 	validates :name, :presence => true, :uniqueness => false, length: {maximum: 50}
 	validates :password, confirmation: true, presence: true,
                        length: { minimum: 4 }, on: :create
@@ -33,12 +33,6 @@ class User < ApplicationRecord
 	#def should_generate_new_friendly_id?
     #	new_record?
 	#end
-	
-	def mailboxer_email(object)
- 
-		return email
-
-	end
 
 	
 	def password=(password)
@@ -48,7 +42,7 @@ class User < ApplicationRecord
 			generate_salt
 			self.hashed_password = self.class.encrypt_password(password, salt)
 		end
-	end
+	end#used to generate salt on the password
 	
 	def User.authenticate(email, password)
 		if user = find_by_email(email)
@@ -56,7 +50,7 @@ class User < ApplicationRecord
 				return user
 			end
 		end
-	end
+	end#used for login, to authenticate the user
 	
 	def get_interests
 		@ui = UserInterest.where(user_id: self.id)
@@ -65,7 +59,7 @@ class User < ApplicationRecord
 			@interests << Interest.find_by_id(u.interest_id)
 		end
 		return @interests
-	end
+	end#returns the interests of a user
 	
 	def get_important_interests
 		@ii = UserInterest.where(user_id: self.id, important: true)
@@ -74,7 +68,7 @@ class User < ApplicationRecord
 			@interests << Interest.find_by_id(i.interest_id)
 		end
 		return @interests
-	end
+	end#returns the important interests of the user (the top 5)
 	
 	def get_interests_by_id
 		@interests = get_interests
@@ -84,7 +78,7 @@ class User < ApplicationRecord
 		end
 		
 		return @interest_ids
-	end
+	end#returns ids of the interests
 	
 	def update_interests_by_ids(interest_ids)
 		@ui = UserInterest.where(user_id: self.id)
@@ -96,7 +90,7 @@ class User < ApplicationRecord
 			self.add_interest(interest_id)
 		end
 		
-	end
+	end#when user changes his interests, it destroys the old ones and saves the new ones
 	
 	def get_interest_names
 		@interests = self.get_interests
@@ -105,7 +99,7 @@ class User < ApplicationRecord
 			@new << i.name
 		end
 		return @new
-	end
+	end#returns names of the interests
 	
 	def User.get_common_interests(usr1, usr2, important = false)
 		usr1i = []
@@ -126,7 +120,7 @@ class User < ApplicationRecord
 			end
 		end
 		return common
-	end
+	end#used for displaying matches, returns common interests between two users
 	
 	def User.get_common_interests_fixed(usr1, usr2, len)
 		important_list = User.get_common_interests(usr1, usr2, important = true)
@@ -156,7 +150,7 @@ class User < ApplicationRecord
 		toreturn = toreturn.compact
 		
 		return toreturn
-	end
+	end#does the same thing as the function above, just take one more input, which is the number of comon intererst to return
 	
 	#if less than 5 important, add as important
 	def add_interest(id)
@@ -166,12 +160,12 @@ class User < ApplicationRecord
 			if get_important_interests.length < IMPORTANT_INTERESTS_NO then @ui.important = true end
 			@ui.save
 		end
-	end
+	end#add interest to user
 	
 	def delete_interest(id)
 		@ui = UserInterest.find_by_user_id_and_interest_id(self.id, id)
 		UserInterest.destroy(@ui.id)
-	end
+	end#deletes interest from user
 	
 	def get_administered_societies
 		@societies = []
@@ -179,7 +173,7 @@ class User < ApplicationRecord
 			@societies << Society.find(member.society_id)
 		end
 		return @societies
-	end
+	end#returns the societies of which the user is admin
 	
 	def get_societies_ids
 		members = Member.where(user_id: self.id)
@@ -188,7 +182,7 @@ class User < ApplicationRecord
 			soc_ids << member.society_id
 		end
 		return soc_ids
-	end
+	end#returns the societies ids of which the user is member
 	
 	def get_societies
 		soc_ids = get_societies_ids
@@ -197,7 +191,7 @@ class User < ApplicationRecord
 			socs << Society.find(id)
 		end
 		return socs
-	end
+	end#returns the societies of which the user is member
 	
 	def get_events_ids
 		participants= Participant.where(user_id: self.id)
@@ -206,7 +200,7 @@ class User < ApplicationRecord
 			ev_ids << par.event_id
 		end
 		return ev_ids
-	end
+	end#returns the event ids of which the user is participant
 	
 	def get_events
 		ev_ids = get_events_ids
@@ -215,7 +209,7 @@ class User < ApplicationRecord
 			evs << Event.find(stuff)
 		end
 		return evs
-	end
+	end#returns the event of which the user is participant
 			
 	
 	def get_user_events
@@ -228,7 +222,7 @@ class User < ApplicationRecord
 		end
 		return userevents
 		
-	end
+	end#returns events on which the user participates
 	
 	def get_society_current_events
 		societies = get_societies
@@ -237,12 +231,12 @@ class User < ApplicationRecord
 			events += soc.get_current_events
 		end
 		return events
-	end
+	end#returns current events of societies
 	
 	def get_notifications
 		@notifs = Notification.where(user_id: self.id)
 		return @notifs
-	end
+	end#returns notificaties
 	
 	def notify(link, info, sender_id, con_id = nil)
 		
@@ -277,5 +271,5 @@ class User < ApplicationRecord
 	
 	def generate_salt
 		self.salt = self.object_id.to_s + rand.to_s
-	end	
+	end	#private methods for security
 end

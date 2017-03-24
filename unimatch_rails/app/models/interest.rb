@@ -1,4 +1,5 @@
 class Interest < ApplicationRecord
+#Interests belong to interests groups, user has interests and so do societies, used for matching
     belongs_to :interest_group
 
     has_many :users

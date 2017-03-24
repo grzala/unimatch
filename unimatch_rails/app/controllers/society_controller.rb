@@ -1,5 +1,5 @@
 class SocietyController < ApplicationController
-    
+# containing all the function that we use for societies    
     def list
        @societies = Society.all
        @sesion = session[:user_id]
@@ -15,11 +15,11 @@ class SocietyController < ApplicationController
         end
         
         redirect_to :action => :list
-    end
+    end#used so that the user can join are leave the society
 
     def show
         @society = Society.find(params[:id])
-    end
+    end#displays the society base on the society id
     
     def new
         @society = Society.new
@@ -41,12 +41,12 @@ class SocietyController < ApplicationController
         end
         
         redirect_to :action => :list
-    end
+    end#creates a new society and add the creator as a admin, and member, redirects to list of all the societies
     
     def delete
         Society.find(params[:id]).destroy
         redirect_to :action => :list
-    end
+    end#deletes a society and redirects to list
     
     def choose_interest_category
         @cathegories = InterestGroup.all
@@ -62,12 +62,12 @@ class SocietyController < ApplicationController
           @matched_societies[Society.find(id)] = coefficient
         end
         @matched_societies = @matched_societies.sort_by {|k,v| v}.reverse
-    end
+    end#matches the user with the societies
     
     private
     def society_param
         params.require(:society).permit(:name, :description)
-    end
+    end#private parameters for security reasons
         
      
 end

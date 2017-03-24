@@ -1,5 +1,5 @@
 class NotificationController < ActionController::Base
-    
+    #used for notifications abput messages and events
     def get_notifications
         if session[:user_id] == nil 
             return

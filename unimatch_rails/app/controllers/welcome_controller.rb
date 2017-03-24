@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
      layout 'login'
-     
+     #welcome controller used for login and registration of users
      def new
          if session[:user_id]
             redirect_to user_url(id: session[:user_id])

@@ -27,7 +27,9 @@
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
-                        <label for=picture5 class="lbl">
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
                         <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
                         </label>
                         </div>
@@ -52,7 +54,9 @@
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
-                        <label for=picture5 class="lbl">
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
                         <%= image_tag("Interests/#{a}.jpg?id=#{a}")%>
                         </label>
                         </div>
@@ -70,16 +74,19 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="cooking_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="checkbox_wrapper">
+                    <div id="cooking_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
                     <p>Cooking</p>
                     <div class = "row">
                     <% @interests3.each do |interest| %>
                        <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
-                        <% a=interest.name.tr(" ","").downcase %>
+                        <% a=interest.name.tr(" ","")%>
+                        <% a.downcase%>
                       
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
-                        <label for=picture5 class="lbl">
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
                         <%= image_tag("Interests/#{a}.jpg?id=#{a}")%>
                         </label>
                         </div>
@@ -97,7 +104,7 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="music_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col=md-12r">
+                    <div id="music_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
                     <p>Music</p>
                     <div class = "row">
                     <% @interests4.each do |interest| %>
@@ -106,7 +113,9 @@
                         <% a=interest.name.tr(" ","").downcase %>
                    
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
-                        <label for=picture5 class="lbl">
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
                         <%= image_tag("Interests/#{a}.jpg?id=#{a}")%>
                         </label>
                         </div>
@@ -124,7 +133,7 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="culture_show" style=" padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="checkbox_wrapper">
+                    <div id="culture_show" style=" padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
                     <p>Culture</p>
                     <div class = "row">
                     <% @interests5.each do |interest| %>
@@ -133,7 +142,9 @@
                         <% a=interest.name.tr(" ","").downcase %>
                       
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
-                        <label for=picture5 class="lbl">
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
                         <%= image_tag("Interests/#{a}.jpg?id=#{a}")%>
                         </label>
                         </div>
@@ -151,7 +162,7 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="health_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="checkbox_wrapper">
+                    <div id="health_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
                     <p>Health</p>
                     <div class = "row">
                     <% @interests6.each do |interest| %>
@@ -160,7 +171,9 @@
                         <% a=interest.name.tr(" ","").downcase %>
                     
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
-                        <label for=picture5 class="lbl">
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
                         <%= image_tag("Interests/#{a}.jpg?id=#{a}")%>
                         </label>
                         </div>
@@ -178,7 +191,7 @@
                     </div>
                  
                     </div>
-                    <div id="social_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="checkbox_wrapper">
+                    <div id="social_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
                     <p>Social</p>
                     <div class = "row">
                     <% @interests7.each do |interest| %>
@@ -187,7 +200,9 @@
                         <% a=interest.name.tr(" ","").downcase %>
                  
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
-                        <label for=picture5 class="lbl">
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
                         <%= image_tag("Interests/#{a}.jpg?id=#{a}")%>
                         </label>
                         </div>
@@ -205,7 +220,10 @@
                     </div>
                     
                     </div>
+            <%= submit_tag :Update, :id=> @user.id %>
             <% end %>
+            
+
             </div>
 
 

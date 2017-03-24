@@ -1,4 +1,5 @@
 class ConversationController < ApplicationController
+    #used for conversations with other users
     def show
         @con = Conversation.find(params[:id])
         
@@ -32,7 +33,7 @@ class ConversationController < ApplicationController
 			}
 	    end
         
-    end
+    end#shows you conversation with the user, uses get messages function below
     
     def get_messages
         @con = Conversation.find(params[:id])
@@ -72,7 +73,7 @@ class ConversationController < ApplicationController
                 render json: @msgs.to_json.html_safe
             }
         end
-    end
+    end#returns all the messages between you and the other user
     
     #messaging view - create conversation and redirect to show
     def message
@@ -86,7 +87,7 @@ class ConversationController < ApplicationController
         end
         
         redirect_to :action => :show, :id => @con.id
-    end
+    end#if no conversation between you and the other user it creates one
     
     def create_message
         @message = Message.new()
@@ -105,7 +106,7 @@ class ConversationController < ApplicationController
         @message.sender_id = @user.id
         @message.save
         render :body => nil
-    end
+    end#creates the messages, with appropriate parameters
     
     
 end

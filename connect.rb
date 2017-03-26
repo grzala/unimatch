@@ -55,8 +55,8 @@ def test_societies
 	
 end
 
-puts Connector.get_user_matches(2, "*")
-puts Connector.get_society_matches(2, "*")
+puts Connector.get_user_matches("*", "*")
+puts Connector.get_society_matches("*", "*")
 puts
 #puts Connector.get_society_matches(1+rand(49))
 #puts Connector.get_society_matches(1+rand(49))

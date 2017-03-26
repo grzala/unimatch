@@ -103,7 +103,7 @@ public class Server {
                 String message = inFromClient.readLine();
                 String[] messageParts = message.split(" ");
                 String type = messageParts[0];
-                int match_id = Integer.parseInt(messageParts[1]);
+                String match_id = (messageParts[1]);
                 String match_against_id = (messageParts[2]);
                 String toSend = getMatches(type, match_id, match_against_id);
                 
@@ -115,34 +115,64 @@ public class Server {
             dbSemaphore--;
         }
         
-        private String getMatches(String type, int id1, String id2) throws JSONException, IOException {
+        private String getMatches(String type, String id1, String id2) throws JSONException, IOException {
+            if (id1.equals("*")) {
+                matchAll(type);
+                return new JSONObject().toString();
+            }
+
             //get matches, convert to json
             final HashMap<Integer, Float> matches;
-            System.out.println("Matching for: " + db.getUserByID(id1).name);
+            System.out.println("Matching for: " + db.getUserByID(Integer.parseInt(id1)).name);
             Reccomendable matchFor = null;
             ArrayList<Reccomendable> matchAgainst = new ArrayList<Reccomendable>();
             
+            String match_type = "";
             
-            matchFor = db.getUserByID(id1);
+            matchFor = db.getUserByID(Integer.parseInt(id1));
             if (type.equals(userMatchType)) {
                 if (id2.equals("*")) {
                     matchAgainst = (ArrayList)db.getUsers();
                 } else {
                     matchAgainst.add(db.getUserByID(Integer.parseInt(id2)));
                 }
+                match_type = "U";
             } else if (type.equals(societyMatchType)) {
                 if (id2.equals("*")) {
                     matchAgainst = (ArrayList)db.getSocieties();
                 } else {
                     matchAgainst.add(db.getSocietyByID(Integer.parseInt(id2)));
                 }
+                match_type = "S";
             }
             
             matches = Reccomender.getMatches(matchFor, matchAgainst, db.getInterests(), false);
             
+            db.saveMatches(Integer.parseInt(id1), matches, match_type);
+            
             JSONObject jsonMatches = hashMapToJson(matches);
             System.out.println("done matching");
             return jsonMatches.toString();
+        }
+        
+        private void matchAll(String type) {
+            String match_type = "";
+            ArrayList<Reccomendable> match = (ArrayList)db.getUsers();
+            ArrayList<Reccomendable> match_against = null;
+            if (type.equals(userMatchType)) {
+                match_type = "U";
+                match_against = (ArrayList)db.getUsers();
+            } else if (type.equals(societyMatchType)) {
+                match_type = "S";
+                match_against = (ArrayList)db.getSocieties();
+            }
+            
+            HashMap<Integer, Float> matches;
+            for (Reccomendable x : match) {
+                System.out.println(x.id);
+                matches = Reccomender.getMatches(x, match_against, db.getInterests(), false);
+                db.saveMatches(x.id, matches, match_type);
+            }
         }
         
         private JSONObject hashMapToJson(HashMap<Integer, Float> map) {

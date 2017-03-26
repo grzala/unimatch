@@ -11,7 +11,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +42,9 @@ public class ProductionDB implements Database {
     final String getSocietyInterestsSTMT = "SELECT * FROM unimatch.society_interests WHERE society_id = ? ;";
     final String getInterestGroupsSTMT = "SELECT * FROM unimatch.interest_groups";
     final String getInterestsSTMT = "SELECT * FROM unimatch.interests";
-
+    final String removeReccomendationsSTMT = "DELETE FROM unimatch.reccomendations WHERE user_id = ? and match_id = ? and match_type = ?";
+    final String reccomendSTMT = "INSERT INTO unimatch.reccomendations (\"user_id\", \"match_type\", \"match_id\", \"coefficient\", \"created_at\", \"updated_at\") VALUES (?, ?, ?, ?, ?, ?)";
+  
     
     public ProductionDB(String HOSTNAME, String user, String password) {
         this.url = "jdbc:mysql://" + HOSTNAME;
@@ -209,6 +213,37 @@ public Society getSocietyByID(int id) {
     
     public Interest findInterestByID(int id) {
         return interests.get(id);
+    }
+    
+    
+    public void saveMatches(int id, HashMap<Integer, Float> matches, String type) {
+        try {
+            
+            for (Integer match_id : matches.keySet()) {
+                //remove existing match
+                PreparedStatement remove = con.prepareStatement(removeReccomendationsSTMT);
+                remove.setInt(1, id);
+                remove.setInt(2, match_id);
+                remove.setString(3, type);
+                remove.execute();
+                
+                //save Match
+                java.util.Date date = Calendar.getInstance().getTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS000");
+                PreparedStatement insert = con.prepareStatement(reccomendSTMT);
+                insert.setInt(1, id);
+                insert.setString(2, type);
+                insert.setInt(3, match_id);
+                insert.setFloat(4, matches.get(match_id));
+                insert.setString(5, sdf.format(date));
+                insert.setString(6, sdf.format(date));
+                insert.execute();
+            }
+            
+            
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
     }
     
     public void close() {

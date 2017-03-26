@@ -103,8 +103,9 @@ public class Server {
                 String message = inFromClient.readLine();
                 String[] messageParts = message.split(" ");
                 String type = messageParts[0];
-                int id = Integer.parseInt(messageParts[1]);
-                String toSend = getMatches(type, id);
+                int match_id = Integer.parseInt(messageParts[1]);
+                String match_against_id = (messageParts[2]);
+                String toSend = getMatches(type, match_id, match_against_id);
                 
                 final DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream()); // OutputStream where to send the map in case of network you get it from the Socket instance.
                 outputStream.writeBytes(toSend+"\n");
@@ -114,19 +115,27 @@ public class Server {
             dbSemaphore--;
         }
         
-        private String getMatches(String type, int id) throws JSONException, IOException {
+        private String getMatches(String type, int id1, String id2) throws JSONException, IOException {
             //get matches, convert to json
             final HashMap<Integer, Float> matches;
-            System.out.println("Matching for: " + db.getUserByID(id).name);
+            System.out.println("Matching for: " + db.getUserByID(id1).name);
             Reccomendable matchFor = null;
             ArrayList<Reccomendable> matchAgainst = new ArrayList<Reccomendable>();
             
+            
+            matchFor = db.getUserByID(id1);
             if (type.equals(userMatchType)) {
-                matchFor = db.getUserByID(id);
-                matchAgainst = (ArrayList)db.getUsers();
+                if (id2.equals("*")) {
+                    matchAgainst = (ArrayList)db.getUsers();
+                } else {
+                    matchAgainst.add(db.getUserByID(Integer.parseInt(id2)));
+                }
             } else if (type.equals(societyMatchType)) {
-                matchFor = db.getUserByID(id);
-                matchAgainst = (ArrayList)db.getSocieties();
+                if (id2.equals("*")) {
+                    matchAgainst = (ArrayList)db.getSocieties();
+                } else {
+                    matchAgainst.add(db.getSocietyByID(Integer.parseInt(id2)));
+                }
             }
             
             matches = Reccomender.getMatches(matchFor, matchAgainst, db.getInterests(), false);

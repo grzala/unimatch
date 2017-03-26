@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public interface Database {
     
     public User getUserByID(int id);
+    public Society getSocietyByID(int id);
     public ArrayList<User> getUsers();
     public ArrayList<Society> getSocieties();
     

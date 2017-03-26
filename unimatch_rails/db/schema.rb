@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20170326193328) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_invites", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "event_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["event_id"], name: "index_event_invites_on_event_id"
+    t.index ["recipient_id"], name: "index_event_invites_on_recipient_id"
+    t.index ["sender_id"], name: "index_event_invites_on_sender_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.date     "date"
@@ -103,6 +114,7 @@ ActiveRecord::Schema.define(version: 20170326193328) do
     t.boolean  "seen",            default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "type"
     t.index ["conversation_id"], name: "index_notifications_on_conversation_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end

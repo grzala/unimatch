@@ -42,5 +42,40 @@ module Connect
                 return {}
             end
         end
+        
+        def Connector.match_against_user(id1, id2)
+            begin
+            puts "matching"
+                s = TCPSocket.open(@hostname, @port)
+                s.puts(@usermatchmsg + " " + id1.to_s + " " + id2.to_s)
+                json = s.gets.chomp
+                json = JSON.parse(json)
+                matches = {}
+                json.each do |key, value|
+                	matches[key.to_i] = value.to_f
+                end
+                s.close
+                return matches
+            rescue SocketError
+                return {}
+            end
+        end
+        
+        def Connector.match_against_society(id1, id2)
+                        begin
+                s = TCPSocket.open(@hostname, @port)
+                s.puts(@societymatchmsg + " " + id1.to_s + " " + id2.to_s)
+                json = s.gets.chomp
+                json = JSON.parse(json)
+                matches = {}
+                json.each do |key, value|
+                	matches[key.to_i] = value.to_f
+                end
+                s.close
+                return matches
+            rescue SocketError
+                return {}
+            end
+        end
     end
 end

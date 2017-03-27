@@ -32,6 +32,8 @@ public class Server {
     final private String userMatchType = "usermatch";
     final private String societyMatchType = "societymatch";
     
+    final private float threshold = 0.1f;
+    
     public Server(int port) {
          //init db
          db = null;
@@ -167,10 +169,20 @@ public class Server {
                 match_against = (ArrayList)db.getSocieties();
             }
             
+            //it is faster if low matches are not saved to db
             HashMap<Integer, Float> matches;
             for (Reccomendable x : match) {
                 System.out.println(x.id);
                 matches = Reccomender.getMatches(x, match_against, db.getInterests(), false);
+                
+                HashMap<Integer, Float> temp = new HashMap<Integer, Float>();
+                for (int key : matches.keySet()) {
+                    if (matches.get(key) > threshold) {
+                        temp.put(key, matches.get(key));
+                    }
+                }
+                matches = temp;
+                
                 db.saveMatches(x.id, matches, match_type);
             }
         }

@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+    
+    include Rails.application.routes.url_helpers
+    
     #event model, used for basic event functions
     belongs_to :user
     
@@ -52,6 +55,7 @@ class Event < ApplicationRecord
     
     def invite(sender, receiver)
         EventInvite.create(sender: sender, recipient: receiver, event_id: self.id)
+        receiver.notify(event_path(:id => self.id), 'event invite', sender.id, "E")
     end   
     
     

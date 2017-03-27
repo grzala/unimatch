@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20170324172638) do
     t.boolean  "seen",            default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.string   "type"
+    t.string   "notif_type"
     t.index ["conversation_id"], name: "index_notifications_on_conversation_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end

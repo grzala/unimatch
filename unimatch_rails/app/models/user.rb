@@ -94,6 +94,10 @@ class User < ApplicationRecord
 		
 	end#when user changes his interests, it destroys the old ones and saves the new ones
 	
+	def refresh_matches
+		Connector.refresh_matches(self.id)	
+	end
+	
 	def get_matches(type)
 		return Reccomendation.where(user_id: self.id, match_type: type)
 	end

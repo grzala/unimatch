@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+	include Connect
+	
 	extend FriendlyId
 	friendly_id :name, use: [:slugged, :history]
 	has_many :messages
@@ -91,6 +93,30 @@ class User < ApplicationRecord
 		end
 		
 	end#when user changes his interests, it destroys the old ones and saves the new ones
+	
+	def refresh_matches
+		Connector.refresh_matches(self.id)	
+	end
+	
+	def get_matches(type)
+		return Reccomendation.where(user_id: self.id, match_type: type)
+	end
+	
+	def get_match(id, type)
+		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type)[0]
+		
+		if match.nil?
+			if type == "U"
+				Connector.match_against_user(self.id, id)
+			elsif type == "S"
+				Connector.match_against_society(self.id, id)
+			end
+		end
+		
+		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type)[0]
+		
+		return match
+	end
 	
 	def get_interest_names
 		@interests = self.get_interests

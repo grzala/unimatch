@@ -44,6 +44,8 @@ after :interests do
             number = (i+1).to_s
             @user = User.create(name: scottish_names.sample, password: 'user'+number, email: 'user'+number+'@abdn.ac.uk' , surname: scottish_surnames.sample)
             
+            @user.avatar.store!(File.open("#{Rails.root}/../users/#{number}.jpg"))
+            
             if !@user.valid? 
                 puts "ERROR CREATING USERS"
                 puts @user.errors.count.to_s + " error"

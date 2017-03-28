@@ -47,7 +47,10 @@ Rails.application.routes.draw do
   
   controller :notification do
     post '/notification' => :get_notifications
-    
+  end
+  
+  controller :event do
+    post '/inviteallmembers' => :invite_all_members
   end
   
   mount ActionCable.server => '/cable'

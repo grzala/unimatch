@@ -44,7 +44,7 @@
             <p>Not attending any events</p>
         <% else %>
             <% @events.each do |event| %>
-            <%= link_to event.name :controller => :event, :action => :show, :id => event.id %>
+            <%= link_to event.name, :controller => :event, :action => :show, :id => event.id %>
             <% end %>
         <% end %>
     <% end %>

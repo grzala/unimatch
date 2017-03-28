@@ -264,11 +264,11 @@ class User < ApplicationRecord
 		return @notifs
 	end#returns notificaties
 	
-	def notify(link, info, sender_id, con_id = nil)
+	def notify(link, info, sender_id, type, special_id = nil)
 		
 		#if conversation exists, just one notification is needed. this prevents an overflow of notifications
-		if con_id != nil
-			@notifs = Notification.where(user_id: self.id, conversation_id: con_id)
+		if special_id != nil and type == "M"
+			@notifs = Notification.where(user_id: self.id, conversation_id: special_id)
 			@notifs.each {|notif| Notification.destroy(notif.id) }
 		end
 		
@@ -277,7 +277,8 @@ class User < ApplicationRecord
 		@notification.sender = sender_id
 		@notification.information = info
 		@notification.user_id = self.id
-		@notification.conversation_id = con_id
+		@notification.conversation_id = special_id
+		@notification.notif_type = type
 		@notification.save
 		
 		notif = Notification.find(@notification.id)

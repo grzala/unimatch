@@ -13,7 +13,7 @@ after :users do
         
         @interest_amount = Interest.all.length
         
-        random_society_ids = rand_set(10, 0, @interest_amount) #generate 10 societies for random interests
+        random_society_ids = rand_set(10, 1, @interest_amount) #generate 10 societies for random interests
         
         random_society_ids.each do |n|
             @i = Interest.find(n)

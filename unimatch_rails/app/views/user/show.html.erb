@@ -17,7 +17,7 @@
 </div>
 <div class="row">
 <div class="col-md-8 left">
-    <h4 class="left">
+    <h4 class="left" id="two_line_fix">
         <% if session[:user_id] == @user.id %>
             Your
         <% else %>
@@ -31,7 +31,7 @@
     <div class="int_image">
     <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "int_img")%>   
     </div>
-    <%= i.name.split.map(&:capitalize).join(' ') %>
+    <p><%= i.name.split.map(&:capitalize).join(' ') %></p>
     </div>
     <% end %>
     <br>

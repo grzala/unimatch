@@ -5,21 +5,78 @@
 <div>
     
 
-<div style= "padding-bottom: 10px">    
-<ul style ="list-style-type: none; margin: 0; padding: 0; overflow: hidden;">
-  <li style= "float: left;"><a href="#sports_show" id="sports" style= "display: block; padding: 8px; width: 127px; background-color: #dddddd;">sports</a></li>
-  <li style= "float: left;"><a href="#science_show" id="science" style= "display: block; padding: 8px; width: 127px; background-color: #dddddd;">science</a></li>
-  <li style= "float: left;"><a href="#cooking_show" id="cooking" style= "display: block; padding: 8px; width: 127px; background-color: #dddddd;">cooking</a></li>
-  <li style= "float: left;"><a href="#music_show" id="music" style= "display: block; padding: 8px; width: 127px; background-color: #dddddd;">music</a></li>
-  <li style= "float: left;"><a href="#culture_show" id="culture" style= "display: block; padding: 8px; width: 127px; background-color: #dddddd;">culture</a></li>
-  <li style= "float: left;"><a href="#health_show" id="health" style= "display: block; padding: 8px; width: 127px; background-color: #dddddd;">health</a></li>
-  <li style= "float: left;"><a href="#social_show" id="social" style= "display: block; padding: 8px; width: 127px; background-color: #dddddd;">social</a></li>
+<div class= "col-md-12" style= "padding-bottom: 10px">    
+<ul class="row col-md-12">
+  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="sports"  >sports</a></li>
+  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="science" >science</a></li>
+  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="cooking" >cooking</a></li>
+  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="music" >music</a></li>
+  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="culture" >culture</a></li>
+  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="health"  >health</a></li>
+  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="social" >social</a></li>
 </ul>
+<script>
+$(document).ready(function(){
+
+ $("#sports_show").hide();
+ $("#science_show").hide();
+ $("#cooking_show").hide();
+ $("#music_show").hide();
+ $("#culture_show").hide();
+ $("#health_show").hide();
+ $("#social_show").hide();
+ 
+ $('#sports').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#sports_show").show();
+ $("#sports_show").addClass("active");
+ });
+ $('#science').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#science_show").show();
+ $("#science_show").addClass("active");
+ });
+ $('#cooking').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#cooking_show").show();
+ $("#cooking_show").addClass("active");
+ });
+ $('#music').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#music_show").show();
+ $("#music_show").addClass("active");
+ });
+ $('#culture').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#culture_show").show();
+ $("#culture_show").addClass("active");
+ });
+ $('#health').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#health_show").show();
+ $("#health_show").addClass("active");
+ });
+ $('#social').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#social_show").show();
+ $("#social_show").addClass("active");
+ });
+
+});
+
+</script>
 </div>
 
            <div style="text-align: left; padding-left: 20px; margin-bottom:100px;">
             <%= form_tag update_interests_url, :id => @user.id do %>
-                    <div id="sports_show" style=" padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
+                    <div id="sports_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Sports</p>
                     <div class = "row" style="table-layout: fixed;">
                     <% @interests1.each do |interest| %>
@@ -74,7 +131,7 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="cooking_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
+                    <div id="cooking_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Cooking</p>
                     <div class = "row">
                     <% @interests3.each do |interest| %>
@@ -104,7 +161,7 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="music_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
+                    <div id="music_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Music</p>
                     <div class = "row">
                     <% @interests4.each do |interest| %>
@@ -133,7 +190,7 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="culture_show" style=" padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
+                    <div id="culture_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Culture</p>
                     <div class = "row">
                     <% @interests5.each do |interest| %>
@@ -162,7 +219,7 @@
                         <% end %>
                     </div>
                     </div>
-                    <div id="health_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
+                    <div id="health_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Health</p>
                     <div class = "row">
                     <% @interests6.each do |interest| %>
@@ -191,7 +248,7 @@
                     </div>
                  
                     </div>
-                    <div id="social_show" style="padding-left: 20px; padding-bottom: 20px; margin-bottom:100px;" class="col-md-12">
+                    <div id="social_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Social</p>
                     <div class = "row">
                     <% @interests7.each do |interest| %>

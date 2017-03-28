@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313162900) do
+ActiveRecord::Schema.define(version: 20170326193328) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20170313162900) do
   create_table "event_groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "event_invites", force: :cascade do |t|
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "event_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["event_id"], name: "index_event_invites_on_event_id"
+    t.index ["recipient_id"], name: "index_event_invites_on_recipient_id"
+    t.index ["sender_id"], name: "index_event_invites_on_sender_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -103,6 +114,7 @@ ActiveRecord::Schema.define(version: 20170313162900) do
     t.boolean  "seen",            default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.string   "type"
     t.index ["conversation_id"], name: "index_notifications_on_conversation_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
@@ -114,6 +126,16 @@ ActiveRecord::Schema.define(version: 20170313162900) do
     t.integer  "event_id",   null: false
     t.index ["event_id"], name: "index_participants_on_event_id"
     t.index ["user_id"], name: "index_participants_on_user_id"
+  end
+
+  create_table "reccomendations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "match_type",  limit: 1
+    t.integer  "match_id"
+    t.float    "coefficient"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["user_id"], name: "index_reccomendations_on_user_id"
   end
 
   create_table "recipients", force: :cascade do |t|

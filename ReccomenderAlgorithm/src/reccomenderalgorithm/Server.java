@@ -32,6 +32,8 @@ public class Server {
     final private String userMatchType = "usermatch";
     final private String societyMatchType = "societymatch";
     
+    final private float threshold = 0.1f;
+    
     public Server(int port) {
          //init db
          db = null;
@@ -103,8 +105,9 @@ public class Server {
                 String message = inFromClient.readLine();
                 String[] messageParts = message.split(" ");
                 String type = messageParts[0];
-                int id = Integer.parseInt(messageParts[1]);
-                String toSend = getMatches(type, id);
+                String match_id = (messageParts[1]);
+                String match_against_id = (messageParts[2]);
+                String toSend = getMatches(type, match_id, match_against_id);
                 
                 final DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream()); // OutputStream where to send the map in case of network you get it from the Socket instance.
                 outputStream.writeBytes(toSend+"\n");
@@ -114,26 +117,74 @@ public class Server {
             dbSemaphore--;
         }
         
-        private String getMatches(String type, int id) throws JSONException, IOException {
+        private String getMatches(String type, String id1, String id2) throws JSONException, IOException {
+            if (id1.equals("*")) {
+                matchAll(type);
+                return new JSONObject().toString();
+            }
+
             //get matches, convert to json
             final HashMap<Integer, Float> matches;
-            System.out.println("Matching for: " + db.getUserByID(id).name);
+            System.out.println("Matching for: " + db.getUserByID(Integer.parseInt(id1)).name);
             Reccomendable matchFor = null;
             ArrayList<Reccomendable> matchAgainst = new ArrayList<Reccomendable>();
             
+            String match_type = "";
+            
+            matchFor = db.getUserByID(Integer.parseInt(id1));
             if (type.equals(userMatchType)) {
-                matchFor = db.getUserByID(id);
-                matchAgainst = (ArrayList)db.getUsers();
+                if (id2.equals("*")) {
+                    matchAgainst = (ArrayList)db.getUsers();
+                } else {
+                    matchAgainst.add(db.getUserByID(Integer.parseInt(id2)));
+                }
+                match_type = "U";
             } else if (type.equals(societyMatchType)) {
-                matchFor = db.getUserByID(id);
-                matchAgainst = (ArrayList)db.getSocieties();
+                if (id2.equals("*")) {
+                    matchAgainst = (ArrayList)db.getSocieties();
+                } else {
+                    matchAgainst.add(db.getSocietyByID(Integer.parseInt(id2)));
+                }
+                match_type = "S";
             }
             
             matches = Reccomender.getMatches(matchFor, matchAgainst, db.getInterests(), false);
             
+            db.saveMatches(Integer.parseInt(id1), matches, match_type);
+            
             JSONObject jsonMatches = hashMapToJson(matches);
             System.out.println("done matching");
             return jsonMatches.toString();
+        }
+        
+        private void matchAll(String type) {
+            String match_type = "";
+            ArrayList<Reccomendable> match = (ArrayList)db.getUsers();
+            ArrayList<Reccomendable> match_against = null;
+            if (type.equals(userMatchType)) {
+                match_type = "U";
+                match_against = (ArrayList)db.getUsers();
+            } else if (type.equals(societyMatchType)) {
+                match_type = "S";
+                match_against = (ArrayList)db.getSocieties();
+            }
+            
+            //it is faster if low matches are not saved to db
+            HashMap<Integer, Float> matches;
+            for (Reccomendable x : match) {
+                System.out.println(x.id);
+                matches = Reccomender.getMatches(x, match_against, db.getInterests(), false);
+                
+                HashMap<Integer, Float> temp = new HashMap<Integer, Float>();
+                for (int key : matches.keySet()) {
+                    if (matches.get(key) > threshold) {
+                        temp.put(key, matches.get(key));
+                    }
+                }
+                matches = temp;
+                
+                db.saveMatches(x.id, matches, match_type);
+            }
         }
         
         private JSONObject hashMapToJson(HashMap<Integer, Float> map) {

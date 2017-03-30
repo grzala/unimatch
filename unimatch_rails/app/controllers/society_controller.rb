@@ -72,8 +72,7 @@ class SocietyController < ApplicationController
     end
     
     def match
-        @matches = Connector.get_society_matches(params[:id])
-        puts @matches
+        @matches = User.find(session[:user_id]).get_matched_societies
         @matched_societies = {}
         @matches.each do |id, coefficient|
           @matched_societies[Society.find(id)] = coefficient

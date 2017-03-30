@@ -102,6 +102,24 @@ class User < ApplicationRecord
 		return Reccomendation.where(user_id: self.id, match_type: type)
 	end
 	
+	def get_matched_users
+		recs = get_matches("U")
+		users = {}
+		recs.each do |rec|
+			users[rec.match_id] = rec.coefficient
+		end
+		return users
+	end
+	
+	def get_matched_societies
+		recs = get_matches("S")
+		users = {}
+		recs.each do |rec|
+			users[rec.match_id] = rec.coefficient
+		end
+		return users
+	end
+	
 	def get_match(id, type)
 		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type)[0]
 		

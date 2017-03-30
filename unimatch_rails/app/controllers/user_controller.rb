@@ -16,7 +16,7 @@ class UserController < ApplicationController
   end#lists all the users, used in developement stages
   
   def match
-    @matches = Connector.get_user_matches(params[:id])
+    @matches = User.find(session[:user_id]).get_matched_users
     @matched_users = {}
     @matches.each do |id, coefficient|
       @matched_users[User.find(id)] = coefficient

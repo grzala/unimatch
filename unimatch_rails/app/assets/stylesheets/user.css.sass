@@ -154,3 +154,19 @@ h4#interest
     
 #some_text
     min-width: 280px
+    
+.star 
+    visibility: hidden
+    font-size: 60px
+    cursor: pointer
+
+    &:before 
+        content: "\2606"
+        position: absolute
+        visibility: visible
+        color: black
+
+    &:checked:before 
+        content: "\2605"
+        position: absolute
+        color: yellow

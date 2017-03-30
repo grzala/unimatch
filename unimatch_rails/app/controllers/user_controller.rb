@@ -131,6 +131,21 @@ class UserController < ApplicationController
     
   end#used for messages with other users, u message them from their profile page
 
+  def switch_favourite
+    if session[:user_id].nil?
+      return 
+    end
+    
+    user = User.find(session[:user_id])
+    user2 = User.find(params[:user_id])
+    
+    if user.get_favourites.include? user2
+      user.remove_favourite(user2)
+    else
+      user.add_favourite(user2)
+    end
+    
+  end
   
   helper_method :common_interests
   

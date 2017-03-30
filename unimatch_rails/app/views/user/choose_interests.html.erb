@@ -80,7 +80,7 @@ $(document).ready(function(){
                     <p>Sports</p>
                     <div class = "row" style="table-layout: fixed;">
                     <% @interests1.each do |interest| %>
-                       <div class="col-md-4">
+                       <div class="col-md-4 picture">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>

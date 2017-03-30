@@ -290,6 +290,24 @@ class User < ApplicationRecord
     	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: notif}
 	end
 	
+	def get_favourites
+		fu = FavouriteUser.where(user: self)
+		users = []
+		fu.each do |f|
+			users << User.find(f.favourite.id)
+		end
+		return users
+	end
+	
+	def add_favourite(user2)
+		FavouriteUser.create(user: self, favourite: user2)
+	end
+	
+	def remove_favourite(user2)
+		fu = FavouriteUser.where(user: self, favourite: user2)
+		fu.each {|f| f.destroy}
+	end
+	
 	private ############################# private methods below ##################################
 	
 	def password_must_be_present

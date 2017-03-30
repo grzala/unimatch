@@ -58,6 +58,8 @@ class User < ApplicationRecord
 		@ui.each do |u|
 			@interests << Interest.find_by_id(u.interest_id)
 		end
+		
+
 		return @interests
 	end#returns the interests of a user
 	

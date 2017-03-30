@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170313162900) do
   create_table "interests", force: :cascade do |t|
     t.integer  "interest_group_id"
     t.string   "name"
+    t.boolean  "important"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.index ["interest_group_id"], name: "index_interests_on_interest_group_id"

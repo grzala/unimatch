@@ -96,10 +96,16 @@ class UserController < ApplicationController
     @interests6 = @allinterests.where(interest_group_id: 6)
     @interests7 = @allinterests.where(interest_group_id: 7)
     @user_interests = @user.get_interests
+    @user_interests_imp = @user_interests.take(5)
+    @user_interests = @user.get_interests
+    @user_interests.drop(5)
   end#used for choosing the interests
   
   def update_interests
-    User.friendly.find(params[:id]).update_interests_by_ids(params[:interests])
+    @a= params[:imp_interests]
+    @b= params[:interests]
+    @c= @a+@b
+    User.friendly.find(params[:id]).update_interests_by_ids(@c)
     redirect_to user_url, :id => params[:id]
   end
   

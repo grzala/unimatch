@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 	include Connect
+    include Rails.application.routes.url_helpers
 	
 	extend FriendlyId
 	friendly_id :name, use: [:slugged, :history]
@@ -288,6 +289,9 @@ class User < ApplicationRecord
 		if special_id != nil and type == "M"
 			@notifs = Notification.where(user_id: self.id, conversation_id: special_id)
 			@notifs.each {|notif| Notification.destroy(notif.id) }
+		elsif type == "F"
+			@notifs = Notification.where(user_id: self.id, sender: sender_id)
+			@notifs.each {|notif| Notification.destroy(notif.id) }
 		end
 		
 		@notification = Notification.new
@@ -319,6 +323,7 @@ class User < ApplicationRecord
 	
 	def add_favourite(user2)
 		FavouriteUser.create(user: self, favourite: user2)
+        user2.notify(user_path(:id => self.id), 'add to favourites', self.id, "F")
 	end
 	
 	def remove_favourite(user2)

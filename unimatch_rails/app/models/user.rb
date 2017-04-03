@@ -333,6 +333,31 @@ class User < ApplicationRecord
 		fu.each {|f| f.destroy}
 	end
 	
+	def self.search(string)
+		toreturn = []
+		words = string.split(" ")
+		
+		first_priority = []
+		(0...words.length).to_a.combination(2).to_a.each do |combination|
+			first_priority += User.where("name LIKE ? AND surname LIKE ?", words[combination[0]], words[combination[1]])
+			first_priority += User.where("name LIKE ? AND surname LIKE ?", words[combination[1]], words[combination[0]])
+		end
+		first_priority = first_priority.compact.uniq
+		
+		second_priority = []
+		words.each do |word| 
+			second_priority += User.where("name LIKE ? OR surname LIKE ?", word, word)
+		end
+		second_priority = second_priority.compact.uniq
+		
+		second_priority -= first_priority
+		
+		toreturn = [first_priority, second_priority]
+		
+		return toreturn
+		
+	end
+	
 	private ############################# private methods below ##################################
 	
 	def password_must_be_present

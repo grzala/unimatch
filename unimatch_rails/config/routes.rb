@@ -54,6 +54,8 @@ Rails.application.routes.draw do
     post '/inviteallmembers' => :invite_all_members
   end
   
+  get '/search' => 'search#query'
+  
   mount ActionCable.server => '/cable'
 
   

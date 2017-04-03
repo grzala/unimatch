@@ -339,14 +339,28 @@ class User < ApplicationRecord
 		
 		first_priority = []
 		(0...words.length).to_a.combination(2).to_a.each do |combination|
-			first_priority += User.where("name LIKE ? AND surname LIKE ?", words[combination[0]], words[combination[1]])
-			first_priority += User.where("name LIKE ? AND surname LIKE ?", words[combination[1]], words[combination[0]])
+			query1 = "(name LIKE '% #{words[combination[0]]} %' AND surname LIKE '% #{words[combination[1]]} %')"
+			query1 += " OR (name LIKE '#{words[combination[0]]} %' AND surname LIKE '#{words[combination[1]]} %')"
+			query1 += " OR (name LIKE '% #{words[combination[0]]}' AND surname LIKE '#{words[combination[1]]}')"
+			query1 += " OR (name LIKE '#{words[combination[0]]}' AND surname LIKE '#{words[combination[1]]}')"
+			
+			query2 = "(name LIKE '% #{words[combination[1]]} %' AND surname LIKE '% #{words[combination[0]]} %')"
+			query2 += " OR (name LIKE '#{words[combination[1]]} %' AND surname LIKE '#{words[combination[0]]} %')"
+			query2 += " OR (name LIKE '% #{words[combination[1]]}' AND surname LIKE '#{words[combination[0]]}')"
+			query2 += " OR (name LIKE '#{words[combination[1]]}' AND surname LIKE '#{words[combination[0]]}')"
+			
+			first_priority += User.where(query1)
+			first_priority += User.where(query2)
 		end
 		first_priority = first_priority.compact.uniq
 		
 		second_priority = []
 		words.each do |word| 
-			second_priority += User.where("name LIKE ? OR surname LIKE ?", word, word)
+			query = "(name LIKE '% #{word} %' OR surname LIKE '% #{word} %')"
+			query += " OR (name LIKE '#{word} %' OR surname LIKE '#{word} %')"
+			query += " OR (name LIKE '% #{word}' OR surname LIKE '% #{word}')"
+			query += " OR (name LIKE '#{word}' OR surname LIKE '#{word}')"
+			second_priority += User.where(query)
 		end
 		second_priority = second_priority.compact.uniq
 		
@@ -355,7 +369,6 @@ class User < ApplicationRecord
 		toreturn = [first_priority, second_priority]
 		
 		return toreturn
-		
 	end
 	
 	private ############################# private methods below ##################################

@@ -13,6 +13,8 @@ class Society < ApplicationRecord
   
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false}, length: {maximum: 50}
   
+  mount_uploader :avatar, AvatarUploader
+  
   def get_members
 		@sm = Member.where(society_id: self.id)
 		@users = []

@@ -1,6 +1,7 @@
 <div class="row">
 <div class="col-md-8">
 <h2><%= @society.name %></h2>
+<%= image_tag @society.avatar_url(:display), :class => "profile_image" %>
 <p><%= @society.description %></p>
     <p>
         <% str = !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>

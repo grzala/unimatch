@@ -11,6 +11,7 @@ describe User, 'methods' do
     before(:each) do |example|
 		unless example.metadata[:skip_before]
 			@user = create_new_user(1)
+			@user2 = create_new_user(2)
 		end
     end
     
@@ -97,6 +98,22 @@ describe User, 'methods' do
 		    end
 		 end
 		 expect(initial_interests).to eq(@user.get_interests_by_id)
+	end
+	
+	it "can add and delete favourite users" do
+		fu = @user.get_favourites
+		expect(fu).to be_empty
+		
+		@user.add_favourite(@user2)
+		fu2 = @user.get_favourites
+		expect(fu2).not_to be_empty
+		expect(fu2.length).to eq(fu.length + 1)
+		expect(fu2).to include(@user2)
+		
+		@user.remove_favourite(@user2)
+		fu3 = @user.get_favourites
+		expect(fu3).to be_empty
+		expect(fu3).not_to include(@user2)
 	end
   
 end

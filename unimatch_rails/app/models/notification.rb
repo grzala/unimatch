@@ -20,6 +20,9 @@ class Notification < ApplicationRecord
         elsif self.notif_type == "E"
             temp_dic['information'] = "Event Invite"
             temp_dic['image_url'] = User.find(self.sender.to_i).avatar_url(:display)
+        elsif self.notif_type == "F"
+            temp_dic['information'] = "Added you to favourites"
+            temp_dic['image_url'] = User.find(self.sender.to_i).avatar_url(:display)
         end
         
         

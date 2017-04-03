@@ -1,5 +1,6 @@
 class User < ApplicationRecord
 	include Connect
+    include Rails.application.routes.url_helpers
 	
 	extend FriendlyId
 	friendly_id :name, use: [:slugged, :history]
@@ -100,6 +101,24 @@ class User < ApplicationRecord
 	
 	def get_matches(type)
 		return Reccomendation.where(user_id: self.id, match_type: type)
+	end
+	
+	def get_matched_users
+		recs = get_matches("U")
+		users = {}
+		recs.each do |rec|
+			users[rec.match_id] = rec.coefficient
+		end
+		return users
+	end
+	
+	def get_matched_societies
+		recs = get_matches("S")
+		users = {}
+		recs.each do |rec|
+			users[rec.match_id] = rec.coefficient
+		end
+		return users
 	end
 	
 	def get_match(id, type)
@@ -270,6 +289,9 @@ class User < ApplicationRecord
 		if special_id != nil and type == "M"
 			@notifs = Notification.where(user_id: self.id, conversation_id: special_id)
 			@notifs.each {|notif| Notification.destroy(notif.id) }
+		elsif type == "F"
+			@notifs = Notification.where(user_id: self.id, sender: sender_id)
+			@notifs.each {|notif| Notification.destroy(notif.id) }
 		end
 		
 		@notification = Notification.new
@@ -288,6 +310,25 @@ class User < ApplicationRecord
         notif = notif.to_json.html_safe
 		
     	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: notif}
+	end
+	
+	def get_favourites
+		fu = FavouriteUser.where(user: self)
+		users = []
+		fu.each do |f|
+			users << User.find(f.favourite.id)
+		end
+		return users
+	end
+	
+	def add_favourite(user2)
+		FavouriteUser.create(user: self, favourite: user2)
+        user2.notify(user_path(:id => self.id), 'add to favourites', self.id, "F")
+	end
+	
+	def remove_favourite(user2)
+		fu = FavouriteUser.where(user: self, favourite: user2)
+		fu.each {|f| f.destroy}
 	end
 	
 	private ############################# private methods below ##################################

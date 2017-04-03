@@ -127,6 +127,7 @@ class Society < ApplicationRecord
   
   def filter_by_name(array)
     @ids = []
+    array = array.compact
     array.each do |item|
       @ids << item.name
     end

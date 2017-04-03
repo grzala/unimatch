@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+	include Connect
+    include Rails.application.routes.url_helpers
+	
 	extend FriendlyId
 	friendly_id :name, use: [:slugged, :history]
 	has_many :messages
@@ -94,6 +97,48 @@ class User < ApplicationRecord
 		
 	end#when user changes his interests, it destroys the old ones and saves the new ones
 	
+	def refresh_matches
+		Connector.refresh_matches(self.id)	
+	end
+	
+	def get_matches(type)
+		return Reccomendation.where(user_id: self.id, match_type: type)
+	end
+	
+	def get_matched_users
+		recs = get_matches("U")
+		users = {}
+		recs.each do |rec|
+			users[rec.match_id] = rec.coefficient
+		end
+		return users
+	end
+	
+	def get_matched_societies
+		recs = get_matches("S")
+		users = {}
+		recs.each do |rec|
+			users[rec.match_id] = rec.coefficient
+		end
+		return users
+	end
+	
+	def get_match(id, type)
+		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type)[0]
+		
+		if match.nil?
+			if type == "U"
+				Connector.match_against_user(self.id, id)
+			elsif type == "S"
+				Connector.match_against_society(self.id, id)
+			end
+		end
+		
+		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type)[0]
+		
+		return match
+	end
+	
 	def get_interest_names
 		@interests = self.get_interests
 		@new = []
@@ -137,6 +182,7 @@ class User < ApplicationRecord
 		while toreturn.length < len and i < len do
 			if i >= cur_list.length
 				l_i += 1
+				i = 0
 				if l_i >= lists.length
 					break
 				end
@@ -147,6 +193,8 @@ class User < ApplicationRecord
 			end
 			i += 1
 		end
+		
+		toreturn = toreturn.compact
 		
 		return toreturn
 	end#does the same thing as the function above, just take one more input, which is the number of comon intererst to return
@@ -237,23 +285,52 @@ class User < ApplicationRecord
 		return @notifs
 	end#returns notificaties
 	
-	def notify(link, info, con_id = nil)
+	def notify(link, info, sender_id, type, special_id = nil)
 		
 		#if conversation exists, just one notification is needed. this prevents an overflow of notifications
-		if con_id != nil
-			@notifs = Notification.where(user_id: self.id, conversation_id: con_id)
+		if special_id != nil and type == "M"
+			@notifs = Notification.where(user_id: self.id, conversation_id: special_id)
+			@notifs.each {|notif| Notification.destroy(notif.id) }
+		elsif type == "F"
+			@notifs = Notification.where(user_id: self.id, sender: sender_id)
 			@notifs.each {|notif| Notification.destroy(notif.id) }
 		end
 		
 		@notification = Notification.new
 		@notification.link = link
+		@notification.sender = sender_id
 		@notification.information = info
 		@notification.user_id = self.id
-		@notification.conversation_id = con_id
+		@notification.conversation_id = special_id
+		@notification.notif_type = type
 		@notification.save
 		
+		notif = Notification.find(@notification.id)
 		
-    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: Notification.find(@notification.id).to_json.html_safe}
+        notif = notif.prepare
+        
+        notif = notif.to_json.html_safe
+		
+    	ActionCable.server.broadcast "notification_channel_#{self.id}", {notification: notif}
+	end
+	
+	def get_favourites
+		fu = FavouriteUser.where(user: self)
+		users = []
+		fu.each do |f|
+			users << User.find(f.favourite.id)
+		end
+		return users
+	end
+	
+	def add_favourite(user2)
+		FavouriteUser.create(user: self, favourite: user2)
+        user2.notify(user_path(:id => self.id), 'add to favourites', self.id, "F")
+	end
+	
+	def remove_favourite(user2)
+		fu = FavouriteUser.where(user: self, favourite: user2)
+		fu.each {|f| f.destroy}
 	end
 	
 	private ############################# private methods below ##################################

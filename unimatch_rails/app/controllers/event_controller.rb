@@ -4,6 +4,12 @@ class EventController < ApplicationController
     
     def show
         @event = Event.find(params[:id])
+        @society = nil
+        if @event.society_id != nil
+            @society = Society.find(@event.society_id)
+        end
+        @participants = @event.get_participants
+        @invited = @event.get_invited
     end
     
     
@@ -54,7 +60,7 @@ class EventController < ApplicationController
             
         else 
             date = Date.parse(params[:startdate])
-            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], params[:user_id], params[:society_id])
+            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], session[:user_id], params[:society_id])
         end
         
         
@@ -74,6 +80,27 @@ class EventController < ApplicationController
         @event.event_group_id = event_group_id
         if !@event.save then puts @event.errors.full_messages end
     end#saves the event to db
+    
+    
+    def invite_all_members
+        @society = Society.find(params[:society_id]) 
+        @event = Event.find(params[:event_id])
+        @user = User.find(session[:user_id])
+        
+        if !@society.has_admin(@user.id) or !(@society.get_events.include? @event)
+            return
+        end
+        
+        @members = @society.get_members
+        @invited = @event.get_invited
+        @joined = @event.get_participants
+        @to_invite = @members - (@invited + @joined).uniq
+        
+        @to_invite.each do |user|
+            @event.invite(@user, user)
+        end
+        
+    end
     
     private
     def event_param

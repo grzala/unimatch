@@ -1,4 +1,7 @@
 class Event < ApplicationRecord
+    
+    include Rails.application.routes.url_helpers
+    
     #event model, used for basic event functions
     belongs_to :user
     
@@ -45,6 +48,16 @@ class Event < ApplicationRecord
     def has_participant(id)
         return get_participants_by_id.include? id
     end
+    
+    def get_invited
+        return EventInvite.where(event_id: self.id)
+    end
+    
+    def invite(sender, receiver)
+        EventInvite.create(sender: sender, recipient: receiver, event_id: self.id)
+        receiver.notify(event_path(:id => self.id), 'event invite', sender.id, "E")
+    end   
+    
     
     private
     def filter_by_id(array)

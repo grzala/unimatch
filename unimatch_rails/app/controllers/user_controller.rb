@@ -16,7 +16,7 @@ class UserController < ApplicationController
   end#lists all the users, used in developement stages
   
   def match
-    @matches = Connector.get_user_matches(params[:id])
+    @matches = User.find(session[:user_id]).get_matched_users
     @matched_users = {}
     @matches.each do |id, coefficient|
       @matched_users[User.find(id)] = coefficient
@@ -131,6 +131,21 @@ class UserController < ApplicationController
     
   end#used for messages with other users, u message them from their profile page
 
+  def switch_favourite
+    if session[:user_id].nil?
+      return 
+    end
+    
+    user = User.find(session[:user_id])
+    user2 = User.find(params[:user_id])
+    
+    if user.get_favourites.include? user2
+      user.remove_favourite(user2)
+    else
+      user.add_favourite(user2)
+    end
+    
+  end
   
   helper_method :common_interests
   

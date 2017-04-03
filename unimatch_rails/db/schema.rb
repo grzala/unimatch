@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170326193328) do
+ActiveRecord::Schema.define(version: 20170330154712) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 20170326193328) do
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
     t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "favourite_users", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "favourite_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["favourite_id"], name: "index_favourite_users_on_favourite_id"
+    t.index ["user_id"], name: "index_favourite_users_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|

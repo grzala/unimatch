@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330154712) do
+ActiveRecord::Schema.define(version: 20170403125953) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20170330154712) do
     t.boolean  "recurring",   default: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "avatar"
   end
 
   create_table "society_interests", force: :cascade do |t|

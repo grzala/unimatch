@@ -67,11 +67,11 @@
                     $('#progress<%= user.id %>').circleProgress({
                         value:  <%= coefficient1 %> ,
                         size: 145,
-                        startAngle: 4.71,
+                        startAngle: -Math.PI / 2,
                         thickness: 7,
                         lineCap: "round",
                         fill: {
-                            gradient: ["green","yellow" , "#FF6868"],
+                            gradient: ["#FF6868"],
                         }
                     });
                 </script>

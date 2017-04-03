@@ -156,18 +156,21 @@ h4#interest
     min-width: 280px
     
 .star 
-    display: block !important//temporary
+    display: inline-block !important//temporary
     visibility: hidden
     font-size: 60px
     cursor: pointer
-
+    
+.star-inactive
     &:before 
         content: "\2606"
-        position: absolute
+        position: relative !important
         visibility: visible
         color: black
 
-    &:checked:before 
+.star-active
+    &:before 
         content: "\2605"
-        position: absolute
-        color: yellow
+        position: relative !important
+        visibility: visible
+        color: yellow 

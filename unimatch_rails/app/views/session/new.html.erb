@@ -10,32 +10,36 @@
     <div class="block_centre" id="form_container">
                 <h2>Register</h2>
         <div class="block_centre">
-            <%= form_for(:user, :url => {:controller => 'user', :action => 'create'}) do |f| %>
+            <%= form_for(:user, :url => {:controller => 'user', :action => 'create'}, :html => {:id => "register-form"}) do |f| %>
                 <fieldset class="block_centre">
                     <div class="form-group">
-                        <label>Email address</label>
-                        <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon2" <%= f.text_field :email %>
-                        <small id="emailHelp" class="form-text text-muted">Needs to end in .ac.uk</small>
+                        <label>Email address *</label>
+                        <%= f.text_field :email, class: "form-control", placeholder: "user@abdn.ac.uk" %> 
+                        <small id="email-help" class="form-text text-muted register-helper">Needs to follow format: username@university.ac.uk</small>
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password %>
+                        <label>Name *</label>
+                        <%= f.text_field :name, class: "form-control", placeholder: "Name" %> 
+                        <small id="name-help" class="form-text text-muted register-helper">Name must have at least 3 characters</small>
                     </div>
                     <div class="form-group">
-                        <label>Password confirmation</label>
-                        <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2" <%= f.password_field :password_confirmation %>
+                        <label>Surname *</label>
+                        <%= f.text_field :surname, class: "form-control", placeholder: "Surname" %>
+                        <small id="surname-help" class="form-text text-muted register-helper">Surname must have at least 3 characters</small>
                     </div>
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" placeholder="name" aria-describedby="basic-addon2" <%= f.text_field :name %>
+                        <label>Password *</label>
+                        <%= f.password_field :password, class: "form-control", placeholder: "password"%>
+                        <small id="pass-help" class="form-text text-muted register-helper">Password needs at least 6 characters</small>
                     </div>
                     <div class="form-group">
-                        <label>Surname</label>
-                        <input type="text" class="form-control" placeholder="surname" aria-describedby="basic-addon2" <%= f.text_field :surname %>
+                        <label>Password confirmation *</label>
+                        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "password" %>
+                        <small id="pass-conf-help" class="form-text text-muted register-helper">This password must be the same as in the field above</small>
                     </div>
                     <div class="form-group">
                         <label>Profile Picture</label>
-                        <input type="file" class="form-control" placeholder="profile pic" aria-describedby="basic-addon2" <%= f.file_field :avatar %>
+                        <%= f.file_field :avatar, class: "form-control", placeholder: "profile_pic" %>
                     </div>
                 </fieldset>
                 <%= submit_tag "Register", {:id => 'register', :class => "btn btn-primary"} %>
@@ -44,4 +48,137 @@
         </div>
         </div>
     </div>
+    
+    <div class="register-invalid-box">Some of the values entered are invalid <br/>Please review your input and try again</div>
 </body>
+
+
+<script>
+    $(document).ready(function(){
+        var email_field = $("#user_email");
+        var name_field = $("#user_name");
+        var surname_field = $("#user_surname");
+        var pass_field = $("#user_password");
+        var pass_conf_field = $("#user_password_confirmation");
+        
+        
+        var email_help = $('#email-help')
+        var pass_help = $('#pass-help')
+        var pass_conf_help = $('#pass-conf-help')
+        var name_help = $('#name-help')
+        var surname_help = $('#surname-help')
+        
+        
+        
+        function validate_pass(value) {
+            if (value.length < 6) {
+                return false;
+            }
+            return true;
+        }
+        
+        function validate_pass_conf(value) {
+            var pass = $(pass_field).val();
+            if (value != pass) {
+                return false;
+            }
+            return true;
+        }
+        
+        function validate_name(value) {
+            if (value.length < 3) {
+                return false;
+            }
+            return true;
+        }
+        
+        function validate_email(value) {
+           var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@([\.a-zA-z0-9]+)\.ac\.uk$/;
+           var valid = regex.test(value);
+           return valid;
+        }
+        
+        //validate email
+        email_field.keyup(function() {
+            var valid = validate_email(email_field.val());
+            if (!valid) {
+                email_field.addClass("invalid");
+                email_help.show();
+            } else {
+                email_field.removeClass("invalid");
+                email_help.hide();
+            }
+        })
+        
+        //validate name
+        name_field.keyup(function() {
+            var valid = validate_name(name_field.val());
+            if (!valid) {
+                name_field.addClass("invalid");
+                name_help.show();
+            } else {
+                name_field.removeClass("invalid");
+                name_help.hide();
+            }
+        })
+        
+        //validate surname
+        surname_field.keyup(function() {
+            var valid = validate_name(surname_field.val());
+            if (!valid) {
+                surname_field.addClass("invalid");
+                surname_help.show();
+            } else {
+                surname_field.removeClass("invalid");
+                surname_help.hide();
+            }
+        })
+        
+        function check_pass() {
+            var valid = validate_pass(pass_field.val());
+            if (!valid) {
+                pass_field.addClass("invalid");
+                pass_help.show();
+            } else {
+                pass_field.removeClass("invalid");
+                pass_help.hide();
+            }
+            valid = validate_pass_conf(pass_conf_field.val());
+            if (!valid) {
+                pass_conf_field.addClass("invalid");
+                pass_conf_help.show();
+            } else {
+                pass_conf_field.removeClass("invalid");
+                pass_conf_help.hide();
+            }
+        }
+        
+        //validate pass
+        pass_field.keyup(function() {
+            check_pass()
+        })
+        
+        //validate pass2
+        pass_conf_field.keyup(function() {
+            check_pass()
+        })
+        
+        $('#register').click(function(e) {
+            e.preventDefault();
+            
+            console.log('validating');
+            
+            var valid = true
+            
+            valid = validate_email(email_field.val()) && validate_name(name_field.val()) && validate_name(surname_field.val()) && validate_pass(pass_field.val()) && validate_pass_conf(pass_conf_field.val());
+            
+            if (valid) {
+                $('#register-form').submit();
+            } else {
+                $('.register-invalid-box').show();
+                $('.register-invalid-box').delay(1500).fadeOut(1000);
+            }
+        })
+    })
+    
+</script>

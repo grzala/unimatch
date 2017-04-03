@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
   
   root :to => 'welcome#index'
+  get '/index' => 'welcome#index'
   
   controller :welcome do
     post '' => :create

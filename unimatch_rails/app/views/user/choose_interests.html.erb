@@ -1,19 +1,45 @@
 <h3>Please choose or edit your interests</h3>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+    
+    </script>
 </head>
 <div>
     
-
-<div class= "col-md-12" style= "padding-bottom: 10px">    
+<div> <button class= "col-md-12 " style="padding-bottom: 10px; min-width:115px; padding: 0px; background-color: #dddddd; margin-bottom: 20px"  id="important_interests"> Choose Important Interests </button></div>
+<div> <button class= "col-md-12 " style="padding-bottom: 10px; min-width:115px; padding: 0px; background-color: #dddddd; margin-bottom: 20px"  id="regular_interests" >Choose regular Interests </button></div>
+<script>
+ $(document).ready(function(){   
+             $("#regular_interests_show").hide();
+             $("#important_interests_show").hide();
+             
+             $("#regular_interests").click(function(){
+             $(".active1").hide();
+             $(".active1").removeClass("active1");
+             $("#regular_interests_show").show();
+             $("#regular_interests_show").addClass("active1");
+             
+            });
+            
+            $("#important_interests").click(function(){
+             $(".active1").hide();
+             $(".active1").removeClass("active1");
+             $("#important_interests_show").show();
+             $("#important_interests_show").addClass("active1");
+             
+            });
+ 
+ });
+</script>
+<div class= "col-md-12" id= "regular_interests_show" style= "padding-bottom: 10px">    
 <ul class="row col-md-12">
-  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="sports"  >sports</a></li>
-  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="science" >science</a></li>
-  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="cooking" >cooking</a></li>
-  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="music" >music</a></li>
-  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="culture" >culture</a></li>
-  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="health"  >health</a></li>
-  <li class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;"><a id="social" >social</a></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;" id="sports"  >sports</button></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;" id="science"  >science</button></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;" id="cooking"  >cooking</button></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;" id="music"  >music</button></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;" id="culture"  >culture</button></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;" id="health"  >health</button></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #dddddd;" id="social"  >social</button></li>
 </ul>
 <script>
 $(document).ready(function(){
@@ -74,15 +100,87 @@ $(document).ready(function(){
 </script>
 </div>
 
+<div class= "col-md-12" id="important_interests_show" style= "padding-bottom: 10px">    
+<ul class="row col-md-12">
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #FF6868;" id="sports_imp"  >sports</a></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #FF6868;" id="science_imp"  >science</a></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #FF6868;" id="cooking_imp"  >cooking</a></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #FF6868;" id="music_imp"  >music</a></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #FF6868;" id="culture_imp"  >culture</a></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #FF6868;" id="health_imp"  >health</a></li>
+  <li> <button class="col-md-1" style= "min-width:115px; padding: 0px; background-color: #FF6868;" id="social_imp"  >social</a></li>
+</ul>
+<script>
+$(document).ready(function(){
+
+ $("#sports_imp_show").hide();
+ $("#science_imp_show").hide();
+ $("#cooking_imp_show").hide();
+ $("#music_imp_show").hide();
+ $("#culture_imp_show").hide();
+ $("#health_imp_show").hide();
+ $("#social_imp_show").hide();
+ 
+ $('#sports_imp').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#sports_imp_show").show();
+ $("#sports_imp_show").addClass("active");
+ });
+ $('#science_imp').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#science_imp_show").show();
+ $("#science_imp_show").addClass("active");
+ });
+ $('#cooking_imp').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#cooking_imp_show").show();
+ $("#cooking_imp_show").addClass("active");
+ });
+ $('#music_imp').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#music_imp_show").show();
+ $("#music_imp_show").addClass("active");
+ });
+ $('#culture_imp').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#culture_imp_show").show();
+ $("#culture_imp_show").addClass("active");
+ });
+ $('#health_imp').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#health_imp_show").show();
+ $("#health_imp_show").addClass("active");
+ });
+ $('#social_imp').click(function(){
+ $(".active").hide();
+ $(".active").removeClass("active");
+ $("#social_imp_show").show();
+ $("#social_imp_show").addClass("active");
+ });
+
+});
+
+</script>
+</div>
+
            <div style="text-align: left; padding-left: 20px; margin-bottom:100px;">
             <%= form_tag update_interests_url, :id => @user.id do %>
+             <%= submit_tag :Update %>
                     <div id="sports_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Sports</p>
                     <div class = "row" style="table-layout: fixed;">
                     <% @interests1.each do |interest| %>
-                       <div class="col-md-4 picture">
+                       <% next if @user_interests_imp.include? interest %>
+                       <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
+                       
                         <input type="checkbox" id= "picture" class="img" <%= check_box_tag "interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
@@ -99,6 +197,37 @@ $(document).ready(function(){
                           for (var i = 0; i < list.length; i++) {
                            list[i].setAttribute("for", "picture" + i);
                           }
+                          
+                        </script>
+                        <% end %>
+                    </div>
+                    </div>
+                     <div id="sports_imp_show" style=" padding-bottom: 5px; padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
+                    <h4>Sports</h4><br>
+                    <p>Remember, you can only choose 5 impotant interests<p>
+                    <div class = "row" style="table-layout: fixed;">
+                    <% @interests1.each do |interest| %>
+                       <div class="col-md-4">
+                        <% checked = @user_interests_imp.include? interest %>
+                        <% a=interest.name.tr(" ","").downcase %>
+                       
+                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
+                        </label>
+                        </div>
+                         <script>
+                          var list = document.getElementsByClassName("img");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("id", "picture" + i);
+                          }
+                          var list = document.getElementsByClassName("lbl");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("for", "picture" + i);
+                          }
+                          
                         </script>
                         <% end %>
                     </div>
@@ -107,6 +236,7 @@ $(document).ready(function(){
                     <p>Science</p>
                     <div class="row">
                     <% @interests2.each do |interest| %>
+                       <% next if @user_interests_imp.include? interest %>
                        <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
@@ -131,10 +261,41 @@ $(document).ready(function(){
                         <% end %>
                     </div>
                     </div>
+                     <div id="science_imp_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
+                    <h4>Science</h4><br>
+                    <p>Remember, you can only choose 5 impotant interests<p>
+                    <div class = "row" style="table-layout: fixed;">
+                    <% @interests2.each do |interest| %>
+                       <div class="col-md-4">
+                        <% checked = @user_interests_imp.include? interest %>
+                        <% a=interest.name.tr(" ","").downcase %>
+                       
+                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
+                        </label>
+                        </div>
+                         <script>
+                          var list = document.getElementsByClassName("img");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("id", "picture" + i);
+                          }
+                          var list = document.getElementsByClassName("lbl");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("for", "picture" + i);
+                          }
+                          
+                        </script>
+                        <% end %>
+                    </div>
+                    </div>
                     <div id="cooking_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Cooking</p>
                     <div class = "row">
                     <% @interests3.each do |interest| %>
+                       <% next if @user_interests_imp.include? interest %>
                        <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","")%>
@@ -161,10 +322,41 @@ $(document).ready(function(){
                         <% end %>
                     </div>
                     </div>
+                     <div id="cooking_imp_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
+                    <p>Cooking</p><br>
+                    <p>Remember, you can only choose 5 impotant interests<p>
+                    <div class = "row" style="table-layout: fixed;">
+                    <% @interests3.each do |interest| %>
+                       <div class="col-md-4">
+                        <% checked = @user_interests_imp.include? interest %>
+                        <% a=interest.name.tr(" ","").downcase %>
+                       
+                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
+                        </label>
+                        </div>
+                         <script>
+                          var list = document.getElementsByClassName("img");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("id", "picture" + i);
+                          }
+                          var list = document.getElementsByClassName("lbl");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("for", "picture" + i);
+                          }
+                          
+                        </script>
+                        <% end %>
+                    </div>
+                    </div>
                     <div id="music_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Music</p>
                     <div class = "row">
                     <% @interests4.each do |interest| %>
+                     <% next if @user_interests_imp.include? interest %>
                      <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
@@ -190,10 +382,41 @@ $(document).ready(function(){
                         <% end %>
                     </div>
                     </div>
+                     <div id="music_imp_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
+                    <p>Music</p><br>
+                    <p>Remember, you can only choose 5 impotant interests<p>
+                    <div class = "row" style="table-layout: fixed;">
+                    <% @interests4.each do |interest| %>
+                       <div class="col-md-4">
+                        <% checked = @user_interests_imp.include? interest %>
+                        <% a=interest.name.tr(" ","").downcase %>
+                       
+                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
+                        </label>
+                        </div>
+                         <script>
+                          var list = document.getElementsByClassName("img");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("id", "picture" + i);
+                          }
+                          var list = document.getElementsByClassName("lbl");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("for", "picture" + i);
+                          }
+                          
+                        </script>
+                        <% end %>
+                    </div>
+                    </div>
                     <div id="culture_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Culture</p>
                     <div class = "row">
                     <% @interests5.each do |interest| %>
+                        <% next if @user_interests_imp.include? interest %>
                         <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
@@ -219,10 +442,41 @@ $(document).ready(function(){
                         <% end %>
                     </div>
                     </div>
+                     <div id="culture_imp_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
+                    <p>Culture</p><br>
+                    <p>Remember, you can only choose 5 impotant interests<p>
+                    <div class = "row" style="table-layout: fixed;">
+                    <% @interests5.each do |interest| %>
+                       <div class="col-md-4">
+                        <% checked = @user_interests_imp.include? interest %>
+                        <% a=interest.name.tr(" ","").downcase %>
+                       
+                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
+                        </label>
+                        </div>
+                         <script>
+                          var list = document.getElementsByClassName("img");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("id", "picture" + i);
+                          }
+                          var list = document.getElementsByClassName("lbl");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("for", "picture" + i);
+                          }
+                          
+                        </script>
+                        <% end %>
+                    </div>
+                    </div>
                     <div id="health_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Health</p>
                     <div class = "row">
                     <% @interests6.each do |interest| %>
+                        <% next if @user_interests_imp.include? interest %>
                         <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
@@ -247,11 +501,42 @@ $(document).ready(function(){
                         <% end %>
                     </div>
                  
+                    </div>
+                     <div id="health_imp_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
+                    <p>Health</p><br>
+                    <p>Remember, you can only choose 5 impotant interests<p>
+                    <div class = "row" style="table-layout: fixed;">
+                    <% @interests6.each do |interest| %>
+                       <div class="col-md-4">
+                        <% checked = @user_interests_imp.include? interest %>
+                        <% a=interest.name.tr(" ","").downcase %>
+                       
+                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
+                        </label>
+                        </div>
+                         <script>
+                          var list = document.getElementsByClassName("img");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("id", "picture" + i);
+                          }
+                          var list = document.getElementsByClassName("lbl");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("for", "picture" + i);
+                          }
+                          
+                        </script>
+                        <% end %>
+                    </div>
                     </div>
                     <div id="social_show" style="padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
                     <p>Social</p>
                     <div class = "row">
                     <% @interests7.each do |interest| %>
+                        <% next if @user_interests_imp.include? interest %>
                         <div class="col-md-4">
                         <% checked = @user_interests.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
@@ -277,7 +562,39 @@ $(document).ready(function(){
                     </div>
                     
                     </div>
-            <%= submit_tag :Update, :id=> @user.id %>
+                     <div id="social_imp_show" style=" padding-left: 0px; padding-top: 20px; margin-bottom:100px; " class="col-md-12">
+                    <p>Social</p><br>
+                    <p>Remember, you can only choose 5 impotant interests<p>
+                    <div class = "row" style="table-layout: fixed;">
+                    <% @interests7.each do |interest| %>
+                       <div class="col-md-4">
+                        <% checked = @user_interests_imp.include? interest %>
+                        <% a=interest.name.tr(" ","").downcase %>
+                       
+                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <label for=picture class="lbl">
+                        <%= interest.name %>
+                        <br>
+                        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "choose_img") %>
+                        </label>
+                        </div>
+                         <script>
+                          var list = document.getElementsByClassName("img");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("id", "picture" + i);
+                          }
+                          var list = document.getElementsByClassName("lbl");
+                          for (var i = 0; i < list.length; i++) {
+                           list[i].setAttribute("for", "picture" + i);
+                          }
+                          
+                        </script>
+                        <% end %>
+                    </div>
+                    </div>
+            
+           
+           
             <% end %>
             
 

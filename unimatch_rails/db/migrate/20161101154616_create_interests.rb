@@ -3,7 +3,7 @@ class CreateInterests < ActiveRecord::Migration[5.0]
     create_table :interests do |t|
       t.belongs_to :interest_group
       t.string :name
-      
+      t.boolean :important
       t.timestamps
     end
   end

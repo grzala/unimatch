@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+	include BCrypt
 	include Connect
     include Rails.application.routes.url_helpers
 	
@@ -38,18 +39,18 @@ class User < ApplicationRecord
 	#end
 
 	
-	def password=(password)
-		@password = password
-		
-		if password.present?
-			generate_salt
-			self.hashed_password = self.class.encrypt_password(password, salt)
-		end
-	end#used to generate salt on the password
+	def password
+		@password ||= Password.new(hashed_password)
+	end
+	
+	def password=(new_password)
+		@password = Password.create(new_password)
+		self.hashed_password = @password
+	end
 	
 	def User.authenticate(email, password)
-		if user = find_by_email(email)
-			if user.hashed_password == encrypt_password(password, user.salt)
+		if user = User.find_by_email(email)
+			if user.password == password
 				return user
 			end
 		end

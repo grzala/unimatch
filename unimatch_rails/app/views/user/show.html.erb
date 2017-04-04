@@ -44,13 +44,19 @@
     </div>
     <div class="col-md-4" class="left">
         <% if @favourite_users.length > 0 %>
-            <div class="user-mini-container">
+            <div id="user-mini-section">
                 <h4>Favourite Users</h4>
-                <% @favourite_users.each do |fav| %>
-                    <div class="user-profile-mini">
-                        <%= fav.name %>
-                    </div>
-                <% end %>
+                <div class="user-mini-container">
+                    <% @favourite_users.each do |fav| %>
+                        <%= link_to :controller => :user, :action => :show, :id => fav.id do %>
+                            <div class="user-mini-element" user_id="<%= fav.id %>">
+                                <%= image_tag fav.avatar_url(:display), :class => "user-mini-image" %>
+                                <p><%= fav.name %> <%= fav.surname %></p>
+                                <p class="special-action"><%= image_tag "close-cross.svg", :id => "close-cross" %></p>
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
             </div>
         <% end %>
         <% if session[:user_id] != @user.id %>
@@ -124,3 +130,19 @@ $(document).ready(function() {
         })
     </script>
 <% end %>
+
+<script>
+    $(document).ready(function() {
+        $(".special-action").click(function(e) {
+            e.preventDefault();
+            var parent = $(this).parent();
+            var id = parent.attr("user_id");
+            
+            switch_favourite(id);
+            parent.parent().remove(); // delets the anchor tag
+            if ($('#user-mini-section .user-mini-container').children().length <= 0) {
+              $('#user-mini-section').remove();
+            }
+        });
+    })
+</script>

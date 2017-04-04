@@ -372,6 +372,10 @@ class User < ApplicationRecord
 		return toreturn
 	end
 	
+	def get_joined_events
+		return Event.get_events_attended_by(self.id)
+	end
+	
 	private ############################# private methods below ##################################
 	
 	def password_must_be_present

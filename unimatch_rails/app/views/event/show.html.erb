@@ -14,27 +14,29 @@
 </div>
 
 
-<script>
-    $('#invite-all').click(function(e) {
-        e.preventDefault();    
-        url = '/inviteallmembers'
-        $.ajax({
-    		type: 'POST',
-    		url: url,
-            data: {
-                society_id: <%= @society.id %>,
-                event_id: <%= @event.id %>
-            },
-            success: function() { 
-                location.reload();
-            },
-            
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(xhr.status)
-                alert(xhr.statusText)
-                alert(xhr.responseText)	
-            }
-    	});
-    })
-    
-</script>
+<% if !@society.nil? and @society.has_admin(session[:user_id]) %>
+    <script>
+        $('#invite-all').click(function(e) {
+            e.preventDefault();    
+            url = '/inviteallmembers'
+            $.ajax({
+        		type: 'POST',
+        		url: url,
+                data: {
+                    society_id: <%= @society.id %>,
+                    event_id: <%= @event.id %>
+                },
+                success: function() { 
+                    location.reload();
+                },
+                
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status)
+                    alert(xhr.statusText)
+                    alert(xhr.responseText)	
+                }
+        	});
+        })
+        
+    </script>
+<% end %>

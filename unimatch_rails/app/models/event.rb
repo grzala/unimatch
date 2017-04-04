@@ -89,6 +89,15 @@ class Event < ApplicationRecord
         return toreturn
     end
     
+    def self.get_events_attended_by(id)
+		ep = Participant.where(user_id: id)
+		events = []
+		ep.each do |participant|
+		    events << Event.find(participant.event_id)
+		end
+		return events
+	end
+    
     
     private
     def filter_by_id(array)

@@ -52,6 +52,8 @@ class UserController < ApplicationController
     
     @image_url = @user.avatar_url(:display)
     
+    @favourite_users = @user.get_favourites
+    
     if session[:user_id] != params[:id]
       @con = Conversation.get_conversation_between(User.friendly.find(session[:user_id]), User.friendly.find(params[:id]))
     end

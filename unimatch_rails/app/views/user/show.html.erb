@@ -43,6 +43,16 @@
         <br>
     </div>
     <div class="col-md-4" class="left">
+        <% if @favourite_users.length > 0 %>
+            <div class="user-mini-container">
+                <h4>Favourite Users</h4>
+                <% @favourite_users.each do |fav| %>
+                    <div class="user-profile-mini">
+                        <%= fav.name %>
+                    </div>
+                <% end %>
+            </div>
+        <% end %>
         <% if session[:user_id] != @user.id %>
             <h4>Attending Events</h4>
             <% if @events.length == 0 %>

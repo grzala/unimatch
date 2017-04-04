@@ -90,14 +90,20 @@
         <% if @events_joined.length > 0 %>
             <h4>Attending Events</h4>
             <div class="user-mini-container">
+                <% 
+                    cur = 0
+                    max_events = 25
+                %>
                 <% @events_joined.each do |event| %>
+                    <% cur += 1 %>
+                    <% break if cur > max_events %>
                     <%= link_to :controller => :event, :action => :show, :id => event.id do %>
                         <div class="user-mini-element">
                             <div class="user-mini-info">
                                 <div class="date date-mini">
                                 	<span class="binds"></span>
-                                	<span class="month">AUG</span>
-                                	<h1 class="day">28</h1>
+                                	<span class="month"><%= event.date.strftime("%B")[0..2] %></span>
+                                	<h1 class="day"><%= event.date.day %></h1>
                                 </div>
                                 <p><%= event.name %></p>
                             </div>

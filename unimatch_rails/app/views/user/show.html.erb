@@ -44,25 +44,27 @@
     </div>
     <div class="col-md-4" class="left">
         <!-- favourite users -->
-        <% if @favourite_users.length > 0 %>
-            <div id="user-mini-section">
-                <h4>Favourite Users</h4>
-                <div class="user-mini-container">
-                    <% @favourite_users.each do |fav| %>
-                        <%= link_to :controller => :user, :action => :show, :id => fav.id do %>
-                            <div class="user-mini-element" user_id="<%= fav.id %>">
-                                <div class="user-mini-info">
-                                    <%= image_tag fav.avatar_url(:display), :class => "user-mini-image" %>
-                                    <p><%= fav.name %> <%= fav.surname %></p>
+        <% if session[:user_id] == @user.id %>
+            <% if @favourite_users.length > 0 %>
+                <div id="user-mini-section">
+                    <h4>Favourite Users</h4>
+                    <div class="user-mini-container">
+                        <% @favourite_users.each do |fav| %>
+                            <%= link_to :controller => :user, :action => :show, :id => fav.id do %>
+                                <div class="user-mini-element" user_id="<%= fav.id %>">
+                                    <div class="user-mini-info">
+                                        <%= image_tag fav.avatar_url(:display), :class => "user-mini-image" %>
+                                        <p><%= fav.name %> <%= fav.surname %></p>
+                                    </div>
+                                    <p class="special-action remove"><%= image_tag "close-cross.svg", :id => "close-cross" %></p>
                                 </div>
-                                <p class="special-action remove"><%= image_tag "close-cross.svg", :id => "close-cross" %></p>
-                            </div>
+                            <% end %>
                         <% end %>
-                    <% end %>
+                    </div>
                 </div>
-            </div>
-        <% else %>
-            <p>see the matches page to find favourite users</p>
+            <% else %>
+                <p>see the matches page to find favourite users</p>
+            <% end %>
         <% end %>
         
         <!-- societies -->

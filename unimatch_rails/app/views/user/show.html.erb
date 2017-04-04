@@ -133,6 +133,7 @@ $(document).ready(function() {
         console.log("RENDER");
         element.find('.fc-content').append('<div class="fc-separator"></div><p class="fc-description">'+ event.description + '</p></div>');
     }
+    console.log(<%= @events_json %>);
     
     $('#calendar').fullCalendar({
         header: {

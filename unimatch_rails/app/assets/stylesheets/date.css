@@ -73,7 +73,8 @@
 
 .date-mini .binds {
 	width: 30px !important;
-	height: 10px;
+	height: 8px;
+	top: -4px;
 }
 
 .date .month {

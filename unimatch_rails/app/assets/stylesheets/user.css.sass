@@ -178,16 +178,13 @@ h4#interest
 
 // MINI CONTAINER //////////////////////
 .user-mini-container
-    height: 200px
+    max-height: 200px
     overflow-y: scroll
     padding: 2px
     
 .user-mini-container p
     color: black
     text-decoration: none
-    
-    float: left
-    margin-top: 15px
     
 .user-mini-container .user-mini-image
     width: 50px
@@ -196,7 +193,7 @@ h4#interest
     margin-right: 10px
     
     border-radius: 10%
-    float: left
+    display: inline-block
     
 .user-mini-element
     width: 100%
@@ -204,6 +201,18 @@ h4#interest
     
     margin-bottom: 3px
     padding: 5px
+    
+.user-mini-element .user-mini-info
+    float: left
+
+.user-mini-element .user-mini-info *
+    vertical-align: middle
+
+.user-mini-element .user-mini-info p
+    width: 150px
+    text-align: left
+    display: inline-block
+    margin-top: 10px
     
 
 .user-mini-container .special-action

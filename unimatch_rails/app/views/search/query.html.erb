@@ -1,0 +1,12 @@
+<% if @search_string.nil? %>
+    Search string invalid or too long
+<% else %>
+
+    <p>You searched For: <%= @search_string %></p>
+    <p>Results: </p>
+    
+    <% @results.each do |result| %>
+        <p><%= result['type'] %>: <a href="<%= result['link'] %>"><%= result['title'] %></a></p>
+    <% end %>
+
+<% end %>

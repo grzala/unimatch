@@ -42,6 +42,8 @@ class UserController < ApplicationController
     @events.merge(@events_joined.to_set)
     @events = @events.to_a
     
+    @events_joined = @events_joined.sort_by &:date
+    
     @events_json = []
     
     @events.each do |event|

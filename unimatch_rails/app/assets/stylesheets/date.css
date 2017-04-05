@@ -1,7 +1,7 @@
 .date {
 	display: block;
-	width: 50px;
-	height: 50px;
+	width: 100px;
+	height: 100px;
 	background: #fff;
 	text-align: center;
 	font-family: 'Helvetica', sans-serif;
@@ -68,6 +68,7 @@
 .date-mini {
 	display: inline-block !important;
 	width: 50px !important;
+	height: 50px !important;
 	margin-bottom: 3px;
 }
 
@@ -77,12 +78,12 @@
 	top: -4px;
 }
 
-.date .month {
+.date-mini .month {
 	font-size: 10px !important;
 	padding: 2px;
 }
 
-.date .day {
+.date-mini .day {
 	font-size: 24px !important;
 	padding: 3px 0px;
 }

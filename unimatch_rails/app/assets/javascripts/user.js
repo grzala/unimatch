@@ -1,8 +1,10 @@
 /* global $ */
 
-$(document).ready(function() {
+function initStars() {
+    console.log("Star ready");
     //star
     $(".star").click(function(e) {
+        console.log("clicked");
         var star = this
         switch_favourite($(star).attr("user_id"))
         
@@ -23,7 +25,7 @@ $(document).ready(function() {
     $(".user-mini-container .user-mini-element").mouseleave(function() {
         $(this).find(".special-action").hide();
     })
-});
+}
 
 function switch_favourite(user_id) {
 	$.ajax({

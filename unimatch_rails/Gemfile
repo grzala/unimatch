@@ -45,6 +45,10 @@ gem 'database_cleaner'
 gem 'carrierwave'
 gem 'mini_magick'
 
+#gems for date parsing
+gem 'momentjs-rails'
+
+
 #security
 gem 'bcrypt'
 

@@ -14,10 +14,10 @@ $.fn.messages = function(con_id){
     this.append('<div class="messages-container"></div>')
     
     var messageField = ''
-    messageField += '<div class="write-message">'
-    messageField += '<p>Message <textarea class="message-body" /> </p>'
-    messageField += '<p><input type="submit" id="send-message" value="send" /></p>'
-    messageField += '</div>'
+    // messageField += '<div class="write-message">'
+    messageField += '<textarea class="message-body" placeholder="Write a reply... press enter to send"></textarea>'
+    // messageField += '<p><input type="submit" id="send-message" value="send" /></p>'
+    // messageField += '</div>'
     this.append(messageField)
     
     $('#send-message').click(function(e) {
@@ -99,13 +99,23 @@ function makeMessage(data) {
     
     var toAppend = '';
     toAppend += '<div class="message ' + clas + '">'
-    toAppend += '<p>'
-    toAppend += data.sender + ' ' 
-    toAppend += data.date
+    
+    if (clas == 0) {
+        toAppend += '<div id="empty_convo"><h3>Start your conversation here</h3></div>'
+    }
+        
+    
+    if (!data['own']) {
+        toAppend += '<img src="https://www.scheller.gatech.edu/thumb/width/600/cropratio/1:1/pix/directory/xmulford_chuck_profile.jpg.pagespeed.ic.BrKpOe4a3L.jpg" class="message_pic">'
+    }
+
+    toAppend += '<p class="message_text">'
+    toAppend += data.body
     toAppend += '</p>'
     
-    toAppend += '<p>'
-    toAppend += data.body
+    toAppend += '<p class="date">'
+    
+    toAppend += moment(data.date).format("ddd h:ma, Do MMM YYYY");
     toAppend += '</p>'
     
     toAppend += '</div>'

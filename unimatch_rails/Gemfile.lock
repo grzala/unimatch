@@ -124,6 +124,8 @@ GEM
     mini_magick (4.7.0)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    momentjs-rails (2.17.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     multi_test (0.1.2)
     mysql2 (0.4.5)
@@ -259,6 +261,7 @@ DEPENDENCIES
   jquery-ui-rails
   listen (~> 3.0.5)
   mini_magick
+  momentjs-rails
   mysql2
   normalize-rails
   passenger

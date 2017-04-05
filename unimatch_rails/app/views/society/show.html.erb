@@ -27,6 +27,26 @@
     </div>
 </div>
 
+<!-- manage admins -->
+<% if @is_admin and @add_remove.length > 0 %>
+<h4>Manage Admin Status</h4>
+    <div id="user-mini-section">
+        <div class="user-mini-container">
+            <% @add_remove.each do |usr| %>
+                    <div class="user-mini-element" user_id="<%= usr.id %>">
+                        <%= link_to :controller => :user, :action => :show, :id => usr.id do %>
+                            <div class="user-mini-info">
+                                <%= image_tag usr.avatar_url(:display), :class => "user-mini-image" %>
+                                <p><%= usr.name %> <%= usr.surname %></p>
+                            </div>
+                        <% end %>
+                        <p class="special-action remove"><a href="#" id="add_remove"><span class="admin_msg"><%= if !@admins.include? usr then "Add admin" else "Remove Admin" end %></span></a></p>
+                    </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+
 <script>
     $(document).ready(function() {
     
@@ -52,4 +72,51 @@
     	    eventRender: render,
         });
     });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $(".special-action").click(function(e) {
+            
+            if (!$(this).hasClass("remove")) {
+                return;
+            }
+            
+            e.preventDefault();
+            var parent = $(this).parent();
+            var id = parent.attr("user_id");
+            
+            switch_admin_status(id);
+            var text = $(this).find(".admin_msg").text();
+            var newText = ""
+            if (text == "Remove Admin") {
+                newText = "Add Admin";
+            } else {
+                newText = "Remove Admin";
+            }
+            $(this).find(".admin_msg").text(newText);
+        });
+    })
+    
+    function switch_admin_status(id) {
+        url = '/society/switch_admin'
+        $.ajax({
+    		type: 'POST',
+    		url: url,
+            data: {
+                society_id: <%= @society.id %>,
+                user_id: id,
+            },
+            success: function() { 
+                console.log("admin switched");
+            },
+            
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status)
+                alert(xhr.statusText)
+                alert(xhr.responseText)	
+            }
+    	});
+    }
 </script>

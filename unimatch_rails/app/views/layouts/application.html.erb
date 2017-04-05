@@ -90,6 +90,15 @@
         
         $(".notifications-link").notificationsLink();
         $(".notifications").addNotifications(<%= @notifs %>);
+        
+        //submit search on enter
+        $("#search_query").keypress(function(e) {
+          if (event.which == 13) {
+            e.preventDefault();
+            console.log("pressed enter");
+            $(this).closest("form").submit();
+          }
+        })
       });
     </script>
     </div>

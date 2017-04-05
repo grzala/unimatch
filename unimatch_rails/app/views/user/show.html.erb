@@ -43,24 +43,74 @@
         <br>
     </div>
     <div class="col-md-4" class="left">
-        <% if session[:user_id] != @user.id %>
-            <h4>Attending Events</h4>
-            <% if @events.length == 0 %>
-                <p>Not attending any events</p>
+        <!-- favourite users -->
+        <% if session[:user_id] == @user.id %>
+            <h4>Favourite Users</h4>
+            <% if @favourite_users.length > 0 %>
+                <div id="user-mini-section">
+                    <div class="user-mini-container">
+                        <% @favourite_users.each do |fav| %>
+                            <%= link_to :controller => :user, :action => :show, :id => fav.id do %>
+                                <div class="user-mini-element" user_id="<%= fav.id %>">
+                                    <div class="user-mini-info">
+                                        <%= image_tag fav.avatar_url(:display), :class => "user-mini-image" %>
+                                        <p><%= fav.name %> <%= fav.surname %></p>
+                                    </div>
+                                    <p class="special-action remove"><%= image_tag "close-cross.svg", :id => "close-cross" %></p>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
             <% else %>
-                <% @events.each do |event| %>
-                <%= link_to event.name, :controller => :event, :action => :show, :id => event.id %>
-                <% end %>
+                <p>see the matches page to find favourite users</p>
             <% end %>
         <% end %>
         
+        <!-- societies -->
         <h4>In Societies</h4>
-        <% if @in_societies.length == 0 %>
-            <p>Not in any societies</p>
+        <% if @in_societies.length > 0 %>
+            <div class="user-mini-container">
+                <% @in_societies.each do |soc| %>
+                    <%= link_to :controller => :society, :action => :show, :id => soc.id do %>
+                        <div class="user-mini-element">
+                            <div class="user-mini-info">
+                                <%= image_tag soc.avatar_url(:display), :class => "user-mini-image" %>
+                                <p><%= soc.name %></p>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
         <% else %>
-            <% @in_societies.each do |society|%>
-                <%= link_to society.name, :controller => :society, :action => :show, :id => society.id %>
-            <% end %>
+            <p></p>See the recommender docs page to find suitable socs</p>
+        <% end %>
+        
+        <!-- events -->
+        <% if @events_joined.length > 0 %>
+            <h4>Attending Events</h4>
+            <div class="user-mini-container">
+                <% 
+                    cur = 0
+                    max_events = 25
+                %>
+                <% @events_joined.each do |event| %>
+                    <% cur += 1 %>
+                    <% break if cur > max_events %>
+                    <%= link_to :controller => :event, :action => :show, :id => event.id do %>
+                        <div class="user-mini-element">
+                            <div class="user-mini-info">
+                                <div class="date date-mini">
+                                	<span class="binds"></span>
+                                	<span class="month"><%= event.date.strftime("%B")[0..2] %></span>
+                                	<h1 class="day"><%= event.date.day %></h1>
+                                </div>
+                                <p><%= event.name %></p>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>           
         <% end %>
     </div>
 </div>
@@ -83,6 +133,7 @@ $(document).ready(function() {
         console.log("RENDER");
         element.find('.fc-content').append('<div class="fc-separator"></div><p class="fc-description">'+ event.description + '</p></div>');
     }
+    console.log(<%= @events_json %>);
     
     $('#calendar').fullCalendar({
         header: {
@@ -114,3 +165,24 @@ $(document).ready(function() {
         })
     </script>
 <% end %>
+
+<script>
+    $(document).ready(function() {
+        $(".special-action").click(function(e) {
+            
+            if (!$(this).hasClass("remove")) {
+                return;
+            }
+            
+            e.preventDefault();
+            var parent = $(this).parent();
+            var id = parent.attr("user_id");
+            
+            switch_favourite(id);
+            parent.parent().remove(); // delets the anchor tag
+            if ($('#user-mini-section .user-mini-container').children().length <= 0) {
+              $('#user-mini-section').remove();
+            }
+        });
+    })
+</script>

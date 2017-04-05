@@ -1,42 +1,26 @@
-<div class="row">
-<div class="col-md-3">
-    <p>Add conditions and filters here</p>
+<div class="recommend_text">
+    <h2>Recommended Socieites</h2>
+    <h5>Societies that relate to your interests</h5>
+    <br>
 </div>
-<div class="col-md-9">
-<h2>Matched Socieites</h2>
-<br>
-<h5>You have been matched with the following socities according to the interests you selected.</h5>
-<br>
 
-<% @matched_societies.each do |society, coefficient| %>
-    <% if coefficient > 0 %>
-        <p><%= link_to society.name, controller: 'society', action: 'show', id: society.id %>
-        <% coefficient = ((coefficient*100).to_f).ceil %>
-        <%
-            match_type = "NO MATCH"
-            class_type = "no_match"
-            if coefficient > 0 && coefficient <= 20
-                match_type = "WEAK MATCH"
-                class_type = "weak_match"
-            elsif coefficient > 20 && coefficient <= 50
-                match_type = "NORMAL MATCH"
-                class_type = "normal_match"
-            elsif coefficient > 50 
-                match_type = "STRONG MATCH"
-                class_type = "strong_match"
-            end
-        %>
-        
-        <%= coefficient.to_s + "% "%>
-        <span class=<%= class_type %>><%= match_type  %></span>
-        
-        
-        
-        </br>
-        </br>
+
+
+<div class="row magic">
+    <% @matched_societies[0..5].each do |society, coefficient| %>
+        <% if coefficient > 0 && society.id != society.id+1 %>
+                <div class="test">
+                    <%= link_to society.name, controller: 'society', action: 'show', :id => society.id do %>
+                       <div class="society_box"> 
+                           <div id="society_img">
+                                <%= image_tag("society_img.png", :alt => "society_img") %>
+                            </div>
+                            <div id="society_name">
+                                <h5><%= society.name.truncate_words(2) %></h5>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+        <% end %>
     <% end %>
-<% end %>
-
-<h5><%= link_to 'View all socities', :controller => :society, :action => :list %></h5>
-</div>
 </div>

@@ -41,6 +41,14 @@
         <% end %>
         <br>
         <br>
+                <% if session[:user_id] == @user.id %>
+            <div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
+                <div id='calendar'></div>
+            </div>
+        <% else %>
+            <h4 class="left">Your conversation with <%= @user.name %></h4>
+            <div class="messages"></div>
+        <% end %>
     </div>
     <div class="col-md-4" class="left">
         <!-- favourite users -->
@@ -114,18 +122,7 @@
         <% end %>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-8">
-        <% if session[:user_id] == @user.id %>
-            <div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
-                <div id='calendar'></div>
-            </div>
-        <% else %>
-            <h4 class="left">Your conversation with <%= @user.name %></h4>
-            <div class="messages"></div>
-        <% end %>
-    </div>
-</div>   
+
 <script>
 $(document).ready(function() {
 

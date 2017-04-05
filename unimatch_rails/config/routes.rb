@@ -53,6 +53,7 @@ Rails.application.routes.draw do
   
   controller :event do
     post '/inviteallmembers' => :invite_all_members
+    post '/invite' => :invite
   end
   
   get '/search' => 'search#query'

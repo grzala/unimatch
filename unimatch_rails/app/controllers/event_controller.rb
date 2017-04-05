@@ -3,13 +3,18 @@ class EventController < ApplicationController
     #if no society - choose interests
     
     def show
+        @user = User.find(session[:user_id])
         @event = Event.find(params[:id])
+        @participants = @event.get_participants
+        @invited = @event.get_invited
         @society = nil
         if @event.society_id != nil
             @society = Society.find(@event.society_id)
+            @is_admin = @society.has_admin(@user)
+            @members_to_invite = @society.get_members - @invited
         end
-        @participants = @event.get_participants
-        @invited = @event.get_invited
+        
+        @favourite_to_invite = @user.get_favourites - @invited
     end
     
     
@@ -101,6 +106,15 @@ class EventController < ApplicationController
         end
         
     end
+    
+    def invite
+        sender = User.find(session[:user_id])
+        recipient = User.find(params[:user_id])
+        event = Event.find(params[:event_id])
+        
+        event.invite(sender, recipient)
+    end
+        
     
     private
     def event_param

@@ -50,7 +50,12 @@ class Event < ApplicationRecord
     end
     
     def get_invited
-        return EventInvite.where(event_id: self.id)
+        ei = EventInvite.where(event_id: self.id)
+        invited = []
+        ei.each do |i|
+            invited << User.find(i.recipient_id)
+        end
+        return invited
     end
     
     def invite(sender, receiver)

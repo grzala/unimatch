@@ -1,12 +1,11 @@
-YOUR ID <%= session[:user_id] %>
-<br/>
-
-number_of messages <%= @msgs.length %>
-
-<br/><br/>
+<h3>Your conversation with </h3>
 
 <div class="messages">
-    
+ 
+ <% if @msgs.length == 0 %>  
+ <h3>Start your conversation.</h3>
+ <% end %>
+ 
 </div>
 
 <script>

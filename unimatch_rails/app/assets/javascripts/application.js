@@ -18,6 +18,7 @@
 //= require bootstrap
 //= require bootstrap-sprockets
 //= require moment.min
+//= require moment
 //= require fullcalendar/fullcalendar
 //= require cable
 //= require_tree .

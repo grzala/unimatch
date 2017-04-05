@@ -47,9 +47,9 @@
         <div class="row">
             <div class="col-md-11">
                 <ul class="nav nav-tabs nav-justified invite-tabs">
-                    <li class="active"><a class="tab-link" data-toggle="tab" href="#menu1">Invite</a></li>
-                    <li><a class="tab-link" data-toggle="tab" href="#menu2">Invited</a></li>
-                    <li><a class="tab-link" data-toggle="tab" href="#menu3">Particitants</a></li>
+                    <li class="active"><a class="tab-link" data-toggle="tab" href="#menu1" id="tab-menu1">Invite</a></li>
+                    <li><a class="tab-link" data-toggle="tab" href="#menu2"  id="tab-menu2">Invited</a></li>
+                    <li><a class="tab-link" data-toggle="tab" href="#menu3"  id="tab-menu3">Particitants</a></li>
                 </ul>
             </div>
             <div class="col-md-1">
@@ -123,7 +123,7 @@
                             <% end %>
                         </div>
                         <div id="menu3" class="tab-pane fade">
-                            <h3>Particitants <%= @participants.length %></h3>
+                            <h3>Participants <%= @participants.length %></h3>
                             <% if @participants.length > 0 %>
                                 <div id="user-mini-section">
                                     <div class="user-mini-container">
@@ -151,10 +151,18 @@
 <script>
     var modal = $('#modal');
     var btn = $(".open-modal");
+    var btn2 = $("#participants-btn");
     var close = $("#close-modal");
     
     btn.click(function() {
         modal.show();
+        document.getElementById("tab-menu1").click()
+    });    
+    
+    btn2.click(function(e) {
+        e.preventDefault();
+        modal.show();
+        document.getElementById("tab-menu2").click()
     });
     
     close.click(function() {

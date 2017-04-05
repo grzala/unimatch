@@ -9,13 +9,15 @@
 <div class="row">
     <% @matched_societies[0..5].each do |society, coefficient| %>
         <% if coefficient > 0 && society.id != society.id+1 %>
-                <div class="col-md-4">
+                <div class="col-md-4 frame">
                     <%= link_to society.name, controller: 'society', action: 'show', :id => society.id do %>
-                        <div id="society_img">
-                            <%= image_tag("society_img.png", :alt => "society_img") %>
-                        </div>
-                        <div id="society_name">
-                            <h5><%= society.name.truncate_words(3) %></h5>
+                       <div class="society_box"> 
+                           <div id="society_img">
+                                <%= image_tag("society_img.png", :alt => "society_img") %>
+                            </div>
+                            <div id="society_name">
+                                <h5><%= society.name.truncate_words(2) %></h5>
+                            </div>
                         </div>
                     <% end %>
                 </div>

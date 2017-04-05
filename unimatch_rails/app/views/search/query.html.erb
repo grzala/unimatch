@@ -6,7 +6,7 @@
     <p>Results: </p>
     
     <% @results.each do |result| %>
-        <p><%= result['type'] %>: <a href="<%= result['link'] %>"><%= result['title'] %></a></p>
+        <p><%= result['type'] %>: <a href="<%= result['link'] %>"><%= result['title'] %> <%= if !result['img'].nil? then image_tag(result['img']) end %></a></p>
     <% end %>
 
 <% end %>

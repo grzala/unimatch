@@ -30,13 +30,13 @@
             <% end %>
             Interests
         </h4>
-        <% User.get_common_interests(User.find(session[:user_id]), User.find(@user.id), important = true).each do |i| %>
+        <% User.get_common_interests_fixed(User.find(session[:user_id]), User.find(@user.id), 5).each do |i| %>
         <div class="interest">
-        <% a=i.name.tr(" -","") %>
-        <div class="int_image">
-        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "int_img")%>   
-        </div>
-        <p><%= i.name.split.map(&:capitalize).join(' ') %></p>
+            <% a=i.name.tr(" -","") %>
+            <div class="int_image">
+                <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "int_img")%>   
+            </div>
+            <p><%= i.name.split.map(&:capitalize).join(' ') %></p>
         </div>
         <% end %>
         <br>

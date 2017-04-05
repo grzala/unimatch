@@ -18,7 +18,7 @@
             <div class="col-md-2">
                 <div class="date" style="margin-bottom: 20px">
                 	<span class="binds"></span>
-                	<span class="month"><%= @event.date.strftime("%B")[0..2] %></span>
+                	<span class="month"><%= @event.date.strftime("%B") %></span>
                 	<h1 class="day"><%= @event.date.day %></h1>
                 </div>
                 <h5><%= @time_str %></h5>
@@ -80,7 +80,12 @@
                                 </div>
                             <% end %>
                             <% if @society != nil and @members_to_invite.length > 0 and @is_admin %>
-                            <h4>Invite Society Members</h4>
+                            <h4>
+                                Invite Society Members
+                                <% if !@society.nil? and @is_admin %>
+                                    <span style="font-size: 12px; text-decoration: underline"><a href="" id="invite-all">Invite all</a></p>
+                                <% end %>
+                            </h4>
                                 <div id="user-mini-section">
                                     <div class="user-mini-container">
                                         <% @members_to_invite.each do |mem| %>
@@ -196,6 +201,33 @@
     	});
     }
 </script>
+
+<% if !@society.nil? and @is_admin %>
+    <script>
+        $('#invite-all').click(function(e) {
+            e.preventDefault();    
+            url = '/event/inviteallmembers'
+            $.ajax({
+        		type: 'POST',
+        		url: url,
+                data: {
+                    society_id: <%= @society.id %>,
+                    event_id: <%= @event.id %>
+                },
+                success: function() { 
+                    location.reload();
+                },
+                
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status)
+                    alert(xhr.statusText)
+                    alert(xhr.responseText)	
+                }
+        	});
+        })
+        
+    </script>
+<% end %>
 
 
 <script>

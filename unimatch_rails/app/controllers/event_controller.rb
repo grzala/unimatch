@@ -10,11 +10,11 @@ class EventController < ApplicationController
         @society = nil
         if @event.society_id != nil
             @society = Society.find(@event.society_id)
-            @is_admin = @society.has_admin(@user)
-            @members_to_invite = @society.get_members - @invited
+            @is_admin = @society.has_admin(@user.id)
+            @members_to_invite = @society.get_members - @invited - [@user]
         end
         
-        @favourite_to_invite = @user.get_favourites - @invited
+        @favourite_to_invite = @user.get_favourites - @invited - [@user]
     end
     
     

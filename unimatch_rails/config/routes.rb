@@ -2,9 +2,10 @@ Rails.application.routes.draw do
 
   
   controller :society do
-     get '/society/list' => :list
-     get '/society/join/:id' => :join_leave
-    get '/society/match/:id' => :match
+      get '/society/list' => :list
+      get '/society/join/:id' => :join_leave
+      get '/society/match/:id' => :match
+      post '/society/switch_admin' => :switch_admin
   end
   resources :society
   
@@ -52,8 +53,8 @@ Rails.application.routes.draw do
   end
   
   controller :event do
-    post '/inviteallmembers' => :invite_all_members
-    post '/invite' => :invite
+    post '/event/inviteallmembers' => :invite_all_members
+    post '/event/invite' => :invite
   end
   
   get '/search' => 'search#query'

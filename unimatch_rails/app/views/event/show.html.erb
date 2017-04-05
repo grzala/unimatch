@@ -35,7 +35,7 @@
     
     <!-- invite members -->
     <% if @society != nil and @members_to_invite.length > 0 and @is_admin %>
-    <h4>Invite Favourite Users</h4>
+    <h4>Invite Society Members</h4>
         <div id="user-mini-section">
             <div class="user-mini-container">
                 <% @members_to_invite.each do |mem| %>
@@ -61,7 +61,7 @@
     <script>
         $('#invite-all').click(function(e) {
             e.preventDefault();    
-            url = '/inviteallmembers'
+            url = '/event/inviteallmembers'
             $.ajax({
         		type: 'POST',
         		url: url,
@@ -102,7 +102,7 @@
     })
     
     function invite(id) {
-        url = '/invite'
+        url = '/event/invite'
         $.ajax({
     		type: 'POST',
     		url: url,

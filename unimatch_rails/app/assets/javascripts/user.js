@@ -16,9 +16,12 @@ function initStars() {
             $(star).addClass("star-active");
         }
     })
-    
+}
+
+function initUserMini() {
     //hover on mini-userbox
     $(".user-mini-container .user-mini-element").mouseenter(function() {
+        console.log("enter");
         $(this).find(".special-action").show();
     })
     

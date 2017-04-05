@@ -26,7 +26,7 @@
                 <%= link_to controller: 'event', action: 'join_leave', id: @event.id do %>
                    <div class="btn btn-danger"><%= if @participates then "Leave Event" else "Join Event" end %></div>
                 <% end %>
-                <a href="#"><div class="btn btn-danger" id="invite-btn">Invite</div></a>
+                <div class="btn btn-danger open-modal" id="invite-btn">Invite</div>
             </div>
             <div class="col-md-7">
                 <p class="event-description"><%= @event.description %></p>
@@ -39,9 +39,6 @@
     </div>
 </div>
 
-<!-- Trigger/Open The Modal -->
-<button id="open-modal">Open Modal</button>
-
 <!-- The Modal -->
 <div class="modal" id="modal">
 
@@ -49,10 +46,98 @@
     <div class="invite-modal-wrapper">
         <div class="row">
             <div class="col-md-11">
-
+                <ul class="nav nav-tabs nav-justified invite-tabs">
+                    <li class="active"><a class="tab-link" data-toggle="tab" href="#menu1">Invite</a></li>
+                    <li><a class="tab-link" data-toggle="tab" href="#menu2">Invited</a></li>
+                    <li><a class="tab-link" data-toggle="tab" href="#menu3">Particitants</a></li>
+                </ul>
             </div>
             <div class="col-md-1">
                 <span class="close-modal" id="close-modal">&times;</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="scroll-box-wrapper">
+                    <div class="tab-content">
+                        <div id="menu1" class="tab-pane fade in active">
+                            <% if @favourite_to_invite.length > 0 %>
+                                <h4>Invite Favourite Users</h4>
+                                <div id="user-mini-section">
+                                    <div class="user-mini-container">
+                                        <% @favourite_to_invite.each do |fav| %>
+                                            <%= link_to :controller => :user, :action => :show, :id => fav.id do %>
+                                                <div class="user-mini-element" user_id="<%= fav.id %>">
+                                                    <div class="user-mini-info">
+                                                        <%= image_tag fav.avatar_url(:display), :class => "user-mini-image" %>
+                                                        <p><%= fav.name %> <%= fav.surname %></p>
+                                                    </div>
+                                                    <p class="special-action remove"><span id="invite">invite</span></p>
+                                                </div>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            <% end %>
+                            <% if @society != nil and @members_to_invite.length > 0 and @is_admin %>
+                            <h4>Invite Society Members</h4>
+                                <div id="user-mini-section">
+                                    <div class="user-mini-container">
+                                        <% @members_to_invite.each do |mem| %>
+                                            <%= link_to :controller => :user, :action => :show, :id => mem.id do %>
+                                                <div class="user-mini-element" user_id="<%= mem.id %>">
+                                                    <div class="user-mini-info">
+                                                        <%= image_tag mem.avatar_url(:display), :class => "user-mini-image" %>
+                                                        <p><%= mem.name %> <%= mem.surname %></p>
+                                                    </div>
+                                                    <p class="special-action remove"><a href="#" id="invite">invite</a></p>
+                                                </div>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div id="menu2" class="tab-pane fade">
+                            <h3>Invited: <%= @invited.length %></h3>
+                            <% if @invited.length > 0 %>
+                                <div id="user-mini-section">
+                                    <div class="user-mini-container">
+                                        <% @invited.each do |mem| %>
+                                            <%= link_to :controller => :user, :action => :show, :id => mem.id do %>
+                                                <div class="user-mini-element" user_id="<%= mem.id %>">
+                                                    <div class="user-mini-info">
+                                                        <%= image_tag mem.avatar_url(:display), :class => "user-mini-image" %>
+                                                        <p><%= mem.name %> <%= mem.surname %></p>
+                                                    </div>
+                                                </div>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div id="menu3" class="tab-pane fade">
+                            <h3>Particitants <%= @participants.length %></h3>
+                            <% if @participants.length > 0 %>
+                                <div id="user-mini-section">
+                                    <div class="user-mini-container">
+                                        <% @participants.each do |mem| %>
+                                            <%= link_to :controller => :user, :action => :show, :id => mem.id do %>
+                                                <div class="user-mini-element" user_id="<%= mem.id %>">
+                                                    <div class="user-mini-info">
+                                                        <%= image_tag mem.avatar_url(:display), :class => "user-mini-image" %>
+                                                        <p><%= mem.name %> <%= mem.surname %></p>
+                                                    </div>
+                                                </div>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -60,7 +145,7 @@
 
 <script>
     var modal = $('#modal');
-    var btn = $("#open-modal");
+    var btn = $(".open-modal");
     var close = $("#close-modal");
     
     btn.click(function() {
@@ -73,29 +158,48 @@
 
 </script>
 
+<script>
+    $(document).ready(function() {
+        $(".special-action").click(function(e) {
+            
+            if (!$(this).hasClass("remove")) {
+                return;
+            }
+            
+            e.preventDefault();
+            var parent = $(this).parent();
+            var id = parent.attr("user_id");
+            
+            invite(id);
+            parent.remove(); // delets the anchor tag and everything inside
+        });
+    })
+    
+    function invite(id) {
+        url = '/event/invite'
+        $.ajax({
+    		type: 'POST',
+    		url: url,
+            data: {
+                event_id: <%= @event.id %>,
+                user_id: id,
+            },
+            success: function() { 
+                console.log("invited");
+            },
+            
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status)
+                alert(xhr.statusText)
+                alert(xhr.responseText)	
+            }
+    	});
+    }
+</script>
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
-  </ul>
 
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>HOME</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Menu 1</h3>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <h3>Menu 2</h3>
-      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-    </div>
-    <div id="menu3" class="tab-pane fade">
-      <h3>Menu 3</h3>
-      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-    </div>
-  </div>
+<script>
+    $(document).ready(function() {
+        initUserMini();
+    })
+</script>

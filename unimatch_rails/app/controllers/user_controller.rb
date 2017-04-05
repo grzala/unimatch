@@ -30,15 +30,29 @@ class UserController < ApplicationController
     if request.path != user_path(@user)
       redirect_to @user, status: :moved_permanently
     end
-    @events = @user.get_society_current_events + @user.get_user_events
+    
+    #events joined - events that the dude or dudette is participating in
+    #events - events the guy created, is participating in, or all the events by societies this guy
+    #is a part of
+    @events_joined = @user.get_joined_events
+    soc_cur_events = @user.get_society_current_events.to_set
+    usr_cur_events = @user.get_user_events.to_set
+    @events = soc_cur_events
+    @events.merge(usr_cur_events)
+    @events.merge(@events_joined.to_set)
+    @events = @events.to_a
+    
+    @events_joined = @events_joined.sort_by &:date
     
     @events_json = []
     
     @events.each do |event|
+      day = event.date.day.to_s
+      day = "0" + day if day.length <= 1
       temp = {
         title: "\n" + event.get_owner_name,
         url: url_for(:controller => :event, :action => :show, :id => event.id),
-      	start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + event.date.day.to_s + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
+      	start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + day + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
       	description: event.name + "\n" + event.description,
       }
       
@@ -47,6 +61,9 @@ class UserController < ApplicationController
     end
     
     @events_json = @events_json.to_json.html_safe
+    
+    puts "JSON"
+    puts @events_json
     
     @in_societies = @user.get_societies
     

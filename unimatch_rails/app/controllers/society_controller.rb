@@ -24,17 +24,25 @@ class SocietyController < ApplicationController
         
         @events_json = []
         @events.each do |event|
+          day = event.date.day.to_s
+          day = "0" + day if day.length <= 1
             temp = {
-            title: "\n" + event.get_owner_name,
-            url: url_for(:controller => :event, :action => :show, :id => event.id),
-              start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + event.date.day.to_s + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
-              description: event.name + "\n" + event.description,
+                title: "\n" + event.get_owner_name,
+                url: url_for(:controller => :event, :action => :show, :id => event.id),
+                start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + day + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
+                description: event.name + "\n" + event.description,
             }
             
             @events_json << temp
         end
     
         @events_json = @events_json.to_json.html_safe
+        
+        @user = User.find(session[:user_id])
+        @admins = @society.get_admins
+        @is_admin = @admins.include? @user
+        @add_remove = (@society.get_members) - @admins
+        @add_remove = (@admins + @add_remove) - [@user] #admins on beggining of the list
         
     end#displays the society base on the society id
     
@@ -79,6 +87,23 @@ class SocietyController < ApplicationController
         end
         @matched_societies = @matched_societies.sort_by {|k,v| v}.reverse
     end#matches the user with the societies
+    
+    def switch_admin
+        @requester = User.find(session[:user_id])
+        @society = Society.find(params[:society_id])
+        
+        if !@society.has_admin(@requester.id)
+            return
+        else
+            @user = User.find(params[:user_id])
+            if @society.has_admin(@user.id)
+                @society.delete_admin(@user.id)     
+            else 
+                @society.add_admin(@user.id)
+            end
+        end
+        
+    end
     
     private
     def society_param

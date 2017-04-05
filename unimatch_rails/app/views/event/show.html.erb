@@ -11,22 +11,107 @@
     <% if !@society.nil? and @society.has_admin(session[:user_id]) %>
         <p><a href="" id="invite-all">Invite all society members</a></p>
     <% end %>
+    
+    
+    <!-- invite favourite users -->
+    <% if @favourite_to_invite.length > 0 %>
+    <h4>Invite Favourite Users</h4>
+        <div id="user-mini-section">
+            <div class="user-mini-container">
+                <% @favourite_to_invite.each do |fav| %>
+                    <%= link_to :controller => :user, :action => :show, :id => fav.id do %>
+                        <div class="user-mini-element" user_id="<%= fav.id %>">
+                            <div class="user-mini-info">
+                                <%= image_tag fav.avatar_url(:display), :class => "user-mini-image" %>
+                                <p><%= fav.name %> <%= fav.surname %></p>
+                            </div>
+                            <p class="special-action remove"><a href="#" id="invite">invite</a></p>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+    
+    <!-- invite members -->
+    <% if @society != nil and @members_to_invite.length > 0 and @is_admin %>
+    <h4>Invite Society Members</h4>
+        <div id="user-mini-section">
+            <div class="user-mini-container">
+                <% @members_to_invite.each do |mem| %>
+                    <%= link_to :controller => :user, :action => :show, :id => mem.id do %>
+                        <div class="user-mini-element" user_id="<%= mem.id %>">
+                            <div class="user-mini-info">
+                                <%= image_tag mem.avatar_url(:display), :class => "user-mini-image" %>
+                                <p><%= mem.name %> <%= mem.surname %></p>
+                            </div>
+                            <p class="special-action remove"><a href="#" id="invite">invite</a></p>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+    
+    
 </div>
 
 
+<% if !@society.nil? and @society.has_admin(session[:user_id]) %>
+    <script>
+        $('#invite-all').click(function(e) {
+            e.preventDefault();    
+            url = '/event/inviteallmembers'
+            $.ajax({
+        		type: 'POST',
+        		url: url,
+                data: {
+                    society_id: <%= @society.id %>,
+                    event_id: <%= @event.id %>
+                },
+                success: function() { 
+                    location.reload();
+                },
+                
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(xhr.status)
+                    alert(xhr.statusText)
+                    alert(xhr.responseText)	
+                }
+        	});
+        })
+        
+    </script>
+<% end %>
+
 <script>
-    $('#invite-all').click(function(e) {
-        e.preventDefault();    
-        url = '/inviteallmembers'
+    $(document).ready(function() {
+        $(".special-action").click(function(e) {
+            
+            if (!$(this).hasClass("remove")) {
+                return;
+            }
+            
+            e.preventDefault();
+            var parent = $(this).parent();
+            var id = parent.attr("user_id");
+            
+            invite(id);
+            parent.remove(); // delets the anchor tag and everything inside
+        });
+    })
+    
+    function invite(id) {
+        url = '/event/invite'
         $.ajax({
     		type: 'POST',
     		url: url,
             data: {
-                society_id: <%= @society.id %>,
-                event_id: <%= @event.id %>
+                event_id: <%= @event.id %>,
+                user_id: id,
             },
             success: function() { 
-                location.reload();
+                console.log("invited");
             },
             
             error: function(xhr, ajaxOptions, thrownError) {
@@ -35,6 +120,5 @@
                 alert(xhr.responseText)	
             }
     	});
-    })
-    
+    }
 </script>

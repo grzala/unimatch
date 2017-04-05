@@ -37,18 +37,18 @@ class SearchController < ApplicationController
                     
                     if item.is_a?(User)
                         result['title'] = item.name.capitalize + " " + item.surname.capitalize
-                        result['img'] = ""
+                        result['img'] = item.avatar_url(:display)
                         result['type'] = "User"
                         result['link'] = user_path(item.id)
                         
                     elsif item.is_a?(Society)
                         result['title'] = item.name
-                        result['img'] = ""
+                        result['img'] = item.avatar_url(:display)
                         result['type'] = "Society"
                         result['link'] = society_path(item.id)
                     elsif item.is_a?(Event)
                         result['title'] = item.name
-                        result['img'] = ""
+                        result['img'] = nil
                         result['type'] = "Event"
                         result['link'] = event_path(item.id)
                         

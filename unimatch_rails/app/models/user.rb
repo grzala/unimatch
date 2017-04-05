@@ -260,17 +260,17 @@ class User < ApplicationRecord
 	end#returns the event of which the user is participant
 			
 	
-	def get_user_events
-		allevents = Event.all
-		userevents = []
-		allevents.each do |ev|
-			if ev.has_participant(id) == true 
-				userevents << ev
-			end
+	def get_user_events(current = true)
+		events = []
+		if !current
+			events = Event.where(user_id: self.id)
+		else
+			events = Event.where("user_id == ? AND date > ?", self.id, Date.new)
 		end
-		return userevents
 		
-	end#returns events on which the user participates
+		return events
+		
+	end#returns events created by the user
 	
 	def get_society_current_events
 		societies = get_societies
@@ -371,6 +371,21 @@ class User < ApplicationRecord
 		
 		return toreturn
 	end
+	
+	def get_joined_events(current = true)
+		events = Event.get_events_attended_by(self.id)
+		return events if !current
+		
+		temp = []
+		events.each do |event|
+			if event.date > Date.new
+				temp << event
+			end
+		end
+		events = temp
+		
+		return events
+	end #return events where user participates
 	
 	private ############################# private methods below ##################################
 	

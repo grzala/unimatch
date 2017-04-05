@@ -58,6 +58,37 @@ class Event < ApplicationRecord
         receiver.notify(event_path(:id => self.id), 'event invite', sender.id, "E")
     end   
     
+    def self.search(string)
+        toreturn = []
+        words = string.split(" ")
+        
+        first_priority = []
+        words.each do |word|  
+            query = "(name LIKE '% #{word} %')"
+            query += " OR (name LIKE '#{word} %')"
+            query += " OR (name LIKE '% #{word}')"
+            query += " OR (name LIKE '#{word}')"
+            first_priority += Event.where(query)
+        end
+        first_priority = first_priority.compact.uniq
+        
+        second_priority = []
+        words.each do |word| 
+            query = "(description LIKE '% #{word} %')"
+            query += " OR (description LIKE '#{word} %')"
+            query += " OR (description LIKE '% #{word}')"
+            query += " OR (description LIKE '#{word}')"
+            second_priority += Event.where(query)
+        end
+        second_priority = second_priority.compact.uniq
+        
+        second_priority -= first_priority
+        
+        toreturn = [first_priority, second_priority]
+        
+        return toreturn
+    end
+    
     
     private
     def filter_by_id(array)

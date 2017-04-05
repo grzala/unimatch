@@ -25,4 +25,9 @@ to start algorithm: sh bin/run.sh
 
 to start rails server: rails s -b $IP -p $PORT
 
+to get imagemagick/minimagick towork;
+    sudo apt-get update
+    
+    sudo apt-get install imagemagick
+
 * ...

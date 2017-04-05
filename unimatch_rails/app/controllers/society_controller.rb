@@ -82,7 +82,7 @@ class SocietyController < ApplicationController
     
     private
     def society_param
-        params.require(:society).permit(:name, :description)
+        params.require(:society).permit(:name, :description, :avatar)
     end#private parameters for security reasons
         
      

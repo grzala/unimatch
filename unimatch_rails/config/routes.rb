@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
   
   root :to => 'welcome#index'
+  get '/index' => 'welcome#index'
   
   controller :welcome do
     post '' => :create
@@ -53,6 +54,8 @@ Rails.application.routes.draw do
   controller :event do
     post '/inviteallmembers' => :invite_all_members
   end
+  
+  get '/search' => 'search#query'
   
   mount ActionCable.server => '/cable'
 

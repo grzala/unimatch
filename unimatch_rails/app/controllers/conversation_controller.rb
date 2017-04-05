@@ -64,6 +64,7 @@ class ConversationController < ApplicationController
             m[:sender] = sender.name + " " + sender.surname
             m[:sender_id] = sender.id
             m[:date] = msg.created_at
+            m[:own] = msg.sender_id.to_i == session[:user_id]
             @temp << m
         end
         @msgs = @temp

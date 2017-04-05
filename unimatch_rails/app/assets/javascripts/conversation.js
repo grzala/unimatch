@@ -95,8 +95,10 @@ function requestMessages(from, to, con_id) {
 }
 
 function makeMessage(data) {
+    clas = data['own'] ? "message-sent" : "message-received";
+    
     var toAppend = '';
-    toAppend += '<div class="message">'
+    toAppend += '<div class="message ' + clas + '">'
     toAppend += '<p>'
     toAppend += data.sender + ' ' 
     toAppend += data.date

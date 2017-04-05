@@ -1,5 +1,7 @@
 <% @page_title = "Event page" %>
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <div class="event-wrapper">
     <div class="row event-info">
         <div class="row event-title">
@@ -7,12 +9,13 @@
                 <div class="event-header">
                     <h1><%= @event.name %></h1>
                     <h5>Hosted by: <%= if @society != nil then @society.name else User.find(@event.user_id).name end %></h5>
+                    <h4><a href="#" id="participants-btn" style="text-decoration: underline; color: black"><%= @participants.length %> attending this event</a></h4>
                 </div>
             </div>
         </div>
         
         <div class="row event-eval">
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <div class="date" style="margin-bottom: 20px">
                 	<span class="binds"></span>
                 	<span class="month"><%= @event.date.strftime("%B")[0..2] %></span>
@@ -23,12 +26,10 @@
                 <%= link_to controller: 'event', action: 'join_leave', id: @event.id do %>
                    <div class="btn btn-danger"><%= if @participates then "Leave Event" else "Join Event" end %></div>
                 <% end %>
+                <a href="#"><div class="btn btn-danger" id="invite-btn">Invite</div></a>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <p class="event-description"><%= @event.description %></p>
-            </div>
-            <div class="col-md-3">
-                <!-- left empty on purpose -->
             </div>
         </div>
         
@@ -37,3 +38,64 @@
     <div class="row event-activity">
     </div>
 </div>
+
+<!-- Trigger/Open The Modal -->
+<button id="open-modal">Open Modal</button>
+
+<!-- The Modal -->
+<div class="modal" id="modal">
+
+  <!-- Modal content -->
+    <div class="invite-modal-wrapper">
+        <div class="row">
+            <div class="col-md-11">
+
+            </div>
+            <div class="col-md-1">
+                <span class="close-modal" id="close-modal">&times;</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var modal = $('#modal');
+    var btn = $("#open-modal");
+    var close = $("#close-modal");
+    
+    btn.click(function() {
+        modal.show();
+    });
+    
+    close.click(function() {
+        modal.hide();
+    })
+
+</script>
+
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>

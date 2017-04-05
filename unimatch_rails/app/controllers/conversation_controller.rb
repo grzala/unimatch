@@ -65,6 +65,7 @@ class ConversationController < ApplicationController
             m[:sender_id] = sender.id
             m[:date] = msg.created_at
             m[:own] = msg.sender_id.to_i == session[:user_id]
+            m[:img] = User.find(msg.sender_id).avatar_url(:display)
             @temp << m
         end
         @msgs = @temp

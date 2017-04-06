@@ -26,8 +26,8 @@
 
 $(document).on('turbolinks:load', function() {
     
-    $("#startdate").datepicker({ dateFormat: 'yymmdd' });
-    $("#enddate").datepicker({ dateFormat: 'yymmdd' });
+    $("#startdate").datepicker({ dateFormat: 'dd MM yy' });
+    $("#enddate").datepicker({ dateFormat: 'dd MM yy' });
     
     /*
     $("#burger_menu").click(function(){

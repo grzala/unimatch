@@ -49,11 +49,16 @@ class UserController < ApplicationController
     @events.each do |event|
       day = event.date.day.to_s
       day = "0" + day if day.length <= 1
+      description = event.description
+      if description.split(" ").length > 10
+        description = description.split(" ")[0..10].join(" ") + "..."
+      end
+      
       temp = {
         title: "\n" + event.get_owner_name,
         url: url_for(:controller => :event, :action => :show, :id => event.id),
       	start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + day + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
-      	description: event.name + "\n" + event.description,
+      	description: event.name + "\n" + description,
       }
       
       @events_json << temp

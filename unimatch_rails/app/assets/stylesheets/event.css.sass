@@ -23,13 +23,15 @@ $break-tablet: 900px
 
 .form_control
     width: 268px
-    padding: 12px 20px
+    padding: 9px 9px
     margin: 0
     display: inline-block
     border: 1px solid #ccc
     border-radius: 4px
     box-sizing: border-box
     resize: none
+    appearance: none
+
 
 .create_form
     display: inline-block
@@ -43,7 +45,7 @@ $break-tablet: 900px
     font-size: 17px
     margin: 0
     float: left
-    // margin-bottom: 5px
+    margin-bottom: 5px
     
 .text_container
     margin-bottom: 45px
@@ -76,3 +78,8 @@ $break-tablet: 900px
     box-sizing: border-box
     width: 131px
     height: 48px
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button 
+    -webkit-appearance: none
+    margin: 0

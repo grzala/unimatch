@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_action :authorize, :only => [:match, :delete]
+  before_action :authorize, :only => [:delete]
   #contains all the function that we need for users
   def authorize
     if session[:user_id] != params[:id].to_i then redirect_to :root end

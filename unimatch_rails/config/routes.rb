@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   controller :society do
       get '/society/list' => :list
       get '/society/join/:id' => :join_leave
-      get '/society/match/:id' => :match
+      get '/society/match' => :match
       post '/society/switch_admin' => :switch_admin
   end
   resources :society
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     get '/user/all/list' => :list
     post '/user/switch_favourite' => :switch_favourite
     post '/user/:id' => :update
-    get '/user/match/:id' => :match
+    get '/user/match' => :match
     get '/user/choose/:id' => :choose_interests, :as => :choose_interests
     post '/user/choose/:id' => :update_interests, :as => :update_interests
   end

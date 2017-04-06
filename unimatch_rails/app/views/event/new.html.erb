@@ -1,14 +1,14 @@
 <% @page_title = "create event" %>
 
-<div class="whatevs">
-    <h2>Create Event</h2>
+<div class="create_form">
+    <h2>Create a new event</h2>
     <%= form_for(:event, :url => {:controller => 'event', :action => 'create'}) do %>
-        <p> Name: </br> <%= text_field_tag :name %></p>
-        <p> Description: </br> <%= text_area_tag :description, nil, cols: 20, rows: 10 %> </p>
-        <p> Location: </br> <%= text_field_tag :location %></p>
-        <p> Cost: </br> <%= number_field_tag :cost %>£</p>
-        <p> Date of Event: </br> <%= text_field_tag :startdate %></p>
-        <p> Time(HH:MM): </br> <%= text_field_tag :hour %> : <%= text_field_tag :minute %></p>
+        <p> Event Title: </br> <%= text_field_tag :name, nil, class: 'form_control' %></p>
+        <p> Description: </br> <%= text_area_tag :description, nil, cols: 35, rows: 10, class: 'form_control'  %> </p>
+        <p> Location: </br> <%= text_field_tag :location, nil, class: 'form_control'  %></p>
+        <p> Cost: </br> <%= number_field_tag :cost, nil, class: 'form_control'  %></p>
+        <p> Date of Event: </br> <%= text_field_tag :startdate, nil, class: 'form_control'  %></p>
+        <p> Time(HH:MM): </br> <%= text_field_tag :hour, nil, class: 'form_control'  %> : <%= text_field_tag :minute, nil, class: 'form_control'  %></p>
         <!--<p> Recurring (Check this box if the event is happening many times, on the same day of the week): <%= check_box_tag :recurring %></p>-->
         <div id="burger-recurring">
             <p> Frequency (1 every week, 2 every two weeks, etc.): </br> <%= text_field_tag :frequency %></p>

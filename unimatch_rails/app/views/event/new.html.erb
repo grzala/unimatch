@@ -1,26 +1,78 @@
 <% @page_title = "create event" %>
 
 <div class="create_form">
-    <h2>Create a new event</h2>
+    <div class="text_container">
+        <h2>Create a new event</h2>
+    </div>
+    <div class="field_container">
+        <h5>Society:</h5>
+        <!--<%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %>-->
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">Choose society
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <% @choices.collect do |c| %>
+              <li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>
+              <!--<li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>-->
+              <%end%>
+            </ul>
+        </div>
+
+    </div>
     <%= form_for(:event, :url => {:controller => 'event', :action => 'create'}) do %>
-        <p> Event Title: </br> <%= text_field_tag :name, nil, class: 'form_control' %></p>
-        <p> Description: </br> <%= text_area_tag :description, nil, cols: 35, rows: 10, class: 'form_control'  %> </p>
-        <p> Location: </br> <%= text_field_tag :location, nil, class: 'form_control'  %></p>
-        <p> Cost: </br> <%= number_field_tag :cost, nil, class: 'form_control'  %></p>
-        <p> Date of Event: </br> <%= text_field_tag :startdate, nil, class: 'form_control'  %></p>
-        <p> Time(HH:MM): </br> <%= text_field_tag :hour, nil, class: 'form_control'  %> : <%= text_field_tag :minute, nil, class: 'form_control'  %></p>
-        <!--<p> Recurring (Check this box if the event is happening many times, on the same day of the week): <%= check_box_tag :recurring %></p>-->
+        <div class="field_container">
+            <h5>Event Title:</h5> 
+            </br> <%= text_field_tag :name, nil, class: 'form_control event_title' %>
+        </div>
+        <div class="field_container">
+            <h5>Description:</h5>
+            </br> <%= text_area_tag :description, nil, cols: 35, rows: 5, class: 'form_control description'  %>
+        </div>
+        <div class="field_container">
+            <h5>Location: </h5>
+            </br><%= text_field_tag :location, nil, class: 'form_control location'  %>
+        </div>
+        <div class="field_container">
+            <h5>Cost:</h5>
+            </br><%= number_field_tag :cost, nil, class: 'form_control cost', placeholder: '£', min: 0  %>
+        </div>
+        <div class="field_container" id="date_time_box">
+           
+            <div class="date">
+                <h5>Date</h5>
+                </br><%= text_field_tag :startdate, nil, class: 'form_control', id: 'date_time'   %>
+            </div>
+            
+            <div class="time">
+                <h5>Time</h5>
+                </br><%= time_field_tag :hour, nil, class: 'form_control hour', id: 'date_time'  %>
+            </div>
+            
+        </div>
+
+
+        <%= check_box_tag :recurring %>
         <div id="burger-recurring">
-            <p> Frequency (1 every week, 2 every two weeks, etc.): </br> <%= text_field_tag :frequency %></p>
-            <p> Date of the last event: </br> <%= text_field_tag :enddate %></p>
+            <p> Once every week(s)</br> <%= text_field_tag :frequency %></p>
+            <p>End date:</br> <%= text_field_tag :enddate %></p>
         </div>
         
-        <!-- drop down list of societies administered by logged in user -->
-        <p> <%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %></p>
+        
         
         <%= submit_tag :Signup %>
     <% end %>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
     $(document).ready(function() {

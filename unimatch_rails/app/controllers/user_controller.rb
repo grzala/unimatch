@@ -77,7 +77,7 @@ class UserController < ApplicationController
     @favourite_users = @user.get_favourites
     
     if session[:user_id] != params[:id]
-      @con = Conversation.get_conversation_between(User.friendly.find(session[:user_id]), User.friendly.find(params[:id]))
+      @con = Conversation.get_conversation_between(User.find(session[:user_id]), @user)
     end
   end#used to display users own profile page and also other users profile pages, using json request for the calendar
   

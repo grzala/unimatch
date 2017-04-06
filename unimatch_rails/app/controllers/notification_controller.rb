@@ -33,5 +33,13 @@ class NotificationController < ActionController::Base
         
     end
     
+    def mark_seen
+        notif = Notification.find(params[:notif_id])
+        is_owner = notif.user_id == session[:user_id]
+        return if !is_owner
+        
+        notif.seen = true
+        notif.save
+    end
     
 end

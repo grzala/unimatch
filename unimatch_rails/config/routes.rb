@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   
   controller :notification do
     post '/notification' => :get_notifications
+    post '/notification/mark_seen' => :mark_seen
   end
   
   controller :event do

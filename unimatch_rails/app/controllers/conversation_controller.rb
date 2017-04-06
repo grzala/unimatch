@@ -25,7 +25,11 @@ class ConversationController < ApplicationController
         
 		respond_to do |format|
 			format.html { 
-			    
+			    if @conusers.length == 2
+			       target = if @conusers[0] != User.find(session[:user_id]) then @conusers[0] else @conusers[1] end
+
+			       redirect_to user_path(target.id)
+			    end
 			}
 			
 			format.json {

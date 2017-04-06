@@ -1,5 +1,6 @@
 /* global $ */
 
+var serviceRun = false;
 var loadMore = false;
 var current_notif = 0;
 var NOTIF_SET = 10;
@@ -14,6 +15,28 @@ $.fn.notificationsLink = function() {
         //$(".notifications").css("left", event.pageX - $(".notifications").width());
         //$(".notifications").css("top", event.pageY);
     });
+}
+
+function notifService() {
+    $(".notification").click(function(e) {
+        var notif_id = $(this).attr("notification_id");
+    	$.ajax({
+    		type: 'POST',
+    		url: '/notification/mark_seen',
+    		dataType: "json",
+    		data: {
+    		  notif_id: notif_id
+    		},
+    		success: function() {   
+                console.log("marked seen");
+    		},
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status)
+                alert(xhr.statusText)
+                alert(xhr.responseText)	
+            }
+    	});
+    })
 }
 
 function refreshNotifLen() {
@@ -100,7 +123,7 @@ function makeNotif(notification) {
     }
     
     var toAppend = '';
-    toAppend += '<div class="' + classes + '" conversation_id="' + notification['conversation_id'] + '">';
+    toAppend += '<div class="' + classes + '" conversation_id="' + notification['conversation_id'] + '" notification_id="' + notification['id'] +'">';
     toAppend += '<a href="' + notification['link'] + '">';
     toAppend += '<div class="notification-wrapper">';
     
@@ -146,6 +169,10 @@ function requestNotifications(from, to) {
             
             loadMore = true;
             refreshNotifLen();
+            if (!serviceRun) {
+                notifService();
+                serviceRun = true;
+            }
 		},
         error: function(xhr, ajaxOptions, thrownError) {
             alert(xhr.status)

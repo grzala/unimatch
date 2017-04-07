@@ -51,6 +51,8 @@ class SearchController < ApplicationController
                         result['img'] = nil
                         result['type'] = "Event"
                         result['link'] = event_path(item.id)
+                        result['month'] = item.date.strftime("%B")
+                        result['day'] = item.date.day
                         
                     else
                         #not supported

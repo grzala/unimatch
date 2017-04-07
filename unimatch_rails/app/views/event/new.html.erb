@@ -80,29 +80,13 @@
 
 
 <script>
-//     $('#burger-recurring').fadeTo('slow',.6);
-//     $('#burger-recurring').append('<div style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>');
-// </script>
-
-
-
-
-
-
-
-
-
-<script>
-//     $(document).ready(function() {
-//         $("#burger-recurring").hide();
-//     });
-    
-//     $("#recurring").change(function(){
-//         if ($('#recurring').is(":checked")) {
-//             $("#burger-recurring").show();
-//         } else {
-//             $("#burger-recurring").hide();
-//         }
-//     });
-    
-// </script>
+    $("#recurring").change(function(){
+        if ($('#recurring').is(":checked")) {
+            $('#burger-recurring').fadeTo(280,1)
+            $('#burger-recurring').css({"pointer-events":"all"}); 
+        } else {
+            $("#burger-recurring").fadeTo(280,.4);
+            $('#burger-recurring').css({"pointer-events":"none"});
+        }
+    });
+</script>

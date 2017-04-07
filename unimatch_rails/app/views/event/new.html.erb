@@ -1,38 +1,77 @@
 <% @page_title = "create event" %>
 
-<div class="whatevs">
-    <h2>Create Event</h2>
-    <%= form_for(:event, :url => {:controller => 'event', :action => 'create'}) do %>
-        <p> Name: </br> <%= text_field_tag :name %></p>
-        <p> Description: </br> <%= text_area_tag :description, nil, cols: 20, rows: 10 %> </p>
-        <p> Location: </br> <%= text_field_tag :location %></p>
-        <p> Cost: </br> <%= number_field_tag :cost %>£</p>
-        <p> Date of Event: </br> <%= text_field_tag :startdate %></p>
-        <p> Time(HH:MM): </br> <%= text_field_tag :hour %> : <%= text_field_tag :minute %></p>
-        <!--<p> Recurring (Check this box if the event is happening many times, on the same day of the week): <%= check_box_tag :recurring %></p>-->
-        <div id="burger-recurring">
-            <p> Frequency (1 every week, 2 every two weeks, etc.): </br> <%= text_field_tag :frequency %></p>
-            <p> Date of the last event: </br> <%= text_field_tag :enddate %></p>
+<div class="create_form">
+    <div class="text_container">
+        <h2>Create a new event</h2>
+        <div class="dropdown">
+            <button class="btn btn-danger dropdown-toggle button" type="button" data-toggle="dropdown" >Choose society
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <% @choices.collect do |c| %>
+                  <li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>
+                  <!--<li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>-->
+              <%end%>
+            </ul>
         </div>
-        
-        <!-- drop down list of societies administered by logged in user -->
-        <p> <%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %></p>
-        
-        <%= submit_tag :Signup %>
+    </div>
+    <div class="field_container">
+        <!--<%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %>-->
+    </div>
+    <%= form_for(:event, :url => {:controller => 'event', :action => 'create'}) do %>
+        <div class="field_container">
+            <h5>Event Title:</h5> 
+            </br> <%= text_field_tag :name, nil, class: 'form_control event_title' %>
+        </div>
+        <div class="field_container">
+            <h5>Description:</h5>
+            </br> <%= text_area_tag :description, nil, cols: 35, rows: 5, class: 'form_control description'  %>
+        </div>
+        <div class="field_container">
+            <h5>Location: </h5>
+            </br><%= text_field_tag :location, nil, class: 'form_control location'  %>
+        </div>
+        <div class="field_container">
+            <h5>Cost:</h5>
+            </br><%= number_field_tag :cost, nil, class: 'form_control cost', placeholder: '£', min: 0  %>
+        </div>
+        <div class="field_container" id="date_time_box">
+            <div class="date">
+                <h5>Date</h5>
+                </br><%= text_field_tag :startdate, nil, class: 'form_control1'%>
+            </div>
+            <div class="time">
+                <h5>Time</h5>
+                </br><%= time_field_tag :hour, nil, class: 'form_control hour', id: 'date_time'  %>
+            </div>
+        </div>
+        <div class="recurring_box">
+            <label>Recurring event: <%= check_box_tag :recurring, class: 'checkbox_control'  %> </label>
+        </div>
+        <div id="burger-recurring">
+            <div class="information">
+                <h5>Please fill out this section if you want your <br>event to repeat</h5>
+            </div>
+            <div class="frequency">
+                <h5>Once every <%= text_field_tag :frequency,nil, class: 'form_control', id: 'frequency_text_field'  %> week(s)</h5>
+            </div>
+            <div class="end_date">
+                <h5>End date:&nbsp&nbsp<%= text_field_tag :enddate,nil, class: 'form_control2' %></h5>
+            </div>
+        </div>
+        <%= button_tag(type: "submit", class: "btn btn-danger button") do %>
+            Sign up
+        <% end %>
+        <!--<%= submit_tag :Signup %>-->
     <% end %>
 </div>
-
 <script>
-    $(document).ready(function() {
-        $("#burger-recurring").hide();
-    });
-    
     $("#recurring").change(function(){
         if ($('#recurring').is(":checked")) {
-            $("#burger-recurring").show();
+            $('#burger-recurring').fadeTo(280,1)
+            $('#burger-recurring').css({"pointer-events":"all"}); 
         } else {
-            $("#burger-recurring").hide();
+            $("#burger-recurring").fadeTo(280,.4);
+            $('#burger-recurring').css({"pointer-events":"none"});
         }
     });
-    
 </script>

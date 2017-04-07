@@ -26,14 +26,10 @@
     <% if session[:user_id] %>
     <div id="search">
     <form action="/search" method="get">
-      <div class="input-group search">
-      <input type="text" class="form-control" placeholder="search" name="search_query" id="search_query">
-        <div class="input-group-btn">
-          <button id="submit-search" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-        </div>
+      <input type="text" placeholder="search..." name="search_query" id="search_query">
+        <button id="submit-search" type="submit"><i class="glyphicon glyphicon-search white"></i></button>
       </div>
     </form>
-    </div>
       <div id="nav_trigger">
         <div class="line"></div>
         <div class="line"></div>
@@ -42,7 +38,7 @@
       <div id="mySidenav" class="sidenav">
       <ul id="navigation_mobile">
         <a href="javascript:void(0)" id="closebtn" >&times;</a>
-        <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
+        <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>
         <li><%= link_to 'Messages', :controller => :user, :action => :match,  id: session[:user_id] %></li>
         <li><%= link_to 'Societies', :controller => :event, :action => :new,  id: session[:user_id] %></li>
         <li><%= link_to 'Notifications', :controller => :event, :action => :new,  id: session[:user_id] %></li>
@@ -55,8 +51,8 @@
           <li>
           </li>
           <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
-          <li><%= link_to 'Matches', :controller => :user, :action => :match,  id: session[:user_id] %></li>
-          <li><%= link_to 'Societies', :controller => :society, :action => :match,  id: session[:user_id] %></li>
+          <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>
+          <li><%= link_to 'Societies', :controller => :society, :action => :match %></li>
           <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
           <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
         </ul>
@@ -90,6 +86,15 @@
         
         $(".notifications-link").notificationsLink();
         $(".notifications").addNotifications(<%= @notifs %>);
+        
+        //submit search on enter
+        $("#search_query").keypress(function(e) {
+          if (event.which == 13) {
+            e.preventDefault();
+            console.log("pressed enter");
+            $(this).closest("form").submit();
+          }
+        })
       });
     </script>
     </div>

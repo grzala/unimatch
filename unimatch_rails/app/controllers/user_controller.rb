@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  before_action :authorize, :only => [:match, :delete]
+  before_action :authorize, :only => [:delete]
   #contains all the function that we need for users
   def authorize
     if session[:user_id] != params[:id].to_i then redirect_to :root end
@@ -49,11 +49,16 @@ class UserController < ApplicationController
     @events.each do |event|
       day = event.date.day.to_s
       day = "0" + day if day.length <= 1
+      description = event.description
+      if description.split(" ").length > 10
+        description = description.split(" ")[0..10].join(" ") + "..."
+      end
+      
       temp = {
         title: "\n" + event.get_owner_name,
         url: url_for(:controller => :event, :action => :show, :id => event.id),
       	start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + day + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
-      	description: event.name + "\n" + event.description,
+      	description: event.name + "\n" + description,
       }
       
       @events_json << temp
@@ -72,7 +77,7 @@ class UserController < ApplicationController
     @favourite_users = @user.get_favourites
     
     if session[:user_id] != params[:id]
-      @con = Conversation.get_conversation_between(User.friendly.find(session[:user_id]), User.friendly.find(params[:id]))
+      @con = Conversation.get_conversation_between(User.find(session[:user_id]), @user)
     end
   end#used to display users own profile page and also other users profile pages, using json request for the calendar
   

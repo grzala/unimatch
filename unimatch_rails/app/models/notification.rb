@@ -8,10 +8,12 @@ class Notification < ApplicationRecord
     
     def prepare
         temp_dic = {}
+        temp_dic['id'] = self.id
         temp_dic['seen'] = self.seen
         temp_dic['sender'] = User.find(self.sender.to_i).name + " " + User.find(self.sender.to_i).surname
         temp_dic['link'] = self.link
         temp_dic['information'] = "Unknown notification"
+        temp_dic['conversation_id'] = self.conversation_id
         
         
         if self.notif_type == "M"

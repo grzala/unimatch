@@ -14,6 +14,13 @@ class EventController < ApplicationController
             @members_to_invite = @society.get_members - @invited - [@user]
         end
         
+        @time_str = @event.time.to_s[0..1] + ":" + @event.time.to_s[1..2]
+        if @time_str[0] == "0"
+            @time_str = [1...@time_str.length]
+        end
+        
+        @participates = @participants.include? @user
+        
         @favourite_to_invite = @user.get_favourites - @invited - [@user]
     end
     
@@ -46,7 +53,7 @@ class EventController < ApplicationController
             @event.delete_participant(session[:user_id])
         end
         
-        redirect_to :action => :list
+        redirect_to :action => :show, :id => @event.id
     end#allows user to participate on events
     
     def create

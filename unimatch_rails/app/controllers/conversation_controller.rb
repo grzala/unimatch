@@ -25,7 +25,11 @@ class ConversationController < ApplicationController
         
 		respond_to do |format|
 			format.html { 
-			    
+			    if @conusers.length == 2
+			       target = if @conusers[0] != User.find(session[:user_id]) then @conusers[0] else @conusers[1] end
+
+			       redirect_to user_path(target.id)
+			    end
 			}
 			
 			format.json {
@@ -65,6 +69,7 @@ class ConversationController < ApplicationController
             m[:sender_id] = sender.id
             m[:date] = msg.created_at
             m[:own] = msg.sender_id.to_i == session[:user_id]
+            m[:img] = User.find(msg.sender_id).avatar_url(:display)
             @temp << m
         end
         @msgs = @temp

@@ -2,11 +2,26 @@
     Search string invalid or too long
 <% else %>
 
-    <p>You searched For: <%= @search_string %></p>
-    <p>Results: </p>
+    <h1>Search resuls for: <%= @search_string %></h1>
+    <br>
     
     <% @results.each do |result| %>
-        <p><%= result['type'] %>: <a href="<%= result['link'] %>"><%= result['title'] %></a></p>
+        <div class="search_result">
+        <% if result['type'] == "Event" %>
+            <div class="date" style="margin-bottom: 20px">
+                <span class="binds"></span>
+                <span class="month"><%= result['month'] %></span>
+                <h1 class="day"><%= result['day'] %></h1>
+            </div>
+        <% else %>
+            <%= image_tag(result['img'], :class=>"search_image") %>
+        <% end %>
+        <div class="search_result_text">
+        <h3><%= result['type'] %></h3>
+        <h4><a href="<%= result['link'] %>"><%= result['title'] %></a></h4>
+        </div>
+        </div>
+        <div class="divider"></div>
     <% end %>
 
 <% end %>

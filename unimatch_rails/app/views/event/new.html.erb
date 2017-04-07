@@ -15,7 +15,6 @@
         </div>
     </div>
     <div class="field_container">
-        <!--<h5>Society:</h5>-->
         <!--<%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %>-->
     </div>
     <%= form_for(:event, :url => {:controller => 'event', :action => 'create'}) do %>
@@ -45,40 +44,26 @@
                 </br><%= time_field_tag :hour, nil, class: 'form_control hour', id: 'date_time'  %>
             </div>
         </div>
-
-
         <div class="recurring_box">
-            <label>Recurring Event: <%= check_box_tag :recurring, class: 'checkbox_control'  %> </label>
+            <label>Recurring event: <%= check_box_tag :recurring, class: 'checkbox_control'  %> </label>
         </div>
-
-        
         <div id="burger-recurring">
-            
             <div class="information">
                 <h5>Please fill out this section if you want your <br>event to repeat</h5>
             </div>
-            
             <div class="frequency">
                 <h5>Once every <%= text_field_tag :frequency,nil, class: 'form_control', id: 'frequency_text_field'  %> week(s)</h5>
             </div>
-            
             <div class="end_date">
                 <h5>End date:&nbsp&nbsp<%= text_field_tag :enddate,nil, class: 'form_control2' %></h5>
             </div>
-            
         </div>
-        
-        
         <%= button_tag(type: "submit", class: "btn btn-danger button") do %>
             Sign up
         <% end %>
-        
-        
         <!--<%= submit_tag :Signup %>-->
     <% end %>
 </div>
-
-
 <script>
     $("#recurring").change(function(){
         if ($('#recurring').is(":checked")) {

@@ -3,21 +3,20 @@
 <div class="create_form">
     <div class="text_container">
         <h2>Create a new event</h2>
-    </div>
-    <div class="field_container">
-        <h5>Society:</h5>
-        <!--<%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %>-->
         <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle" type="button" data-toggle="dropdown">Choose society
+            <button class="btn btn-danger dropdown-toggle button" type="button" data-toggle="dropdown" >Choose society
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <% @choices.collect do |c| %>
-              <li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>
-              <!--<li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>-->
+              <% @choices.collect do |c| %>
+                  <li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>
+                  <!--<li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>-->
               <%end%>
             </ul>
         </div>
-
+    </div>
+    <div class="field_container">
+        <!--<h5>Society:</h5>-->
+        <!--<%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %>-->
     </div>
     <%= form_for(:event, :url => {:controller => 'event', :action => 'create'}) do %>
         <div class="field_container">
@@ -37,17 +36,14 @@
             </br><%= number_field_tag :cost, nil, class: 'form_control cost', placeholder: '£', min: 0  %>
         </div>
         <div class="field_container" id="date_time_box">
-           
             <div class="date">
                 <h5>Date</h5>
                 </br><%= text_field_tag :startdate, nil, class: 'form_control1'%>
             </div>
-            
             <div class="time">
                 <h5>Time</h5>
                 </br><%= time_field_tag :hour, nil, class: 'form_control hour', id: 'date_time'  %>
             </div>
-            
         </div>
 
 
@@ -67,13 +63,13 @@
             </div>
             
             <div class="end_date">
-                <h5>End date:&nbsp&nbsp<%= text_field_tag :enddate,nil, class: 'form_control', id: 'end_date_text_field' %></h5>
+                <h5>End date:&nbsp&nbsp<%= text_field_tag :enddate,nil, class: 'form_control2' %></h5>
             </div>
             
         </div>
         
         
-        <%= button_tag(type: "submit", class: "btn btn-danger") do %>
+        <%= button_tag(type: "submit", class: "btn btn-danger button") do %>
             Sign up
         <% end %>
         
@@ -83,6 +79,10 @@
 </div>
 
 
+<script>
+//     $('#burger-recurring').fadeTo('slow',.6);
+//     $('#burger-recurring').append('<div style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>');
+// </script>
 
 
 
@@ -92,8 +92,7 @@
 
 
 
-
- <script>
+<script>
 //     $(document).ready(function() {
 //         $("#burger-recurring").hide();
 //     });

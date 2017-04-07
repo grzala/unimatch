@@ -38,7 +38,7 @@ $break-tablet: 900px
     
 
 .field_container
-    margin-bottom: 25px
+    margin-bottom: 15px
 
 .field_container h5
     font-family: 'Lato', sans-serif
@@ -48,7 +48,7 @@ $break-tablet: 900px
     margin-bottom: 5px
     
 .text_container
-    margin-bottom: 45px
+    margin-bottom: 20px
     
 #date_time
     width: 131px
@@ -85,6 +85,13 @@ input[type=number]::-webkit-inner-spin-button
     -webkit-appearance: none
     margin: 0
     
+input[type="time" i]::-webkit-outer-spin-button,
+input[type="time" i]::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+    
+input[type="time" i]
+    text-align: center
     
 label 
     font-family: 'Lato', sans-serif
@@ -114,8 +121,20 @@ input[type=checkbox]
 
 .recurring_box
     overflow: hidden
-    // float: none
     
-#end_date_text_field
+.form_control2
+    width: 268px
+    padding: 12px 20px
+    margin: 0
+    display: inline-block
+    border: 1px solid #ccc
+    border-radius: 4px
+    box-sizing: border-box
     width: 131px
-    height: 35px
+    height: 35   
+
+.button
+    width: 270px
+    
+.dropdown
+    margin-bottom: 40px

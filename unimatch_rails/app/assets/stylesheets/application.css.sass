@@ -36,6 +36,7 @@ $break-phone: 450px
 $break-tablet: 900px
 
 /* css stuff */ 
+    
 
 #user_image
     display: inline-block
@@ -181,7 +182,6 @@ ul li a
 #details_dropdown a
     padding-top: 5px
     display: block
-        
 
 #user_image
     @media screen and (min-width: $break-phone)
@@ -329,8 +329,29 @@ a:visited
     display: none
     @media screen and (min-width: $break-tablet)
         position: relative
-        left: 212px
+        left: 210px
         top: 5px
-        width: 200px
+        width: 190px
         display: block
+        
+#search_query
+    background: rgba(215,215,215,0.30)
+    border-radius: 2px
+    border: none
+    height: 30px
+    padding-left: 10px
+    
+#search_query:placeholder-shown
+    font-family: 'Lato', sans-serif
+    font-size: 12
+    color: $black
+    
+#submit-search
+    background: transparent
+    border: none
+    
+.white
+    color: white
+    
+    
         

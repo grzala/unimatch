@@ -59,6 +59,7 @@ $break-tablet: 900px
     display: flex
     flex-wrap: wrap
     justify-content: start
+    margin-bottom: 15px
     
 .date
     float: left
@@ -83,3 +84,38 @@ input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button 
     -webkit-appearance: none
     margin: 0
+    
+    
+label 
+    font-family: 'Lato', sans-serif
+    font-size: 17px
+    color: $black
+    font-weight: normal
+    float: left
+
+input[type=checkbox]
+    width: 17px
+    height: 17px
+    margin-left: 5px
+    position: relative
+    bottom: -3px
+    
+#burger-recurring
+    margin: 30px 0
+
+#frequency_text_field
+    width: 25px
+    height: 25px
+    padding: 0
+    text-align: center
+    
+.information, .end_date, .reccuring_box, .frequency
+    text-align: left
+
+.recurring_box
+    overflow: hidden
+    // float: none
+    
+#end_date_text_field
+    width: 131px
+    height: 35px

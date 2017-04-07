@@ -51,16 +51,33 @@
         </div>
 
 
-        <%= check_box_tag :recurring %>
+        <div class="recurring_box">
+            <label>Recurring Event: <%= check_box_tag :recurring, class: 'checkbox_control'  %> </label>
+        </div>
+
+        
         <div id="burger-recurring">
-            <p> Once every week(s)</br> <%= text_field_tag :frequency %></p>
-            <p>End date:</br> <%= text_field_tag :enddate %></p>
+            
+            <div class="information">
+                <h5>Please fill out this section if you want your <br>event to repeat</h5>
+            </div>
+            
+            <div class="frequency">
+                <h5>Once every <%= text_field_tag :frequency,nil, class: 'form_control', id: 'frequency_text_field'  %> week(s)</h5>
+            </div>
+            
+            <div class="end_date">
+                <h5>End date:&nbsp&nbsp<%= text_field_tag :enddate,nil, class: 'form_control', id: 'end_date_text_field' %></h5>
+            </div>
+            
         </div>
         
         
         <%= button_tag(type: "submit", class: "btn btn-danger") do %>
-            Sign up <i class="icon-repeat"></i>
+            Sign up
         <% end %>
+        
+        
         <!--<%= submit_tag :Signup %>-->
     <% end %>
 </div>
@@ -76,17 +93,17 @@
 
 
 
-<script>
-    $(document).ready(function() {
-        $("#burger-recurring").hide();
-    });
+ <script>
+//     $(document).ready(function() {
+//         $("#burger-recurring").hide();
+//     });
     
-    $("#recurring").change(function(){
-        if ($('#recurring').is(":checked")) {
-            $("#burger-recurring").show();
-        } else {
-            $("#burger-recurring").hide();
-        }
-    });
+//     $("#recurring").change(function(){
+//         if ($('#recurring').is(":checked")) {
+//             $("#burger-recurring").show();
+//         } else {
+//             $("#burger-recurring").hide();
+//         }
+//     });
     
-</script>
+// </script>

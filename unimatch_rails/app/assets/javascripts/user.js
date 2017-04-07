@@ -1,8 +1,10 @@
 /* global $ */
 
-$(document).ready(function() {
+function initStars() {
+    console.log("Star ready");
     //star
     $(".star").click(function(e) {
+        console.log("clicked");
         var star = this
         switch_favourite($(star).attr("user_id"))
         
@@ -14,16 +16,19 @@ $(document).ready(function() {
             $(star).addClass("star-active");
         }
     })
-    
+}
+
+function initUserMini() {
     //hover on mini-userbox
     $(".user-mini-container .user-mini-element").mouseenter(function() {
+        console.log("enter");
         $(this).find(".special-action").show();
     })
     
     $(".user-mini-container .user-mini-element").mouseleave(function() {
         $(this).find(".special-action").hide();
     })
-});
+}
 
 function switch_favourite(user_id) {
 	$.ajax({

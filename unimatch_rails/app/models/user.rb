@@ -172,32 +172,11 @@ class User < ApplicationRecord
 	
 	def User.get_common_interests_fixed(usr1, usr2, len)
 		important_list = User.get_common_interests(usr1, usr2, important = true)
-		list = User.get_common_interests(usr1, usr2)
+		list = User.get_common_interests(usr1, usr2, false)
 		
-		lists = [important_list, list]
-		l_i = 0
-		cur_list = lists[l_i]
+		toreturn = (important_list + list)[0...len]
 		
-		i = 0
-		toreturn = []
-		while toreturn.length < len and i < len do
-			if i >= cur_list.length
-				l_i += 1
-				i = 0
-				if l_i >= lists.length
-					break
-				end
-				cur_list = lists[i]
-			end
-			if !toreturn.include? cur_list[i]
-				toreturn << cur_list[i]
-			end
-			i += 1
-		end
-		
-		toreturn = toreturn.compact
-		
-		return toreturn
+		return toreturn.uniq
 	end#does the same thing as the function above, just take one more input, which is the number of comon intererst to return
 	
 	#if less than 5 important, add as important

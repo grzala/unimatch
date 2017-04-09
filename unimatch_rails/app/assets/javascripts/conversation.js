@@ -113,7 +113,7 @@ function makeMessage(data) {
     toAppend += data.body
     toAppend += '</p>'
     
-    toAppend += '<p class="date">'
+    toAppend += '<p class="message_date">'
     
     toAppend += moment(data.date).format("ddd h:ma, Do MMM YYYY");
     toAppend += '</p>'

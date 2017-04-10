@@ -175,7 +175,7 @@ $(document).ready(function(){
 
 </script>
 </div>
-           <div id="counter" > Number of Important Interests selected </div>
+           <div id="counter" > <p>Number of Important Interests selected </p></div>
            <script>
            var myJSArray = <%=raw @user_interests_imp.to_json %>
            $(document).ready(function(){
@@ -185,7 +185,7 @@ $(document).ready(function(){
              var $count = ($('.imp.img:checked').size());
              //alert($count);
              $("#counter").empty()
-             $("#counter").append("Number of Important Interests selected " + "<b>" + $count + "</b>");
+             $("#counter").append("<p>Number of Important Interests selected </p>" + "<b>" + $count + "</b>");
             });
            });
            </script>

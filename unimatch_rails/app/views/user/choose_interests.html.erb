@@ -15,7 +15,9 @@
              
              $("#regular_interests").click(function(){
              $(".active1").hide();
+             $(".active").hide();
              $(".active1").removeClass("active1");
+             $(".active").removeClass("active");
              $("#regular_interests_show").show();
              $("#regular_interests_show").addClass("active1");
              
@@ -23,7 +25,9 @@
             
             $("#important_interests").click(function(){
              $(".active1").hide();
+             $(".active").hide();
              $(".active1").removeClass("active1");
+             $(".active").removeClass("active");
              $("#important_interests_show").show();
              $("#important_interests_show").addClass("active1");
              
@@ -112,7 +116,9 @@ $(document).ready(function(){
 </ul>
 <script>
 $(document).ready(function(){
-
+ var $count = ($('.imp.img:checked').size());
+ $("#counter").append("<b>" + $count + "</b>");
+ 
  $("#sports_imp_show").hide();
  $("#science_imp_show").hide();
  $("#cooking_imp_show").hide();
@@ -168,7 +174,21 @@ $(document).ready(function(){
 
 </script>
 </div>
-
+           <div id="counter" > Number of Important Interests selected </div>
+           <script>
+           var myJSArray = <%=raw @user_interests_imp.to_json %>
+           $(document).ready(function(){
+            $('.img').click(function(){
+             console.log("her");
+             
+             
+             var $count = ($('.imp.img:checked').size());
+             //alert($count);
+             $("#counter").empty()
+             $("#counter").append("Number of Important Interests selected " + "</b>" + $count + "</b>");
+            });
+           });
+           </script>
            <div style="text-align: left; padding-left: 20px; margin-bottom:100px;">
             <%= form_tag update_interests_url, :id => @user.id do %>
              <%= submit_tag :Update %>
@@ -211,7 +231,7 @@ $(document).ready(function(){
                         <% checked = @user_interests_imp.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                        
-                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <input type="checkbox" id= "picture" class="img imp" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
                         <br>
@@ -270,7 +290,7 @@ $(document).ready(function(){
                         <% checked = @user_interests_imp.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                        
-                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <input type="checkbox" id= "picture" class="img imp" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
                         <br>
@@ -331,7 +351,7 @@ $(document).ready(function(){
                         <% checked = @user_interests_imp.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                        
-                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <input type="checkbox" id= "picture" class="img imp" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
                         <br>
@@ -391,7 +411,7 @@ $(document).ready(function(){
                         <% checked = @user_interests_imp.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                        
-                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <input type="checkbox" id= "picture" class="img imp" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
                         <br>
@@ -451,7 +471,7 @@ $(document).ready(function(){
                         <% checked = @user_interests_imp.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                        
-                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <input type="checkbox" id= "picture" class="img imp" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
                         <br>
@@ -511,7 +531,7 @@ $(document).ready(function(){
                         <% checked = @user_interests_imp.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                        
-                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <input type="checkbox" id= "picture" class="img imp" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
                         <br>
@@ -571,7 +591,7 @@ $(document).ready(function(){
                         <% checked = @user_interests_imp.include? interest %>
                         <% a=interest.name.tr(" ","").downcase %>
                        
-                        <input type="checkbox" id= "picture" class="img" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
+                        <input type="checkbox" id= "picture" class="img imp" <%= check_box_tag "imp_interests[]", interest.id, checked, {:multiple => true} %>
                         <label for=picture class="lbl">
                         <%= interest.name %>
                         <br>

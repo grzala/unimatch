@@ -10,7 +10,7 @@
 /*.checked
     background: transparent url(http://i.stack.imgur.com/S4p2R.png ) no-repeat 80% 50%
 
-.img
+.img, .img.imp
     display:none
     width: 220px
     height: 220px
@@ -106,7 +106,7 @@
     width: auto !important
     width: 200px
 
-.img
+.img, .imp.img
     display: none
 
 .imp
@@ -118,7 +118,7 @@
 .lbl
     z-index: 1
 
-.img:checked +label 
+.img:checked +label, .imp.img:checked +label 
     background: url("check.png") no-repeat top right
     background-size: 20px 20px
     //border-color: green

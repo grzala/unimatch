@@ -48,7 +48,7 @@
                        <div class="btn btn-danger">Message</div>
                    <% end %>
                    
-                    <button class="btn btn-danger" id="change_fav" user_id="<%= user.id %>" style="margin-left: 5px;">
+                    <button class="btn btn-danger change_fav" user_id="<%= user.id %>" style="margin-left: 5px;">
                         <% in_favourites = User.find(session[:user_id]).get_favourites.include? user %>
                         <span class="<%= if in_favourites then "fav" else "non-fav" end %>"><%= if in_favourites then "Remove from favourites" else "Add to favourites" end %></span>
                     </button>

@@ -3,7 +3,7 @@
 function initFavs() {
     console.log("Star ready");
     //star
-    $("#change_fav").click(function(e) {
+    $(".change_fav").click(function(e) {
         e.preventDefault();
         console.log("click");
         var btn = this;

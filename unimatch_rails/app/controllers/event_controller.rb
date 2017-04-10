@@ -57,6 +57,10 @@ class EventController < ApplicationController
     end#allows user to participate on events
     
     def create
+        time = params[:time].split(":")
+        hour = time[0]
+        minute = time[1]
+        
         if params[:recurring]
             startdate = Date.parse(params[:startdate])
             enddate = Date.parse(params[:enddate])
@@ -66,13 +70,13 @@ class EventController < ApplicationController
             
             while cur_date <= enddate
                 puts cur_date
-                save_event(params[:name], params[:description], params[:location], params[:cost], cur_date, params[:hour], params[:minute], session[:user_id], params[:society_id], @group.id)
+                save_event(params[:name], params[:description], params[:location], params[:cost], cur_date, hour, minute, session[:user_id], params[:society_id], @group.id)
                 cur_date += 7 * params[:frequency].to_i
             end
             
         else 
             date = Date.parse(params[:startdate])
-            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], session[:user_id], params[:society_id])
+            save_event(params[:name], params[:description], params[:location], params[:cost], date, hour, minute, session[:user_id], params[:society_id])
         end
         
         

@@ -7,7 +7,7 @@
             <h2 class="inline_block_user"><%= @user.name %></h2>
             
             <% if session[:user_id] != @user.id %>
-                <button class="btn btn-danger" id="change_fav" user_id="<%= @user.id %>">
+                <button class="btn btn-danger change_fav" user_id="<%= @user.id %>">
                     <% in_favourites = User.find(session[:user_id]).get_favourites.include? @user %>
                     <span class="<%= if in_favourites then "fav" else "non-fav" end %>"><%= if in_favourites then "Remove from favourites" else "Add to favourites" end %></span>
                 </button>

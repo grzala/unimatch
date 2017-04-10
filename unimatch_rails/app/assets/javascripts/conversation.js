@@ -28,14 +28,14 @@ $.fn.messages = function(con_id){
         
         sendMessage('/conversation/create_message', msg, con_id);
     });
-    $(document).keypress(function(e) {
+    $("textarea.message-body").keypress(function(e) {
         if(e.which == 13) {
             e.preventDefault();
             
-            var messageBody = $('.write-message .message-body')
+            var messageBody = $('.message-body')
             if (messageBody.is(":focus")) {
-                var msg = $(".write-message .message-body").val();
-                $(".write-message .message-body").val('')
+                var msg = $(".message-body").val();
+                $(".message-body").val('')
                 
                 sendMessage('/conversation/create_message', msg, con_id);
             }

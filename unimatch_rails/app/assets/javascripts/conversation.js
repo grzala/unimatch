@@ -106,7 +106,7 @@ function makeMessage(data) {
         
     
     if (!data['own']) {
-        toAppend += '<img src="https://www.scheller.gatech.edu/thumb/width/600/cropratio/1:1/pix/directory/xmulford_chuck_profile.jpg.pagespeed.ic.BrKpOe4a3L.jpg" class="message_pic">'
+        toAppend += '<img src="' + data.img + '" class="message_pic">'
     }
 
     toAppend += '<p class="message_text">'

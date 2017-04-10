@@ -6,12 +6,12 @@
         <div class="left" id="user_details">
             <h2 class="inline_block_user"><%= @user.name %></h2>
             
-            <button class="btn btn-danger" user_id="<%= @user.id %>">
-                <% if session[:user_id] != @user.id %>
+            <% if session[:user_id] != @user.id %>
+                <button class="btn btn-danger" id="change_fav" user_id="<%= @user.id %>">
                     <% in_favourites = User.find(session[:user_id]).get_favourites.include? @user %>
-                    <%= if in_favourites then "Remove from favourites" else "Add to favourites" end %>
-                <% end %>
-            </button>
+                    <span class="<%= if in_favourites then "fav" else "non-fav" end %>"><%= if in_favourites then "Remove from favourites" else "Add to favourites" end %></span>
+                </button>
+            <% end %>
         </div>
     </div>
     <div class="col-md-3">
@@ -21,10 +21,6 @@
         </div>
     </div>
     <div class="col-md-4">
-        <% if session[:user_id] != @user.id %>
-            <% in_favourites = User.find(session[:user_id]).get_favourites.include? @user %>
-            <div class="star <%= if in_favourites then "star-active" else "star-inactive" end %>" title="<%= if in_favourites then "Remove from favourites" else "Add to favourites" end %>" user_id="<%= @user.id %>" ></div>
-        <% end %>
     </div>
 </div>
 <div class="row">

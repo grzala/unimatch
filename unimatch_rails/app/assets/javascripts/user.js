@@ -1,20 +1,27 @@
 /* global $ */
 
-function initStars() {
+function initFavs() {
     console.log("Star ready");
     //star
-    $(".star").click(function(e) {
-        console.log("clicked");
-        var star = this
-        switch_favourite($(star).attr("user_id"))
+    $("#change_fav").click(function(e) {
+        e.preventDefault();
+        console.log("click");
+        var btn = this;
+        switch_favourite($(btn).attr("user_id"));
         
-        if ($(star).hasClass("star-active")) {
-            $(star).removeClass("star-active");
-            $(star).addClass("star-inactive");
+        var span = $(btn).find("span");
+        
+        console.log($(span).hasClass("fav"));
+        if ($(span).hasClass("fav")) {
+            $(span).text("Add to favourites");
+            $(span).removeClass("fav");
+            $(span).addClass("non-fav");
         } else {
-            $(star).removeClass("star-inactive");
-            $(star).addClass("star-active");
+            $(span).text("Remove from favourites");
+            $(span).removeClass("non-fav");
+            $(span).addClass("fav");
         }
+
     })
 }
 

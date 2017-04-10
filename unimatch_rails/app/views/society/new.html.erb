@@ -1,13 +1,15 @@
 <div class="create_society_form_or_whatever"> <!-- Jack, tag-naming is for you -->
-    <h2>Create a society</h2>
+    <h2>Create a new society</h2>
+    <div id="new_society_container">
     <%= form_for(:society, :url => {:controller => 'society', :action => 'create'}) do |f| %>
-        <p> Name: </br> <%= f.text_field :name %></p>
-        <p> Description: </br> <%= f.text_area :description, cols: 20, rows: 10 %> </p>
-        <p> Image: </br> <%= f.file_field :avatar %></p>
+        <p> Name: </p><%= f.text_field :name %>
+        <p> Description: </p><%= f.text_area :description, cols: 20, rows: 10 %>
+        <p> Image: </p><%= f.file_field :avatar %>
         
         
         <!-- this is temporary somebody fix this abomination as quick as possible -->
         <p>Interests:</p>
+        <p id="interest_info">Please choose 5 interests that are inline with the society. This allows us the match users with your society and gain you more members</p>
         
         <% count = 0; 5.times do %>
             <!-- cannot be called interests -->
@@ -17,7 +19,9 @@
         
         
         <input type="hidden" name="interest_count" value=<%= count.to_s %> />
-        <%= f.submit :Signup %>
+        
+        <%= f.submit :Create, :class => "btn btn-danger button" %>
     <% end %>
+    </div>
 </div>
 

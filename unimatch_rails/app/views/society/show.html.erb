@@ -106,6 +106,14 @@
 
 <script>
     $(document).ready(function() {
+        $(".user-mini-container .user-mini-element").mouseenter(function() {
+            console.log("enter");
+            $(this).find(".special-action").show();
+        })
+        
+        $(".user-mini-container .user-mini-element").mouseleave(function() {
+            $(this).find(".special-action").hide();
+        })
         $(".special-action").click(function(e) {
             
             if (!$(this).hasClass("remove")) {

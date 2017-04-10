@@ -20,12 +20,13 @@ $break-tablet: 900px
 body
   height: 100%
   width: 100%
-  background: url("background.jpg") no-repeat center center
+  background: url(image_path("background.jpg")) no-repeat center center
   -webkit-background-size: cover
   -moz-background-size: cover
   -o-background-size: cover
   -ms-background: cover
   background-size: cover
+  background-attachment: fixed
     
 .block_centre
   display: block
@@ -117,6 +118,7 @@ fieldset
 #nav_bar
   display: none
   background-color: transparent
+  // opacity: 0
   @media screen and (min-width: $break-tablet)
     display: flex
     padding: 0

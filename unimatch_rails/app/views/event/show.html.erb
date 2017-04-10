@@ -3,5 +3,38 @@
 <div>
     <p><%=@event.name%></p>
     <p><%=@event.description%></p>
-    <p>Location: <%=@event.location%></p>
+    <p>Location: <%= @event.location %></p>        
+    <p><% str = !@event.has_participant(session[:user_id]) ? "Join Event" : "Leave Event" %></p>
+    <p><%= link_to str, controller: 'event', action: 'join_leave', id: @event.id %></p>
+    <p>Participants: <%= @participants.length %></p>
+    <p>Invited: <%= @invited.length %></p>
+    <% if !@society.nil? and @society.has_admin(session[:user_id]) %>
+        <p><a href="" id="invite-all">Invite all society members</a></p>
+    <% end %>
 </div>
+
+
+<script>
+    $('#invite-all').click(function(e) {
+        e.preventDefault();    
+        url = '/inviteallmembers'
+        $.ajax({
+    		type: 'POST',
+    		url: url,
+            data: {
+                society_id: <%= @society.id %>,
+                event_id: <%= @event.id %>
+            },
+            success: function() { 
+                location.reload();
+            },
+            
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(xhr.status)
+                alert(xhr.statusText)
+                alert(xhr.responseText)	
+            }
+    	});
+    })
+    
+</script>

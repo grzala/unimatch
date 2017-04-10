@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     #get 'user/:id' => :show
     #get 'user/slug/edit' => :edit
     get '/user/all/list' => :list
+    post '/user/switch_favourite' => :switch_favourite
     post '/user/:id' => :update
     get '/user/match/:id' => :match
     get '/user/choose/:id' => :choose_interests, :as => :choose_interests
@@ -47,7 +48,10 @@ Rails.application.routes.draw do
   
   controller :notification do
     post '/notification' => :get_notifications
-    
+  end
+  
+  controller :event do
+    post '/inviteallmembers' => :invite_all_members
   end
   
   mount ActionCable.server => '/cable'

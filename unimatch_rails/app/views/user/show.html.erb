@@ -1,76 +1,80 @@
 <div class="row" id="user_info">
-<div class="col-md-2">
-    <%= image_tag @user.avatar_url(:display), :id => "profile_image" %>
-</div>
-<div class="col-md-3">
-    <div class="left" id="user_details">
-    <h2 class="inline_block_user"><%= @user.name %></h2>
+    <div class="col-md-2">
+        <%= image_tag @user.avatar_url(:display), :class => "profile_image" %>
     </div>
-</div>
-<div class="col-md-3">
-    <div class="left" id="percentage">
-    <!--<p>Percentage Match: </p>
-    <p></p>-->
-
+    <div class="col-md-3">
+        <div class="left" id="user_details">
+        <h2 class="inline_block_user"><%= @user.name %></h2>
+        </div>
     </div>
-</div>
-</div>
-<div class="row">
-<div class="col-md-8 left">
-    <h4 class="left">
-        <% if session[:user_id] == @user.id %>
-            Your
-        <% else %>
-            Similar
+    <div class="col-md-3">
+        <div class="left" id="percentage">
+        <!--<p>Percentage Match: </p>
+        <p></p>-->
+        </div>
+    </div>
+    <div class="col-md-4">
+        <% if session[:user_id] != @user.id %>
+            <% in_favourites = User.find(session[:user_id]).get_favourites.include? @user %>
+            <div class="star <%= if in_favourites then "star-active" else "star-inactive" end %>" title="<%= if in_favourites then "Remove from favourites" else "Add to favourites" end %>" user_id="<%= @user.id %>" ></div>
         <% end %>
-        Interests
-    </h4>
-    <% User.get_common_interests(User.find(session[:user_id]), User.find(@user.id), important = true).each do |i| %>
-    <div class="interest">
-    <% a=i.name.tr(" -","") %>
-    <div class="int_image">
-    <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "int_img")%>   
     </div>
-    <%= i.name.split.map(&:capitalize).join(' ') %>
-    </div>
-    <% end %>
-    <br>
-    <br>
-</div>
-<div class="col-md-4" class="left">
-    <% if session[:user_id] != @user.id %>
-    <h4>Attending Events</h4>
-    <% if @events.length == 0 %>
-    <p>Not attending any events</p>
-    <% else %>
-    <% @events.each do |event| %>
-    <%= link_to event.name :controller => :event, :action => :show, :id => event.id %>
-    <% end %>
-    <% end %>
-    <% end %>
-    <h4>In Societies</h4>
-    <% if @in_societies.length == 0 %>
-    <p>Not in any societies</p>
-    <% else %>
-    <% @in_societies.each do %>
-    <%= link_to society.name :controller => :society, :action => :show, :id => society.id %>
-    <% end %>
-    <% end %>
-</div>
 </div>
 <div class="row">
-<div class="col-md-8">
-<% if session[:user_id] == @user.id %>
-<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
-    <div id='calendar'>
+    <div class="col-md-8 left">
+        <h4 class="left" id="two_line_fix">
+            <% if session[:user_id] == @user.id %>
+                Your
+            <% else %>
+                Similar
+            <% end %>
+            Interests
+        </h4>
+        <% User.get_common_interests(User.find(session[:user_id]), User.find(@user.id), important = true).each do |i| %>
+        <div class="interest">
+        <% a=i.name.tr(" -","") %>
+        <div class="int_image">
+        <%= image_tag("Interests/#{a}.jpg?id=#{a}", :class => "int_img")%>   
+        </div>
+        <p><%= i.name.split.map(&:capitalize).join(' ') %></p>
+        </div>
+        <% end %>
+        <br>
+        <br>
+    </div>
+    <div class="col-md-4" class="left">
+        <% if session[:user_id] != @user.id %>
+            <h4>Attending Events</h4>
+            <% if @events.length == 0 %>
+                <p>Not attending any events</p>
+            <% else %>
+                <% @events.each do |event| %>
+                <%= link_to event.name, :controller => :event, :action => :show, :id => event.id %>
+                <% end %>
+            <% end %>
+        <% end %>
+        
+        <h4>In Societies</h4>
+        <% if @in_societies.length == 0 %>
+            <p>Not in any societies</p>
+        <% else %>
+            <% @in_societies.each do |society|%>
+                <%= link_to society.name, :controller => :society, :action => :show, :id => society.id %>
+            <% end %>
+        <% end %>
     </div>
 </div>
-<% else %>
-<h4 class="left">Your conversation with <%= @user.name %></h4>
-<div class="messages">
-</div>
-<% end %>
-</div>
+<div class="row">
+    <div class="col-md-8">
+        <% if session[:user_id] == @user.id %>
+            <div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
+                <div id='calendar'></div>
+            </div>
+        <% else %>
+            <h4 class="left">Your conversation with <%= @user.name %></h4>
+            <div class="messages"></div>
+        <% end %>
+    </div>
 </div>   
 <script>
 $(document).ready(function() {

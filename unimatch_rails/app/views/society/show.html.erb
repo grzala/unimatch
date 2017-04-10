@@ -7,6 +7,7 @@
         <%= link_to str, :controller=> :society, :action=> :join_leave, id: @society.id %>
     </p>
 
+
 <p>interests:</p>
 <% @society.get_interests_by_name.each do |interest| %>
     <p><%= interest %></p>
@@ -14,8 +15,40 @@
 </div>
 <div class="col-md-4">
 <p>Upcoming Events:</p>
-<% @society.get_events.each do |event| %>
+<% @events.each do |event| %>
     <p><%= link_to event.name, {:controller => :event, :action => :show, :id => event.id} %></p>
 <% end %>
 </div>
 </div>
+
+<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
+    <div id='calendar'>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+    
+        function render(event, element) {
+            console.log("RENDER");
+            element.find('.fc-content').append('<div class="fc-separator"></div><p class="fc-description">'+ event.description + '</p></div>');
+        }
+        
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev',
+                center: 'title',
+                right: 'next',
+            },
+    		defaultView: 'basicWeek',
+    		height: 500,
+            timeFormat: 'H(:mm)', // uppercase H for 24-hour clock
+            
+            
+    		
+    		events: <%= @events_json %>,
+    		
+    	    eventRender: render,
+        });
+    });
+</script>

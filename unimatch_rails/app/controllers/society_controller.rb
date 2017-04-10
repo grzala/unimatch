@@ -19,6 +19,23 @@ class SocietyController < ApplicationController
 
     def show
         @society = Society.find(params[:id])
+        
+        @events = @society.get_events
+        
+        @events_json = []
+        @events.each do |event|
+            temp = {
+            title: "\n" + event.get_owner_name,
+            url: url_for(:controller => :event, :action => :show, :id => event.id),
+              start: event.date.year.to_s + '-' + ('%02d' % event.date.month).to_s + '-' + event.date.day.to_s + 'T' + event.time.to_s.slice(0...2) + ':' + event.time.to_s.slice(2...4),
+              description: event.name + "\n" + event.description,
+            }
+            
+            @events_json << temp
+        end
+    
+        @events_json = @events_json.to_json.html_safe
+        
     end#displays the society base on the society id
     
     def new
@@ -55,8 +72,7 @@ class SocietyController < ApplicationController
     end
     
     def match
-        @matches = Connector.get_society_matches(params[:id])
-        puts @matches
+        @matches = User.find(session[:user_id]).get_matched_societies
         @matched_societies = {}
         @matches.each do |id, coefficient|
           @matched_societies[Society.find(id)] = coefficient

@@ -6,6 +6,7 @@
 package reccomenderalgorithm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -14,10 +15,13 @@ import java.util.ArrayList;
 public interface Database {
     
     public User getUserByID(int id);
+    public Society getSocietyByID(int id);
     public ArrayList<User> getUsers();
     public ArrayList<Society> getSocieties();
     
     public ArrayList<Interest> getInterests();
+    
+    public void saveMatches(int id, HashMap<Integer, Float> matches, String type);
     
     public void connect();
     public void close();

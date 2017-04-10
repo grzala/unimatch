@@ -1,31 +1,60 @@
 <div class="row">
-<div class="col-md-8">
-<h2><%= @society.name %></h2>
-<%= image_tag @society.avatar_url(:display), :class => "profile_image" %>
-<p><%= @society.description %></p>
-    <p>
+<div class="col-md-2">
+        <%= image_tag @society.avatar_url(:display), :class => "profile_image" %>
+    </div>
+    <div class="col-md-10">
+        <div class="left" id="society_details">
+        <h2><%= @society.name %></h2>
+        <p><%= @society.description %></p>
+        <button class="btn btn-danger button join_society">
         <% str = !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
         <%= link_to str, :controller=> :society, :action=> :join_leave, id: @society.id %>
-    </p>
-
-
-<p>interests:</p>
-<% @society.get_interests_by_name.each do |interest| %>
-    <p><%= interest %></p>
-<% end %>
+    </button>
+    </div>
+    </div>
+</div>
+<div class="row">
+<div class="col-md-8">
+    <p>Society wall</p>
 </div>
 <div class="col-md-4">
 <p>Upcoming Events:</p>
-<% @events.each do |event| %>
-    <p><%= link_to event.name, {:controller => :event, :action => :show, :id => event.id} %></p>
+
+<% if @events.length > 0 %>
+            <h4>Attending Events</h4>
+            <div class="user-mini-container">
+                <% 
+                    cur = 0
+                    max_events = 25
+                %>
+                <% @events.each do |event| %>
+                    <% cur += 1 %>
+                    <% break if cur > max_events %>
+                    <%= link_to :controller => :event, :action => :show, :id => event.id do %>
+                        <div class="user-mini-element">
+                            <div class="user-mini-info">
+                                <div class="date date-mini">
+                                	<span class="binds"></span>
+                                	<span class="month"><%= event.date.strftime("%B")[0..2] %></span>
+                                	<h1 class="day"><%= event.date.day %></h1>
+                                </div>
+                                <p><%= event.name %></p>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>
+            </div> 
+<% else %>
+<p>No Upcoming Events</p>
 <% end %>
 </div>
 </div>
 
-<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>
-    <div id='calendar'>
-    </div>
-</div>
+
+<!--<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>-->
+<!--    <div id='calendar'>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!-- manage admins -->
 <% if @is_admin and @add_remove.length > 0 %>

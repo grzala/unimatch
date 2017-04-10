@@ -95,14 +95,14 @@
         <% end %>
         
         <!-- events -->
-        <% if @events_joined.length > 0 %>
+        <% if @events.length > 0 %>
             <h4>Attending Events</h4>
             <div class="user-mini-container">
                 <% 
                     cur = 0
                     max_events = 25
                 %>
-                <% @events_joined.each do |event| %>
+                <% @events.each do |event| %>
                     <% cur += 1 %>
                     <% break if cur > max_events %>
                     <%= link_to :controller => :event, :action => :show, :id => event.id do %>

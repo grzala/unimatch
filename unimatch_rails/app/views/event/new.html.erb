@@ -1,26 +1,16 @@
 <% @page_title = "create event" %>
 
-<div class="create_form">
+<div class="create_form form-group">
     <div class="text_container">
         <h2>Create a new event</h2>
-        <div class="dropdown">
-            <button class="btn btn-danger dropdown-toggle button" type="button" data-toggle="dropdown" >Choose society
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu">
-              <% @choices.collect do |c| %>
-                  <li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>
-                  <!--<li><a href="#"><%= c["name"]%> <%= c["value"]%> </a></li>-->
-              <%end%>
-            </ul>
-        </div>
-    </div>
-    <div class="field_container">
-        <!--<%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }) %>-->
     </div>
     <%= form_for(:event, :url => {:controller => 'event', :action => 'create'}) do %>
         <div class="field_container">
-            <h5>Event Title:</h5> 
-            </br> <%= text_field_tag :name, nil, class: 'form_control event_title' %>
+            <%= select_tag 'society_id', options_for_select(@choices.collect{ |c| [c["name"], c["value"]] }), :class => "form-control", :style => "max-width: 270px" %>
+        </div>
+        <div class="field_container">
+            <h5>Event Title:</h5>
+            <br> <%= text_field_tag :name, nil, class: 'form_control event_title' %>
         </div>
         <div class="field_container">
             <h5>Description:</h5>
@@ -58,6 +48,7 @@
                 <h5>End date:&nbsp&nbsp<%= text_field_tag :enddate,nil, class: 'form_control2' %></h5>
             </div>
         </div>
+
         <%= button_tag(type: "submit", class: "btn btn-danger button") do %>
             Create Event
         <% end %>

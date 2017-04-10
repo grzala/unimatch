@@ -16,7 +16,7 @@ class EventController < ApplicationController
         
         @time_str = @event.time.to_s[0..1] + ":" + @event.time.to_s[1..2]
         if @time_str[0] == "0"
-            @time_str = [1...@time_str.length]
+            @time_str = @time_str[1...@time_str.length]
         end
         
         @participates = @participants.include? @user
@@ -60,6 +60,14 @@ class EventController < ApplicationController
         time = params[:time].split(":")
         hour = time[0]
         minute = time[1]
+        puts "TIIIIIIIME"
+        puts hour
+        puts minute
+        puts time
+        params[:startdate] = params[:startdate].gsub("/", "")
+        if params[:enddate] != nil
+            params[:enddate] = params[:enddate].gsub("/", "")
+        end
         
         if params[:recurring]
             startdate = Date.parse(params[:startdate])
@@ -90,7 +98,7 @@ class EventController < ApplicationController
         @event.location = location
         @event.cost = cost
         @event.date = date.strftime("%Y-%m-%d")
-        @event.time = (hour.to_s + minute.to_s).to_i
+        @event.time = (hour.to_s + minute.to_s)
         @event.user_id = user_id
         @event.society_id = society_id
         @event.event_group_id = event_group_id

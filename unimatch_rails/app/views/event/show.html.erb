@@ -7,8 +7,8 @@
         <div class="row event-title">
             <div class="col-md-12">
                 <div class="event-header">
-                    <h1><%= @event.name %></h1>
-                    <h5>Hosted by: <%= if @society != nil then @society.name else User.find(@event.user_id).name end %></h5>
+                    <h1><%= @event.name.capitalize %></h1>
+                    <h5>Hosted by: <%= if @society != nil then @society.name else User.find(@event.user_id).name.capitalize end %></h5>
                     <h4><a href="#" id="participants-btn" style="text-decoration: underline; color: black"><%= @participants.length %> attending this event</a></h4>
                 </div>
             </div>

@@ -1,0 +1,2 @@
+class SocietyPost < ApplicationRecord
+end

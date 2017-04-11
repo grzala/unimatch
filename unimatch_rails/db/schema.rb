@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170410194949) do
+ActiveRecord::Schema.define(version: 20170411111514) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 20170410194949) do
     t.index ["event_id"], name: "index_event_invites_on_event_id"
     t.index ["recipient_id"], name: "index_event_invites_on_recipient_id"
     t.index ["sender_id"], name: "index_event_invites_on_sender_id"
+  end
+
+  create_table "event_posts", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "eventsociety_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["eventsociety_id"], name: "index_event_posts_on_eventsociety_id"
+    t.index ["user_id"], name: "index_event_posts_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -174,6 +184,16 @@ ActiveRecord::Schema.define(version: 20170410194949) do
     t.datetime "updated_at",  null: false
     t.index ["interest_id"], name: "index_society_interests_on_interest_id"
     t.index ["society_id"], name: "index_society_interests_on_society_id"
+  end
+
+  create_table "society_posts", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "society_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["society_id"], name: "index_society_posts_on_society_id"
+    t.index ["user_id"], name: "index_society_posts_on_user_id"
   end
 
   create_table "universities", force: :cascade do |t|

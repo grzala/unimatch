@@ -1,0 +1,2 @@
+class EventPost < ApplicationRecord
+end

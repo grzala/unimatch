@@ -28,14 +28,14 @@ $.fn.messages = function(con_id){
         
         sendMessage('/conversation/create_message', msg, con_id);
     });
-    $(document).keypress(function(e) {
+    $("textarea.message-body").keypress(function(e) {
         if(e.which == 13) {
             e.preventDefault();
             
-            var messageBody = $('.write-message .message-body')
+            var messageBody = $('.message-body')
             if (messageBody.is(":focus")) {
-                var msg = $(".write-message .message-body").val();
-                $(".write-message .message-body").val('')
+                var msg = $(".message-body").val();
+                $(".message-body").val('')
                 
                 sendMessage('/conversation/create_message', msg, con_id);
             }
@@ -106,7 +106,7 @@ function makeMessage(data) {
         
     
     if (!data['own']) {
-        toAppend += '<img src="https://www.scheller.gatech.edu/thumb/width/600/cropratio/1:1/pix/directory/xmulford_chuck_profile.jpg.pagespeed.ic.BrKpOe4a3L.jpg" class="message_pic">'
+        toAppend += '<img src="' + data.img + '" class="message_pic">'
     }
 
     toAppend += '<p class="message_text">'

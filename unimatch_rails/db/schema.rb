@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170403125953) do
+ActiveRecord::Schema.define(version: 20170410194949) do
 
   create_table "billing_histories", force: :cascade do |t|
     t.date     "date"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20170403125953) do
   create_table "events", force: :cascade do |t|
     t.string   "name"
     t.date     "date"
-    t.integer  "time"
+    t.string   "time"
     t.string   "description"
     t.string   "location"
     t.integer  "frequency",      default: 0
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20170403125953) do
   end
 
   create_table "notifications", force: :cascade do |t|
+    t.string   "sender"
     t.string   "link"
     t.string   "information"
     t.integer  "user_id"

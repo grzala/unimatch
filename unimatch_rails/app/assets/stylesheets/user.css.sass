@@ -50,14 +50,10 @@ $break-tablet: 900px
     font-family: "Lato", sans-serif
     font-size: 25px
 
-// .message_button
-//     float: left
-//     margin-right: 20px
-//     background-color: $red
-//     border: 0
-//     min-width: 134px
+.coefficient_profile
+    font-family: "Lato", sans-serif
+    font-size: 15px
 
-    
 .favourites_button
     float: left
     
@@ -84,11 +80,12 @@ $break-tablet: 900px
     justify-content: start
 
 .btn-danger
-    min-width: 134px
     border: 0
     background-color: $red
     border-radius: 4px
-    // margin-right: 10px
+    
+.change_fav
+    min-width: 176px
     
 .left
     text-align: left
@@ -98,7 +95,7 @@ $break-tablet: 900px
     left: 20px
     @media screen and (min-width: $break-tablet)
     left: 0px
-    top: 48px
+    // top: 48px
     
 #percentage
     position: relative
@@ -107,6 +104,27 @@ $break-tablet: 900px
     left: 0px
     top: 82px
     
+.percentage_match_profile1
+
+    text-align: left
+    display: unset
+    @media screen and (min-width: $break-tablet)
+        display: none
+
+.percentage_match_profile
+    text-align: left
+    margin-bottom: 10px
+    
+.percentage_match_profile p
+    margin: 0
+    font-family: "Lato", sans-serif
+    font-size: 16px
+
+.hide_unhide, .coefficient
+    display: none
+    @media screen and (min-width: $break-tablet)
+        display: unset
+
 #user_info
     margin-bottom: 30px
     
@@ -153,29 +171,16 @@ h4#interest
     font-size: 16px
     
 #some_text
-    min-width: 280px
+    width: 310px
+    margin-bottom: 80px
+    @media screen and (min-width: $break-tablet)
+        margin-bottom: 0
+     
+     
+hr.style14 
+    border-top: 1px solid #8c8b8b
+
     
-.star 
-    display: inline-block !important//temporary
-    visibility: hidden
-    font-size: 60px
-    cursor: pointer
-
-// STAR ///////////////////////////////
-.star-inactive
-    &:before 
-        content: "\2606"
-        position: relative !important
-        visibility: visible
-        color: black
-
-.star-active
-    &:before 
-        content: "\2605"
-        position: relative !important
-        visibility: visible
-        color: yellow 
-
 // MINI CONTAINER //////////////////////
 .user-mini-container
     max-height: 200px

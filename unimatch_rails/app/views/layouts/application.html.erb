@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="turbolinks-cache-control" content="no-cache">
+     <meta name="viewport" content="width=device-width initial-scale = 1.0 maximum-scale=1.0 user-scalable=no" />
   </head>
   <body>
     <script>
@@ -63,10 +63,10 @@
           <%= image_tag @image_thumbnail, :class => "user_image_thubmnail" %>
         </div>
         <div id = "details_dropdown">
-          <%= link_to session[:user_name], controller: :user, action: :show, id: session[:user_id] %>
-          <%= link_to "Logout", logout_url, id: 'logout' %>
+          <%= link_to session[:user_name].capitalize, controller: :user, action: :show, id: session[:user_id] %>
           <%= link_to 'Edit details', controller: 'user', action: 'edit', id: @logged_user.slug %>
           <%= link_to 'Edit interests', controller: 'user', action: 'choose_interests', id: @logged_user.slug %>
+          <%= link_to "Logout", logout_url, id: 'logout' %>
         </div>
       </div>
     <% end %>
@@ -100,5 +100,10 @@
     </script>
     
     </div>
+    
+    <div class="footer6">
+      <%= image_tag("unimatch_logo.png", border: 0, height: "60px", width: "152px", alt: "UniMatch") %>
+    </div>
+    
   </body>
 </html>

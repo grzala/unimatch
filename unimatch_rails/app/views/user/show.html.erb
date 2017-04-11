@@ -7,6 +7,11 @@
 
         <h2 class="inline_block_user"><%= @user.name.capitalize %></h2>
 
+        <% if @coefficient && session[:user_id] != @user.id%>
+            <div class="percentage_match_profile">
+                <p class="coefficient_profile">Percentage match: <%= ((@coefficient*100).round).to_s + "%"%></p>
+            </div>
+        <% end %>
             
             <% if session[:user_id] != @user.id %>
                 <button class="btn btn-danger change_fav" user_id="<%= @user.id %>">
@@ -18,12 +23,13 @@
         </div>
     </div>
     <div class="col-md-3">
-        <div class="left" id="percentage">
-        <!--<p>Percentage Match: </p>
-        <p></p>-->
-        </div>
     </div>
     <div class="col-md-4">
+        <!--<% if @coefficient && session[:user_id] != @user.id%>-->
+        <!--<div class="percentage_match_profile">-->
+        <!--    <p class="coefficient_profile">Percentage match: <%= ((@coefficient*100).round).to_s + "%"%></p>-->
+        <!--</div>-->
+        <!--<% end %>-->
     </div>
 </div>
 <div class="row">

@@ -13,7 +13,8 @@
                     <%= link_to society.name, controller: 'society', action: 'show', :id => society.id do %>
                        <div class="society_box"> 
                            <div id="society_img">
-                                <%= image_tag("society_img.png", :alt => "society_img") %>
+                                <%= image_tag society.avatar_url(:display) %>
+                                <!--<%= image_tag("society_img.png", :alt => "society_img") %>-->
                             </div>
                             <div id="society_name">
                                 <h5><%= society.name.truncate_words(2) %></h5>

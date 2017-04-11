@@ -7,9 +7,9 @@
         <h2><%= @society.name %></h2>
         <p><%= @society.description %></p>
         <button class="btn btn-danger button join_society">
-        <% str = !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
-        <%= link_to str, :controller=> :society, :action=> :join_leave, id: @society.id %>
-    </button>
+            <% str = !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
+            <%= link_to str, :controller=> :society, :action=> :join_leave, id: @society.id %>
+        </button>
     </div>
     </div>
 </div>
@@ -106,6 +106,14 @@
 
 <script>
     $(document).ready(function() {
+        $(".user-mini-container .user-mini-element").mouseenter(function() {
+            console.log("enter");
+            $(this).find(".special-action").show();
+        })
+        
+        $(".user-mini-container .user-mini-element").mouseleave(function() {
+            $(this).find(".special-action").hide();
+        })
         $(".special-action").click(function(e) {
             
             if (!$(this).hasClass("remove")) {

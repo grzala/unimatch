@@ -16,7 +16,7 @@ class EventController < ApplicationController
         
         @time_str = @event.time.to_s[0..1] + ":" + @event.time.to_s[1..2]
         if @time_str[0] == "0"
-            @time_str = [1...@time_str.length]
+            @time_str = @time_str[1...@time_str.length]
         end
         
         @participates = @participants.include? @user
@@ -57,6 +57,18 @@ class EventController < ApplicationController
     end#allows user to participate on events
     
     def create
+        time = params[:time].split(":")
+        hour = time[0]
+        minute = time[1]
+        puts "TIIIIIIIME"
+        puts hour
+        puts minute
+        puts time
+        params[:startdate] = params[:startdate].gsub("/", "")
+        if params[:enddate] != nil
+            params[:enddate] = params[:enddate].gsub("/", "")
+        end
+        
         if params[:recurring]
             startdate = Date.parse(params[:startdate])
             enddate = Date.parse(params[:enddate])
@@ -66,13 +78,13 @@ class EventController < ApplicationController
             
             while cur_date <= enddate
                 puts cur_date
-                save_event(params[:name], params[:description], params[:location], params[:cost], cur_date, params[:hour], params[:minute], session[:user_id], params[:society_id], @group.id)
+                save_event(params[:name], params[:description], params[:location], params[:cost], cur_date, hour, minute, session[:user_id], params[:society_id], @group.id)
                 cur_date += 7 * params[:frequency].to_i
             end
             
         else 
             date = Date.parse(params[:startdate])
-            save_event(params[:name], params[:description], params[:location], params[:cost], date, params[:hour], params[:minute], session[:user_id], params[:society_id])
+            save_event(params[:name], params[:description], params[:location], params[:cost], date, hour, minute, session[:user_id], params[:society_id])
         end
         
         
@@ -86,7 +98,7 @@ class EventController < ApplicationController
         @event.location = location
         @event.cost = cost
         @event.date = date.strftime("%Y-%m-%d")
-        @event.time = (hour.to_s + minute.to_s).to_i
+        @event.time = (hour.to_s + minute.to_s)
         @event.user_id = user_id
         @event.society_id = society_id
         @event.event_group_id = event_group_id

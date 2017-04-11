@@ -128,10 +128,13 @@ class UserController < ApplicationController
   def update_interests
     @a= params[:imp_interests]
     @a=@a.take(5)
-    puts "asdasdsd"
-    puts @a
+   
     @b= params[:interests]
-    @c= @a+@b
+    if (@b == nil) then 
+              @c= @a
+    else 
+      @c=@a+@b
+    end
     User.friendly.find(params[:id]).update_interests_by_ids(@c)
     redirect_to user_url, :id => params[:id]
   end

@@ -4,7 +4,7 @@ class CreateEventPosts < ActiveRecord::Migration[5.0]
       
       t.text :body
       t.belongs_to :user
-      t.belongs_to :eventsociety
+      t.belongs_to :event
 
       t.timestamps
     end

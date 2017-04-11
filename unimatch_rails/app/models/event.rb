@@ -37,12 +37,16 @@ class Event < ApplicationRecord
 		@participants = get_participants_by_id
 		if !@participants.include? id
 			Participant.create(user_id: id, event_id: self.id)
+			add_post(id, "Joined the event")
 		end
     end#add a participant to a event
     
     def delete_participant(id)
         @p = Participant.find_by_event_id_and_user_id(self.id, id) #not using .where method as just 1 record is expected to be found
-        if @p != nil then @p.destroy end
+        if @p != nil
+            @p.destroy 
+			add_post(id, "Left the event")
+        end
     end#when user doesnt wanto attend the event anymore
     
     def has_participant(id)
@@ -61,6 +65,7 @@ class Event < ApplicationRecord
     def invite(sender, receiver)
         EventInvite.create(sender: sender, recipient: receiver, event_id: self.id)
         receiver.notify(event_path(:id => self.id), 'event invite', sender.id, "E")
+		add_post(sender.id, "Invited " + receiver.name.capitalize)
     end   
     
     def self.search(string)
@@ -103,6 +108,17 @@ class Event < ApplicationRecord
 		return events
 	end
     
+    def get_posts
+        posts = EventPost.where(event_id: self.id)
+        posts.sort_by(&:created_at)
+        posts = posts.reverse
+        
+        return posts
+    end
+    
+    def add_post(user_id, body)
+        EventPost.create(event_id: self.id, user_id: user_id, body: body)
+    end
     
     private
     def filter_by_id(array)

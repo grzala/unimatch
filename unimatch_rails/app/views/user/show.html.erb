@@ -22,15 +22,8 @@
 
         </div>
     </div>
-    <div class="col-md-3">
-    </div>
-    <div class="col-md-4">
-        <!--<% if @coefficient && session[:user_id] != @user.id%>-->
-        <!--<div class="percentage_match_profile">-->
-        <!--    <p class="coefficient_profile">Percentage match: <%= ((@coefficient*100).round).to_s + "%"%></p>-->
-        <!--</div>-->
-        <!--<% end %>-->
-    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-4"></div>
 </div>
 <div class="row">
     <div class="col-md-8 left">
@@ -102,8 +95,10 @@
                     <% end %>
                 <% end %>
             </div>
+        <% elsif session[:user_id] != @user.id%>
+            <p>Not attending any societies</p>
         <% else %>
-            <p></p>See the recommender docs page to find suitable socs</p>
+            <p>Visit Societies page to find suitable societies</p>
         <% end %>
         
         <!-- events -->

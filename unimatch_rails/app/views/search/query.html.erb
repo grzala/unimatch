@@ -12,7 +12,7 @@
     <% @results.each do |result| %>
         <div class="search_result">
         <% if result['type'] == "Event" %>
-            <div class="date" style="margin-bottom: 20px">
+            <div class="date search_image" style="margin-bottom: 20px">
                 <span class="binds"></span>
                 <span class="month"><%= result['month'] %></span>
                 <h1 class="day"><%= result['day'] %></h1>

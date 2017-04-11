@@ -17,6 +17,10 @@
                     <h3><%= link_to user.name, :controller => :user, :action => :show, :id => user.id %></h3>
                 </div>
                 
+                <div class="percentage_match_profile1">
+                    <p class="mobile_coefficient">Percentage match: <%= ((coefficient*100).round).to_s + "%"%></p>
+                </div>
+                
                 <div class="common_interests">
                     
                     <% interests = User.get_common_interests_fixed(User.find(session[:user_id]), User.find(user.id), 3) %>
@@ -60,14 +64,11 @@
                    
                 </div>
             </div>
-            
-            <script>
-                
-            </script>
+
             <div class="col-md-3" id="percentage_bar">
                 <% coefficient1 = coefficient.round(2) %>
                 <div class="coefficient"><%= ((coefficient1*100).round).to_s + "%"%></div>
-                <div id="progress<%= user.id %>"></div>
+                <div class="hide_unhide" id="progress<%= user.id %>"></div>
                 <script>
                     $('#progress<%= user.id %>').circleProgress({
                         value:  <%= coefficient1 %> ,

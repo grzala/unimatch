@@ -104,6 +104,23 @@ $break-tablet: 900px
     left: 0px
     top: 82px
     
+.percentage_match_profile
+
+    text-align: left
+    display: unset
+    @media screen and (min-width: $break-tablet)
+        display: none
+        
+.percentage_match_profile p
+    margin: 0
+    font-family: "Lato", sans-serif
+    font-size: 16px
+
+.hide_unhide, .coefficient
+    display: none
+    @media screen and (min-width: $break-tablet)
+        display: unset
+
 #user_info
     margin-bottom: 30px
     
@@ -151,6 +168,14 @@ h4#interest
     
 #some_text
     width: 310px
+    margin-bottom: 80px
+    @media screen and (min-width: $break-tablet)
+        margin-bottom: 0
+     
+     
+hr.style14 
+    border-top: 1px solid #8c8b8b
+
     
 // MINI CONTAINER //////////////////////
 .user-mini-container

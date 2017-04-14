@@ -14,8 +14,43 @@
     </div>
 </div>
 <div class="row">
-<div class="col-md-8">
-    <p>Society wall</p>
+    <div class="col-md-8">
+        <h3 class="wall_heading">Recent activity</h3>
+        <div class="wall">
+            <div class="wallPostContainer">
+            <div class="wallPost">
+                <div class="wallPost_top">
+                    <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">
+                </div>
+                <p class="post_title">Adam posted</p>
+                <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>
+                <p class="post_date">Yesterday, 5pm</p>
+            </div>
+            <div class="wallPost">
+                <div class="wallPost_top">
+                    <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">
+                </div>
+                <p class="post_title">Adam posted</p>
+                <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>
+                <p class="post_date">Yesterday, 5pm</p>
+            </div>
+            <div class="wallPost">
+                <div class="wallPost_top">
+                    <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">
+                </div>
+                <p class="post_title">Adam posted</p>
+                <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>
+                <p class="post_date">Yesterday, 5pm</p>
+            </div>
+            </div>
+            <div class="wallForm">
+                <%= form_for(:societyWall, :url => {:controller => 'society', :action => 'wall'}) do %>
+                <%= text_field_tag :post %>
+                <%= submit_tag :Post, :class => "btn btn-danger button submit" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="col-md-4">
 <p>Upcoming Events:</p>

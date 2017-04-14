@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get '/society/join/:id' => :join_leave
       get '/society/match' => :match
       post '/society/switch_admin' => :switch_admin
+      post '/society/wall' => :wall
   end
   resources :society
   
@@ -56,6 +57,7 @@ Rails.application.routes.draw do
   controller :event do
     post '/event/inviteallmembers' => :invite_all_members
     post '/event/invite' => :invite
+    post '/event/wall' => :wall
   end
   
   get '/search' => 'search#query'

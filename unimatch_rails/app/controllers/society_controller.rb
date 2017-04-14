@@ -44,6 +44,8 @@ class SocietyController < ApplicationController
         @add_remove = (@society.get_members) - @admins
         @add_remove = (@admins + @add_remove) - [@user] #admins on beggining of the list
         
+        @posts = @society.get_posts
+        
     end#displays the society base on the society id
     
     def new

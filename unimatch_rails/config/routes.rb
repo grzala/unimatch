@@ -60,6 +60,11 @@ Rails.application.routes.draw do
     post '/event/wall' => :wall
   end
   
+  controller :posts do
+    post '/posts/society_send' => :society_send
+    post '/posts/event_send' => :event_send
+  end
+  
   get '/search' => 'search#query'
   
   mount ActionCable.server => '/cable'

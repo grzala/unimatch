@@ -36,34 +36,46 @@
         <h3 class="wall_heading">Recent activity</h3>
         <div class="wall">
             <div class="wallPostContainer">
-            <div class="wallPost">
-                <div class="wallPost_top">
-                    <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">
+            <!--<div class="wallPost">-->
+            <!--    <div class="wallPost_top">-->
+            <!--        <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">-->
+            <!--    </div>-->
+            <!--    <p class="post_title">Adam posted</p>-->
+            <!--    <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>-->
+            <!--    <p class="post_date">Yesterday, 5pm</p>-->
+            <!--</div>-->
+            <!--<div class="wallPost">-->
+            <!--    <div class="wallPost_top">-->
+            <!--        <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">-->
+            <!--    </div>-->
+            <!--    <p class="post_title">Adam posted</p>-->
+            <!--    <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>-->
+            <!--    <p class="post_date">Yesterday, 5pm</p>-->
+            <!--</div>-->
+            <!--<div class="wallPost">-->
+            <!--    <div class="wallPost_top">-->
+            <!--        <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">-->
+            <!--    </div>-->
+            <!--    <p class="post_title">Adam posted</p>-->
+            <!--    <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>-->
+            <!--    <p class="post_date">Yesterday, 5pm</p>-->
+            <!--</div>-->
+            <% @posts.each do |post| %>
+                <% @sender = User.find(post.user_id) %>
+                <div class="wallPost">
+                    <div class="wallPost_top">
+                        <%= image_tag @user.avatar_url(:display), :class => "message_pic" %>
+                    </div>
+                    <p class="post_title"><%= @user.name.capitalize %></p>
+                    <p class="post_main"><%= post.body %></p>
+                    <p class="post_date"><%= post.created_at.strftime("%Y/%m/%d") %></p>
                 </div>
-                <p class="post_title">Adam posted</p>
-                <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>
-                <p class="post_date">Yesterday, 5pm</p>
-            </div>
-            <div class="wallPost">
-                <div class="wallPost_top">
-                    <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">
-                </div>
-                <p class="post_title">Adam posted</p>
-                <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>
-                <p class="post_date">Yesterday, 5pm</p>
-            </div>
-            <div class="wallPost">
-                <div class="wallPost_top">
-                    <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">
-                </div>
-                <p class="post_title">Adam posted</p>
-                <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>
-                <p class="post_date">Yesterday, 5pm</p>
-            </div>
+            <% end %>
             </div>
             <div class="wallForm">
-                <%= form_for(:eventWall, :url => {:controller => 'event', :action => 'wall'}) do %>
+                <%= form_for(:eventWall, :url => {:controller => 'posts', :action => 'event_send'}) do %>
                 <%= text_field_tag :post %>
+                <%= hidden_field_tag :event_id, @society.id %>
                 <%= submit_tag :Post, :class => "btn btn-danger button submit" %>
                 <% end %>
             </div>

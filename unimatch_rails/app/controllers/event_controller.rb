@@ -22,6 +22,7 @@ class EventController < ApplicationController
         @participates = @participants.include? @user
         
         @favourite_to_invite = @user.get_favourites - @invited - [@user]
+        @posts = @event.get_posts
     end
     
     

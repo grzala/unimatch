@@ -91,6 +91,7 @@ class UserController < ApplicationController
   end
   
   def create
+    begin
     @user = User.new(user_param)
     
     if params[:password] != params[:password_confirmation]
@@ -108,6 +109,9 @@ class UserController < ApplicationController
       puts @user.errors.full_messages
       redirect_to :controller => :session, :action => :register
     end
+    rescue CarrierWave::ProcessingError => error
+  raise error.cause
+end
     
   end#creates new user account, relates to the welcom controller
   

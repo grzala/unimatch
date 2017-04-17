@@ -105,7 +105,7 @@ class UserController < ApplicationController
     else
       flash[:warning] = "Account not created"
       puts flash[:warning]
-      redirect_to :controller => :session, action => :new
+      redirect_to :controller => :session, action => :register
     end
     
   end#creates new user account, relates to the welcom controller

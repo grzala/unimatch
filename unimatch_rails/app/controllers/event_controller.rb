@@ -88,7 +88,7 @@ class EventController < ApplicationController
         end
         
         
-        redirect_to :action => :list
+        redirect_to :action => :show, :id => @event.id
     end#creates now event, get parameteers and send them to save event function
     
     def save_event(name, description, location, cost, date, hour, minute, user_id, society_id = nil, event_group_id = nil)

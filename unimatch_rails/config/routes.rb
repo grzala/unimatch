@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-
+  
+  root :to => 'welcome#index'
+  get '/index' => 'welcome#index'
   
   controller :society do
       get '/society/list' => :list
@@ -31,14 +33,12 @@ Rails.application.routes.draw do
   controller :session do
     post '/register' => :register
     get '/register' => :new
+    get 'logout' => :destroy
   end
-  
-  root :to => 'welcome#index'
-  get '/index' => 'welcome#index'
+
   
   controller :welcome do
     post '' => :create
-    get 'logout' => :destroy
   end
   
   controller :conversation do

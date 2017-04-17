@@ -92,16 +92,16 @@ class UserController < ApplicationController
   
   def create
     @user = User.new(user_param)
-    @user.save
+    
+    if params[:password] != params[:password_confirmation]
+      flash[:warning] = "Passwords are different"
+      puts flash[:warning]
+      return redirect_to :controller => :session, :action => :new
+    end
     
     if @user.save
       flash[:success] = "Account created successfuly. Please log in."
       redirect_to root_path
-    elsif (:password) != (:password_confirmation)
-      flash[:warning] = "Passwords are different"
-      puts flash[:warning]
-      redirect_to :controller => :session, :action => :new
-        
     else
       flash[:warning] = "Account not created"
       puts flash[:warning]
@@ -113,7 +113,7 @@ class UserController < ApplicationController
   def choose_interests
     @user = User.friendly.find(params[:id])
     if request.path != choose_interests_path(@user)
-      redirect_to choose_interests_path, status: :moved_permanently
+      return redirect_to choose_interests_path, status: :moved_permanently
     end
     @interests = Interest.retrieve_as_dictionary
     @allinterests = Interest.all

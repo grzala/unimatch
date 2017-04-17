@@ -27,6 +27,7 @@ class SessionController < ApplicationController
                 redirect_to :controller => :user, :action => :choose_interests, :id => session[:user_id]
             end
         else
+            flash[:warning] = "Password and email do not match"
             print params[:email]
             redirect_to login_url, :alert => "Username or password is invalid"
         end

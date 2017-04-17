@@ -32,12 +32,16 @@ class Society < ApplicationRecord
 		@members = get_members_by_id
 		if !@members.include? id
 			Member.create(user_id: id, society_id: self.id)
+			add_post(id, "Joined the society")
 		end
   end#add a member to a society, executes when user clicks join society
   
   def delete_member(id)
     @m = Member.find_by_society_id_and_user_id(self.id, id) #not using .where method as just 1 record is expected to be found
-    if @m != nil and !@m.admin then @m.destroy end
+    if @m != nil and !@m.admin
+      @m.destroy
+			add_post(id, "Left the society")
+    end
   end#deletes user from a society, executes when user clicks leave a society
   
   def get_admins
@@ -60,6 +64,7 @@ class Society < ApplicationRecord
     @m = Member.find_by_society_id_and_user_id(self.id, id)
     @m.admin = true
     @m.save
+		add_post(id, "Became an administrator")
   end#add user as a admin
   
   def delete_admin(id)
@@ -69,6 +74,7 @@ class Society < ApplicationRecord
     if @m.admin 
       @m.admin = false
       @m.save
+			add_post(id, "Administrator status revoked")
     end
   end#deletes admin, and user will be just a member
   
@@ -118,25 +124,7 @@ class Society < ApplicationRecord
     return current_events
   end#returns event that have yet to happen
   
-  private
-  def filter_by_id(array)
-    @ids = []
-    array.each do |item|
-      @ids << item.id
-    end
-    return @ids    
-  end
-  
-  def filter_by_name(array)
-    @ids = []
-    array = array.compact
-    array.each do |item|
-      @ids << item.name
-    end
-    return @ids    
-  end#private methods for security
-  
-  def self.search(string)
+    def self.search(string)
     toreturn = []
     words = string.split(" ")
     
@@ -168,5 +156,35 @@ class Society < ApplicationRecord
     
     return toreturn
   end
+  
+  def get_posts
+    posts = SocietyPost.where(society_id: self.id)
+    posts.sort_by(&:created_at)
+    posts = posts.reverse
+    
+    return posts
+  end
+  
+  def add_post(user_id, body)
+		SocietyPost.create(society_id: self.id, user_id: user_id, body: body)
+	end
+  
+  private
+  def filter_by_id(array)
+    @ids = []
+    array.each do |item|
+      @ids << item.id
+    end
+    return @ids    
+  end
+  
+  def filter_by_name(array)
+    @ids = []
+    array = array.compact
+    array.each do |item|
+      @ids << item.name
+    end
+    return @ids    
+  end#private methods for security
   
 end

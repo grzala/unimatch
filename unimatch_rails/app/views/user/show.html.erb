@@ -95,21 +95,21 @@
                     <% end %>
                 <% end %>
             </div>
-        <% elsif session[:user_id] != @user.id%>
+        <% elsif session[:user_id] != @user.id %>
             <p>Not attending any societies</p>
         <% else %>
             <p>Visit Societies page to find suitable societies</p>
         <% end %>
         
         <!-- events -->
-        <% if @events.length > 0 %>
+        <% if @events_joined.length > 0 %>
             <h4>Attending Events</h4>
             <div class="user-mini-container">
                 <% 
                     cur = 0
                     max_events = 25
                 %>
-                <% @events.each do |event| %>
+                <% @events_joined.each do |event| %>
                     <% cur += 1 %>
                     <% break if cur > max_events %>
                     <%= link_to :controller => :event, :action => :show, :id => event.id do %>

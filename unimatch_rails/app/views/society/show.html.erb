@@ -6,22 +6,70 @@
         <div class="left" id="society_details">
         <h2><%= @society.name %></h2>
         <p><%= @society.description %></p>
-        <button class="btn btn-danger button join_society">
-            <% str = !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
-            <%= link_to str, :controller=> :society, :action=> :join_leave, id: @society.id %>
-        </button>
+        
+        <%= link_to :controller=> :society, :action=> :join_leave, id: @society.id do %>
+            <button class="btn btn-danger button join_society">
+                <%= !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
+            </button>
+        <% end %>
+        
     </div>
     </div>
 </div>
 <div class="row">
-<div class="col-md-8">
-    <p>Society wall</p>
-</div>
-<div class="col-md-4">
-<p>Upcoming Events:</p>
-
-<% if @events.length > 0 %>
-            <h4>Attending Events</h4>
+    <div class="col-md-8">
+        <h3 class="wall_heading">Recent activity</h3>
+        <div class="wall">
+            <div class="wallPostContainer">
+            <!--<div class="wallPost">-->
+            <!--    <div class="wallPost_top">-->
+            <!--        <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">-->
+            <!--    </div>-->
+            <!--    <p class="post_title">Adam posted</p>-->
+            <!--    <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>-->
+            <!--    <p class="post_date">Yesterday, 5pm</p>-->
+            <!--</div>-->
+            <!--<div class="wallPost">-->
+            <!--    <div class="wallPost_top">-->
+            <!--        <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">-->
+            <!--    </div>-->
+            <!--    <p class="post_title">Adam posted</p>-->
+            <!--    <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>-->
+            <!--    <p class="post_date">Yesterday, 5pm</p>-->
+            <!--</div>-->
+            <!--<div class="wallPost">-->
+            <!--    <div class="wallPost_top">-->
+            <!--        <img src="http://combiboilersleeds.com/image.php?pic=/images/profile/profile-4.jpg" class="message_pic">-->
+            <!--    </div>-->
+            <!--    <p class="post_title">Adam posted</p>-->
+            <!--    <p class="post_main">So glad i managed to find this society, ace stuff and looking forward to the upcoming events. Holla at me if you wanna skate.</p>-->
+            <!--    <p class="post_date">Yesterday, 5pm</p>-->
+            <!--</div>-->
+            <% @posts.each do |post| %>
+                <% @sender = User.find(post.user_id) %>
+                <div class="wallPost">
+                    <div class="wallPost_top">
+                        <%= image_tag @sender.avatar_url(:display), :class => "message_pic" %>
+                    </div>
+                    <p class="post_title"><%= @sender.name.capitalize %></p>
+                    <p class="post_main"><%= post.body %></p>
+                    <p class="post_date"><%= post.created_at.strftime("%Y/%m/%d") %></p>
+                </div>
+            <% end %>
+            </div>
+            <div class="wallForm">
+                <%= form_for(:societyWall, :url => {:controller => :posts, :action => :society_send}) do %>
+                <%= text_field_tag :post %>
+                <%= hidden_field_tag :society_id, @society.id %>
+                <%= submit_tag :Post, :class => "btn btn-danger button submit" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4>Upcoming Events:</h4>
+        
+        <% if @events.length > 0 %>
             <div class="user-mini-container">
                 <% 
                     cur = 0
@@ -44,11 +92,32 @@
                     <% end %>
                 <% end %>
             </div> 
-<% else %>
-<p>No Upcoming Events</p>
-<% end %>
+        <% else %>
+        <p>No Upcoming Events</p>
+        <% end %>
+        
+        <!-- manage admins -->
+        <% if @is_admin and @add_remove.length > 0 %>
+        <h4>Manage Admin Status</h4>
+            <div id="user-mini-section">
+                <div class="user-mini-container">
+                    <% @add_remove.each do |usr| %>
+                            <div class="user-mini-element" user_id="<%= usr.id %>">
+                                <%= link_to :controller => :user, :action => :show, :id => usr.id do %>
+                                    <div class="user-mini-info">
+                                        <%= image_tag usr.avatar_url(:display), :class => "user-mini-image" %>
+                                        <p><%= usr.name %> <%= usr.surname %></p>
+                                    </div>
+                                <% end %>
+                                <p class="special-action remove"><a href="#" id="add_remove"><span class="admin_msg"><%= if !@admins.include? usr then "Add admin" else "Remove Admin" end %></span></a></p>
+                            </div>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 </div>
-</div>
+
 
 
 <!--<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>-->
@@ -56,25 +125,7 @@
 <!--    </div>-->
 <!--</div>-->
 
-<!-- manage admins -->
-<% if @is_admin and @add_remove.length > 0 %>
-<h4>Manage Admin Status</h4>
-    <div id="user-mini-section">
-        <div class="user-mini-container">
-            <% @add_remove.each do |usr| %>
-                    <div class="user-mini-element" user_id="<%= usr.id %>">
-                        <%= link_to :controller => :user, :action => :show, :id => usr.id do %>
-                            <div class="user-mini-info">
-                                <%= image_tag usr.avatar_url(:display), :class => "user-mini-image" %>
-                                <p><%= usr.name %> <%= usr.surname %></p>
-                            </div>
-                        <% end %>
-                        <p class="special-action remove"><a href="#" id="add_remove"><span class="admin_msg"><%= if !@admins.include? usr then "Add admin" else "Remove Admin" end %></span></a></p>
-                    </div>
-            <% end %>
-        </div>
-    </div>
-<% end %>
+
 
 <script>
     $(document).ready(function() {

@@ -125,17 +125,17 @@ class User < ApplicationRecord
 	end
 	
 	def get_match(id, type)
-		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type)[0]
+		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type).limit(1)[0]
 		
 		if match.nil?
 			if type == "U"
-				Connector.match_against_user(self.id, id)
+				match = Connector.match_against_user(self.id, id)
 			elsif type == "S"
-				Connector.match_against_society(self.id, id)
+				match = Connector.match_against_society(self.id, id)
 			end
+		else
+			match = match.coefficient
 		end
-		
-		match = Reccomendation.where(user_id: self.id, match_id: id, match_type: type)[0]
 		
 		return match
 	end

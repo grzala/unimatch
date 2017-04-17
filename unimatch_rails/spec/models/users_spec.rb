@@ -32,7 +32,6 @@ describe User, 'methods' do
 		expect(user2.name).to eq(username)
 		expect(user2.email).to eq(mail)
 		expect(user2.hashed_password).not_to eq(pass)
-		expect(user2.salt).to be
 		
 		expect(User.authenticate(mail, pass)).to be
 	end

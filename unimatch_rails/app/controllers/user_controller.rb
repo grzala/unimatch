@@ -32,19 +32,9 @@ class UserController < ApplicationController
       redirect_to @user, status: :moved_permanently
     end
     
-    #takes all matched users  
-    matches = User.find(session[:user_id]).get_matched_users
-    @coefficient = nil
-    if matches #if there are any matched users 
-      matches.each do |id, coefficient|
-        if(id == @user.id) # if the viewed user is in the list of matched users
-           @coefficient = coefficient #takes coefficient
-           break
-        end
-      end
+    if @user_id != session[:user_id]
+      @coefficient = User.find(session[:user_id]).get_match(@user.id, "U")
     end
-    
-    
     
     #events joined - events that the dude or dudette is participating in
     #events - events the guy created, is participating in, or all the events by societies this guy

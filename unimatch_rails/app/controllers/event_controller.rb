@@ -22,6 +22,7 @@ class EventController < ApplicationController
         @participates = @participants.include? @user
         
         @favourite_to_invite = @user.get_favourites - @invited - [@user]
+        @posts = @event.get_posts
     end
     
     
@@ -57,6 +58,13 @@ class EventController < ApplicationController
     end#allows user to participate on events
     
     def create
+        if params[:society_id] != nil && params[:society_id] != ''
+            soc = Society.find(params[:society_id])
+            if !soc.has_admin(session[:user_id])
+                return redirect_to root_path #cant create on behalf of random societies, only te ones tou administer
+            end
+        end
+        
         time = params[:time].split(":")
         hour = time[0]
         minute = time[1]
@@ -96,13 +104,19 @@ class EventController < ApplicationController
         @event.name = name
         @event.description = description
         @event.location = location
-        @event.cost = cost
+        @event.cost = if cost != '' then cost else 0 end
         @event.date = date.strftime("%Y-%m-%d")
         @event.time = (hour.to_s + minute.to_s)
         @event.user_id = user_id
         @event.society_id = society_id
         @event.event_group_id = event_group_id
+        
         if !@event.save then puts @event.errors.full_messages end
+        
+        if @event.society_id != nil
+            u = User.find(@event.user_id)
+            Society.find(@event.society_id).add_post(u.id, "#{u.name} Created new event: #{@event.name}")
+        end
     end#saves the event to db
     
     

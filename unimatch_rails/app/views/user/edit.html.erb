@@ -20,22 +20,12 @@
             <div class="image_details_box">
                 <%= image_tag @user.avatar_url(:display), :class => "image_details"  %>
             </div>
-            <!--<div class="browse_button">-->
-            <!--    <p style=' margin-left: 75px'><%= f.file_field :avatar, :class => "btn-danger"%></p>-->
-            <!--</div>-->
-           
-            <!--<div class="fileinput fileinput-new" data-provides="fileinput">-->
-            <!--    <span class="btn btn-danger btn-file"><span>Choose file</span><input type="file" /></span>-->
-            <!--    <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>-->
-            <!--</div>-->
-            
-           
-             <div class="fileUpload btn btn-default">
+            <div class="fileUpload btn btn-default">
                 <span>Choose file</span>
                 <input type="file" class="upload" />
             </div>
             <div class="submit_button">
-                <%= f.submit :Update, :class => "btn-danger"%></p>
+                <%= f.submit :Update, :class => "btn-danger submit_button"%></p>
             </div>
         </div>
     <% end %>

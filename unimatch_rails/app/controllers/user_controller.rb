@@ -104,7 +104,8 @@ class UserController < ApplicationController
       redirect_to root_path
     else
       flash[:warning] = "Account not created"
-      puts flash[:warning]
+      puts "ERRORS"
+      puts @user.errors.full_messages
       redirect_to :controller => :session, :action => :register
     end
     

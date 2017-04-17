@@ -75,7 +75,7 @@
             <div class="wallForm">
                 <%= form_for(:eventWall, :url => {:controller => 'posts', :action => 'event_send'}) do %>
                 <%= text_field_tag :post %>
-                <%= hidden_field_tag :event_id, @society.id %>
+                <%= hidden_field_tag :event_id, @event.id %>
                 <%= submit_tag :Post, :class => "btn btn-danger button submit" %>
                 <% end %>
             </div>

@@ -49,12 +49,12 @@ module Connect
                 s.puts(@usermatchmsg + " " + id1.to_s + " " + id2.to_s)
                 json = s.gets.chomp
                 json = JSON.parse(json)
-                matches = {}
+                match = nil
                 json.each do |key, value|
-                	matches[key.to_i] = value.to_f
+                	match = value.to_f
                 end
                 s.close
-                return matches
+                return match
             rescue SocketError
                 return {}
             end
@@ -66,12 +66,13 @@ module Connect
                 s.puts(@societymatchmsg + " " + id1.to_s + " " + id2.to_s)
                 json = s.gets.chomp
                 json = JSON.parse(json)
-                matches = {}
+                puts json
+                match = nil
                 json.each do |key, value|
-                	matches[key.to_i] = value.to_f
+                	match = value.to_f
                 end
                 s.close
-                return matches
+                return match
             rescue SocketError
                 return {}
             end

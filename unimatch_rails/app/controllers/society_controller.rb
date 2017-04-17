@@ -67,7 +67,7 @@ class SocietyController < ApplicationController
             @society.add_interest(params[:selected_interests][param].to_i) #THIS CANNOT STAY LIKE THIS
         end
         
-        redirect_to :action => :list
+        redirect_to :action => :show, :id => @society.id
     end#creates a new society and add the creator as a admin, and member, redirects to list of all the societies
     
     def delete

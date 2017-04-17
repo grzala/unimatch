@@ -1,8 +1,12 @@
 class WelcomeController < ApplicationController
+    
+    before_action :authenticate
+    
+     
      layout 'login'
      #welcome controller used for login and registration of users
-     def new
-         if session[:user_id]
+     def authenticate
+         if session[:user_id] != nil
             redirect_to user_url(id: session[:user_id])
          end
      end

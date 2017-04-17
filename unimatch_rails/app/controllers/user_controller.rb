@@ -110,7 +110,9 @@ class UserController < ApplicationController
       redirect_to :controller => :session, :action => :register
     end
     rescue CarrierWave::ProcessingError => error
-  raise error.cause
+
+  puts "AAA"
+  puts error
 end
     
   end#creates new user account, relates to the welcom controller

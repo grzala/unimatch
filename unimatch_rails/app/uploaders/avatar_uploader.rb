@@ -22,7 +22,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
     begin
     process :resize_to_fill => [300, 300, :north]
     rescue CarrierWave::ProcessingError => error
-  raise error.cause
+  puts "AAA"
+  puts error
 end
   end
 
@@ -32,7 +33,9 @@ end
     begin
     process :resize_to_fill => [100, 100, :north]
     rescue CarrierWave::ProcessingError => error
-  raise error.cause
+
+  puts "AAA"
+  puts error
 end
   end
   

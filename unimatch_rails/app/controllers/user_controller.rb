@@ -113,7 +113,8 @@ class UserController < ApplicationController
   def choose_interests
     @user = User.friendly.find(params[:id])
     if request.path != choose_interests_path(@user)
-      return redirect_to choose_interests_path, status: :moved_permanently
+      #return redirect_to choose_interests_path, status: :moved_permanently#
+      #i dont know what that is but it caused a lot of error
     end
     @interests = Interest.retrieve_as_dictionary
     @allinterests = Interest.all

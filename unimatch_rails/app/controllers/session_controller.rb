@@ -21,15 +21,15 @@ class SessionController < ApplicationController
             user = User.find(session[:user_id])
             interests = user.get_interests
             
-            if interests.length > 00
-                redirect_to :controller => :user, :action => :show, :id => session[:user_id]
+            if interests.length > 0
+                return redirect_to :controller => :user, :action => :show, :id => session[:user_id]
             else
-                redirect_to :controller => :user, :action => :choose_interests, :id => session[:user_id]
+                return redirect_to :controller => :user, :action => :choose_interests, :id => session[:user_id]
             end
         else
             flash[:warning] = "Password and email do not match"
             print params[:email]
-            redirect_to login_url, :alert => "Username or password is invalid"
+            return redirect_to login_url, :alert => "Username or password is invalid"
         end
     end
     

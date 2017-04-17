@@ -244,7 +244,7 @@ class User < ApplicationRecord
 		if !current
 			events = Event.where(user_id: self.id)
 		else
-			events = Event.where("user_id = ? AND date > ?", self.id, Date.new)
+			events = Event.where("user_id = ? AND date > ?", self.id, DateTime.now.strftime('%Y-%m-%d'))
 		end
 		
 		return events

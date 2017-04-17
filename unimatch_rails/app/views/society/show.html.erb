@@ -63,11 +63,10 @@
             </div>
         </div>
     </div>
-</div>
-<div class="col-md-4">
-<p>Upcoming Events:</p>
-
-<% if @events.length > 0 %>
+    <div class="col-md-4">
+        <p>Upcoming Events:</p>
+        
+        <% if @events.length > 0 %>
             <h4>Attending Events</h4>
             <div class="user-mini-container">
                 <% 
@@ -91,11 +90,12 @@
                     <% end %>
                 <% end %>
             </div> 
-<% else %>
-<p>No Upcoming Events</p>
-<% end %>
+        <% else %>
+        <p>No Upcoming Events</p>
+        <% end %>
+    </div>
 </div>
-</div>
+
 
 
 <!--<div id='calendar-wrapper' style='width: 100%; margin-right:auto; margin-left: auto'>-->

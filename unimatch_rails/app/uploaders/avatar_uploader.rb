@@ -19,13 +19,21 @@ class AvatarUploader < CarrierWave::Uploader::Base
   version :display do
     puts "GETTING DISP"
     # process :eager => true
+    begin
     process :resize_to_fill => [300, 300, :north]
+    rescue CarrierWave::ProcessingError => error
+  raise error.cause
+end
   end
 
   version :thumbnail do
     puts "GETTING THUMB"
-    # process :eager => true
+    # process :eager => true4
+    begin
     process :resize_to_fill => [100, 100, :north]
+    rescue CarrierWave::ProcessingError => error
+  raise error.cause
+end
   end
   
   # include RMagick or MiniMagick support:

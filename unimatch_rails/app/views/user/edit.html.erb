@@ -2,13 +2,48 @@
 <link rel="stylesheet" href="edit.css">
 <div class="Edit_Form">
     <h2>Edit Details</h2>
+
     <%= form_for(:user, :url => {:action => 'update', :id => @user.id}, method: :put) do |f| %>
-        <p> name: </br> <%= f.text_field :name %></p>
-        <p> surname: </br> <%= f.text_field :surname %></p>
-        <p> change profile picture: </p>
-        <%= image_tag @user.avatar_url(:display) %></br>
-        <center><p style=' margin-left: 75px'><%= f.file_field :avatar%></p><center>
-        
-        <%= f.submit :Edit %>
+        <div class="form_container">
+            <div class="name_details">
+                <h5>Name:</h5>
+                <%= f.text_field :name, :class => "form_control" %>
+            </div>
+            <div class="surname_details">
+                <h5>Surname:</h5>
+                <%= f.text_field :surname, :class => "form_control" %>
+            </div>
+            <div class="change_profile_picture">
+                <h5>Current profile picture: </h5>
+            </div>
+            
+            <div class="image_details_box">
+                <%= image_tag @user.avatar_url(:display), :class => "image_details"  %>
+            </div>
+            <!--<div class="browse_button">-->
+            <!--    <p style=' margin-left: 75px'><%= f.file_field :avatar, :class => "btn-danger"%></p>-->
+            <!--</div>-->
+           
+            <!--<div class="fileinput fileinput-new" data-provides="fileinput">-->
+            <!--    <span class="btn btn-danger btn-file"><span>Choose file</span><input type="file" /></span>-->
+            <!--    <span class="fileinput-filename"></span><span class="fileinput-new">No file chosen</span>-->
+            <!--</div>-->
+            
+           
+             <div class="fileUpload btn btn-default">
+                <span>Choose file</span>
+                <input type="file" class="upload" />
+            </div>
+            <div class="submit_button">
+                <%= f.submit :Update, :class => "btn-danger"%></p>
+            </div>
+        </div>
     <% end %>
 </div>
+
+<script>
+    document.getElementById("uploadBtn").onchange = function () {
+    document.getElementById("uploadFile").value = this.value;
+};
+</script>
+

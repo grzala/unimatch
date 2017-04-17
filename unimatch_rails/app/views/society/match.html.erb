@@ -7,10 +7,11 @@
 
 
 <div class="row magic">
+    <% puts @matched_societies.inspect %>
     <% @matched_societies[0..5].each do |society, coefficient| %>
         <% if coefficient > 0 && society.id != society.id+1 %>
                 <div class="test">
-                    <%= link_to society.name, controller: 'society', action: 'show', :id => society.id do %>
+                    <%= link_to controller: 'society', action: 'show', :id => society.id do %>
                        <div class="society_box"> 
                            <div id="society_img">
                                 <%= image_tag society.avatar_url(:display) %>

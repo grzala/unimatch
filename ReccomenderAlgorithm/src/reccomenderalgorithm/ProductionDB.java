@@ -43,7 +43,7 @@ public class ProductionDB implements Database {
     final String getInterestGroupsSTMT = "SELECT * FROM unimatch.interest_groups";
     final String getInterestsSTMT = "SELECT * FROM unimatch.interests";
     final String removeReccomendationsSTMT = "DELETE FROM unimatch.reccomendations WHERE user_id = ? and match_id = ? and match_type = ?";
-    final String reccomendSTMT = "INSERT INTO unimatch.reccomendations (\"user_id\", \"match_type\", \"match_id\", \"coefficient\", \"created_at\", \"updated_at\") VALUES (?, ?, ?, ?, ?, ?)";
+    final String reccomendSTMT = "INSERT INTO unimatch.reccomendations (user_id, match_type, match_id, coefficient, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
   
     
     public ProductionDB(String HOSTNAME, String user, String password) {

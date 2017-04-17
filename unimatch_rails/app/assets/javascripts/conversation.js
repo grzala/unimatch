@@ -9,7 +9,7 @@ var currentMessage = 0
 var messagePortion = 10
 
 $.fn.messages = function(con_id){
-    curentMessage = 0;
+    currentMessage = 0;
     this.empty();
     this.append('<div class="messages-container"></div>')
     
@@ -67,7 +67,7 @@ function requestMessages(from, to, con_id) {
 		  to: to,
 		  id: con_id
 		},
-		success: function(data) {    
+		success: function(data) {  
             var messageBox = $(".messages .messages-container")
             var initialHeight = messageBox.prop("scrollHeight")
             

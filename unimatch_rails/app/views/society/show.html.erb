@@ -6,10 +6,13 @@
         <div class="left" id="society_details">
         <h2><%= @society.name %></h2>
         <p><%= @society.description %></p>
-        <button class="btn btn-danger button join_society">
-            <% str = !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
-            <%= link_to str, :controller=> :society, :action=> :join_leave, id: @society.id %>
-        </button>
+        
+        <%= link_to :controller=> :society, :action=> :join_leave, id: @society.id do %>
+            <button class="btn btn-danger button join_society">
+                <%= !@society.has_member(session[:user_id]) ? "Join Society" : "Leave Society" %>
+            </button>
+        <% end %>
+        
     </div>
     </div>
 </div>

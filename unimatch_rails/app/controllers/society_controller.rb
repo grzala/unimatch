@@ -14,7 +14,7 @@ class SocietyController < ApplicationController
             @society.delete_member(session[:user_id])
         end
         
-        redirect_to :action => :list
+        redirect_to :action => :show, :id => @society.id
     end#used so that the user can join are leave the society
 
     def show

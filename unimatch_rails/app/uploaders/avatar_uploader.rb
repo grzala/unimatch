@@ -20,7 +20,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
     puts "GETTING DISP"
     # process :eager => true
     begin
-    process :resize_to_fill => [300, 300, :north]
+    #process :resize_to_fill => [300, 300, :north]
     rescue CarrierWave::ProcessingError => error
   puts "AAA"
   puts error
@@ -31,7 +31,7 @@ end
     puts "GETTING THUMB"
     # process :eager => true4
     begin
-    process :resize_to_fill => [100, 100, :north]
+    #process :resize_to_fill => [100, 100, :north]
     rescue CarrierWave::ProcessingError => error
 
   puts "AAA"

@@ -150,6 +150,7 @@ end
     end
     User.friendly.find(params[:id]).update_interests_by_ids(@c)
     User.friendly.find(params[:id]).refresh_matches
+    flash[:success] = "Interests updated"
     redirect_to user_url, :id => params[:id]
   end
   

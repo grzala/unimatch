@@ -19,6 +19,18 @@
     <script>
       window.onunload = function(){}
     </script>
+    <% if flash[:success] %>
+      <div class="alert alert-success fade in application_flash">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:success] %></strong>
+      </div>
+    <% end %>
+    <% if flash[:warning] %>
+      <div class="alert alert-warning fade in application_flash">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:warning] %></strong>
+      </div>
+    <% end %>
     <div class="header">
       <div id="header_text_container">
         <h1 id="header_text"><%= link_to 'UniMatch', :controller => :user, :action => :show ,  id: session[:user_id] %></h1>
@@ -74,20 +86,6 @@
       <div class="notice"><legend><%= flash[:notice] %></legend></div>
     <% end %>
     </div>
-    
-        <% if flash[:success] %>
-      <div class="alert alert-success fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong><%= flash[:success] %></strong>
-      </div>
-    <% end %>
-    <% if flash[:warning] %>
-      <div class="alert alert-warning fade in">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong><%= flash[:warning] %></strong>
-      </div>
-    <% end %>
-    
     <div class="container shadow">
     <%= yield %>
     <!-- list of notifs defined as json in application_controller -->

@@ -96,10 +96,25 @@ $.fn.addNotifications = function(notifications) {
 };
 
 $.fn.addNotification = function(notification) {
+    var ids = get_notifications_html_ids(this.find('.notifications-wrapper'))
+    if (ids.indexOf(notification['id']) >= 0) {
+        return;
+    }
+    
     var n = makeNotif(notification);
     this.find('.notifications-wrapper').prepend(n);
     current_notif++;
     refreshNotifLen();
+}
+
+function get_notifications_html_ids(parent) {
+    var ids = [];
+    
+    parent.children("notification").each(function() {
+        ids.push($(this).attr("notification_id"));
+    })
+    
+    return ids;
 }
 
 function makeNotif(notification) {

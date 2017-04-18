@@ -6,7 +6,7 @@
                     <%= link_to controller: 'society', action: 'show', :id => society.id do %>
                        <div class="society_box"> 
                            <div id="society_img">
-                                <%= image_tag society.avatar_url(:display) %>
+                                <%= image_tag society.avatar_url(:display), :class => "society_profile_picture" %>
                                 <!--<%= image_tag("society_img.png", :alt => "society_img") %>-->
                             </div>
                             <div id="society_name">

@@ -104,7 +104,7 @@ class UserController < ApplicationController
       flash[:success] = "Account created successfuly. Please log in."
       redirect_to root_path
     else
-      flash[:warning] = "Account not created"
+      flash[:warning] = "Account not created. Email already registered, or filesize to big"
       puts "ERRORS"
       puts @user.errors.full_messages
       redirect_to :controller => :session, :action => :register
@@ -149,6 +149,8 @@ end
       @c=@a+@b
     end
     User.friendly.find(params[:id]).update_interests_by_ids(@c)
+    User.friendly.find(params[:id]).refresh_matches
+    flash[:success] = "Interests updated"
     redirect_to user_url, :id => params[:id]
   end
   
@@ -159,7 +161,11 @@ end
   def update
     @user = User.find_by_id(params[:id])
     if @user.update_attributes(user_param)
+      flash[:success] = "Details updated"
       redirect_to :action => :show
+    else 
+      flash[:warning] = "Details not updated. Profile photo might be too big."
+      redirect_to :action => :edit
     end
   end
   

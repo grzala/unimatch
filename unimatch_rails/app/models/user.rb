@@ -2,6 +2,7 @@ class User < ApplicationRecord
 	include BCrypt
 	include Connect
     include Rails.application.routes.url_helpers
+	include ActiveModel::Validations
 	
 	extend FriendlyId
 	friendly_id :name, use: [:slugged, :history]
@@ -28,6 +29,7 @@ class User < ApplicationRecord
 	IMPORTANT_INTERESTS_NO ||= 5
 
 	mount_uploader :avatar, AvatarUploader
+	validates :avatar, file_size: { less_than: 512.kilobytes }
 
 	
 	def User.encrypt_password(password, salt)

@@ -11,9 +11,28 @@
         <p>Interests:</p>
         <p id="interest_info">Please choose 5 interests that are inline with the society. This allows us the match users with your society and gain you more members</p>
         
+        <%
+            @groups = {}
+            @IG = InterestGroup.all
+            @IG.each do |ig|
+                interests = ig.get_interests
+                @groups[ig.name] = interests
+            end
+        %>
+        
         <% count = 0; 5.times do %>
             <!-- cannot be called interests -->
-            <p><%= select("selected_interests", "id_" + count.to_s ,  @interests.all.collect {|i| [ i.name, i.id ] }, { include_blank: true }) %></p>
+            <p>
+                <select id="<%= 'selected_interests_id_'+count.to_s %>" name="<%= 'selected_interests[id_'+count.to_s+']' %>">
+                    <% @groups.each do |gname, interests| %>
+                        <optgroup label="<%= gname %>">
+                            <% interests.each do |interest| %>
+                                <option value="<%= interest.id %>"><%= interest.name %></option>
+                            <% end %>
+                        </optgroup>
+                    <% end %>
+                </select>
+            </p>
             <% count += 1 %>
         <% end %>
         

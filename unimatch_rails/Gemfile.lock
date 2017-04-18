@@ -94,6 +94,9 @@ GEM
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
     ffi (1.9.17)
+    file_validators (2.1.0)
+      activemodel (>= 3.0)
+      mime-types (>= 1.0)
     friendly_id (5.2.0)
       activerecord (>= 4.0.0)
     gherkin (4.0.0)
@@ -255,6 +258,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   factory_girl
+  file_validators
   friendly_id (~> 5.2)
   jbuilder (~> 2.5)
   jquery-rails (> 2.3.0)

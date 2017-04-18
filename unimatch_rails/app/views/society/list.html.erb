@@ -3,7 +3,7 @@
 <div class="row magic all_societies">
 <% @societies.each do |society| %>
     <div class="test">
-                    <%= link_to society.name, controller: 'society', action: 'show', :id => society.id do %>
+                    <%= link_to controller: 'society', action: 'show', :id => society.id do %>
                        <div class="society_box"> 
                            <div id="society_img">
                                 <%= image_tag society.avatar_url(:display) %>

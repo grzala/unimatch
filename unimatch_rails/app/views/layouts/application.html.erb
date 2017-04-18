@@ -20,13 +20,13 @@
       window.onunload = function(){}
     </script>
     <% if flash[:success] %>
-      <div class="alert alert-success fade in">
+      <div class="alert alert-success fade in application_flash">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong><%= flash[:success] %></strong>
       </div>
     <% end %>
     <% if flash[:warning] %>
-      <div class="alert alert-warning fade in">
+      <div class="alert alert-warning fade in application_flash">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         <strong><%= flash[:warning] %></strong>
       </div>

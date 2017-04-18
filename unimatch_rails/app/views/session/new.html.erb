@@ -37,9 +37,9 @@
                         <%= f.password_field :password_confirmation, class: "form-control", placeholder: "password" %>
                         <small id="pass-conf-help" class="form-text text-muted register-helper">This password must be the same as in the field above</small>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group custom-file-upload" >
                         <label>Profile Picture</label>
-                        <%= f.file_field :avatar, class: "form-control", placeholder: "profile_pic" %>
+                        <%= f.file_field :avatar, placeholder: "profile_pic" %>
                     </div>
                 </fieldset>
                 <%= submit_tag "Register", {:id => 'register', :class => "btn btn-primary"} %>

@@ -20,20 +20,12 @@
             <div class="image_details_box">
                 <%= image_tag @user.avatar_url(:display), :class => "image_details"  %>
             </div>
-            <div class="fileUpload btn btn-default">
-                <span>Choose file</span>
-                <input type="file" class="upload" />
-            </div>
+            <%= f.file_field :avatar %>
+            <br>
             <div class="submit_button">
                 <%= f.submit :Update, :class => "btn-danger submit_button"%></p>
             </div>
         </div>
     <% end %>
 </div>
-
-<script>
-    document.getElementById("uploadBtn").onchange = function () {
-    document.getElementById("uploadFile").value = this.value;
-};
-</script>
 

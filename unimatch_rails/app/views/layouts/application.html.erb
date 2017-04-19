@@ -19,6 +19,18 @@
     <script>
       window.onunload = function(){}
     </script>
+    <% if flash[:success] %>
+      <div class="alert alert-success fade in application_flash">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:success] %></strong>
+      </div>
+    <% end %>
+    <% if flash[:warning] %>
+      <div class="alert alert-warning fade in application_flash">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= flash[:warning] %></strong>
+      </div>
+    <% end %>
     <div class="header">
       <div id="header_text_container">
         <h1 id="header_text"><%= link_to 'UniMatch', :controller => :user, :action => :show ,  id: session[:user_id] %></h1>
@@ -38,18 +50,16 @@
       <div id="mySidenav" class="sidenav">
       <ul id="navigation_mobile">
         <a href="javascript:void(0)" id="closebtn" >&times;</a>
-        <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>
-        <li><%= link_to 'Messages', :controller => :user, :action => :match,  id: session[:user_id] %></li>
-        <li><%= link_to 'Societies', :controller => :event, :action => :new,  id: session[:user_id] %></li>
-        <li><%= link_to 'Notifications', :controller => :event, :action => :new,  id: session[:user_id] %></li>
-        <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
-        <li><%= link_to "logout", logout_url, id: 'logout' %></li>
+          <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
+          <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>
+          <li><%= link_to 'Societies', :controller => :society, :action => :match %></li>
+          <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+          <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
+        <li><%= link_to "Logout", logout_url, id: 'logout' %></li>
       </ul>
       </div>
       <div id="desktop_nav">
         <ul id="navigation">
-          <li>
-          </li>
           <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
           <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>
           <li><%= link_to 'Societies', :controller => :society, :action => :match %></li>
@@ -63,7 +73,7 @@
           <%= image_tag @image_thumbnail, :class => "user_image_thubmnail" %>
         </div>
         <div id = "details_dropdown">
-          <%= link_to session[:user_name].capitalize, controller: :user, action: :show, id: session[:user_id] %>
+          <%= link_to User.find(session[:user_id]).name.capitalize, controller: :user, action: :show, id: session[:user_id] %>
           <%= link_to 'Edit details', controller: 'user', action: 'edit', id: @logged_user.slug %>
           <%= link_to 'Edit interests', controller: 'user', action: 'choose_interests', id: @logged_user.slug %>
           <%= link_to "Logout", logout_url, id: 'logout' %>

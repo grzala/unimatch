@@ -91,29 +91,40 @@ class UserController < ApplicationController
   end
   
   def create
-    begin
     @user = User.new(user_param)
     
-    if params[:password] != params[:password_confirmation]
-      flash[:warning] = "Passwords are different"
-      puts flash[:warning]
-      return redirect_to :controller => :session, :action => :new
-    end
-    
-    if @user.save
+    if @user.valid? && @user.save
       flash[:success] = "Account created successfuly. Please log in."
       redirect_to root_path
     else
-      flash[:warning] = "Account not created. Email already registered, or filesize to big"
-      puts "ERRORS"
-      puts @user.errors.full_messages
+      warnings = []
+      warnings << "Account not created."
+      
+      @user.errors.each do |error|
+        puts error.inspect
+        if error == :email
+          warnings << "Wrong email format, or email address already registered."
+        end
+        
+        if error == :password_confirmation
+          warnings << "Passwords do not match."
+        end
+      end
+      
+      if params[:user][:password].length < 5
+        warnings << "Password is too short"
+      end
+      
+      warnings = warnings.uniq
+      
+      flash[:warning] = ''
+      warnings.each do |warning|
+        flash[:warning] += warning + " "
+      end
+      
       redirect_to :controller => :session, :action => :register
     end
-    rescue CarrierWave::ProcessingError => error
 
-  puts "AAA"
-  puts error
-end
     
   end#creates new user account, relates to the welcom controller
   

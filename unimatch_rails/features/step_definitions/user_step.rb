@@ -24,6 +24,10 @@ When(/^I click logout$/) do
   first("#logout").click
 end
 
+When(/^I click login/) do
+  first("#login").click
+end
+
 Then(/^I should see the message "(.*?)"$/) do |message|
   page.should have_content(message)
 end

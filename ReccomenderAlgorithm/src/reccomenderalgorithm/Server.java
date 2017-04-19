@@ -7,6 +7,7 @@ package reccomenderalgorithm;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
@@ -15,6 +16,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import org.json.JSONException;
 
 import org.json.JSONObject;
@@ -33,6 +38,10 @@ public class Server {
     final private String societyMatchType = "societymatch";
     
     final private float threshold = 0.1f;
+    
+    final BlockingQueue<File> queue = new ArrayBlockingQueue<File>(5000);
+    final int MAX_SIM_THREADS = 5;
+    private ExecutorService pool = Executors.newFixedThreadPool(5);
     
     public Server(int port) {
          //init db
@@ -59,7 +68,7 @@ public class Server {
         }
         
         //if no threads are running, close the connection
-        new Thread(new Runnable() {
+        Thread t = new Thread(new Runnable() {
             public void run() {
                 while (true) {
                     if (dbSemaphore <= 0)
@@ -71,7 +80,9 @@ public class Server {
                     }
                 } 
             }
-        }).start();
+        });
+        
+        pool.execute(t);
         
         try {
             while (listening) {

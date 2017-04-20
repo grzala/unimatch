@@ -40,8 +40,8 @@
     <form action="/search" method="get">
       <input type="text" placeholder="search..." name="search_query" id="search_query">
         <button id="submit-search" type="submit"><i class="glyphicon glyphicon-search white"></i></button>
-      </div>
     </form>
+    </div>
       <div id="nav_trigger">
         <div class="line"></div>
         <div class="line"></div>
@@ -50,6 +50,14 @@
       <div id="mySidenav" class="sidenav">
       <ul id="navigation_mobile">
         <a href="javascript:void(0)" id="closebtn" >&times;</a>
+          <li>
+            <div id= "mob_search">
+              <form action="/search" method="get">
+                <input type="text" placeholder="search..." name="search_query" id="search_query">
+                  <button id="submit-search" type="submit"><i class="glyphicon glyphicon-search white"></i></button>
+              </form>
+            </div>
+          </li>
           <li><%= image_tag @image_thumbnail, :class => "user_image_mob_menu" %></li>
           <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
           <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>

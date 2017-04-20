@@ -3,12 +3,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   
   def default_url(*args)
-    puts "GETTING DEF DIR"
       ActionController::Base.helpers.asset_path('display_default.png')
   end
   
   def store_dir
-    puts "GETTING STORE DIR"
     'profile_pictures'
   end
   
@@ -17,26 +15,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # image.resize "600x600"
   
   version :display do
-    puts "GETTING DISP"
-    # process :eager => true
-    begin
     #process :resize_to_fill => [300, 300, :north]
-    rescue CarrierWave::ProcessingError => error
-  puts "AAA"
-  puts error
-end
   end
 
   version :thumbnail do
-    puts "GETTING THUMB"
-    # process :eager => true4
-    begin
     #process :resize_to_fill => [100, 100, :north]
-    rescue CarrierWave::ProcessingError => error
-
-  puts "AAA"
-  puts error
-end
   end
   
   # include RMagick or MiniMagick support:

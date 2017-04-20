@@ -50,6 +50,7 @@
       <div id="mySidenav" class="sidenav">
       <ul id="navigation_mobile">
         <a href="javascript:void(0)" id="closebtn" >&times;</a>
+          <li><%= image_tag @image_thumbnail, :class => "user_image_mob_menu" %></li>
           <li><%= link_to 'Home', :controller => :user, :action => :show ,  id: session[:user_id] %></li>
           <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>
           <li><%= link_to 'Societies', :controller => :society, :action => :match %></li>

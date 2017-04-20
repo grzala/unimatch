@@ -54,13 +54,17 @@ $notif_height: 50px
     height: 25px
     display: inline-block
     position: absolute
-    right: 85px
+    right: 15px
     top: 17px
     margin: 0px auto
     text-align: center
     &:hover 
         cursor: pointer
         color: black
+    @media screen and (min-width: $break-tablet)
+        right: 85px
+        
+    
 
 .notifications-link .bell
     width: 20px

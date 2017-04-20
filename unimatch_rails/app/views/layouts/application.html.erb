@@ -54,8 +54,10 @@
           <li><%= link_to 'Matches', :controller => :user, :action => :match %></li>
           <li><%= link_to 'Societies', :controller => :society, :action => :match %></li>
           <li><%= link_to 'Create Event', :controller => :event, :action => :new,  id: session[:user_id] %></li>
+          <li><%= link_to 'Edit details', controller: 'user', action: 'edit', id: @logged_user.slug %></li>
+          <li><%= link_to 'Edit interests', controller: 'user', action: 'choose_interests', id: @logged_user.slug %></li>
           <li><%= link_to 'Feedback', 'https://goo.gl/forms/QwN1Uu2ww5J3jIdz1', :target => "_blank" %></li>
-        <li><%= link_to "Logout", logout_url, id: 'logout' %></li>
+          <li><%= link_to "Logout", logout_url, id: 'logout' %></li>
       </ul>
       </div>
       <div id="desktop_nav">

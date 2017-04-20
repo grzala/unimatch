@@ -48,10 +48,12 @@
             <% @posts.each do |post| %>
                 <% @sender = User.find(post.user_id) %>
                 <div class="wallPost">
-                    <div class="wallPost_top">
-                        <%= image_tag @sender.avatar_url(:display), :class => "message_pic" %>
-                    </div>
-                    <p class="post_title"><%= @sender.name.capitalize %></p>
+                    <%= link_to controller: :user, action: :show, id: @sender.id do %>
+                        <div class="wallPost_top">
+                            <%= image_tag @sender.avatar_url(:display), :class => "message_pic" %>
+                        </div>
+                        <p class="post_title"><%= @sender.name.capitalize %></p>
+                    <% end %>
                     <p class="post_main"><%= post.body %></p>
                     <p class="post_date"><%= post.created_at.strftime("%Y/%m/%d") %></p>
                 </div>

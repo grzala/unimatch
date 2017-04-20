@@ -110,7 +110,7 @@ $.fn.addNotification = function(notification) {
 function get_notifications_html_ids(parent) {
     var ids = [];
     
-    parent.children("notification").each(function() {
+    parent.children(".notification").each(function() {
         ids.push($(this).attr("notification_id"));
     })
     

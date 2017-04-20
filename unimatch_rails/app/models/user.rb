@@ -271,10 +271,10 @@ class User < ApplicationRecord
 		
 		#if conversation exists, just one notification is needed. this prevents an overflow of notifications
 		if special_id != nil and type == "M"
-			@notifs = Notification.where(user_id: self.id, conversation_id: special_id)
+			@notifs = Notification.where(user_id: self.id, conversation_id: special_id, notif_type: type)
 			@notifs.each {|notif| Notification.destroy(notif.id) }
 		elsif type == "F"
-			@notifs = Notification.where(user_id: self.id, sender: sender_id)
+			@notifs = Notification.where(user_id: self.id, sender: sender_id, notif_type: type)
 			@notifs.each {|notif| Notification.destroy(notif.id) }
 		end
 		
